@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".fragments.onboarding.PendingApprovalFragment">
+
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:padding="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_2sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/left"
+            app:tint="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tvCurrStep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="@string/account_verification_pending"
+            style="@style/mostserrat_bold"
+            android:layout_centerVertical="true"
+            android:gravity="start"
+            android:layout_toEndOf="@id/ivBack"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topPanel"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:orientation="vertical">
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_350sdp"
+            android:layout_gravity="center"
+            android:background="#fff"
+            android:src="@drawable/create_account" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/your_account_is_pending_for_admin_approval"
+            style="@style/mostserrat_bold"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            style="@style/mostserrat_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:background="@drawable/submitt_btn"
+            android:text="Go Back"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

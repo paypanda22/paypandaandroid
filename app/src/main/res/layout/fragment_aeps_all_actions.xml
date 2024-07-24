@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.AepsAllActions">
+
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:contentDescription="@string/splash_logo"
+            android:src="@drawable/left"
+            app:tint="@color/white" />
+
+        <TextView
+            style="@style/mostserrat_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/aeps_services"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/horizontalBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@+id/topBar">
+
+        <LinearLayout
+            android:id="@+id/llBe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp"
+            tools:ignore="UselessParent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="@dimen/_3sdp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:contentDescription="@string/imps"
+                    android:src="@drawable/bag_money"
+                    app:tint="@color/black" />
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_9ssp"
+                android:text="@string/balance_enquiry"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llCw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toEndOf="@+id/llBe"
+            android:padding="@dimen/_5sdp"
+            tools:ignore="UselessParent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="@dimen/_3sdp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:id="@+id/iv2"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:contentDescription="@string/imps"
+                    android:src="@drawable/loan_1"
+                    app:tint="@color/black" />
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="@dimen/_9ssp"
+                android:text="@string/cash_withdrawal"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toEndOf="@+id/llCw"
+            android:padding="@dimen/_5sdp"
+            tools:ignore="UselessParent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="@dimen/_3sdp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:id="@+id/iv3"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:contentDescription="@string/imps"
+                    android:src="@drawable/statement_mini"
+                    app:tint="@color/black" />
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="@dimen/_9ssp"
+                android:text="@string/mini_statement"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llAp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toEndOf="@+id/llMs"
+            android:padding="@dimen/_5sdp"
+            tools:ignore="UselessParent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="@dimen/_3sdp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:id="@+id/iv4"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:contentDescription="@string/imps"
+                    android:src="@drawable/loan_1"
+                    app:tint="@color/black" />
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="@dimen/_9ssp"
+                android:text="Aadhaar\nPay"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llTxn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toEndOf="@+id/llAp"
+            android:padding="@dimen/_5sdp"
+            tools:ignore="UselessParent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="@dimen/_3sdp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:id="@+id/iv5"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:contentDescription="@string/imps"
+                    android:src="@drawable/transaction_history"
+                    app:tint="@color/black" />
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="@dimen/_9ssp"
+                android:text="Txn\nList"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/horizontalBar" />
+
+
+</RelativeLayout>

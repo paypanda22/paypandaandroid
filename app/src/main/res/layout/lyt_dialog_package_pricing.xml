@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/bill_fetch_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:id="@+id/tvPackageName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:gravity="left"
+                android:maxLength="20"
+                android:text="@string/package_name"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/sub_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvPackageName"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:gravity="left"
+                android:text="@string/select_package_price"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp"
+                tools:ignore="RtlHardcoded" />
+
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="?actionBarSize"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/horizontal_logo"/>
+
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:id="@+id/rvPriceList"/>
+    <LinearLayout
+        android:id="@+id/llPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/enter_your_transaction_pin"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/colorPrimaryDark" />
+        <app.pay.panda.reusable.PinView
+            android:id="@+id/edtTPin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:focusableInTouchMode="true"
+            android:inputType="number"
+            android:itemBackground="@drawable/box"
+            style="@style/mostserrat_bold"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            app:itemCount="4"
+            app:itemSpacing="@dimen/_8sdp"
+            app:viewType="none"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBuyNow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:background="@drawable/submitt_btn"
+        android:text="@string/buy_now"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        style="@style/mostserrat_bold"/>
+
+
+</LinearLayout>

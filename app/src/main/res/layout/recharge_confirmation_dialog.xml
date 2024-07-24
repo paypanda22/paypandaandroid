@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/bill_fetch_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:id="@+id/billerName"
+                style="@style/mostserrat_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:gravity="left"
+                android:maxLength="20"
+                android:text="Mobile Recharge"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/sub_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/billerName"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:gravity="left"
+                android:text="Confirm Details &amp; Continue"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="?actionBarSize"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/bharat_billpay_logo" />
+
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/details_lyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bill_fetch_heading"
+            android:layout_margin="@dimen/_5sdp"
+            android:elevation="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_5sdp"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+                <RelativeLayout
+                    android:id="@+id/rlOpDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/op_logo"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:src="@drawable/airtel" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@+id/op_logo"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvMobileTitle"
+                                style="@style/mostserrat_bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:maxLength="37"
+                                android:text="@string/mobile_vc_number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvConfirmMobile"
+                                style="@style/mostserrat_bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:maxLength="37"
+                                android:text="0875985898569"
+                                android:textColor="@color/green_700"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                style="@style/mostserrat_bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:maxLength="37"
+                                android:text="Recharge Amount :"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvAmount"
+                                style="@style/mostserrat_bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:maxLength="37"
+                                android:text="179"
+                                android:textColor="@color/green_700"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1ssp"
+                    android:layout_marginVertical="@dimen/_5sdp"
+                    android:background="@color/bggrey" />
+
+                <TextView
+                    android:id="@+id/tv_number"
+                    style="@style/mostserrat_extra_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="@string/enter_your_transaction_pin"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <app.pay.panda.reusable.PinView
+                    android:id="@+id/edtOtpLogin"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:focusableInTouchMode="true"
+                    android:inputType="number"
+                    android:itemBackground="@drawable/box"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="bold"
+                    app:itemCount="4"
+                    app:itemSpacing="@dimen/_8sdp"
+                    app:viewType="none"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPay"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/submitt_btn"
+                    android:text="Proceed to Pay"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

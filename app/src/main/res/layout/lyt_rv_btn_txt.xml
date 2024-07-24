@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatButton xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/mostserrat_bold"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    android:id="@+id/btnName"
+    android:background="@drawable/submitt_btn_small_white"
+    android:paddingHorizontal="@dimen/_20sdp"
+    android:text=""
+    android:textSize="@dimen/_12ssp" />
+
+

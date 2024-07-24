@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/payout_nav"
+    app:startDestination="@id/payoutAccountList">
+
+    <fragment
+        android:id="@+id/payoutAccountList"
+        android:name="app.pay.panda.fragments.payout.PayoutAccountList"
+        android:label="PayoutAccountList">
+        <!-- Define the action to navigate to AddPayoutAccount -->
+        <action
+            android:id="@+id/action_payoutAccountList_to_addPayoutAccount"
+            app:destination="@id/addPayoutAccount" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addPayoutAccount"
+        android:name="app.pay.panda.fragments.payout.AddPayoutAccount"
+        android:label="fragment_add_payout_account"
+        tools:layout="@layout/fragment_add_payout_account" />
+</navigation>

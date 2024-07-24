@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <ImageView
+        android:id="@+id/ivCancel"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:src="@drawable/cancel_3"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivCancel"
+        android:background="@drawable/curved_background_with_shadow">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_centerHorizontal="true"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_100sdp"
+            app:cardBackgroundColor="@color/bggrey" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_25sdp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_115sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:src="@drawable/finger_success" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/fingerprint_quality_score"
+                        style="@style/mostserrat_bold"
+                        android:textColor="@color/water_blue"
+                        android:textSize="@dimen/_12ssp" />
+                    <TextView
+                        android:id="@+id/tvScore"
+                        style="@style/mostserrat_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:text="@string/_0"
+                        android:textColor="@color/water_blue"
+                        android:textSize="@dimen/_35ssp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center"
+                style="@style/mostserrat_bold"
+                android:text="@string/fingerprint_captured_successfully"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/water_blue"
+                android:textSize="@dimen/_12ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnYes"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginVertical="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/submitt_btn_water_blue"
+                    android:text="@string/proceed"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintButtonSize" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnNo"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginVertical="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/submitt_btn_dialog_red"
+                    android:text="@string/cancel"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintButtonSize" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

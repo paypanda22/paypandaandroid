@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:paddingVertical="@dimen/_10sdp">
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextInput4">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtCateList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Category to search"
+                android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBankList"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_400sdp"/>
+        <LinearLayout
+            android:id="@+id/llNoData"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_400sdp"
+            android:gravity="center"
+            android:layout_marginVertical="@dimen/_25sdp"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:src="@drawable/ic_no_txn"
+                android:layout_gravity="center"
+                app:tint="@color/bggrey_dark" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Record Found"
+                android:gravity="center"
+                style="@style/mostserrat_bold"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

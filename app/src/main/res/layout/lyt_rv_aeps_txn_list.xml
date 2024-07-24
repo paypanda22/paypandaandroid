@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardUseCompatPadding="true"
+    app:strokeColor="@color/colorPrimaryDark"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:id="@+id/rlStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green_700"
+            android:padding="@dimen/_5sdp">
+            <ImageView
+                android:id="@+id/ivType"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/bag_money"
+                android:layout_centerVertical="true"
+                app:tint="@color/white" />
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/ivType"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="@string/cash_withdrawal_2"
+                style="@style/mostserrat_bold"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp" />
+            <TextView
+                android:id="@+id/tvStatus"
+                style="@style/mostserrat_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="SUCCESS"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp">
+
+                <ImageView
+                    android:id="@+id/ivBankLogo"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/bank_color" />
+
+                <LinearLayout
+                    android:id="@+id/llBankName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_toEndOf="@id/ivBankLogo"
+                    android:layout_toStartOf="@+id/tvAmount"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvBankName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="35"
+                        android:maxLines="1"
+                        android:text="Kotak Mahindra Bank Limited"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
+                    <TextView
+                        android:id="@+id/tvBankRrn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="35"
+                        android:maxLines="1"
+                        android:text="567890987654568"
+                        android:textColor="@color/bggrey_dark"
+                        android:textSize="@dimen/_8ssp" />
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:text="10000"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp" />
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:weightSum="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="AckNo :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/green_700"/>
+                        <TextView
+                            android:id="@+id/tvAckNo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="3214"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="TxnId :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/green_700"/>
+
+                        <TextView
+                            android:id="@+id/tvTxnId"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="AE1234567899874"
+                            android:maxLength="15"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9ssp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:weightSum="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="Mobile :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/green_700"/>
+                        <TextView
+                            android:id="@+id/tvCustomerMobile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="9876543214"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlOpen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="Opening Bal :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/green_700"/>
+                        <TextView
+                            android:id="@+id/tvOpen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="0.00"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="Aadhar :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/green_700"/>
+
+                        <TextView
+                            android:id="@+id/tvCustomerAadhaar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="xxxx-xxxx-0000"
+                            android:maxLength="15"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9ssp" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlClosing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="Closing Bal :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/green_700"/>
+
+                        <TextView
+                            android:id="@+id/tvClose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="xxxx-xxxx-0000"
+                            android:maxLength="15"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9ssp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bggrey_dark"
+                android:layout_marginVertical="@dimen/_3sdp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvCreatedAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="2024-05-15T15:10:22.032Z"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"/>
+                <ImageView
+                    android:id="@+id/ivShare"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/bill" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

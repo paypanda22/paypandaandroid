@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recharge_nav"
+    app:startDestination="@id/rechargeHostFragment">
+
+    <fragment
+        android:id="@+id/rechargeHostFragment"
+        android:name="app.pay.panda.fragments.recharge.RechargeHostFragment"
+        android:label="fragment_recharge_host"
+        tools:layout="@layout/fragment_recharge_host" />
+    <fragment
+        android:id="@+id/mobileRechargeFragment"
+        android:name="app.pay.panda.fragments.recharge.MobileRechargeFragment"
+        android:label="fragment_mobile_recharge"
+        tools:layout="@layout/fragment_mobile_recharge" >
+        <action
+            android:id="@+id/action_mobileRechargeFragment_to_fetchPlansFragment"
+            app:destination="@id/fetchPlansFragment" />
+        <action
+            android:id="@+id/action_mobileRechargeFragment_to_ROfferFragment"
+            app:destination="@id/ROfferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dthRechargeFragment"
+        android:name="app.pay.panda.fragments.recharge.DthRechargeFragment"
+        android:label="fragment_dth_recharge"
+        tools:layout="@layout/fragment_dth_recharge" />
+    <fragment
+        android:id="@+id/fetchPlansFragment"
+        android:name="app.pay.panda.fragments.recharge.FetchPlansFragment"
+        android:label="fragment_fetch_plans"
+        tools:layout="@layout/fragment_fetch_plans" />
+    <fragment
+        android:id="@+id/ROfferFragment"
+        android:name="app.pay.panda.fragments.aepsFragments.AepsCashDeposit"
+        android:label="fragment_r_offer"
+        tools:layout="@layout/fragment_r_offer" />
+</navigation>

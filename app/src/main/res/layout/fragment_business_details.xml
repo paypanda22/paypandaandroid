@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.onboarding.BusinessDetailsFragment">
+
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:padding="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_2sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/left"
+            app:tint="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tvCurrStep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="@string/business_details"
+            style="@style/mostserrat_bold"
+            android:layout_centerVertical="true"
+            android:gravity="start"
+            android:layout_toEndOf="@id/ivBack"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topPanel"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10sdp"
+                style="@style/mostserrat_bold"
+                android:text="@string/are_you_registered_for_gst"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rgGst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbYes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="YES"
+                    android:textStyle="bold"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <RadioButton
+                    android:id="@+id/rbNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="NO"
+                    android:textStyle="bold"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </RadioGroup>
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:text="@string/business_address_details"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/llGstDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:orientation="vertical">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/EditTextInput2">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtGstNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/tax"
+                        android:hint="@string/enter_gst_provisinal_gst_number"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:maxLength="15"
+                        android:textColor="@color/black"
+                        style="@style/mostserrat_bold"
+                        android:textColorHint="@color/bggrey"
+                        android:drawableTint="@color/bggrey_dark"
+                        android:inputType="textCapCharacters" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/EditTextInput2"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtBusinessName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_business_gst_name"
+                        android:focusable="false"
+                        android:drawableStart="@drawable/busines_address"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        style="@style/mostserrat_bold"
+                        android:textColorHint="@color/bggrey"
+                        android:drawableTint="@color/bggrey_dark"
+                        android:inputType="textCapWords" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/EditTextInput2"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtTypeOfRegistration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Gst Registration Type"
+                        android:focusable="false"
+                        android:drawableStart="@drawable/customer_type"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        style="@style/mostserrat_bold"
+                        android:textColorHint="@color/bggrey"
+                        android:drawableTint="@color/bggrey_dark"
+                        android:inputType="textCapWords" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPincode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_pincode"
+                    android:drawableStart="@drawable/location"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    style="@style/mostserrat_bold"
+                    android:textColorHint="@color/bggrey"
+                    android:drawableTint="@color/bggrey_dark"
+                    android:inputType="number"
+                    android:maxLength="6" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/busines_address"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/enter_address"
+                    android:textColor="@color/black"
+                    style="@style/mostserrat_bold"
+                    android:textColorHint="@color/bggrey"
+                    android:drawableTint="@color/bggrey_dark"
+                    android:inputType="textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/busines_address"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/enter_area"
+                    android:focusable="false"
+                    android:textColor="@color/black"
+                    style="@style/mostserrat_bold"
+                    android:textColorHint="@color/bggrey"
+                    android:drawableTint="@color/bggrey_dark"
+                    android:inputType="textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_city_name"
+                    android:focusable="false"
+                    android:drawableStart="@drawable/map_1_"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    style="@style/mostserrat_bold"
+                    android:textColorHint="@color/bggrey"
+                    android:drawableTint="@color/bggrey_dark"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/_12ssp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_state_name"
+                    android:drawableStart="@drawable/map_1_"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:focusable="false"
+                    android:textColor="@color/black"
+                    style="@style/mostserrat_bold"
+                    android:textColorHint="@color/bggrey"
+                    android:drawableTint="@color/bggrey_dark"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/_12ssp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spCity"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:spinnerMode="dropdown" />
+
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_shop_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/busines_address"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/enter_shop_name"
+                    android:textColor="@color/black"
+                    style="@style/mostserrat_bold"
+                    android:textColorHint="@color/bggrey"
+                    android:drawableTint="@color/bggrey_dark"
+                    android:inputType="textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/submitt_btn"
+                android:text="@string/submit"
+                android:textColor="@color/black"
+                style="@style/mostserrat_bold"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

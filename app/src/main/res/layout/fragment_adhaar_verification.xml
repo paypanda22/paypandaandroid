@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="@dimen/_20sdp"
+    android:paddingVertical="@dimen/_45sdp"
+    tools:context=".fragments.onboarding.AdhaarVerificationFragment">
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/left"
+            app:tint="@color/colorAccent"
+            android:contentDescription="@string/back" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toEndOf="@+id/ivBack"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/step"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvCurrStep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/_2"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/__2"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlAadhaar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topPanel"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp">
+
+        <LinearLayout
+            android:id="@+id/llAadhaar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/mostserrat_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_adhaar_number"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_your_aadhaar_number_we_will"
+                android:textColor="@color/bggrey_dark"
+                android:textSize="@dimen/_10ssp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2"
+                android:layout_marginTop="@dimen/_20sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtAdhaarNumber"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="@string/enter_adhaar_number"
+                    android:textColorHint="@color/bggrey"
+                    android:maxLength="12"
+                    android:textSize="@dimen/_14ssp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:id="@+id/llOtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enter_the_verification_code"
+                    android:textColor="@color/black"
+                    style="@style/mostserrat_bold"
+                    android:textSize="@dimen/_14ssp"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sent_to_the_mobile_numbe"
+                    android:textSize="@dimen/_12ssp"
+                    android:gravity="center"/>
+                <app.pay.panda.reusable.PinView
+                    android:id="@+id/edtOtpLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:focusableInTouchMode="true"
+                    android:inputType="number"
+                    style="@style/mostserrat_bold"
+                    android:itemBackground="@drawable/box"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="bold"
+                    app:itemCount="6"
+                    app:itemSpacing="@dimen/_8sdp"
+                    app:viewType="none"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_20sdp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/submitt_btn"
+                    android:drawableTint="@color/white"
+                    android:paddingHorizontal="@dimen/_20sdp"
+                    android:text="Submit OTP"
+                    style="@style/mostserrat_bold"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintButtonSize"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llAadhaarName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Adhaar Verified Name "
+                    android:textColor="@color/bggrey_dark"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvAadhaarVerifiedName"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAadhaar"
+            style="@style/mostserrat_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/submitt_btn"
+            android:text="@string/verify"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</RelativeLayout>

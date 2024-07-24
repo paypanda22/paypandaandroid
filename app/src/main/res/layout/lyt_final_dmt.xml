@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/_8sdp">
+
+    <RelativeLayout
+        android:id="@+id/bill_fetch_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/billerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:gravity="left"
+                style="@style/mostserrat_bold"
+                android:text="Send Money"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/sub_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:gravity="left"
+            android:text="@string/domestic_money_transfer"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_10ssp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:background="@color/bggrey" />
+    <!-- -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/name"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAcName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text=""
+                android:maxLength="25"
+                style="@style/mostserrat_bold"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/mobile"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvHolderMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text=""
+                style="@style/mostserrat_bold"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/account_number_"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAcNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text=""
+                style="@style/mostserrat_bold"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/ifsc_code_"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvIfscCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text=""
+                style="@style/mostserrat_bold"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/bank_name"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvBankName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text=""
+                style="@style/mostserrat_bold"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                tools:ignore="RelativeOverlap" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Available Limit :"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text=""
+                style="@style/mostserrat_bold"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                tools:ignore="RelativeOverlap" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Status :"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true">
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ddfgdfgdfgdfgdf"
+                    style="@style/mostserrat_bold"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    tools:ignore="RelativeOverlap" />
+                <ImageView
+                    android:id="@+id/ivStatus"
+                    android:layout_width="@dimen/_15ssp"
+                    android:layout_height="@dimen/_15ssp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_cancel_red"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tvValidateBene"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/submitt_btn_water_blue"
+            android:paddingVertical="@dimen/_2sdp"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:text="@string/validate_beneficiary"
+            android:textColor="@color/white"
+            style="@style/mostserrat_bold"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvValidateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/you_will_be_charged_3_for_beneficiary_validation"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_8ssp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_amount"
+                android:drawableStart="@drawable/ic_rupee"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:inputType="number"
+                android:maxLength="5"
+                style="@style/mostserrat_bold"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
+                android:textColorHint="@color/bggrey"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold"
+                android:layout_centerVertical="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/ivEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edit"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:clickable="true"
+            android:focusable="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+        <LinearLayout
+            android:id="@+id/llMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/select_transfer_mode"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textAllCaps="true"
+
+                style="@style/mostserrat_bold" />
+
+            <RadioGroup
+                android:id="@+id/rgMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_20sdp"
+                tools:ignore="RtlSymmetry">
+
+                <RadioButton
+                    android:id="@+id/imps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/imps"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+
+                <RadioButton
+                    android:id="@+id/neft"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/neft"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+            </RadioGroup>
+        </LinearLayout>
+       <LinearLayout
+           android:id="@+id/llTPin"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:visibility="gone"
+           android:orientation="vertical">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:text="@string/enter_your_transaction_pin"
+               android:textColor="@color/colorPrimary"
+               android:layout_marginTop="@dimen/_10sdp"
+               android:layout_marginBottom="@dimen/_5sdp"
+               android:textSize="@dimen/_12sdp"
+               android:textAllCaps="true"
+               style="@style/mostserrat_bold" />
+           <app.pay.panda.reusable.PinView
+               android:id="@+id/edtTPin"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_horizontal"
+               android:layout_marginBottom="@dimen/_10sdp"
+               android:focusableInTouchMode="true"
+               android:inputType="number"
+               style="@style/mostserrat_bold"
+               android:textColor="@color/black"
+               android:textSize="@dimen/_20ssp"
+               android:textStyle="bold"
+               app:itemCount="4"
+               app:itemSpacing="@dimen/_8sdp"
+               app:viewType="line"
+               tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+       </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnPay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/bg_btn_green"
+        android:text="@string/confirm_amp_pay"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        style="@style/mostserrat_bold"
+        android:visibility="visible"
+        android:textSize="@dimen/_12ssp" />
+
+
+</LinearLayout>

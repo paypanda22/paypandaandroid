@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_5sdp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/amount"
+            style="@style/mostserrat_bold"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="0.00"
+            style="@style/mostserrat_bold"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Bank UTR : "
+            style="@style/mostserrat_bold"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/tvUtr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="0.00"
+            style="@style/mostserrat_bold"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/status"
+            style="@style/mostserrat_bold"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textAllCaps="true"
+            style="@style/mostserrat_bold"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bggrey_dark"
+        android:layout_marginVertical="@dimen/_3sdp"/>
+
+
+
+</LinearLayout>

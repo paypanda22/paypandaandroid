@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardUseCompatPadding="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/tvAmount"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get 2GB data and 28 days of validity at just Rs179"
+                android:textSize="@dimen/_10ssp"
+                android:maxLength="40"
+                android:gravity="center"
+                android:justificationMode="inter_word"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RC179=Unlimited call, 2GB data aur 300 SMS, 28 din"
+                android:textSize="@dimen/_10ssp"
+                android:gravity="center"
+                android:justificationMode="inter_word"
+                android:textColor="@color/bggrey_dark"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="15999"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:textSize="@dimen/_17ssp"
+            style="@style/mostserrat_extra_bold"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

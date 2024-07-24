@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "209902651714",
+    "project_id": "paypanda-13c01",
+    "storage_bucket": "paypanda-13c01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209902651714:android:c3ce2fef73fddd79d120db",
+        "android_client_info": {
+          "package_name": "app.pay.panda"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHwThHlbc6oYTAE-SllrFMNAc9nC77NHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

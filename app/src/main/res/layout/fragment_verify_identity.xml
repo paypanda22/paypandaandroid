@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingHorizontal="@dimen/_20sdp"
+    android:paddingVertical="@dimen/_45sdp"
+    tools:context=".fragments.onboarding.VerifyIdentityFragment">
+
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/left"
+            app:tint="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toEndOf="@+id/ivBack"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/step"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvCurrStep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="1"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" / 2"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlPan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topPanel"
+        android:visibility="visible"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp">
+
+        <LinearLayout
+            android:id="@+id/llPan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/mostserrat_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_pan_number"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_your_pan_number_pan_number_should_belong_to_an_individual"
+                android:textColor="@color/bggrey_dark"
+                android:textSize="@dimen/_10ssp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lytPanNumber"
+                style="@style/EditTextInput2"
+                android:layout_marginTop="@dimen/_20sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPanNumber"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="10"
+                    android:hint="@string/enter_pan_number"
+                    android:textColorHint="@color/bggrey"
+                    android:textSize="@dimen/_14ssp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tvBtnPan"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:text=""
+                android:visibility="gone"
+                android:textSize="@dimen/_15ssp"
+                style="@style/mostserrat_bold"
+                android:background="@drawable/submitt_btn_dialog_light_grey"/>
+            <TextView
+                android:id="@+id/tvEditPan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_pan_number"
+                android:gravity="end"
+                android:visibility="gone"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/llPanName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pan_verified_name"
+                    android:textColor="@color/bggrey_dark"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPanVerifiedName"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnPan"
+            style="@style/mostserrat_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/submitt_btn"
+            android:text="@string/verify"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

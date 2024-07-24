@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.login.RegisterFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nsMainContent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_15sdp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_75sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/horizontal_logo"
+                android:importantForAccessibility="no" />
+
+
+            <TextView
+                android:id="@+id/heading_text"
+                style="@style/mostserrat_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:text="@string/create_an_account"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:gravity="start"
+                android:justificationMode="inter_word"
+                android:text="@string/to_use_our_services"
+                android:textColor="@color/bggrey_dark"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/EditTextInput2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtRegMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_phone_base"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/enter_your_mobile_number"
+                    android:inputType="number"
+                    android:maxLength="10" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/EditTextInput2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_person_base"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="Enter Your Name"
+                    android:inputType="textPersonName"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/EditTextInput2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_email_base"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/enter_your_email"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2"
+                app:endIconMode="dropdown_menu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/edtState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/location"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:padding="@dimen/_13sdp"
+                    android:textSize="@dimen/_12ssp"
+                    android:hint="@string/select_state"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtSponsorMobileLayout"
+                style="@style/EditTextInput2">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSponsorMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_person_base"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="Partner code/Reffer Id"
+                    android:inputType="text"
+                    android:maxLength="10" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5sdp">
+                <CheckBox
+                    android:id="@+id/chkNoreferal"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/chkNoreferal"
+                    android:layout_centerVertical="true"
+                    android:text="@string/i_do_not_have_any_referal_code"
+                    android:textSize="@dimen/_12ssp"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/colorAccent"/>
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tvSponsorName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/mostserrat_bold"
+                android:gravity="end"
+                android:visibility="gone"
+                android:textColor="@color/green" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_account_type"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/_10sdp"/>
+            <RadioGroup
+                android:id="@+id/rbLoginMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:orientation="horizontal">
+
+           <!--     <RadioButton
+                    android:id="@+id/rbMobile"
+                    style="@style/mostserrat_bold"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_weight="1"
+
+                    android:background="@drawable/rectanle_backgound_primary"
+                    android:buttonTint="@color/white"
+                    android:checked="true"
+                    android:text="Retailer"
+                    android:textColor="@color/white"
+                    tools:ignore="TouchTargetSizeCheck" />-->
+
+              <!--  <RadioButton
+                    android:id="@+id/rbEmail"
+                    style="@style/mostserrat_bold"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:text="Distributor"
+                    tools:ignore="TouchTargetSizeCheck" />-->
+            </RadioGroup>
+
+            <RelativeLayout
+                android:id="@+id/rlBottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/rlConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/terms_and_conditions"
+                        android:textSize="@dimen/_8ssp" />
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_toEndOf="@id/tv1"
+                        android:text="@string/terms_conditions"
+                        android:textColor="@color/blue_900"
+                        android:textSize="@dimen/_8ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_toEndOf="@id/tv2"
+                        android:text="@string/and"
+                        android:textSize="@dimen/_8ssp" />
+
+                    <TextView
+                        android:id="@+id/tv4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_toEndOf="@id/tv3"
+                        android:text="@string/privacy_policy"
+                        android:textColor="@color/blue_900"
+                        android:textSize="@dimen/_8ssp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:layout_below="@+id/rlConfirm"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:background="@drawable/submitt_btn">
+
+                    <TextView
+                        style="@style/mostserrat_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/submitt_btn"
+                        android:gravity="center"
+                        android:text="@string/register"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

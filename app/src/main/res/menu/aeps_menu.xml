@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group_transfers">
+    <item
+        android:id="@+id/toWallet"
+        android:title="@string/transfer_to_wallet"
+        android:icon="@drawable/wallet_plus"
+       />
+    <item
+        android:id="@+id/toBank"
+        android:title="@string/transfer_to_bank"
+        android:icon="@drawable/ic_bank_1_"
+        />
+    </group>
+    <group android:id="@+id/group_views">
+    <item
+        android:id="@+id/viewAll"
+        android:title="@string/view_all_transactions"
+        android:icon="@drawable/transaction_history"
+        />
+    </group>
+</menu>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="@dimen/_5sdp"
+        app:cardBackgroundColor="@color/bggrey"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change_transaction_pin"
+                android:textSize="@dimen/_14ssp"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/colorAccent"
+                android:layout_alignParentStart="true"/>
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_otp"
+                app:tint="@color/colorAccent" />
+        </RelativeLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextInput4"
+            android:layout_marginTop="@dimen/_10sdp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtOldPin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_old_pin"
+                android:textSize="@dimen/_12ssp"
+                style="@style/mostserrat_bold"
+                android:inputType="number"
+                android:maxLength="4"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextInput4">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtNewPin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_new_pin"
+                android:textSize="@dimen/_12ssp"
+                style="@style/mostserrat_bold"
+                android:inputType="number"
+                android:maxLength="4"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextInput4">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtConfirmPin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/re_enter_pin"
+                android:textSize="@dimen/_12ssp"
+                style="@style/mostserrat_bold"
+                android:inputType="number"
+                android:maxLength="4"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnChangePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/submitt_btn"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:text="change Pin"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

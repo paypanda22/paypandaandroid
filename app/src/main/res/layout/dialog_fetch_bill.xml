@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/bill_fetch_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:id="@+id/billerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:gravity="left"
+                android:maxLength="20"
+                android:text="Bill Details Fetched"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/sub_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/billerName"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:gravity="left"
+                android:text="Confirm Details &amp; Continue"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp" />
+
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="?actionBarSize"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/bharat_billpay_logo"/>
+
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/details_lyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bill_fetch_heading"
+            android:layout_margin="@dimen/_5sdp"
+            android:elevation="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_5sdp"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/op_logo"
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:src="@drawable/b_assured_memo" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_toRightOf="@+id/op_logo"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/opName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="37"
+                            android:text=""
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/refId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="37"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="10sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/ref_id"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="@dimen/_10sdp"
+                            android:background="@color/colorPrimary" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="@string/bill_details"
+                        style="@style/mostserrat_bold"
+                        android:textColor="@color/colorPrimaryDark" />
+
+
+                <LinearLayout
+                    android:id="@+id/bill_det"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/customer_name_"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/black" />
+                        <TextView
+                            android:id="@+id/tvCustomerName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                           android:gravity="end"
+                            android:layout_weight="1"
+                            android:text="Test Customer"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/mostserrat_bold"
+                            android:text="Bill Date :"
+                            android:textColor="@color/black" />
+
+
+                        <TextView
+                            android:id="@+id/tvDueDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                           android:gravity="end"
+                            android:layout_weight="1"
+                            android:text="NA"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/mostserrat_bold"
+                            android:layout_weight="1"
+                            android:text="Amount"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tvBillAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_weight="1"
+                            android:text="NA"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcvAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/_10sdp"
+                        android:paddingVertical="@dimen/_5sdp">
+
+                        <ImageView
+                            android:id="@+id/iv_rupee"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_rupee" />
+
+                        <EditText
+                            android:id="@+id/finalAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/dimen_10dp"
+                            android:layout_toEndOf="@+id/iv_rupee"
+                            android:background="@null"
+                            android:text="0"
+                            android:focusable="false"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_30sdp"
+                            style="@style/mostserrat_bold" />
+
+                        <ImageView
+                            android:id="@+id/iv_edit"
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/_25sdp"
+                            android:src="@drawable/ic_edit"
+                            android:visibility="gone"
+                            app:tint="@color/black" />
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_part_payment_allwd"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="@dimen/_10sdp"-->
+<!--                    android:gravity="end"-->
+<!--                    android:text="Part Payment Not Allowed"-->
+<!--                    style="@style/mostserrat_bold"-->
+<!--                    android:textColor="@color/green"-->
+<!--                    android:textSize="@dimen/_8ssp"-->
+<!--                    android:textStyle="bold" />-->
+                <TextView
+                    android:id="@+id/tv_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter Your Transaction PIN"
+                    android:textSize="@dimen/_12ssp"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:gravity="center"/>
+                <app.pay.panda.reusable.PinView
+                    android:id="@+id/edtOtpLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:focusableInTouchMode="true"
+                    android:inputType="number"
+                    style="@style/mostserrat_bold"
+                    android:itemBackground="@drawable/box"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="bold"
+                    app:itemCount="4"
+                    app:itemSpacing="@dimen/_8sdp"
+                    app:viewType="none"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/submitt_btn"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Proceed to Pay"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"/>
+
+
+
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

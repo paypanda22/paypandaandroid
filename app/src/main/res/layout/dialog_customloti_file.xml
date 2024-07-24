@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="24dp"
+    android:elevation="10dp"
+    android:background="@color/green_50"
+    android:clipToOutline="true">
+
+    <!-- Lottie Animation Background -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="316dp"
+        android:layout_height="311dp"
+
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/comingsoon" />
+
+    <Button
+        android:id="@+id/notifyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="304dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:backgroundTint="@color/water_blue_light"
+        android:text="Notify Me"
+        android:textColor="@android:color/black" />
+
+
+</FrameLayout>

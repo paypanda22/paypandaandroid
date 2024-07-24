@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.bbps.OperatorListFragment">
+
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:gravity="center"
+            android:padding="@dimen/_3sdp"
+            android:src="@drawable/left_1_"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/tvServiceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/ivBack"
+            android:gravity="start"
+            android:maxLength="35"
+            android:text=""
+            style="@style/mostserrat_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/info"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:gravity="center"
+            android:padding="@dimen/_4sdp"
+            android:src="@drawable/bharat_billpay_logo" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/hr"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/top_bar"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:background="@color/bggrey_dark" />
+
+    <RelativeLayout
+        android:id="@+id/rTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hr"
+        android:background="@color/white"
+        android:padding="@dimen/_5sdp"
+        android:visibility="visible">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            app:strokeColor="@color/colorPrimaryDark"
+            app:strokeWidth="1dp"
+            app:cardCornerRadius="@dimen/_5sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp">
+
+
+                <EditText
+                    android:id="@+id/edtSearchBiller"
+                    android:layout_width="@dimen/_225sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:background="@color/white"
+                    android:drawableTint="@color/colorPrimary"
+                    android:hint="Search by Biller Name"
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/operatorlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rTop"
+        android:elevation="@dimen/_5sdp"
+        android:visibility="visible"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp">
+
+            <TextView
+                style="@style/pTextbold"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:text="All Billers"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+            <RelativeLayout
+                android:id="@+id/rlNoData"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+                <ImageView
+                    android:id="@+id/iv"
+                    android:layout_width="@dimen/_85sdp"
+                    android:layout_height="@dimen/_85sdp"
+                    android:src="@drawable/b_assured_memo"
+                    android:layout_centerInParent="true"
+                    />
+                <TextView
+                    android:id="@+id/tvCategoryName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="No Billers Found"
+                    style="@style/mostserrat_bold"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+<RelativeLayout
+    android:id="@+id/rlImageView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="@dimen/_75sdp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/loading_anim" />
+</RelativeLayout>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</RelativeLayout>

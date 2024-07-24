@@ -1,0 +1,1583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.home.HomeFragment">
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+
+        android:layout_height="?actionBarSize">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:src="@drawable/user_male"
+            app:civ_border_color="#FF000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_toEndOf="@+id/profileImage"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtBal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/balance"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/currBal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_toEndOf="@+id/txtBal"
+                    android:text="@string/_00_00"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/downArrow"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+
+                    android:layout_toEndOf="@+id/currBal"
+                    android:src="@drawable/ic_drop_down"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/upArrow"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_toEndOf="@+id/currBal"
+                    android:rotation="180"
+                    android:src="@drawable/ic_drop_down"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
+
+                <TextView
+                    style="@style/mostserrat_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtBal"
+                    android:text="@string/view_details"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_8sdp"
+                    android:textStyle="bold"
+                    tools:ignore="SpUsage,TextSizeCheck" />
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlNotifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:src="@drawable/bell"
+                app:tint="@color/white"
+                android:layout_margin="@dimen/_5sdp"/>
+
+            <TextView
+                android:id="@+id/tvCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:minWidth="@dimen/_12sdp"
+                android:background="@drawable/round_corner"
+                android:gravity="center"
+                android:padding="@dimen/_2sdp"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_7sdp"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/walletDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topPanel"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/llAllBalance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/lMainWallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp">
+
+                    <ImageView
+                        android:id="@+id/rupee"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_rupee" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@+id/rupee"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/main_wallet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_00_00"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/main_wallet"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_8ssp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/llAepsWallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp">
+
+                    <ImageView
+                        android:id="@+id/rupee1"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_rupee" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_toEndOf="@+id/rupee1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/aeps_wallet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_00_00"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/aeps_wallet"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_8ssp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/llCashBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_3sdp">
+
+                    <ImageView
+                        android:id="@+id/rupee2"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_rupee" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_toEndOf="@+id/rupee2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/cashBack_wallet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_00_00"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cashback_wallet"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_6ssp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/hr"
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/llAddMoney"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_addmoney"
+                    app:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/add_money"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/in_main_wallet"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_8ssp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_back_curv_white"
+        android:paddingTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_below="@+id/walletDetails">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_5sdp">
+
+                <!-- Transfer Money -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/_5sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/trf_img"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/transaction_two_line" />
+
+                            <TextView
+                                style="@style/pTextbold"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_toEndOf="@+id/trf_img"
+                                android:text="Transfer Money"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:background="@color/colorPrimary" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/llDmt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/dmt" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Money Transfer"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_cms"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:src="@drawable/airtel" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="@string/airtel_cms"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llCashDeposit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:padding="@dimen/_5sdp"
+                                    android:rotation="180"
+                                    android:src="@drawable/money_currency" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="@string/cash_deposit_d"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:visibility="gone"
+                                android:id="@+id/ll_scan_n_pay"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/qr_color" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Scan &amp; Pay"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!--                    <View-->
+                        <!--                        android:layout_width="match_parent"-->
+                        <!--                        android:layout_height="@dimen/_3sdp"-->
+                        <!--                        android:background="@color/colorPrimary" />-->
+
+                        <!--                    <View-->
+                        <!--                        android:layout_width="match_parent"-->
+                        <!--                        android:layout_height="@dimen/_3sdp"-->
+                        <!--                        android:background="@color/colorPrimaryDark" />-->
+
+                    </LinearLayout>
+
+                <!-- Cash Out -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/_5sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/cashout_img"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/atm" />
+
+                            <TextView
+                                style="@style/pTextbold"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_toRightOf="@+id/cashout_img"
+                                android:text="Cash Out Services"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:background="@color/colorPrimary" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/ll_aeps_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/ic_aeps_services"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="AEPS"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:visibility="gone"
+                                android:id="@+id/ll_aeps_2_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/micro_atm_2"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="M-POS"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/lytQrCollection"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/scan_n_pay_color" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="QR Collect"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/micro_atm_lyt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/micro_atm"
+                                    />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Micro-ATM"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!--                    <View-->
+                        <!--                        android:layout_width="match_parent"-->
+                        <!--                        android:layout_height="@dimen/_3sdp"-->
+                        <!--                        android:background="@color/colorPrimary" />-->
+
+                        <!--                    <View-->
+                        <!--                        android:layout_width="match_parent"-->
+                        <!--                        android:layout_height="@dimen/_3sdp"-->
+                        <!--                        android:background="@color/colorPrimaryDark" />-->
+
+                    </LinearLayout>
+
+
+
+                <!-- Recharge & Bill Payment -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/bbpsmemo"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/b_assured_memo" />
+
+                            <TextView
+                                style="@style/pTextbold"
+                                android:layout_centerVertical="true"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_toRightOf="@+id/bbpsmemo"
+                                android:text="Recharge &amp; Bill Payments"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:background="@color/colorPrimary" />
+
+                        <!-- Recharge & Bill Payment Row 1 -->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:weightSum="4">
+
+                            <LinearLayout
+                                android:id="@+id/ll_prepaid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/ic_mobile_recharge"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Mobile Recharge"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_dth_recharge"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/satellite_dish"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="DTH"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_broadband"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/wifi_router"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Broadband"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_fastag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/toll_road"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Fastag Recharge"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!-- Recharge & Bill Payment Row 2 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:weightSum="4">
+
+                            <LinearLayout
+                                android:id="@+id/ll_electricity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/light_bulb"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Electricity"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_lpg_booking"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/gas_tank"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="LPG Booking"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_rent_payment"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/house_rent"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Rent Payment"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_credit_card_bill"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/credit_card"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Credit Card Bill"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                        <!-- Recharge & Bill Payment Row 3 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:weightSum="4">
+
+                            <LinearLayout
+                                android:id="@+id/ll_landline"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/landline"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Landline Bill"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_piped_gas"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/piped_gas"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Piped Gas"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_post_paid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/bill_mobile"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Postpaid "
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_google_play"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/metro" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Metro Card Recharge"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                <!-- Finance & Taxes -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/finance_n_taxes"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/b_assured_memo" />
+
+                            <TextView
+                                style="@style/pTextbold"
+                                android:layout_centerVertical="true"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_toRightOf="@+id/finance_n_taxes"
+                                android:text="Finance &amp; Tax Payments"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:background="@color/colorPrimary" />
+                        <!-- FINANCE ROW 1 -->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:weightSum="4">
+
+                            <LinearLayout
+                                android:id="@+id/ll_emi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/signing"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="EMI Payment"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_insurance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/ic_insurance"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Insurance"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llRd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/recurring_deposit"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Recurring Deposit"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_water_tax"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/ic_waterdrop"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Water Tax"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                        <!-- FINANCE ROW 2 -->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:weightSum="4">
+
+                            <LinearLayout
+                                android:id="@+id/ll_municipal_tax"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/municipality"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Municipal\nTax"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llMunicinalServices"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/central_park"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Municipal\nServices"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llHealthInsurance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/healthcare"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Health\nInsurance"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llLic"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:src="@drawable/lic_rounded"
+                                    />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="LIC"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                <!-- Other Services -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/other_services"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/b_assured_memo" />
+
+                            <TextView
+                                style="@style/pTextbold"
+                                android:layout_centerVertical="true"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_toRightOf="@+id/other_services"
+                                android:text="Other Services"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_margin="@dimen/_3sdp"
+                        android:background="@color/colorPrimary" />
+                        <!-- Other Services Row 1 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:weightSum="4">
+
+                            <LinearLayout
+                                android:id="@+id/ll_education"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/ic_education"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Education"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llDonation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/donation"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Donation"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llSubscription"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/subscription"
+                                    app:tint="@color/colorPrimaryDark" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="Subscriptions"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llClubs"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:background="@drawable/rounded_back_circle"
+                                    android:padding="@dimen/_10sdp"
+                                    android:src="@drawable/club" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Clubs and\nAssociations"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

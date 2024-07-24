@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_home"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="app.pay.panda.fragments.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_operatorListFragment"
+            app:destination="@id/operatorListFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_requestWalletFragment"
+            app:destination="@id/requestWalletFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/aepsHomeFragment"
+        android:name="app.pay.panda.fragments.home.AepsHomeFragment"
+        android:label="fragment_aeps_home"
+        tools:layout="@layout/fragment_aeps_home" />
+
+    <fragment
+        android:id="@+id/cashBackFragment"
+        android:name="app.pay.panda.fragments.home.CashBackFragment"
+        android:label="fragment_cash_back"
+        tools:layout="@layout/fragment_cash_back" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="app.pay.panda.fragments.home.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_walletTransactionReport"
+            app:destination="@id/walletTransactionReport"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_companyBankAccountList"
+            app:destination="@id/companyBankAccountList"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_dmtTransactionFragment"
+            app:destination="@id/dmtTransactionFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_supportTicketHost"
+            app:destination="@id/supportTicketHost"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_utilityTransactions"
+            app:destination="@id/utilityTransactions"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_to_aepsHomeFragment"
+        app:destination="@id/aepsHomeFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+    <action
+        android:id="@+id/action_global_to_cashBackFragment"
+        app:destination="@id/cashBackFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+    <action
+        android:id="@+id/action_global_to_profileFragment"
+        app:destination="@id/profileFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@anim/slide_out_right"/>
+    <action
+        android:id="@+id/action_global_to_homeFragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@anim/slide_out_right"/>
+    <fragment
+        android:id="@+id/operatorListFragment"
+        android:name="app.pay.panda.fragments.bbps.OperatorListFragment"
+        android:label="fragment_operator_list"
+        tools:layout="@layout/fragment_operator_list" />
+    <fragment
+        android:id="@+id/requestWalletFragment"
+        android:name="app.pay.panda.fragments.home.RequestWalletFragment"
+        android:label="fragment_request_wallet"
+        tools:layout="@layout/fragment_request_wallet" >
+        <action
+            android:id="@+id/action_requestWalletFragment_to_walletRequestListFragment2"
+            app:destination="@id/walletRequestListFragment2"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <action android:id="@+id/action_global_requestWalletFragment"
+        app:destination="@id/requestWalletFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@anim/slide_out_right"/>
+    <fragment
+        android:id="@+id/walletTransactionReport"
+        android:name="app.pay.panda.fragments.reports.WalletTransactionReport"
+        android:label="fragment_wallet_transaction_report"
+        tools:layout="@layout/fragment_wallet_transaction_report" />
+    <fragment
+        android:id="@+id/walletRequestListFragment2"
+        android:name="app.pay.panda.fragments.reports.WalletRequestListFragment"
+        android:label="fragment_wallet_request_list"
+        tools:layout="@layout/fragment_wallet_request_list" />
+    <action android:id="@+id/action_global_walletRequestListFragment2"
+        app:destination="@id/walletRequestListFragment2"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@anim/slide_out_right"/>
+    <fragment
+        android:id="@+id/companyBankAccountList"
+        android:name="app.pay.panda.fragments.reports.CompanyBankAccountList"
+        android:label="fragment_company_bank_account_list"
+        tools:layout="@layout/fragment_company_bank_account_list" />
+    <fragment
+        android:id="@+id/dmtTransactionFragment"
+        android:name="app.pay.panda.fragments.dmt.DmtTransactionFragment"
+        android:label="fragment_dmt_transaction"
+        tools:layout="@layout/fragment_dmt_transaction" />
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="app.pay.panda.fragments.home.ProfileEditFragment"
+        android:label="fragment_profile_edit"
+        tools:layout="@layout/fragment_profile_edit" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="app.pay.panda.fragments.home.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <action android:id="@+id/action_global_notificationsFragment"
+        app:destination="@id/notificationsFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+    <fragment
+        android:id="@+id/supportTicketHost"
+        android:name="app.pay.panda.fragments.supportTicket.SupportTicketHost"
+        android:label="fragment_support_ticket_host"
+        tools:layout="@layout/fragment_support_ticket_host" />
+    <fragment
+        android:id="@+id/utilityTransactions"
+        android:name="app.pay.panda.fragments.reports.UtilityTransactions"
+        android:label="fragment_utility_transactions"
+        tools:layout="@layout/fragment_utility_transactions" />
+
+</navigation>

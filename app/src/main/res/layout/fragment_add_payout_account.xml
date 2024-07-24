@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/ivCancel"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:src="@drawable/cancel_3"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/cancelDialog" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivCancel"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/curved_background_with_shadow"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_20sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add Bank"
+                    style="@style/mostserrat_bold"
+                    android:textAllCaps="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    tools:ignore="TextSizeCheck" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:background="@color/bggrey_dark" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtName"
+                    android:layout_width="match_parent"
+                    android:hint="Enter Your Name"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="@string/enter_your_mobile_number"
+                    android:maxLength="10"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtAccountNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Enter Account Number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lytBankList"
+                style="@style/EditTextInput2"
+                app:endIconMode="dropdown_menu"
+                ><AutoCompleteTextView
+                android:id="@+id/edtBankName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12ssp"
+                android:hint="@string/select_bank_name"
+                android:focusable="false"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lytEdtIfsc"
+                style="@style/EditTextInput2"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtIfsc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Enter Ifsc Code"
+                    android:maxLines="1"
+                    android:textAllCaps="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <TextView
+                android:id="@+id/tvValidateBeneficiaryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/validate_beneficiary"
+                android:background="@drawable/submitt_btn_water_blue"
+                android:paddingVertical="@dimen/_3sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:textColor="@color/white"
+                style="@style/mostserrat_bold"
+                android:layout_gravity="end"/>
+            <TextView
+                android:id="@+id/tvPromtCharges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_will_be_charged_3_for_beneficiary_validation"
+                android:layout_gravity="end"
+                android:textColor="@color/red"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAddBeneficiary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/submitt_btn_dialog"
+                android:text="Add Beneficiary"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_dmt"
+    app:startDestination="@id/DMTFragment2">
+
+    <fragment
+        android:id="@+id/DMTFragment2"
+        android:name="app.pay.panda.fragments.dmt.DMTFragment"
+        android:label="fragment_d_m_t"
+        tools:layout="@layout/fragment_d_m_t" >
+        <action
+            android:id="@+id/action_DMTFragment2_to_createCustomerFragment2"
+            app:destination="@id/createCustomerFragment2"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/fade_out_m"
+            app:popEnterAnim="@anim/fade_in_m"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_DMTFragment2_to_dmtTransactionFragment2"
+            app:destination="@id/dmtTransactionFragment2"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/fade_out_m"
+            app:popEnterAnim="@anim/fade_in_m"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/createCustomerFragment2"
+        android:name="app.pay.panda.fragments.dmt.CreateCustomerFragment"
+        android:label="fragment_create_customer"
+        tools:layout="@layout/fragment_create_customer" >
+        <action
+            android:id="@+id/action_createCustomerFragment2_to_dmtTransactionFragment2"
+            app:destination="@id/dmtTransactionFragment2"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/fade_out_m"
+            app:popEnterAnim="@anim/fade_in_m"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/dmtTransactionFragment2"
+        android:name="app.pay.panda.fragments.dmt.DmtTransactionFragment"
+        android:label="fragment_dmt_transaction"
+        tools:layout="@layout/fragment_dmt_transaction" />
+</navigation>

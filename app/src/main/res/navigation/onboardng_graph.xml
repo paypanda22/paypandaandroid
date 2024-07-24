@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboardng_graph"
+    app:startDestination="@id/onboardingStatusFragment">
+
+    <fragment
+        android:id="@+id/onboardingStatusFragment"
+        android:name="app.pay.panda.fragments.onboarding.OnboardingStatusFragment"
+        android:label="fragment_onboarding_status"
+        tools:layout="@layout/fragment_onboarding_status" >
+        <action
+            android:id="@+id/action_onboardingStatusFragment_to_businessDetailsFragment"
+            app:destination="@id/businessDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_onboardingStatusFragment_to_onboardBankDetailsFragment"
+            app:destination="@id/onboardBankDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_onboardingStatusFragment_to_personalDetailsFragment"
+            app:destination="@id/personalDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_onboardingStatusFragment_to_verifyIdentityFragment"
+            app:destination="@id/verifyIdentityFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_onboardingStatusFragment_to_videoKycFragment"
+            app:destination="@id/videoKycFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_onboardingStatusFragment_to_uploadDocsFragment"
+            app:destination="@id/uploadDocsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_onboardingStatusFragment_to_pendingApprovalFragment"
+            app:destination="@id/pendingApprovalFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/businessDetailsFragment"
+        android:name="app.pay.panda.fragments.onboarding.BusinessDetailsFragment"
+        android:label="fragment_business_details"
+        tools:layout="@layout/fragment_business_details" />
+    <fragment
+        android:id="@+id/onboardBankDetailsFragment"
+        android:name="app.pay.panda.fragments.onboarding.OnboardBankDetailsFragment"
+        android:label="fragment_onboard_bank_details"
+        tools:layout="@layout/fragment_onboard_bank_details" />
+    <fragment
+        android:id="@+id/personalDetailsFragment"
+        android:name="app.pay.panda.fragments.onboarding.PersonalDetailsFragment"
+        android:label="fragment_personal_details"
+        tools:layout="@layout/fragment_personal_details" />
+    <fragment
+        android:id="@+id/verifyIdentityFragment"
+        android:name="app.pay.panda.fragments.onboarding.VerifyIdentityFragment"
+        android:label="fragment_verify_identity"
+        tools:layout="@layout/fragment_verify_identity" >
+        <action
+            android:id="@+id/action_verifyIdentityFragment_to_adhaarVerificationFragment"
+            app:destination="@id/adhaarVerificationFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/videoKycFragment"
+        android:name="app.pay.panda.fragments.onboarding.VideoKycFragment"
+        android:label="fragment_video_kyc"
+        tools:layout="@layout/fragment_video_kyc" />
+    <fragment
+        android:id="@+id/uploadDocsFragment"
+        android:name="app.pay.panda.fragments.onboarding.UploadDocsFragment"
+        android:label="fragment_upload_docs"
+        tools:layout="@layout/fragment_upload_docs" />
+    <fragment
+        android:id="@+id/pendingApprovalFragment"
+        android:name="app.pay.panda.fragments.onboarding.PendingApprovalFragment"
+        android:label="fragment_pending_approval"
+        tools:layout="@layout/fragment_pending_approval" />
+    <fragment
+        android:id="@+id/adhaarVerificationFragment"
+        android:name="app.pay.panda.fragments.onboarding.AdhaarVerificationFragment"
+        android:label="AdhaarVerificationFragment" />
+
+    <action
+        android:id="@+id/action_global_onboardingStatusFragment"
+        app:destination="@id/onboardingStatusFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@anim/slide_out_right"/>
+</navigation>

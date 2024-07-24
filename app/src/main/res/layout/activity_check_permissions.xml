@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@color/colorAccent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            style="@style/mostserrat_bold"
+            android:text="@string/essential_permissions"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            tools:ignore="TextContrastCheck" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lytRequestPermission"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBar"
+        android:layout_below="@+id/topPanel"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+
+        <ImageView
+            android:id="@+id/ivServiceIcon"
+            android:layout_width="@dimen/_95sdp"
+            android:layout_height="@dimen/_95sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/camera_color"
+            tools:ignore="ContentDescription,ImageContrastCheck" />
+
+        <TextView
+            android:id="@+id/tvPermissionName"
+            style="@style/mostserrat_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/camera_permission"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/_14ssp" />
+
+        <TextView
+            android:id="@+id/tvPermissionDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:justificationMode="inter_word"
+            android:text="@string/camera_permissions_text"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp" />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent">
+
+        <TextView
+            style="@style/mostserrat_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/allow"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/nav_host_fragment"
+    tools:context=".activity.QrCollectionActivity">
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/back"
+            android:src="@drawable/left"
+            app:tint="@color/white" />
+
+        <TextView
+            style="@style/mostserrat_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/collect_payment_by_qr_code"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lytDetailsNOtp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:layout_below="@+id/topPanel"
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextInput5">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_mobile_number"
+                android:inputType="number"
+                android:maxLength="10"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextInput5">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/customer_name"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextInput5">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/customer_address"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextInput5">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPinCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_pincode"
+                android:maxLength="6"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextInput5">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPurpose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/purpose_of_transaction"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Amount to Collect"
+            android:textSize="@dimen/_12ssp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            style="@style/mostserrat_extra_bold"
+            android:textColor="@color/black"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextInput5">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_amount"
+                android:maxLength="4"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:layout_marginHorizontal="@dimen/_3sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/colorAccent"
+                style="@style/mostserrat_extra_bold"
+                android:background="@drawable/edit_text_round_bg_outline_bold"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"/>
+            <TextView
+                android:id="@+id/tv200"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200"
+                android:layout_marginHorizontal="@dimen/_3sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/colorAccent"
+                style="@style/mostserrat_extra_bold"
+                android:background="@drawable/edit_text_round_bg_outline_bold"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/tv500"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500"
+                android:layout_marginHorizontal="@dimen/_3sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/colorAccent"
+                style="@style/mostserrat_extra_bold"
+                android:background="@drawable/edit_text_round_bg_outline_bold"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"/>
+            <TextView
+                android:id="@+id/tv1000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000"
+                android:layout_marginHorizontal="@dimen/_3sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/colorAccent"
+                style="@style/mostserrat_extra_bold"
+                android:background="@drawable/edit_text_round_bg_outline_bold"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lytOtp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_the_verification_code"
+                android:textColor="@color/black"
+                style="@style/mostserrat_bold"
+                android:textSize="@dimen/_14ssp"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/tvNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/_10ssp"
+                android:gravity="center"/>
+            <app.pay.panda.reusable.PinView
+                android:id="@+id/edtOtpLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:focusableInTouchMode="true"
+                android:inputType="number"
+                style="@style/mostserrat_bold"
+                android:itemBackground="@drawable/box"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold"
+                app:itemCount="6"
+                app:itemSpacing="@dimen/_8sdp"
+                app:viewType="none"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        </LinearLayout>
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btnSubmit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/_20sdp"
+    android:background="@drawable/submitt_btn"
+    android:text="@string/send_otp"
+    style="@style/mostserrat_bold"
+    android:textSize="@dimen/_12ssp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

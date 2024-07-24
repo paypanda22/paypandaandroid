@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.reports.WalletRequestListFragment">
+
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/back"
+            android:src="@drawable/left"
+            app:tint="@color/white" />
+
+        <TextView
+            style="@style/mostserrat_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/wallet_request_list"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+
+    </RelativeLayout>
+
+        <RadioGroup
+            android:id="@+id/rbLoginMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/topPanel"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+                 <RadioButton
+                     android:id="@+id/Company"
+                     style="@style/mostserrat_bold"
+                     android:textSize="@dimen/_10sdp"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginEnd="@dimen/_3sdp"
+                     android:layout_weight="1"
+                     android:background="@drawable/rectanle_backgound_primary"
+                     android:buttonTint="@color/white"
+                     android:checked="true"
+                     android:text="Company"
+                     android:textColor="@color/white"
+                     tools:ignore="TouchTargetSizeCheck" />
+
+              <RadioButton
+                  android:textColor="@color/white"
+                  android:id="@+id/Distributor"
+                  android:buttonTint="@color/white"
+                  android:background="@drawable/rectanle_backgound_primary"
+                  style="@style/mostserrat_bold"
+                  android:textSize="@dimen/_10sdp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+
+                  android:layout_weight="1"
+                  android:text="Distributor/ Sup/Distributer"
+                  tools:ignore="TouchTargetSizeCheck" />
+        </RadioGroup>
+
+  <!--  <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/rvTransferTo"/>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rvWalletRequestList"
+        android:layout_below="@+id/rbLoginMethod"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/llNoData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topPanel"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/dmt"
+            android:src="@drawable/transaction_history"
+            app:tint="@color/bggrey_dark" />
+
+        <TextView
+            style="@style/mostserrat_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/no_transactions_found"
+            android:textSize="@dimen/_14ssp" />
+    </LinearLayout>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="@dimen/_75sdp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:src="@drawable/loading_anim" />
+
+</RelativeLayout>

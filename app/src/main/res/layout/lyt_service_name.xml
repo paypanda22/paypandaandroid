@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/_2sdp"
+    >
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DMT"
+        style="@style/mostserrat_bold"
+        android:textColor="@color/black"
+        android:background="@drawable/submitt_btn_dialog_light_grey"
+        android:padding="@dimen/_5sdp"/>
+
+</RelativeLayout>

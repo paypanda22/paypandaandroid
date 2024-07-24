@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardUseCompatPadding="true"
+    app:strokeColor="@color/colorPrimaryDark"
+    app:strokeWidth="@dimen/_1sdp"
+    app:cardElevation="@dimen/_10sdp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_20sdp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Customer Consent"
+            android:gravity="center"
+            android:textSize="@dimen/_12ssp"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:justificationMode="inter_word"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aadhaar_consent_eng"
+            android:justificationMode="inter_word"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/grahak_anumati"
+            android:gravity="center"
+            style="@style/hindi"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:justificationMode="inter_word"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aadhaar_consent_hindi"
+           style="@style/hindi"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:justificationMode="inter_word"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnOkey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/submitt_btn"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/i_agree"
+            style="@style/hindi"
+            android:textStyle="bold"
+            android:textSize="@dimen/_14ssp"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
