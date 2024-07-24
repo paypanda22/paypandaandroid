@@ -76,7 +76,7 @@ class DmtTransactionListAdapter(
                 }
                 3->{
                     holder.tvStatus.text = "FAILED"
-                    holder.refresh.setVisibility(View.GONE)
+                    holder.refresh.setVisibility(View.VISIBLE)
                     holder.ivOtp.setVisibility(View.GONE)
                     holder.ivShare.setVisibility(View.GONE)
                     holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.white))

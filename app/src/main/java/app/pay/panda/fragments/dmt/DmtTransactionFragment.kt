@@ -85,7 +85,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
                             when (type) {
                                 1 -> {
                                     refreshTransactionStatus(model[pos])
-                                }
+                                    }
 
                                 2 -> {
                                     openOtpDialog(model[pos])
@@ -212,8 +212,17 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
         UtilMethods.dmtTxnEnquiry(requireContext(), model._id.toString(), token, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: DmtTxnEnqResponse = Gson().fromJson(message, DmtTxnEnqResponse::class.java)
-                getTransactionList(start_date, end_date, count);
-            }
+               // getTransactionList(start_date, end_date, count);
+                if (!response.error) {
+   if(model.is_refunded ==equals("true")){
+       Toast.makeText(requireContext(), "ok", Toast.LENGTH_SHORT).show()
+   }else{
+       Toast.makeText(requireContext(), "not ok", Toast.LENGTH_SHORT).show()
+   }
+                }else{
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                }
+                }
 
             override fun fail(from: String) {
                 Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
