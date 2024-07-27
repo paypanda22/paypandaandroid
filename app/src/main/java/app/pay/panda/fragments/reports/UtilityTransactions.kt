@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -32,12 +33,14 @@ import app.pay.panda.adapters.UtilityTransactionAdapter
 import app.pay.panda.databinding.DialogCategoryListBinding
 import app.pay.panda.databinding.FragmentUtilityTransactionsBinding
 import app.pay.panda.databinding.LytUtilityFilterBinding
+import app.pay.panda.fragments.dmt.SingleDmtTransaction
 
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.helperclasses.Utils.Companion.showToast
 import app.pay.panda.interfaces.BbpsCategoryClick
 import app.pay.panda.interfaces.BbpsCategoryIDClick
+import app.pay.panda.interfaces.DmtTxnClickListener
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.UtilityTransactionClick
 
@@ -52,7 +55,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 
 
-class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(FragmentUtilityTransactionsBinding::inflate),UtilityTransactionClick ,BbpsCategoryIDClick{
+class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(FragmentUtilityTransactionsBinding::inflate){
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
     private var start_date = ""
@@ -87,7 +90,24 @@ class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(Fra
                     if (response.data?.isNotEmpty() == true){
                         list= mutableListOf()
                         list.addAll(response.data)
-                        val txnAdapter=UtilityTransactionAdapter(myActivity,list,this@UtilityTransactions)
+                        val clickListner = object : UtilityTransactionClick {
+                            override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int, type: Int) {
+                                when (type) {
+                                    1 -> {
+
+                                    }
+
+                                    2 -> {
+
+                                    }
+
+                                    else -> {
+                                        openShareReceipt(model[pos]._id.toString())
+                                    }
+                                }
+                            }
+                        }
+                        val txnAdapter=UtilityTransactionAdapter(myActivity,list,clickListner)
                         binding.rvTransactionList.adapter=txnAdapter
                         binding.rvTransactionList.layoutManager=LinearLayoutManager(myActivity)
 
@@ -345,26 +365,13 @@ dBinding.edtBillers.setOnClickListener{
 
     }
 
-
-
-
-
-
-
-
-    override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
-
+    private fun openShareReceipt(id: String) {
+        val bottomSheet = SingleUtilityTransaction()
+        val bundle = Bundle()
+        bundle.putString("id", id)
+        bottomSheet.arguments = bundle
+        bottomSheet.show(parentFragmentManager, bottomSheet.tag)
     }
-
-    override fun onItemClickedId(
-        holder: RecyclerView.ViewHolder,
-        model: List<app.pay.panda.responsemodels.CategoryIdResponse.Data>,
-        pos: Int
-    ) {
-        dBinding.edtBillers.setText(model[pos].name)
-
-    }
-
 
 }
 

@@ -36,7 +36,9 @@
         android:theme="@style/Theme.Paypanda"
         tools:replace="android:name"
         tools:targetApi="31">
-
+        <activity
+            android:name=".activity.NetworkDownline"
+            android:exported="false" />
         <activity
             android:name=".mAtm.MyAtmActivity"
             android:exported="false"

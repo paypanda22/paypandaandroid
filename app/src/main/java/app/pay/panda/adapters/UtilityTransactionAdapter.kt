@@ -73,5 +73,11 @@ class UtilityTransactionAdapter(
         holder.date.text=list[position].createdAt.toString()
         holder.txnID.text=list[position].txn_id.toString()
         holder.utr.text=list[position].biller_id.toString()
+
+        holder.ivShare.setOnClickListener{
+            if (holder.ivShare.visibility==VISIBLE){
+                click.onItemClicked(holder,list,position,3)
+            }
+        }
     }
 }

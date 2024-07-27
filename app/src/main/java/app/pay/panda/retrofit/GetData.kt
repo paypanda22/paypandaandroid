@@ -339,9 +339,11 @@ interface GetData {
                 (@Query("service_id") serviceId: String
     ): Call<JsonObject>
 
+    @GET("api/bbps_txn/invoice/{id}")
+    fun getTxnByUtilityId(@Path("id") id: String): Call<JsonObject>
 
-
-
+    @GET("/api/user/referTo")
+    fun getNetwork(): Call<JsonObject>
 
 
     //YooPayAPIs
