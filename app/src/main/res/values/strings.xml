@@ -559,5 +559,7 @@
     <string name="aeps_wallet_to_main_wallet">Aeps Wallet To Main Wallet</string>
     <string name="transfer_aeps_wallet_amount_to_main_wallet">Transfer Aeps Wallet Amount to Main Wallet</string>
     <string name="aeps_wallet_banlance">Aeps Wallet Banlance :</string>
+    <string name="select_transaction_type">Select Transaction Type</string>
+    <string name="do_you_want_to_skip_transaction_receipt">Do You want to skip Receipt ?</string>
 
 </resources>

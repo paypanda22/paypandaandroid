@@ -339,6 +339,9 @@ interface GetData {
                 (@Query("service_id") serviceId: String
     ): Call<JsonObject>
 
+    @POST("api/mAtm/iServeU/mAtmSdkInitiate")
+    fun mAtmInitiate(@Body obj:Any):Call<JsonObject>
+
 
 
 

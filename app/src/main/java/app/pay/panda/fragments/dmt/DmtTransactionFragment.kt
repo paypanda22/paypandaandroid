@@ -212,7 +212,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
         UtilMethods.dmtTxnEnquiry(requireContext(), model._id.toString(), token, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: DmtTxnEnqResponse = Gson().fromJson(message, DmtTxnEnqResponse::class.java)
-                getTransactionList(start_date, end_date, count);
+                getTransactionList(start_date, end_date, count)
             }
 
             override fun fail(from: String) {
