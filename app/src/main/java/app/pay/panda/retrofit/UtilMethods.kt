@@ -3309,13 +3309,41 @@ object UtilMethods {
     }
 
 
-    fun getNetwork(context: Context,token: String, callBackResponse: MCallBackResponse) {
+    fun getNetwork(context: Context,token: String, page:String,count:String, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
                         .create(GetData::class.java)
-                        .getNetwork().execute()
+                        .getNetwork(page,count).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun getNetworkRetailer(context: Context,token: String, id:String, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .getNetworkRetailer(id).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
                             val responseBody = response.body() as JsonObject

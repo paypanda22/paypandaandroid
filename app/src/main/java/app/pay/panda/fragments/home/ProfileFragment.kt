@@ -86,6 +86,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.card2.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_utilityTransactions)
         }
+        binding.card13.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_fragment_fragment_network)
+        }
     }
 
     override fun setData() {

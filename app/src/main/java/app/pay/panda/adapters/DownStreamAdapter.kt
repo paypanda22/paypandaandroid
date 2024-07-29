@@ -1,0 +1,53 @@
+package app.pay.panda.adapters
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import app.pay.panda.R
+import app.pay.panda.adapters.UtilityTransactionAdapter.ViewHolder
+import app.pay.panda.interfaces.DownStreamClick
+import app.pay.panda.responsemodels.downstreamresponse.Data
+
+
+class DownStreamAdapter (
+    private val activity: Activity,
+    private val downstramlist: MutableList<Data>,
+    private val downStreamClick: DownStreamClick
+
+): RecyclerView.Adapter<DownStreamAdapter.ViewHolder>() {
+    class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
+        val NAme: TextView =itemView.findViewById(R.id.NAme)
+        val refer_id: TextView =itemView.findViewById(R.id.refer_id)
+        val main_wallet: TextView =itemView.findViewById(R.id.main_wallet)
+        val is_approved: TextView =itemView.findViewById(R.id.is_approved)
+        val card_top: TextView =itemView.findViewById(R.id.card_top)
+        val retailerLyt: TextView =itemView.findViewById(R.id.retailerLyt)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
+            LayoutInflater.from(activity).inflate(R.layout.lyt_downstram_list, parent, false)
+        )
+    }
+
+    override fun getItemCount(): Int {
+        return downstramlist.size
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val data = downstramlist[position]
+        holder.NAme.text = data.name
+        holder.refer_id.text = data.refer_id
+        holder.main_wallet.text = data.main_wallet
+        holder.is_approved.text = data.is_approved
+        holder.card_top.setOnClickListener {
+            downStreamClick.onItemClicked(holder, downstramlist, position)
+        }
+
+    }
+}

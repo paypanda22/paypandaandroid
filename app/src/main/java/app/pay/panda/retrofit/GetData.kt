@@ -343,7 +343,25 @@ interface GetData {
     fun getTxnByUtilityId(@Path("id") id: String): Call<JsonObject>
 
     @GET("/api/user/referTo")
-    fun getNetwork(): Call<JsonObject>
+    fun getNetwork(
+        @Query("page") page: String,
+        @Query("count") count: String
+    ): Call<JsonObject>
+
+    @GET("/api/user/referTo")
+    fun getNetworkRetailer(
+        @Query("id") id: String,
+    ): Call<JsonObject>
+
+
+
+
+
+
+
+
+
+
 
 
     //YooPayAPIs

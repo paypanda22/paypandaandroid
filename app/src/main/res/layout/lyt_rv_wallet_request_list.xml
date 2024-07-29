@@ -1,138 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/mcvRequestItem"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_top"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="@dimen/_5sdp">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_1sdp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_5sdp"
-        app:cardPreventCornerOverlap="true">
-
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        android:weightSum="3">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center|center_vertical"
+            android:layout_weight="1">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp">
-
-
-
-
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/Route_No"
-                    android:layout_width="@dimen/_70sdp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="@dimen/_70sdp"
+                    android:text="@string/requested_to"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentStart="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_toStartOf="@+id/tvRequestedTo"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/tvRequestedTo"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:id="@+id/Distributor_Name"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="@dimen/_80sdp"
+                    android:text=""
+                    android:maxLength="20"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:id="@+id/Booth_Code"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="@dimen/_70sdp"
+                    android:text="@string/status_"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentStart="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:id="@+id/Shift_Type"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
+                    android:text=""
+                    android:textAllCaps="true"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+            </RelativeLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:id="@+id/Item_Code"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:id="@+id/Item_Desc"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/Item_Type"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/purple_500"
-                    android:textSize="@dimen/_11sdp" />
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/Unit_code"
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/purple_500"
-                    android:textSize="@dimen/_11sdp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/qty"
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/purple_500"
-                    android:textSize="@dimen/_11sdp" />
-
-
-
-
-
-            </LinearLayout>
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0000"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/_15ssp"
+            android:gravity="center|center_vertical"
+            android:layout_weight="2"/>
+    </LinearLayout>
 
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

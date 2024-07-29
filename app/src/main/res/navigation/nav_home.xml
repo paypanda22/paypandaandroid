@@ -83,6 +83,13 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_fragment_network"
+            app:destination="@id/FragmentNetwork"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <action
@@ -192,5 +199,9 @@
         android:name="app.pay.panda.fragments.reports.UtilityTransactions"
         android:label="fragment_utility_transactions"
         tools:layout="@layout/fragment_utility_transactions" />
-
+    <fragment
+        android:id="@+id/FragmentNetwork"
+        android:name="app.pay.panda.fragments.network.FragemntNetwork"
+        android:label="fragment_fragment_network"
+        tools:layout="@layout/fragment_fragemnt_network" />
 </navigation>

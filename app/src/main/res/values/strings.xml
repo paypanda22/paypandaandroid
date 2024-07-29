@@ -508,6 +508,7 @@
     <string name="enter_ca_number">Enter CA Number</string>
     <string name="select_service_category">Select Service Category</string>
     <string name="filter_by_biller_name">Filter By Biller Name</string>
+    <string name="filter_by_biller_name_id">Filter By Biller Name or Refer Id</string>
     <string name="filter_by_service_category">Filter By Service Category</string>
     <string name="filter_by_ca_number">Filter By CA Number</string>
     <string name="buy_activation_package">Buy Activation Package</string>
