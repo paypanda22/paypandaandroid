@@ -55,11 +55,13 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
                 else -> binding.chipNavigationBar.visibility = View.GONE
             }
         }
-
     }
 
 
     override fun addListeners() {
+        val userType = userSession.getData(Constant.USER_TYPE)
+
+        setMenuVisibility(userType.toString())
 
         binding.chipNavigationBar.setOnItemSelectedListener(object : ChipNavigationBar.OnItemSelectedListener {
             override fun onItemSelected(id: Int) {
@@ -70,13 +72,17 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
                     }
 
                     R.id.cashback -> {
-                        navController.navigate(R.id.action_global_to_cashBackFragment)
-                        binding.chipNavigationBar.setItemSelected(R.id.cashback, true)
+                        if (userType != "Super Distributor" && userType != "Distributor") {
+                            navController.navigate(R.id.action_global_to_cashBackFragment)
+                            binding.chipNavigationBar.setItemSelected(R.id.cashback, true)
+                        }
                     }
 
                     R.id.aeps -> {
-                        navController.navigate(R.id.action_global_to_aepsHomeFragment)
-                        binding.chipNavigationBar.setItemSelected(R.id.aeps, true)
+                        if (userType != "Super Distributor" && userType != "Distributor") {
+                            navController.navigate(R.id.action_global_to_aepsHomeFragment)
+                            binding.chipNavigationBar.setItemSelected(R.id.aeps, true)
+                        }
                     }
 
                     R.id.profile -> {
@@ -91,8 +97,16 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
                 }
             }
         })
+    }
 
-
+    private fun setMenuVisibility(userType: String) {
+        if (userType == "Super Distributor" || userType == "Distributor") {
+            binding.chipNavigationBar.findViewById<View>(R.id.cashback).visibility = View.GONE
+            binding.chipNavigationBar.findViewById<View>(R.id.aeps).visibility = View.GONE
+        } else {
+            binding.chipNavigationBar.findViewById<View>(R.id.cashback).visibility = View.VISIBLE
+            binding.chipNavigationBar.findViewById<View>(R.id.aeps).visibility = View.VISIBLE
+        }
     }
 
 

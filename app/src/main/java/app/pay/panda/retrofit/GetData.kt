@@ -350,8 +350,50 @@ interface GetData {
 
     @GET("/api/user/referTo")
     fun getNetworkRetailer(
+        @Query("page") page: String,
+        @Query("count") count: String,
         @Query("id") id: String,
     ): Call<JsonObject>
+
+    @GET("/api/report/fundtransfer")
+    fun viewReport(
+        @Query("page") page: String,
+        @Query("count") count: String,
+        @Query("to") to: String,
+    ): Call<JsonObject>
+
+    @POST("/api/user/fundTransferToRefer")
+    fun moneyTreansfer(@Body obj:Any): Call<JsonObject>
+
+    @POST("/api/user/fundReverseVerify")
+    fun otpVarify(@Body obj:Any): Call<JsonObject>
+
+    @POST("/api/mainwallet/public/filter")
+    fun earningReport(@Body obj:Any): Call<JsonObject>
+
+    @GET("/api/dashboard/public")
+    fun distributerDashboard(@Query("date") date: String
+    ): Call<JsonObject>
+
+    @GET("/api/auth/mb/get/profile")
+    fun getUserDetail(): Call<JsonObject>
+
+    @POST("api/auth/mb/login/resendOtp")
+    fun resendOTP(@Body obj: Any): Call<JsonObject>
+
+    @PUT("api/paymentrequesttouser/transfer")
+    fun paymentRequestToUser(@Body obj: Any): Call<JsonObject>
+
+    @POST("api/paymentRequestToUser/admin")
+    fun paymentRequestToAdmin(@Body obj: Any): Call<JsonObject>
+
+
+
+
+    @GET("api/auth/resendOtpForTpin")
+    fun resendOtpForTPin(): Call<JsonObject>
+
+
 
 
 

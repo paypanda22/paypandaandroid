@@ -37,44 +37,54 @@
 
         <RadioGroup
             android:id="@+id/rbLoginMethod"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:padding="@dimen/_12sdp"
+            android:background="@drawable/edit_text_round_bg_outline"
             android:layout_below="@+id/topPanel"
-            android:layout_marginTop="@dimen/_5sdp"
             android:layout_gravity="center"
-            android:padding="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
+
             android:orientation="horizontal">
 
-                 <RadioButton
-                     android:id="@+id/Company"
-                     style="@style/mostserrat_bold"
-                     android:textSize="@dimen/_10sdp"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_marginEnd="@dimen/_3sdp"
-                     android:layout_weight="1"
-                     android:background="@drawable/rectanle_backgound_primary"
-                     android:buttonTint="@color/white"
-                     android:checked="true"
-                     android:text="Company"
-                     android:textColor="@color/white"
-                     tools:ignore="TouchTargetSizeCheck" />
+            <RadioButton
+                android:id="@+id/Company"
+                style="@style/mostserrat_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_weight="1"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="Company"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                tools:ignore="TouchTargetSizeCheck" />
 
-              <RadioButton
-                  android:textColor="@color/white"
-                  android:id="@+id/Distributor"
-                  android:buttonTint="@color/white"
-                  android:background="@drawable/rectanle_backgound_primary"
-                  style="@style/mostserrat_bold"
-                  android:textSize="@dimen/_10sdp"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
+            <RadioButton
+                android:id="@+id/Distributor"
+                style="@style/mostserrat_bold"
+                android:layout_width="141dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/black"
+                android:text=" Sup D./Distributor "
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                tools:ignore="TouchTargetSizeCheck" />
 
-                  android:layout_weight="1"
-                  android:text="Distributor/ Sup/Distributer"
-                  tools:ignore="TouchTargetSizeCheck" />
+            <RadioButton
+                android:id="@+id/retailer"
+                style="@style/mostserrat_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/black"
+                android:text="Retailer"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                tools:ignore="TouchTargetSizeCheck" />
         </RadioGroup>
 
   <!--  <androidx.recyclerview.widget.RecyclerView

@@ -20,8 +20,13 @@ class CashBackFragment : BaseFragment<FragmentCashBackBinding>(FragmentCashBackB
     private lateinit var userSession: UserSession
     override fun init() {
         nullActivityCheck()
-        userSession= UserSession(requireContext())
 
+        userSession= UserSession(requireContext())
+        val userType = userSession.getData(Constant.USER_TYPE)
+        if (userType != "Super Distributor" && userType != "Distributor") {
+            binding.llAepsWallet.visibility=View.GONE
+
+        }
     }
 
     private fun nullActivityCheck() {

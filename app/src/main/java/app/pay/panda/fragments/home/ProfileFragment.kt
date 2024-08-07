@@ -23,7 +23,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private lateinit var userSession: UserSession
     override fun init() {
         userSession= UserSession(requireContext())
-
+        val userType = userSession.getData(Constant.USER_TYPE)
+        if (userType.equals("Super Distributor") || userType.equals("Distributor")) {
+            binding.llAepsWallet.visibility=View.GONE
+   binding.card3.visibility=View.GONE
+   binding.card2.visibility=View.GONE
+   binding.card5.visibility=View.GONE
+   binding.card7.visibility=View.GONE
+   binding.card10.visibility=View.GONE
+        }
     }
 
     override fun addListeners() {
@@ -88,6 +96,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
         binding.card13.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_fragment_fragment_network)
+        }
+        binding.earningreport.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_fragment_earning_report)
         }
     }
 

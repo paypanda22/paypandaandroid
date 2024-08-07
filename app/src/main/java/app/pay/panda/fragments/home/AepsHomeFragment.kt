@@ -58,6 +58,11 @@ class AepsHomeFragment : BaseFragment<FragmentAepsHomeBinding>(FragmentAepsHomeB
         }else{
             startActivity(Intent(context,IntroActivity::class.java))
         }
+        val userType = userSession.getData(Constant.USER_TYPE)
+        if (userType == "Super Distributor" || userType == "Distributor") {
+            binding.llAepsWallet.visibility=View.GONE
+
+        }
     }
 
     override fun addListeners() {

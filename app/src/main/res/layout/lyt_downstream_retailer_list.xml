@@ -1,142 +1,98 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_top"
+    android:layout_margin="8dp"
+    android:padding="8dp"
+    android:background="@android:color/white"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp"
+    android:id="@+id/card_top">
+
+    <RelativeLayout
+        android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_1sdp"
-        app:cardBackgroundColor="@color/grey_10"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:cardPreventCornerOverlap="true">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/userImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/user_1_" />
+        <TextView
+            android:id="@+id/SrNo"
+            android:layout_width="@dimen/_20sdp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_toEndOf="@id/userImageView"
+            android:text="1"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/NAme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/SrNo"
+            android:text="NARESH TANWAR"
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            android:shadowDx="2"
+            style="@style/mostserrat_bold"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp">
+        <TextView
+            android:id="@+id/refer_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/NAme"
+            android:layout_toEndOf="@id/userImageView"
+            android:text="R006605"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/blue_900"
+            android:textSize="@dimen/_9sdp" />
 
-
-
-
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/Route_No"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:id="@+id/refer_id"
-                    android:gravity="center"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:id="@+id/NAme"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:id="@+id/is_approved"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
-                    android:id="@+id/main_wallet"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_11sdp" />
-                <!-- <androidx.appcompat.widget.AppCompatTextView
-                     android:layout_width="@dimen/_70sdp"
-                     android:layout_height="wrap_content"
-                     android:padding="@dimen/_7sdp"
-                     android:id="@+id/Item_Desc"
-                     android:gravity="center"
-                     android:layout_gravity="center"
-
-                     android:textColor="@color/colorPrimaryDark"
-                     android:textSize="@dimen/_11sdp" />
+        <TextView
+            android:id="@+id/main_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/refer_id"
+            android:layout_toEndOf="@id/userImageView"
+            style="@style/mostserrat_bold"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:text="Balance"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+<!--
+        <TextView
+            android:id="@+id/is_approved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_wallet"
+            android:layout_toEndOf="@id/userImageView"
+            android:text="₹ 230.75"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />-->
 
 
-                 <androidx.appcompat.widget.AppCompatTextView
-                     android:id="@+id/Item_Type"
-                     android:layout_width="@dimen/_50sdp"
-                     android:layout_height="wrap_content"
-                     android:padding="@dimen/_7sdp"
-                     android:gravity="center"
-                     android:layout_gravity="center"
-                     android:textColor="@color/purple_500"
-                     android:textSize="@dimen/_11sdp" />
+        <TextView
+            android:id="@+id/is_approved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="-1dp"
+            android:layout_marginRight="-1dp"
+            android:text="is_approved"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
+    </RelativeLayout>
 
-                 <androidx.appcompat.widget.AppCompatTextView
-                     android:id="@+id/Unit_code"
-                     android:layout_width="@dimen/_60sdp"
-                     android:layout_height="wrap_content"
-                     android:padding="@dimen/_7sdp"
-                     android:gravity="center"
-                     android:layout_gravity="center"
-                     android:textColor="@color/purple_500"
-                     android:textSize="@dimen/_11sdp" />
-
-                 <androidx.appcompat.widget.AppCompatTextView
-                     android:id="@+id/qty"
-                     android:layout_width="@dimen/_60sdp"
-                     android:layout_height="wrap_content"
-                     android:padding="@dimen/_7sdp"
-                     android:gravity="center"
-                     android:layout_gravity="center"
-                     android:textColor="@color/purple_500"
-                     android:textSize="@dimen/_11sdp" />
- -->
-
-
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

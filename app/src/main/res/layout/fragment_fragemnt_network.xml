@@ -32,7 +32,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
 
-        <ImageView
+   <!--     <ImageView
             android:id="@+id/ivMenu"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_20sdp"
@@ -41,7 +41,7 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:contentDescription="@string/back"
             android:src="@drawable/filter_funnel"
-            app:tint="@color/white" />
+            app:tint="@color/white" />-->
     </RelativeLayout>
 
     <pl.droidsonroids.gif.GifImageView
@@ -106,12 +106,11 @@
                 android:id="@+id/linear_heading"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_10sdp"
-
+                android:layout_marginTop="@dimen/_2sdp"
                 android:orientation="vertical">
 
 
-                <HorizontalScrollView
+               <!-- <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:scrollbars="none"
                     android:layout_height="wrap_content">
@@ -120,11 +119,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
-
+-->
+                <!--        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/colorPrimaryDark"
+                            app:cardCornerRadius="@dimen/_8sdp"
+                            app:cardElevation="@dimen/_4sdp">
                         <LinearLayout
                             android:id="@+id/linear_common"
-
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/black_promo"
@@ -133,16 +136,14 @@
 
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="@dimen/_70sdp"
+                                android:layout_width="@dimen/_40sdp"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/_7sdp"
                                 android:textStyle="bold"
                                 android:text="S.No"
                                 android:gravity="center"
                                 android:layout_gravity="center"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_11sdp"
-                                android:fontFamily="sans-serif" />
+                                android:textSize="@dimen/_12sdp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="@dimen/_90sdp"
@@ -153,7 +154,7 @@
                                 android:gravity="center"
                                 android:layout_gravity="center"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_12sdp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="@dimen/_130sdp"
@@ -163,11 +164,23 @@
                                 android:text="Name"
                                 android:gravity="center"
                                 android:layout_gravity="center"
-
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_12sdp" />
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="@dimen/_70sdp"
+                                android:layout_width="@dimen/_90sdp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/mostserrat_bold"
+                                android:padding="@dimen/_7sdp"
+                                android:text="Retailer"
+                                android:gravity="center"
+                                android:shadowColor="@android:color/darker_gray"
+                                android:shadowDx="2"
+                                android:shadowDy="2"
+                                android:layout_gravity="center"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12sdp" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="@dimen/_80sdp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/mostserrat_bold"
                                 android:padding="@dimen/_7sdp"
@@ -176,22 +189,56 @@
                                 android:layout_gravity="center"
 
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_12sdp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="@dimen/_110sdp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/mostserrat_bold"
+                                android:padding="@dimen/_7sdp"
+                                android:text="Transfer Money"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="@dimen/_115sdp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/mostserrat_bold"
+                                android:text="Reverse Transfer"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/mostserrat_bold"
+                                android:text="Transfer"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12sdp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="@dimen/_70sdp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/mostserrat_bold"
                                 android:padding="@dimen/_7sdp"
-                                android:text="Transfer"
+                                android:text="Report"
                                 android:gravity="center"
                                 android:layout_gravity="center"
 
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_11sdp" />
+                                android:textSize="@dimen/_12sdp" />
 
 
-                         <!--   <androidx.appcompat.widget.AppCompatTextView
+                         &lt;!&ndash;   <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="@dimen/_110sdp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/mostserrat_bold"
@@ -213,25 +260,24 @@
                                 android:layout_gravity="center"
 
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_11sdp" />-->
+                                android:textSize="@dimen/_11sdp" />&ndash;&gt;
 
 
                         </LinearLayout>
-
+                        </androidx.cardview.widget.CardView>-->
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recydlerlist"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginBottom="@dimen/_5sdp" />
 
 
 
-                    </LinearLayout>
+               <!--     </LinearLayout>
 
 
 
-                </HorizontalScrollView>
+                </HorizontalScrollView>-->
 
             </LinearLayout>
 

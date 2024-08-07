@@ -55,4 +55,6 @@ object Constant {
     const val SCANNER_IMAGE="scanner_image"
     const val NOTIFICATION_COUNT="notification_count"
     const val RUPEE="\u20B9"
+    const val USERTYPE="user_type"
+    const val ID="ID"
 }

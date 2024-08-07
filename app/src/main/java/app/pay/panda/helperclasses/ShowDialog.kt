@@ -41,6 +41,8 @@ import app.pay.panda.responsemodels.dmtTransaction.Data
 import app.pay.panda.responsemodels.forgetPin.ForgetPinResponse
 import app.pay.panda.responsemodels.miniStatement.Ministatement
 import app.pay.panda.responsemodels.pinChange.PasswordChangeResponse
+import app.pay.panda.responsemodels.resendOtpForTpin.resendOtpForTpinResponse
+import app.pay.panda.responsemodels.userid.UserIDResponse
 import app.pay.panda.responsemodels.verifyOtp.VerifyOtpResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
@@ -676,6 +678,29 @@ class ShowDialog {
                 } else {
                     forgetTPin(activity, dBinding.edtOtpLogin.text.toString(), userSession, bottomSheetDialog)
                 }
+            }
+            dBinding.tvResendOtp.setOnClickListener{
+                    val token = userSession.getData(Constant.USER_TOKEN).toString()
+                    UtilMethods.resendOtpForTPin(activity, token, object : MCallBackResponse {
+                        override fun success(from: String, message: String) {
+                            val response: resendOtpForTpinResponse =
+                                Gson().fromJson(message, resendOtpForTpinResponse::class.java)
+                            if (!response.error!!) {
+                                Toast.makeText(activity, response.message.toString(), Toast.LENGTH_SHORT)
+                                    .show()
+
+
+                            } else {
+                                Toast.makeText(activity, "Unable to Load Bank List", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+
+                        override fun fail(from: String) {
+                            Toast.makeText(activity, "Unable to Load Bank List", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    })
             }
         }
 

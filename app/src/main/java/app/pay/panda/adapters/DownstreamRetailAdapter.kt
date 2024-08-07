@@ -10,18 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.R
 import app.pay.panda.responsemodels.downstreamRetailerResponse.Data
 
-
-class DownstreamRetailAdapter (
+class DownstreamRetailAdapter(
     private val activity: Activity,
-    private val downstramlistRetailer: MutableList<Data>,
+    private val downstramlistRetailer: MutableList<Data>
+) : RecyclerView.Adapter<DownstreamRetailAdapter.ViewHolder>() {
 
-): RecyclerView.Adapter<DownstreamRetailAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val NAme: TextView = itemView.findViewById(R.id.NAme)
         val refer_id: TextView = itemView.findViewById(R.id.refer_id)
         val main_wallet: TextView = itemView.findViewById(R.id.main_wallet)
         val is_approved: TextView = itemView.findViewById(R.id.is_approved)
-        val card_top: TextView = itemView.findViewById(R.id.card_top)
+        val SrNo: TextView = itemView.findViewById(R.id.SrNo)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,12 +36,10 @@ class DownstreamRetailAdapter (
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = downstramlistRetailer[position]
+        holder.SrNo.text = (position + 1).toString()
         holder.NAme.text = data.name
-        holder.refer_id.text = data.refer_id
-        holder.main_wallet.text = data.main_wallet
-        holder.is_approved.text = data.is_approved
-        holder.card_top.setOnClickListener {
-
-        }
+        holder.refer_id.text = "Refer ID:-" + data.refer_id
+        holder.main_wallet.text = "Balance:- " + data.main_wallet
+        holder.is_approved.text = "Approved:- " + data.is_approved
     }
 }
