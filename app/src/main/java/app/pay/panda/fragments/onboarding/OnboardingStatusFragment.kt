@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import app.pay.panda.BaseFragment
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.databinding.FragmentOnboardingStatusBinding
+import app.pay.panda.fragments.PrivacyPolicy
 import app.pay.panda.fragments.TermsAndConditions
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.ShowDialog
@@ -124,7 +125,8 @@ class OnboardingStatusFragment : BaseFragment<FragmentOnboardingStatusBinding>(F
             tncFragment.show(myActivity.supportFragmentManager,"TAG")
         }
         binding.tvPrivacy.setOnClickListener {
-            openBrowser("https://bbps.paypanda.in/privacy-policy/")
+            val policy= PrivacyPolicy()
+            policy.show(myActivity.supportFragmentManager,"TAG")
         }
 
         binding.mcvVerifyId.setOnClickListener {

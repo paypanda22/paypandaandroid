@@ -1424,7 +1424,75 @@
                             </LinearLayout>
 
                         </com.google.android.material.card.MaterialCardView>
+                        <!-- Row 14 -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/packages"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="@dimen/spacing_large"
+                            app:cardBackgroundColor="@color/bggrey"
+                            app:cardCornerRadius="@dimen/_10sdp">
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/rectangle_stroke_small_radius_grey"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="@dimen/spacing_middle"
+                                android:paddingEnd="@dimen/spacing_middle">
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardCornerRadius="4dp"
+                                    app:cardElevation="0dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_centerInParent="true"
+                                            app:srcCompat="@drawable/support"
+                                            app:tint="@color/black" />
+
+                                    </RelativeLayout>
+
+                                </com.google.android.material.card.MaterialCardView>
+
+                                <View
+                                    android:layout_width="@dimen/spacing_middle"
+                                    android:layout_height="0dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:text="Packages"
+                                    style="@style/mostserrat_bold"
+                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                                    android:textColor="@color/grey_80"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:textStyle="bold" />
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    app:srcCompat="@drawable/ic_chevron"
+                                    app:tint="@color/grey_40" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
                         <!-- Logout -->
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnLogout"

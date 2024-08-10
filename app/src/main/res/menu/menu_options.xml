@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Company"
+        android:title="Fund Request To Company"
+        android:icon="@drawable/campus_1_" />
+    <item
+        android:id="@+id/Super_Distributer"
+        android:title="Fund Request To Super Distributer"
+        android:icon="@drawable/support" />
+    <item
+        android:id="@+id/Distributer"
+        android:title="Fund Request by Member"
+        android:icon="@drawable/ic_home_2_" />
+</menu>

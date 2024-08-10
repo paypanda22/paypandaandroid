@@ -37,11 +37,29 @@ class RequestListAdapter(
         holder.tvAmount.text=list[position].amount.toString()
         holder.tvStatus.text=list[position].status
         if (list[position].status=="Approved"){
-            holder.mcvRequestItem.setCardBackgroundColor(ContextCompat.getColor(activity,R.color.green_bow))
+            holder.mcvRequestItem.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    activity,
+                    R.color.green_50
+                )
+            )
+            holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.green_900))
         }else if (list[position].status=="Pending"){
-            holder.mcvRequestItem.setCardBackgroundColor(ContextCompat.getColor(activity,R.color.rainbow_Orange))
+            holder.mcvRequestItem.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    activity,
+                    R.color.yellow_100
+                )
+            )
+            holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.deep_orange_900))
         }else{
-            holder.mcvRequestItem.setCardBackgroundColor(ContextCompat.getColor(activity,R.color.red_bow))
+            holder.mcvRequestItem.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    activity,
+                    R.color.red_bow
+                ))
+            holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.dark_red))
+
         }
     }
 }

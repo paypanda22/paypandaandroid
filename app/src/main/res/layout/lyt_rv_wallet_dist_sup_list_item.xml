@@ -100,7 +100,7 @@
             style="@style/mostserrat_bold"
             android:textColor="@color/black"
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/_15ssp"
+            android:textSize="@dimen/_13ssp"
             android:gravity="center|center_vertical"
             android:layout_weight="2"/>
     </LinearLayout>

@@ -178,22 +178,26 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edtSponsorMobileLayout"
-
+                android:visibility="gone"
                 style="@style/EditTextInput2">
 
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtSponsorMobile"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_person_base"
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="Partner code/Reffer Id"
                     android:inputType="text"
                     android:maxLength="10" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
+                android:id="@+id/referal"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_5sdp">

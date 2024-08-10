@@ -53,12 +53,13 @@ class AepsHomeFragment : BaseFragment<FragmentAepsHomeBinding>(FragmentAepsHomeB
     }
 
     private fun nullActivityCheck() {
+        userSession= UserSession(requireContext())
         if (activity !=null){
             myActivity= activity as FragmentActivity
         }else{
             startActivity(Intent(context,IntroActivity::class.java))
         }
-        val userType = userSession.getData(Constant.USER_TYPE)
+        val userType = userSession.getData(Constant.USERTYPE)
         if (userType == "Super Distributor" || userType == "Distributor") {
             binding.llAepsWallet.visibility=View.GONE
 

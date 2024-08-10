@@ -51,12 +51,12 @@ class FragemntNetwork : BaseFragment<FragmentFragemntNetworkBinding>(FragmentFra
         nullActivityCheck()
         userSession = UserSession(requireContext())
 
-        val userType = userSession.getData(Constant.USER_TYPE)
+        val userType = userSession.getData(Constant.USERTYPE)
         if (userType.equals("Super Distributor") ) {
             getNetwork(page,count)
         }else if(userType.equals("Distributor")){
             val id = userSession.getData(Constant.ID)
-           // getNetworkRetailer(page,count, id.toString(),null)
+            getNetworkRetailerDist(page,count, id.toString())
         }
     }
     private fun getNetwork(pageNo: String, txnCount: String) {
@@ -199,6 +199,67 @@ class FragemntNetwork : BaseFragment<FragmentFragemntNetworkBinding>(FragmentFra
                 }
             })
         }
+
+
+    private fun getNetworkRetailerDist(pageNo: String, txnCount: String, id: String) {
+        binding.llNoData.visibility = View.GONE
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+        UtilMethods.getNetworkRetailer(requireContext(), token, pageNo, txnCount, id, object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                try {
+                    // Use the custom Gson instance with the deserializer
+                    val response: DownstreamRetailarResp = Gson().fromJson(message, DownstreamRetailarResp::class.java)
+
+                    // Proceed with your existing logic
+                    if (!response.error) {
+                        if (response.statusCode == 200) {
+                            if (response.data.isNotEmpty()) {
+
+
+                                downstramlistRetailer = response.data.toMutableList()
+                                downstramlistRetailer.clear() // Clear existing data
+                                downstramlistRetailer.addAll(response.data) // Add new data
+                                // Set up the nested RecyclerView
+                                val adapter = DownstreamRetailAdapter(myActivity, downstramlistRetailer)
+                               binding.recydlerlist.adapter = adapter
+                                binding.recydlerlist.layoutManager = LinearLayoutManager(myActivity)
+                                binding.recydlerlist.visibility = View.VISIBLE
+                                binding.imageView.visibility = View.GONE
+                                binding.llNoData.visibility = View.GONE
+                                adapter.notifyDataSetChanged()
+
+                            } else {
+                                // Handle empty data case
+                                binding.imageView.visibility = View.GONE
+                                binding.llNoData.visibility = View.VISIBLE
+                            }
+                        } else {
+                            // Handle non-200 status code
+
+                            binding.imageView.visibility = View.GONE
+                            binding.llNoData.visibility = View.VISIBLE
+                        }
+                    } else {
+                        // Handle error case
+
+                        binding.imageView.visibility = View.GONE
+                        binding.llNoData.visibility = View.VISIBLE
+                    }
+                } catch (e: JsonSyntaxException) {
+                    e.printStackTrace()
+
+                    binding.imageView.visibility = View.GONE
+                    binding.llNoData.visibility = View.VISIBLE
+                }
+            }
+
+            override fun fail(from: String) {
+
+                binding.imageView.visibility = View.GONE
+                binding.llNoData.visibility = View.VISIBLE
+            }
+        })
+    }
 
 
         private fun handleEmptyRetailerData(holder: RecyclerView.ViewHolder) {

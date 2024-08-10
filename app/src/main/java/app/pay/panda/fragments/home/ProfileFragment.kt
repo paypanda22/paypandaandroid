@@ -1,12 +1,16 @@
 package app.pay.panda.fragments.home
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.net.Uri
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import app.pay.panda.BaseFragment
 import app.pay.panda.R
+import app.pay.panda.activity.ActivationPackages
+import app.pay.panda.activity.IntroActivity
 import app.pay.panda.databinding.FragmentProfileBinding
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.CustomProgressBar
@@ -21,9 +25,11 @@ import kotlinx.coroutines.launch
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
     private lateinit var userSession: UserSession
+    private lateinit var myActivity: FragmentActivity
     override fun init() {
         userSession= UserSession(requireContext())
-        val userType = userSession.getData(Constant.USER_TYPE)
+        nullActivityCheck()
+        val userType = userSession.getData(Constant.USERTYPE)
         if (userType.equals("Super Distributor") || userType.equals("Distributor")) {
             binding.llAepsWallet.visibility=View.GONE
    binding.card3.visibility=View.GONE
@@ -31,6 +37,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
    binding.card5.visibility=View.GONE
    binding.card7.visibility=View.GONE
    binding.card10.visibility=View.GONE
+   binding.packages.visibility=View.GONE
+        }
+        if (userType.equals("Retailer")) {
+            binding.earningreport.visibility=View.GONE
+            binding.card13.visibility=View.GONE
+            }
+    }
+    private fun nullActivityCheck() {
+        if (activity == null) {
+            startActivity(Intent(context, IntroActivity::class.java))
+        } else {
+            myActivity = activity as FragmentActivity
         }
     }
 
@@ -99,6 +117,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
         binding.earningreport.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_fragment_earning_report)
+        }
+        binding.packages.setOnClickListener {
+            startActivity(Intent(activity, ActivationPackages::class.java))
+            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
         }
     }
 

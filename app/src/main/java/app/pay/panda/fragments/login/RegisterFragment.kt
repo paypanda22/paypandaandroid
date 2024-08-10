@@ -28,6 +28,7 @@ import app.pay.panda.adapters.StateListAdapter
 import app.pay.panda.databinding.FragmentRegisterBinding
 import app.pay.panda.databinding.OtpDialogBinding
 import app.pay.panda.dialog.DialogOK
+import app.pay.panda.fragments.PrivacyPolicy
 import app.pay.panda.fragments.TermsAndConditions
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CustomProgressBar
@@ -124,7 +125,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 } else if (!ActivityExtensions.isValidEmail(binding.edtEmail.text.toString())) {
                     binding.edtEmail.error = "Invalid Email Address Provided"
                     binding.chkNoreferal.isChecked = false
-                } else if (binding.edtName.text.toString().isEmpty()) {
+                } else if (!ActivityExtensions.isValidName(binding.edtName.text.toString())) {
                     binding.edtName.error = "Enter Name"
                     binding.chkNoreferal.isChecked = false
                 } else if (stateID.isEmpty()) {
@@ -138,7 +139,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
 
             isReferral = 0
-           binding.edtSponsorMobile.isEnabled = false
+            binding.edtSponsorMobile.isEnabled = false
             binding.edtSponsorMobile.background =
                 ContextCompat.getDrawable(myActivity, R.drawable.submitt_btn_dialog_light_grey)
 
@@ -153,7 +154,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             tncFragment.show(myActivity.supportFragmentManager, "TAG")
         }
         binding.tv4.setOnClickListener {
-            openBrowser("https://bbps.paypanda.in/privacy-policy/")
+            val policy= PrivacyPolicy()
+            policy.show(myActivity.supportFragmentManager,"TAG")
         }
         binding.edtRegMobile.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -189,7 +191,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         })
 
 
-     /*   binding.edtSponsorMobile.addTextChangedListener(object : TextWatcher {
+        /*   binding.edtSponsorMobile.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -214,7 +216,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                     .show()
             } else if (!ActivityExtensions.isValidEmail(binding.edtEmail.text.toString())) {
                 binding.edtEmail.error = "Invalid Email Address Provided"
-            } else if (binding.edtName.text.toString().isEmpty()) {
+            } else if (!ActivityExtensions.isValidName(binding.edtName.text.toString())) {
                 binding.edtName.error = "Enter Name"
             } else if (stateID.isEmpty()) {
                 showToast(requireContext(), "Select State First")
@@ -222,29 +224,60 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 if (binding.chkNoreferal.isChecked) {
                     reqRegister()
                 } else {
-                  /*  if (!sponsorverified) {
+                    /*  if (!sponsorverified) {
                         binding.edtSponsorMobile.error = "Enter a Valid Sponsor Code"
                     } else {*/
-                        sendOtp(binding.edtRegMobile.text.toString())
-                  //  }
+                    sendOtp(binding.edtRegMobile.text.toString())
+                    //  }
                 }
 
             }
 
         }
+        // Inside your onItemClickListener
         binding.rbLoginMethod.setOnItemClickListener { parent, view, position, id ->
-            selectedUserTypeId=userTypelist.get(position)._id
-            userSession.setData(Constant.USERTYPE, userTypelist.get(position)._id.toString())
+            selectedUserTypeId = userTypelist[position]._id
             val selectedUserType = parent.getItemAtPosition(position) as String
-            if (selectedUserType == "Super Distributor") {
-                binding.edtSponsorMobile.visibility = View.GONE
-            } else if(selectedUserType == "whiteLabel"){
-                binding.edtSponsorMobile.visibility = View.GONE
-            }else{
-                binding.edtSponsorMobile.visibility = View.VISIBLE
-            }
+            updateVisibilityBasedOnUserType(selectedUserType)
         }
+
     }
+    private fun updateVisibilityBasedOnUserType(selectedUserType: String) {
+        val isSponsorMobileVisible: Boolean
+        val isReferalVisible: Boolean
+
+        if (selectedUserType == "Super Distributor" || selectedUserType == "whiteLabel") {
+            binding.edtSponsorMobile.visibility = View.GONE
+            binding.edtSponsorMobileLayout.visibility = View.GONE
+            binding.referal.visibility = View.GONE
+            isSponsorMobileVisible = false
+            isReferalVisible = false
+        } else {
+            binding.edtSponsorMobile.visibility = View.VISIBLE
+            binding.edtSponsorMobileLayout.visibility = View.VISIBLE
+            binding.referal.visibility = View.VISIBLE
+            isSponsorMobileVisible = true
+            isReferalVisible = true
+        }
+
+        // Save visibility states in SharedPreferences
+        userSession.setBoolData(Constant.SPONSOR_MOBILE_VISIBLE, isSponsorMobileVisible)
+        userSession.setBoolData(Constant.REFERAL_VISIBLE, isReferalVisible)
+        userSession.setData(Constant.USERTYPE, selectedUserType)
+    }
+
+
+
+    // Call this function in onResume
+    override fun onResume() {
+        super.onResume()
+
+        // Retrieve the last selected user type from SharedPreferences
+        val lastUserType = userSession.getData(Constant.USERTYPE)
+        updateVisibilityBasedOnUserType(lastUserType.toString())
+    }
+
+
 
     private fun openStateListDialog() {
         val dialogView = layoutInflater.inflate(R.layout.lyt_rv_name_search_item_list, null)

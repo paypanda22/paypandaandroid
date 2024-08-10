@@ -18,6 +18,7 @@
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:src="@drawable/left"
+            android:visibility="gone"
             tools:ignore="RtlSymmetry"
             android:importantForAccessibility="no" />
         <TextView
@@ -79,11 +80,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
+            android:visibility="gone"
             android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_12ssp"
             android:gravity="center"/>
         <app.pay.panda.reusable.PinView
             android:id="@+id/edtOtpEmail"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

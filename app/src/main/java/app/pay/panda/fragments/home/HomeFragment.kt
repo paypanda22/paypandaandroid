@@ -1,14 +1,26 @@
 package app.pay.panda.fragments.home
 
+import CustomTypefaceSpan
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.view.Gravity
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.AutoCompleteTextView
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import app.pay.panda.BaseFragment
+import app.pay.panda.PaymentRequestDialogFragment
 import app.pay.panda.R
 import app.pay.panda.activity.ActivationPackages
 import app.pay.panda.activity.AepsAllActions
@@ -22,6 +34,7 @@ import app.pay.panda.activity.QrCollectionActivity
 import app.pay.panda.activity.RechargeActivity
 import app.pay.panda.databinding.FragmentHomeBinding
 import app.pay.panda.fragments.login.RegisterFragment.UserTypeAdapter
+import app.pay.panda.fragments.reports.WalletRequestListFragment
 import app.pay.panda.helperclasses.Category
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.MyGlide
@@ -53,11 +66,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         userSession = UserSession(requireContext())
         resetTPIN=ResetTPIN(myActivity,userSession)
         resetTPIN.resetTPin()
-        val userType = userSession.getData(Constant.USER_TYPE)
+        val userType = userSession.getData(Constant.USERTYPE)
 
         if (userType.equals("Super Distributor") || userType.equals("Distributor")) {
       binding.llAepsWallet.visibility=View.GONE
+      binding.retailerDashboard.visibility=View.GONE
+      binding.distributerDashboard.visibility=View.VISIBLE
 
+        }else{
+            binding.retailerDashboard.visibility=View.VISIBLE
+            binding.distributerDashboard.visibility=View.GONE
         }
         distributerDashboard("3-8-2024")
         val name = userSession.getData(Constant.NAME)
@@ -76,6 +94,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     override fun onResume() {
         super.onResume()
         binding.tvCongratulations.isSelected = true // Ensure marquee is active
+
+
     }
 
 
@@ -216,6 +236,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
         }
 
+        binding.transactionStatus.setOnClickListener{
+            findNavController().navigate(R.id.action_global_walletRequestListFragment2)
+
+        }
     }
 
 

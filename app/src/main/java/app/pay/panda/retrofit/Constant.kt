@@ -18,7 +18,7 @@ object Constant {
     const val MOBILE = "user_mobile"
     const val BUSINESS_NAME = "business_name"
     const val PROFILE_PIC = "user_profile"
-    const val USER_TYPE = "user_type"
+
     const val USER_TYPE_ID = "user_type_id"
     const val USER_ID = "userID"
     const val SHOP_NAME = "shop_name"
@@ -55,6 +55,9 @@ object Constant {
     const val SCANNER_IMAGE="scanner_image"
     const val NOTIFICATION_COUNT="notification_count"
     const val RUPEE="\u20B9"
-    const val USERTYPE="user_type"
+
     const val ID="ID"
+    const val USERTYPE = "user_type"
+    const val SPONSOR_MOBILE_VISIBLE = "sponsor_mobile_visible"
+    const val REFERAL_VISIBLE = "referal_visible"
 }

@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.BaseFragment
@@ -27,9 +28,11 @@ import app.pay.panda.databinding.FragmentPackageListBinding
 import app.pay.panda.databinding.LytDialogPackagePricingBinding
 import app.pay.panda.helperclasses.FingerPrintScanner
 import app.pay.panda.helperclasses.MyGlide
+import app.pay.panda.helperclasses.ShowDialog
 import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.helperclasses.Utils.Companion.showToast
 import app.pay.panda.interfaces.MCallBackResponse
+import app.pay.panda.interfaces.MyClick
 import app.pay.panda.interfaces.PackageListClickListener
 import app.pay.panda.interfaces.PackagePriceClick
 import app.pay.panda.interfaces.ScannerListClick
@@ -154,7 +157,15 @@ class PackageListFragment : BaseFragment<FragmentPackageListBinding>(FragmentPac
                 requestData["user_id"]=token
                 UtilMethods.purchasePackage(requireContext(),requestData,object:MCallBackResponse{
                     override fun success(from: String, message: String) {
-
+                        ShowDialog.bottomDialogSingleButton(myActivity,
+                            "Congratulations!",
+                            "Package buy Successfully",
+                            "success",
+                            object : MyClick {
+                                override fun onClick() {
+                                    findNavController().popBackStack()
+                                }
+                            })
 
                     }
 

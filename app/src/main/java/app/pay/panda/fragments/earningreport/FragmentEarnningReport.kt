@@ -21,7 +21,7 @@ import app.pay.panda.adapters.DownStreamAdapter
 import app.pay.panda.adapters.DownstreamRetailAdapter
 import app.pay.panda.adapters.EarningReportAdapter
 
-import app.pay.panda.adapters.RequestListAdapter
+
 import app.pay.panda.databinding.FragmentEarnningReportBinding
 import app.pay.panda.helperclasses.CustomProgressBar
 import app.pay.panda.helperclasses.UserSession

@@ -1,15 +1,27 @@
 package app.pay.panda.fragments.reports
 
+import CustomTypefaceSpan
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.view.Gravity
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.PopupMenu
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.BaseFragment
 import app.pay.panda.PaymentRequestDialogFragment
+import app.pay.panda.R
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.adapters.RequestListAdapter
 import app.pay.panda.adapters.RequestListAdapterDist
@@ -253,15 +265,71 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
 
     override fun addListeners() {
         binding.ivBack.setOnClickListener { findNavController().popBackStack() }
-        binding.rbLoginMethod.setOnCheckedChangeListener { group, checkedId ->
+    /*    binding.rbLoginMethod.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId == binding.Company.id) {
-                getWalletRequestList()
+
             }else if(checkedId == binding.retailer.id) {
-                paymentRequestToAdmin()
+
             }else {
 
-                walletRequestListDist()
+
+            }*/
+
+        binding.rbLoginMethod.setOnClickListener { view ->
+            val popup = PopupMenu(activity, view)
+
+            popup.gravity = Gravity.END or Gravity.BOTTOM
+
+            val inflater: MenuInflater = popup.menuInflater
+            inflater.inflate(R.menu.menu_options, popup.menu)
+
+            for (i in 0 until popup.menu.size()) {
+                val menuItem = popup.menu.getItem(i)
+                val spannableTitle = SpannableString(menuItem.title)
+                spannableTitle.setSpan(
+                    ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.grey_60)),
+                    0,
+                    spannableTitle.length,
+                    0
+                )
+                spannableTitle.setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    0,
+                    spannableTitle.length,
+                    0
+                )
+                val typeface = ResourcesCompat.getFont(requireContext(), R.font.mostserrat_extra_bold)
+                if (typeface != null) {
+                    spannableTitle.setSpan(
+                        CustomTypefaceSpan("", typeface),
+                        0,
+                        spannableTitle.length,
+                        0
+                    )
+                }
+                menuItem.title = spannableTitle
             }
+
+            // Handle item clicks
+            popup.setOnMenuItemClickListener { item: MenuItem ->
+                when (item.itemId) {
+                    R.id.Company -> {
+                        getWalletRequestList()
+                        true
+                    }
+                    R.id.Super_Distributer -> {
+                        walletRequestListDist()
+                        true
+                    }
+                    R.id.Distributer -> {
+                        paymentRequestToAdmin()
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+            popup.show() // Show the popup menu
         }
     }
 
