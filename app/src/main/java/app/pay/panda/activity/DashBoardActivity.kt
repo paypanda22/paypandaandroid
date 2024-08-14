@@ -59,7 +59,7 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
 
 
     override fun addListeners() {
-        val userType = userSession.getData(Constant.USERTYPE)
+        val userType = userSession.getData(Constant.USER_TYPE_NAME)
 
         setMenuVisibility(userType.toString())
 

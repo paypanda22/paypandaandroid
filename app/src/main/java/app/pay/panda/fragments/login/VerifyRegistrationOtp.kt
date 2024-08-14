@@ -1,6 +1,8 @@
 package app.pay.panda.fragments.login
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -16,14 +18,17 @@ import app.pay.panda.BaseFragment
 import app.pay.panda.R
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.databinding.FragmentVerifyRegistrationOtpBinding
+import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.GetKeyHash
 import app.pay.panda.helperclasses.ShowDialog
 import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.helperclasses.Utils.Companion.showToast
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.MyClick
+import app.pay.panda.interfaces.MyClickWithString
 import app.pay.panda.responsemodels.register.RegisterResponse
 import app.pay.panda.responsemodels.registerOtp.RegisterOtpResponse
+import app.pay.panda.responsemodels.verifyOtp.VerifyOtpResponse
 import app.pay.panda.responsemodels.verifyRegisterOtp.VerifyRegisterOtpResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
@@ -40,6 +45,7 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
     private var mobileToken=""
     private var userTypeId=""
     private var name=""
+    private var state=""
     private var password=""
     private var refID=""
     private var isReferral=""
@@ -59,6 +65,7 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
         name=arguments?.getString("name") ?:""
         refID=arguments?.getString("refID") ?:""
         isReferral=arguments?.getString("isReferral") ?:""
+        state=arguments?.getString("state") ?:""
 
         binding.tvNumber.text="Sent to +91- $phone"
         binding.tvEmail.text="Sent to - $email"
@@ -125,7 +132,7 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
                 if (email.isNotEmpty() && phone.isNotEmpty()){
                     resendOtp()
                 }else{
-                    showToast(requireContext(),"Email Or Mobile Number is Not Valid.")
+                    showToast(requireContext()," Mobile Number is Not Valid.")
                 }
 
             }
@@ -134,19 +141,21 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
         binding.btnContinue.setOnClickListener{
             if (binding.edtOtpMobile.length()<6){
                 showToast(requireContext(),"Enter OTP Received On Mobile")
-            }else if (binding.edtOtpEmail.length()<6){
+            }/*else if (binding.edtOtpEmail.length()<=6){
                 showToast(requireContext(),"Enter OTP Received On Email")
-            }else{
-                verifyOtp()
-            }
+            }*/else{
+             //   verifyOtp()
+            validateMobileOtp()
+         //  }
         }
 
     }
+        }
 
     private fun verifyOtp() {
         val requestData= hashMapOf<String,Any?>()
         requestData["user_id"]=token
-        requestData["email_otp"]=binding.edtOtpEmail.text.toString()
+      requestData["email_otp"]=binding.edtOtpEmail.text.toString()
         requestData["mobile_otp"]=binding.edtOtpMobile.text.toString()
 
         UtilMethods.verifyRegisterOtp(requireContext(),requestData,object:MCallBackResponse{
@@ -156,7 +165,7 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
                     emailToken=response.data?.email.toString()
                     mobileToken=response.data?.mobile.toString()
                     cancelTimer()
-                    register()
+                   // register()
                 }else{
                     showToast(requireContext(),response.message)
                 }
@@ -168,19 +177,46 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
         })
     }
 
+    private fun validateMobileOtp() {
+        val requestData = hashMapOf<String, Any?>()
+        requestData["otp"] = binding.edtOtpMobile.text.toString()
+       requestData["user_id"] = token
+
+        UtilMethods.verifyOtp(myActivity, requestData, object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: VerifyOtpResponse = Gson().fromJson(message, VerifyOtpResponse::class.java)
+                if (response.data.user.isNotEmpty()) {
+//                    emailToken=response.data?.toString()
+                  // mobileToken=response.data?.user.toString()
+                      mobileToken=response.data.user.toString()
+
+                    register()
+                    cancelTimer()
+                } else {
+                    Toast.makeText(activity, "Unable to verify OTP", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun fail(from: String) {
+                Toast.makeText(activity, from, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+    }
 
 
     private fun register() {
         val requestData = hashMapOf<String, Any?>()
-        requestData["email"] = emailToken
+              requestData["email"] = email
         requestData["mobile"] = mobileToken
+        requestData["password"] = password
         requestData["user_type_id"] = userTypeId
         requestData["name"] = name
-        requestData["password"] = password
         requestData["refer_id"] = refID
+        requestData["state"] = state
         val getHash = GetKeyHash(myActivity)
         val finalData = getHash.getHash(requestData)
-        UtilMethods.register(requireContext(), finalData, object : MCallBackResponse {
+        UtilMethods.register(myActivity, finalData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: RegisterResponse = Gson().fromJson(message, RegisterResponse::class.java)
                 if (response.error==false){

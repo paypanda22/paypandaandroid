@@ -18,15 +18,14 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
-            android:background="@color/black"
+            android:background="@color/green_100"
             android:src="@drawable/horizontal_logo"
-            android:layout_margin="@dimen/_4sdp"
+            android:layout_margin="@dimen/_1sdp"
             android:scaleType="fitCenter" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blue_100"
 
             android:paddingHorizontal="@dimen/_8sdp"
             android:paddingVertical="@dimen/_2sdp">
@@ -48,12 +47,11 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/blue_100"
                     android:text="@string/package_third_a"
                     android:textSize="@dimen/_11ssp"
                     style="@style/mostserrat_bold"
                     android:textColor="@color/black"
-                    android:gravity="center"
+
                     android:paddingBottom="@dimen/_2sdp"/>
 
                 <androidx.recyclerview.widget.RecyclerView

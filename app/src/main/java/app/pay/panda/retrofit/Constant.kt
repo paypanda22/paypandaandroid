@@ -33,7 +33,7 @@ object Constant {
     const val ADHAAR_VERIFIED = "adhaarVerified"
     const val PAN_VERIFIED = "panVerified"
     const val IDENTITY_VERIFIED = "isIdentity_verified"
-    const val IS_GST = "is_gst"
+    const val IS_GST = "is_gstis_gst"
     const val GST_AVAILABLE = "isGstAvailable"
     const val PAN_NAME = "pan_name"
     const val PAN_NUMBER = "pan_number"
@@ -60,4 +60,5 @@ object Constant {
     const val USERTYPE = "user_type"
     const val SPONSOR_MOBILE_VISIBLE = "sponsor_mobile_visible"
     const val REFERAL_VISIBLE = "referal_visible"
+    const val USER_TYPE_NAME = "user_type_name"
 }

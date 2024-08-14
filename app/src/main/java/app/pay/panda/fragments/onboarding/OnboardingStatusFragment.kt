@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import app.pay.panda.BaseFragment
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.databinding.FragmentOnboardingStatusBinding
+import app.pay.panda.fragments.DialogKYCInstruction
 import app.pay.panda.fragments.PrivacyPolicy
 import app.pay.panda.fragments.TermsAndConditions
 import app.pay.panda.helperclasses.CommonClass
@@ -146,6 +147,8 @@ class OnboardingStatusFragment : BaseFragment<FragmentOnboardingStatusBinding>(F
             onStepButtonClick(5,requireContext())
         }
         binding.mcvVideoKyc.setOnClickListener {
+            val dialogKYCInstruction = DialogKYCInstruction()
+            dialogKYCInstruction.show(myActivity.supportFragmentManager, "KYCInstructionDialog")
             onStepButtonClick(6,requireContext())
         }
         binding.chkTnc.setOnCheckedChangeListener { _, _ ->
@@ -203,7 +206,7 @@ class OnboardingStatusFragment : BaseFragment<FragmentOnboardingStatusBinding>(F
         super.onResume()
     }
 
-    private fun onStepButtonClick(clickedStep: Int, context: Context) {
+    public fun onStepButtonClick(clickedStep: Int, context: Context) {
         val loginSteps=userSession.getIntData(Constant.LOGIN_STEPS)
         when {
             clickedStep <= loginSteps -> Toast.makeText(context, "This step is already completed.", Toast.LENGTH_SHORT).show()

@@ -392,10 +392,12 @@ interface GetData {
 
     @GET("api/auth/resendOtpForTpin")
     fun resendOtpForTPin(): Call<JsonObject>
+    @GET("api/auth/resendOtp")
+    fun resendOtpTPin(@Body obj: Any): Call<JsonObject>
 
 
-
-
+    @GET("api/package/public/{id}")
+    fun packageDatails(@Path("id") id: String): Call<JsonObject>
 
 
 

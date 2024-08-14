@@ -263,7 +263,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         // Save visibility states in SharedPreferences
         userSession.setBoolData(Constant.SPONSOR_MOBILE_VISIBLE, isSponsorMobileVisible)
         userSession.setBoolData(Constant.REFERAL_VISIBLE, isReferalVisible)
-        userSession.setData(Constant.USERTYPE, selectedUserType)
+        userSession.setData(Constant.USER_TYPE_NAME, selectedUserType)
     }
 
 
@@ -273,7 +273,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         super.onResume()
 
         // Retrieve the last selected user type from SharedPreferences
-        val lastUserType = userSession.getData(Constant.USERTYPE)
+        val lastUserType = userSession.getData(Constant.USER_TYPE_NAME)
         updateVisibilityBasedOnUserType(lastUserType.toString())
     }
 
@@ -443,9 +443,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private fun sendOtp(mobile: String) {
         progressBar.showProgress(requireContext())
         val requestData = hashMapOf<String, Any?>()
-        requestData["emailId"] = binding.edtEmail.text.toString()
+        //requestData["emailId"] = binding.edtEmail.text.toString()
         requestData["mobileNo"] = "+91$mobile"
-        UtilMethods.getRegistrationOtp(requireContext(), requestData, object : MCallBackResponse {
+        UtilMethods.sendOtpMobile(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: RegisterOtpResponse =
                     Gson().fromJson(message, RegisterOtpResponse::class.java)
@@ -462,6 +462,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         bundle.putString("userTypeId", selectedUserTypeId)
                         bundle.putString("name", binding.edtName.text.toString())
                         bundle.putString("refID", binding.edtSponsorMobile.text.toString())
+                        bundle.putString("state",stateID)
                         findNavController().navigate(
                             R.id.action_registerFragment_to_verifyRegistrationOtp,
                             bundle

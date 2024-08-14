@@ -66,7 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         userSession = UserSession(requireContext())
         resetTPIN=ResetTPIN(myActivity,userSession)
         resetTPIN.resetTPin()
-        val userType = userSession.getData(Constant.USERTYPE)
+        val userType = userSession.getData(Constant.USER_TYPE_NAME)
 
         if (userType.equals("Super Distributor") || userType.equals("Distributor")) {
       binding.llAepsWallet.visibility=View.GONE
@@ -355,7 +355,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
            }
            binding.disputeRequest.text= buildString {
                append(response.data.disputeRequest.toString())
-               append(" ₹")
+
 
            }
        }
@@ -370,7 +370,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "Unable To Fetch Services Status", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(requireContext(), "Unable To Fetch Services Status", Toast.LENGTH_SHORT).show()
             }
         })
     }

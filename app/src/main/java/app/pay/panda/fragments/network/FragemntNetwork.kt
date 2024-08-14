@@ -51,7 +51,7 @@ class FragemntNetwork : BaseFragment<FragmentFragemntNetworkBinding>(FragmentFra
         nullActivityCheck()
         userSession = UserSession(requireContext())
 
-        val userType = userSession.getData(Constant.USERTYPE)
+        val userType = userSession.getData(Constant.USER_TYPE_NAME)
         if (userType.equals("Super Distributor") ) {
             getNetwork(page,count)
         }else if(userType.equals("Distributor")){

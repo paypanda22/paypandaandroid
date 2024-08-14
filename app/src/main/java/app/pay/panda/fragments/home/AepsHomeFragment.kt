@@ -59,7 +59,7 @@ class AepsHomeFragment : BaseFragment<FragmentAepsHomeBinding>(FragmentAepsHomeB
         }else{
             startActivity(Intent(context,IntroActivity::class.java))
         }
-        val userType = userSession.getData(Constant.USERTYPE)
+        val userType = userSession.getData(Constant.USER_TYPE_NAME)
         if (userType == "Super Distributor" || userType == "Distributor") {
             binding.llAepsWallet.visibility=View.GONE
 

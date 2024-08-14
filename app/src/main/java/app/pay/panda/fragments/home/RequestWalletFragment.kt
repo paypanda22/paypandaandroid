@@ -245,25 +245,35 @@ class RequestWalletFragment : BaseFragment<FragmentRequestWalletBinding>(Fragmen
             }
         }
         binding.btnTopup.setOnClickListener {
-            if (binding.edtAmount.text.toString().isEmpty()) {
+            val amountText = binding.edtAmount.text.toString()
+
+            // Check if the amount field is empty
+            if (amountText.isEmpty()) {
                 binding.edtAmount.error = "Enter Amount"
             } else {
-                if (transferTo == "Admin") {
-                    if (validateInput()) {
-                        processRequest()
-                    }
+                val amount = amountText.toIntOrNull() // Safely convert the amount to an integer
 
+                // Check if the amount is valid and at least 100
+                if (amount == null || amount < 100) {
+                    binding.edtAmount.error = "Minimum amount is 100"
+                    Toast.makeText(myActivity, "Please enter at least 100", Toast.LENGTH_SHORT).show()
                 } else {
-                    if (binding.edtRemark.text.toString().isEmpty()) {
-                        binding.edtRemark.error = "Enter Remark"
+                    // If the amount is valid and meets the minimum requirement
+                    if (transferTo == "Admin") {
+                        if (validateInput()) {
+                            processRequest()
+                        }
                     } else {
-                        processRequest()
+                        if (binding.edtRemark.text.toString().isEmpty()) {
+                            binding.edtRemark.error = "Enter Remark"
+                        } else {
+                            processRequest()
+                        }
                     }
-
-
                 }
             }
         }
+
 
         binding.ivMenu.setOnClickListener { findNavController().navigate(R.id.action_requestWalletFragment_to_walletRequestListFragment2) }
 

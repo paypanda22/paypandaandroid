@@ -22,7 +22,7 @@ class CashBackFragment : BaseFragment<FragmentCashBackBinding>(FragmentCashBackB
         nullActivityCheck()
 
         userSession= UserSession(requireContext())
-        val userType = userSession.getData(Constant.USERTYPE)
+        val userType = userSession.getData(Constant.USER_TYPE_NAME)
         if (userType != "Super Distributor" && userType != "Distributor") {
             binding.llAepsWallet.visibility=View.GONE
 

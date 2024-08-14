@@ -1,5 +1,6 @@
 package app.pay.panda.fragments.aepsFragments
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -13,6 +14,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +38,9 @@ import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.ScannerListClick
 import app.pay.panda.responsemodels.aepsTxnList.AepsTransactionsResponse
 import app.pay.panda.responsemodels.aepsTxnList.Data
+import app.pay.panda.responsemodels.packagedetail.PackageDetailResponse
+import app.pay.panda.responsemodels.singleutility.SingleUtilityTransaction
+import app.pay.panda.retrofit.ApiMethods
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.gson.Gson
@@ -45,6 +50,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
     private lateinit var txnList:MutableList<Data>
+    private lateinit var txnDetailList:MutableList<app.pay.panda.responsemodels.packagedetail.Data>
     private var txnCount=25
     override fun init() {
         nullActivityCheck()
@@ -182,7 +188,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         val receipt=SingleAepsTransaction()
         val bundle=Bundle()
         bundle.apply {
-            putString("date",model[pos].createdAt)
+            putString("date",model[pos].createdAt.toString())
             putString("bankRrn",model[pos].bank_rrn.toString())
             putString("bankName",model[pos].bank_name.toString())
             putString("balAmount",model[pos].bal_amount.toString())
@@ -194,4 +200,27 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         receipt.show(parentFragmentManager, receipt.tag)
     }
 
+    private fun packageDatails() {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+
+        ApiMethods.packageDatails(requireContext(), token,"id", object : MCallBackResponse {
+            @SuppressLint("SetTextI18n")
+            override fun success(from: String, message: String) {
+                val response: PackageDetailResponse = Gson().fromJson(message, PackageDetailResponse::class.java)
+                if (!response.error) {
+                    if (txnDetailList.isNotEmpty()) {
+                        txnDetailList.clear()
+                    }
+
+
+                } else {
+                    Toast.makeText(requireContext(), "Unable to fetch Details", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun fail(from: String) {
+                Toast.makeText(requireContext(), "Unable to Txn", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 }

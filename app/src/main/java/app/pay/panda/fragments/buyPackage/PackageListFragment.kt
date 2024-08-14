@@ -164,6 +164,7 @@ class PackageListFragment : BaseFragment<FragmentPackageListBinding>(FragmentPac
                             object : MyClick {
                                 override fun onClick() {
                                     findNavController().popBackStack()
+                                    buyNowDialog.dismiss()
                                 }
                             })
 

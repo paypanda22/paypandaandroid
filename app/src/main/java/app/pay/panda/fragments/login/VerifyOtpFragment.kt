@@ -170,7 +170,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
                     if (entityType=="phone"){
                         verifyMobileOtp()
                     }else{
-                        verifyEmailOtp()
+                       // verifyEmailOtp()
                     }
                 }
 
@@ -275,6 +275,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
                 if (response.error==false){
                     val createSession = response.data?.let { userSession.createUserSession(it) }
                     if (createSession == true) {
+                        userSession.setData(Constant.USER_TYPE_NAME,response.data.user_type_name.toString())
                         sendToMainScreen();
                     } else {
                         Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()

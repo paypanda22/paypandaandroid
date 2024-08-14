@@ -128,13 +128,16 @@ class OnboardBankDetailsFragment : BaseFragment<FragmentOnboardBankDetailsBindin
         requestData["ifsc"]=binding.edtIfsc.text.toString()
         requestData["phone"]=phone
         requestData["bank_id"]=bankID
-        requestData["bankAccount"]=binding.edtAcNumber.text.toString()
+        requestData["bank_name"]=binding.atvBankName.text.toString()
+        requestData["bank_account_number"]=binding.edtAcNumber.text.toString()
         requestData["user_id"]=token
+        requestData["account_number"]=binding.edtAcNumber.text.toString()
 
         UtilMethods.saveBankDetails(requireContext(),requestData,object:MCallBackResponse{
             override fun success(from: String, message: String) {
                 userSession.setBoolData(Constant.ISBANK,true)
                 userSession.setIntData(Constant.LOGIN_STEPS,4)
+
                 ShowDialog.bottomDialogSingleButton(myActivity,
                     "Bank Added Successfully",
                     "Bank Account verified and added, Proceed To next Step","success",object:MyClick{
@@ -149,7 +152,7 @@ class OnboardBankDetailsFragment : BaseFragment<FragmentOnboardBankDetailsBindin
                     "ERROR",
                     "Unable to Add Your Bank Details. Kindly try after some time","error",object:MyClick{
                         override fun onClick() {
-                            findNavController().popBackStack()
+
                         }
                     })
             }
@@ -214,11 +217,12 @@ class OnboardBankDetailsFragment : BaseFragment<FragmentOnboardBankDetailsBindin
         requestData["user_id"]=token
         UtilMethods.verifyBankAccount(requireContext(),requestData,object:MCallBackResponse{
             override fun success(from: String, message: String) {
-                val response:VerifyBankResponse=Gson().fromJson(message,VerifyBankResponse::class.java)
+                val response: VerifyBankResponse =Gson().fromJson(message,VerifyBankResponse::class.java)
                 bankVerified=true
                 binding.tvVerifyBank.visibility=GONE
-                binding.edtName.setText(response.data.data.nameAtBank)
+                binding.edtName.setText(response.data.bank_account_name)
                 Toast.makeText(requireContext(),"Bank Verified Successfully",Toast.LENGTH_SHORT).show()
+
             }
 
             override fun fail(from: String) {

@@ -12,6 +12,7 @@ import app.pay.panda.R
 import app.pay.panda.activity.ActivationPackages
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.databinding.FragmentProfileBinding
+import app.pay.panda.fragments.aepsFragments.AepsTransactionList
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.CustomProgressBar
 import app.pay.panda.helperclasses.MyGlide
@@ -29,7 +30,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun init() {
         userSession= UserSession(requireContext())
         nullActivityCheck()
-        val userType = userSession.getData(Constant.USERTYPE)
+        val userType = userSession.getData(Constant.USER_TYPE_NAME)
         if (userType.equals("Super Distributor") || userType.equals("Distributor")) {
             binding.llAepsWallet.visibility=View.GONE
    binding.card3.visibility=View.GONE
@@ -121,6 +122,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.packages.setOnClickListener {
             startActivity(Intent(activity, ActivationPackages::class.java))
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+        }
+        binding.card5.setOnClickListener{
+            findNavController().navigate(R.id.action_profileFragment_to_fragment_aeps_transaction_list)
         }
     }
 

@@ -272,7 +272,7 @@ class ShowDialog {
 
         }
 
-        private fun validateMobileOtp(
+      /*  private fun validateMobileOtp(
             dialog: Dialog,
             activity: Activity,
             userSession: UserSession,
@@ -300,7 +300,7 @@ class ShowDialog {
                 }
             })
 
-        }
+        }*/
 
 
         fun bottomDialogSingleButton(activity: Activity, title: String, desc: String, type: String, click: MyClick) {

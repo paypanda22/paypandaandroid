@@ -16,6 +16,7 @@ import app.pay.panda.helperclasses.Utils.Companion.showToast
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.MyClick
 import app.pay.panda.responsemodels.gerateTpinOtp.GenerateTPinOtpResponse
+import app.pay.panda.responsemodels.resendtpin.TransactionPinResponse
 import app.pay.panda.retrofit.ApiMethods
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
@@ -82,7 +83,9 @@ class ResetTPIN(
                 verifyTPinOtp(tPinOtpDialogBinding,tPinOtpDialog)
             }
         }
-    }
+        tPinOtpDialogBinding.tvResendOtp.setOnClickListener{
+            resendOtpTPin()
+        }    }
 
     private fun verifyTPinOtp(tPinOtpDialogBinding: OtpDialogBinding, tPinOtpDialog: Dialog) {
         val token=userSession.getData(Constant.USER_TOKEN).toString()
@@ -106,6 +109,28 @@ class ResetTPIN(
         })
 
     }
+
+    private fun resendOtpTPin() {
+        val token=userSession.getData(Constant.USER_TOKEN).toString()
+        val requestData= hashMapOf<String,Any?>()
+        requestData["user_id"]=token
+        ApiMethods.resendOtpTPin(myActivity,token,requestData,object:MCallBackResponse{
+            override fun success(from: String, message: String) {
+                val response: TransactionPinResponse =Gson().fromJson(message,TransactionPinResponse::class.java)
+                if(response.error==false){
+                    showToast(myActivity,"Otp Sand Successfully ")
+                }else{
+                    showToast(myActivity,response.message)
+                }
+            }
+
+            override fun fail(from: String) {
+               // showToast(myActivity,from)
+            }
+        })
+
+    }
+
 
     private fun openResetOtpDialog() {
         val createTPinDialog: Dialog = Dialog(myActivity)

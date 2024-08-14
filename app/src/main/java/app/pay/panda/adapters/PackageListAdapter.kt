@@ -64,6 +64,11 @@ class PackageListAdapter(
             }
 
         }
+        if(list[position].isPaid==true){
+            holder.tvBuyNow.visibility= VISIBLE
+        }else{
+            holder.tvBuyNow.visibility= GONE
+        }
 
         if (list[position].services.isNotEmpty()) {
             val servicesAdapter = PackageServicesAdapter(activity, list[position].services)

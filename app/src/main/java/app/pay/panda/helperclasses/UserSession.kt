@@ -139,7 +139,7 @@ class UserSession(private val context: Context) {
             data.notification?.let { putInt(Constant.NOTIFICATION_COUNT, it) }
             putString(Constant.TPINSTATUS,data.Tpin_status)
             putString(Constant.BUSINESS_NAME,data.business_name.toString())
-            putString(Constant.USERTYPE,data.user_type_id?.user_type.toString())
+           // putString(Constant.USERTYPE,data.user_type_id?.user_type.toString())
             putString(Constant.USER_TYPE_ID,data.user_type_id?._id.toString())
 
             val loginStepList= listOf(

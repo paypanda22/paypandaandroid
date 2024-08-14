@@ -373,13 +373,7 @@ object UtilMethods {
                         if (response.isSuccessful && response.body() != null) {
                             val responseBody = response.body() as JsonObject
                             if (responseBody.has("error")) {
-                                val status = responseBody.get("error").asBoolean
-                                if (status) {
-                                    val message = responseBody.get("message").asString
-                                    callBackResponse.fail(message)
-                                } else {
-                                    callBackResponse.success("strresponse", responseBody.toString())
-                                }
+                                callBackResponse.success("strresponse", responseBody.toString())
                             } else {
                                 val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)

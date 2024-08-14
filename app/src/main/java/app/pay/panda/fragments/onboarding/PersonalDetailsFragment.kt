@@ -252,10 +252,7 @@ class PersonalDetailsFragment : BaseFragment<FragmentPersonalDetailsBinding>(Fra
     }
 
     private fun validate(): Boolean {
-        if (!ActivityExtensions.isValidMobile(binding.edtAltMobile.text.toString())) {
-            binding.edtAltMobile.error = "Enter a Valid Mobile"
-            return false
-        } else if ("+91" + binding.edtAltMobile.text.toString() == binding.edtMobile.text.toString()) {
+  if ("+91" + binding.edtAltMobile.text.toString() == binding.edtMobile.text.toString()) {
             binding.edtAltMobile.error = "Alternate mobile should be different from registered mobile"
             return false
         } else if (binding.edtPresetAddress.text.toString().isEmpty()) {
@@ -266,9 +263,6 @@ class PersonalDetailsFragment : BaseFragment<FragmentPersonalDetailsBinding>(Fra
             return false
         } else if (stateID.isEmpty()) {
             binding.atvState.error = "Select State First"
-            return false
-        } else if (binding.edtQualification.text.toString().isEmpty()) {
-            binding.edtQualification.error = "Enter Your Educational Qualification"
             return false
         } else {
             return true
