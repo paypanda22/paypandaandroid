@@ -55,7 +55,7 @@
         app:cardUseCompatPadding="true"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
         app:cardElevation="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView19" >
@@ -101,6 +101,49 @@
                     style="@style/mostserrat_bold"
                     android:textColorHint="@color/bggrey"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:id="@+id/llTransferMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Transaction Mode"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"/>
+                <RadioGroup
+                    android:id="@+id/rgMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/rbIMPS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IMPS"
+                        android:checked="true"
+                        style="@style/mostserrat_bold"
+                        android:textSize="@dimen/_12ssp"/>
+                    <RadioButton
+                        android:id="@+id/rbNEFT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NEFT"
+                        style="@style/mostserrat_bold"
+                        android:textSize="@dimen/_12ssp"/>
+                    <RadioButton
+                        android:id="@+id/rbRTGS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RTGS"
+                        style="@style/mostserrat_bold"
+                        android:textSize="@dimen/_12ssp"/>
+                </RadioGroup>
+            </LinearLayout>
+
 
 
             <TextView

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_payoutAccountList_to_addPayoutAccount"
             app:destination="@id/addPayoutAccount" />
+        <action
+            android:id="@+id/action_payoutAccountList_to_fragemntNetwork"
+            app:destination="@id/fragemntNetwork" />
     </fragment>
 
     <fragment
@@ -20,4 +23,9 @@
         android:name="app.pay.panda.fragments.payout.AddPayoutAccount"
         android:label="fragment_add_payout_account"
         tools:layout="@layout/fragment_add_payout_account" />
+    <fragment
+        android:id="@+id/fragemntNetwork"
+        android:name="app.pay.panda.fragments.network.FragemntNetwork"
+        android:label="fragment_fragemnt_network"
+        tools:layout="@layout/fragment_fragemnt_network" />
 </navigation>

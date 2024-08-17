@@ -9,7 +9,6 @@
     <RelativeLayout
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
-
         android:layout_height="?actionBarSize">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -124,7 +123,6 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
     <LinearLayout
         android:id="@+id/walletDetails"
         android:layout_width="match_parent"
@@ -613,7 +611,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:clickable="true"
                                 android:gravity="center"

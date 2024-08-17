@@ -14,7 +14,8 @@ import app.pay.panda.responsemodels.payoutBanks.Data
 class PayoutAccountAdapter(
     private val activity:Activity,
     private val list:List<Data>,
-    private val click:UserBankAccountClick
+    private val click:UserBankAccountClick,
+    private val onLongPressed:PayoutAccountOnLongPressed
 ) :RecyclerView.Adapter<PayoutAccountAdapter.ViewHolder>() {
     class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
         val tvAcName:TextView=itemView.findViewById(R.id.tvAcName)
@@ -23,8 +24,11 @@ class PayoutAccountAdapter(
         val tvBranch:TextView=itemView.findViewById(R.id.tvBranch)
         val tvIfsc:TextView=itemView.findViewById(R.id.tvIfsc)
         val tvType:TextView=itemView.findViewById(R.id.tvType)
-        val tvDelete:ImageView=itemView.findViewById(R.id.tvDelete)
 
+    }
+
+    interface PayoutAccountOnLongPressed {
+        fun onLongPressed(holder:RecyclerView.ViewHolder,model:List<Data>,pos:Int);
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,11 +46,8 @@ class PayoutAccountAdapter(
         holder.tvAcNumber.text=list[position].bank_account_number.toString()
         holder.tvBankName.text=list[position].bank_name
         holder.tvBranch.text=list[position].bank_branch
-        holder.tvDelete.setOnClickListener {
-            click.onItemCLicked(holder,list,position,"delete")
-        }
         holder.itemView.setOnClickListener {
-            click.onItemCLicked(holder,list,position,"select")
+            click.onItemCLicked(holder,list,position)
         }
     }
 }
