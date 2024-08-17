@@ -17,6 +17,7 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.BaseFragment
@@ -38,7 +39,6 @@ import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.ScannerListClick
 import app.pay.panda.responsemodels.aepsTxnList.AepsTransactionsResponse
 import app.pay.panda.responsemodels.aepsTxnList.Data
-import app.pay.panda.responsemodels.packagedetail.PackageDetailResponse
 import app.pay.panda.responsemodels.singleutility.SingleUtilityTransaction
 import app.pay.panda.retrofit.ApiMethods
 import app.pay.panda.retrofit.Constant
@@ -50,7 +50,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
     private lateinit var txnList:MutableList<Data>
-    private lateinit var txnDetailList:MutableList<app.pay.panda.responsemodels.packagedetail.Data>
+
     private var txnCount=25
     override fun init() {
         nullActivityCheck()
@@ -116,7 +116,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         binding.ivFilter.setOnClickListener {
            openFilterDialog()
         }
-
+        binding.ivBack.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun openFilterDialog() {
@@ -200,27 +200,5 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         receipt.show(parentFragmentManager, receipt.tag)
     }
 
-    private fun packageDatails() {
-        val token = userSession.getData(Constant.USER_TOKEN).toString()
 
-        ApiMethods.packageDatails(requireContext(), token,"id", object : MCallBackResponse {
-            @SuppressLint("SetTextI18n")
-            override fun success(from: String, message: String) {
-                val response: PackageDetailResponse = Gson().fromJson(message, PackageDetailResponse::class.java)
-                if (!response.error) {
-                    if (txnDetailList.isNotEmpty()) {
-                        txnDetailList.clear()
-                    }
-
-
-                } else {
-                    Toast.makeText(requireContext(), "Unable to fetch Details", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun fail(from: String) {
-                Toast.makeText(requireContext(), "Unable to Txn", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
 }

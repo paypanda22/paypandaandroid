@@ -36,6 +36,7 @@ class DmtTransactionListAdapter(
         val refresh: AppCompatImageView =itemView.findViewById(R.id.refresh)
         val ivOtp:AppCompatImageView=itemView.findViewById(R.id.ivOtp)
         val ivShare:AppCompatImageView=itemView.findViewById(R.id.ivShare)
+        val view:AppCompatImageView=itemView.findViewById(R.id.view)
 
 
 
@@ -126,6 +127,9 @@ class DmtTransactionListAdapter(
             holder.refresh.setOnClickListener{
                 if (holder.refresh.visibility==VISIBLE){
                     clickListener.onItemClicked(holder,list,position,1)
+                }
+                holder.view.setOnClickListener{
+                    clickListener.onItemClicked(holder,list,position,4)
                 }
             }
 

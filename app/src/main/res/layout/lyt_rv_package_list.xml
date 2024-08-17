@@ -32,8 +32,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivIcon"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:src="@drawable/ic_cart_flat_shop" />
 
             <LinearLayout
@@ -94,22 +94,36 @@
                     android:visibility="gone"
                     android:textSize="@dimen/_9ssp"
                     android:gravity="end"/>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvBuyNow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/buy_now"
-                    style="@style/mostserrat_bold"
-                    android:textColor="@color/white"
-                    android:drawablePadding="@dimen/_8sdp"
-                    android:background="@drawable/btn_success"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_8sdp"
-                    android:textSize="@dimen/_10ssp"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginTop="@dimen/_5sdp"/>
 
+    <TextView
+        android:id="@+id/tvBuyNow"
+        style="@style/mostserrat_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+
+        android:background="@drawable/btn_success"
+        android:drawablePadding="@dimen/_8sdp"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        android:paddingStart="@dimen/_20sdp"
+        android:text="@string/buy_now"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp" />
+    <ImageView
+        android:id="@+id/commission"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:src="@drawable/read_more"
+        android:background="@color/transparent"
+        />
+            </LinearLayout>
             </LinearLayout>
 
         </RelativeLayout>

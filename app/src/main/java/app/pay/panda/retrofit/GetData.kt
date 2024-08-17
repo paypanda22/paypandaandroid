@@ -398,8 +398,15 @@ interface GetData {
 
     @GET("api/package/public/{id}")
     fun packageDatails(@Path("id") id: String): Call<JsonObject>
+    @GET("api/package/bbps/commision")
+    fun bbpsServices(@Query("package_id") package_id: String,
+                     @Query("service_id") service_id: String,
+                     @Query("page") page: String,
+                     @Query("count") count: String): Call<JsonObject>
 
 
+    @GET("api/auth/recipientDelete")
+    fun recipientDelete(@Body obj: Any): Call<JsonObject>
 
 
 

@@ -16,7 +16,7 @@ data class Request(
     val requestTo: RequestTo? = null,
     val __v: Int = 0,
     val _id: String = "",
-    val amount: Long = 0L,
+    val amount: String = "",
     val createdAt: String = "",
     val paymentDate: String = "",
     val status: String = "",

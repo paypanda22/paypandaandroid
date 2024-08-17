@@ -14,6 +14,7 @@ import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
@@ -150,20 +151,21 @@ class FetchBillPayment : BaseFragment<FragmentFetchBillPaymentBinding>(FragmentF
         dBinding.tvDueDate.text = response.data.billerResponse.dueDate
         dBinding.refId.text = response.data.refId
         dBinding.finalAmount.setText(response.data.billerResponse.amount.toString())
-        bottomSheetDialog.setCancelable(true)
-        bottomSheetDialog.show()
+
 
         dBinding.btnPay.setOnClickListener {
-            if (dBinding.edtOtpLogin.text.toString().length<4){
-                showToast(requireContext(),"Enter Your Transaction Pin")
-            }else{
-                payBill2(dBinding.edtOtpLogin.text.toString(),dBinding.finalAmount.text.toString(), bottomSheetDialog, response)
+            val transactionPin = dBinding.edtOtpLogin.text.toString()
+            if (transactionPin.length < 4) {
+                showToast(requireContext(), "Enter Your Transaction Pin")
+            } else {
+                payBill2(transactionPin, dBinding.finalAmount.text.toString(), bottomSheetDialog, response)
             }
-
         }
+       // bottomSheetDialog.setCancelable(true)
+        bottomSheetDialog.show()
     }
 
-    private fun payBill2(tPIN:String,amount: String, bottomSheetDialog: Dialog, response: FetchBillResponse) {
+    private fun payBill2(tPIN: String, amount: String, bottomSheetDialog: Dialog, response: FetchBillResponse) {
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         val inputDataArray = getInputParams()
 
@@ -174,48 +176,39 @@ class FetchBillPayment : BaseFragment<FragmentFetchBillPaymentBinding>(FragmentF
         requestData["refId"] = response.data.refId
         requestData["billerResponse"] = response.data.billerResponse
         requestData["user_id"] = token
-        requestData["tpin"]=tPIN
+        requestData["tpin"] = tPIN
 
         UtilMethods.payBill(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                bottomSheetDialog.dismiss()
                 val billPayResponse: BillPayResponse = Gson().fromJson(message, BillPayResponse::class.java)
                 if (!billPayResponse.error) {
-                    if (billPayResponse.data.status==2){
-                        ShowDialog.bbpsSuccess(myActivity, billPayResponse.data, response.message, object : MyClick { override fun onClick() {
-                                findNavController().popBackStack()
+                    if (billPayResponse.data.status == 2) {
+                        ShowDialog.bbpsSuccess(myActivity, billPayResponse.data, response.message, object : MyClick {
+                            override fun onClick() {
+                                bottomSheetDialog.dismiss()
                             }
                         })
-                    }else{
-                        ShowDialog.bottomDialogSingleButton(myActivity, "Request Accepted", billPayResponse.data.message, "success", object : MyClick {
+                    } else {
+                        ShowDialog.bottomDialogSingleButton(myActivity, billPayResponse.message, billPayResponse.data.message, "success", object : MyClick {
                             override fun onClick() {
-                                findNavController().popBackStack()
+
                             }
                         })
                     }
-
                 } else {
-                    ShowDialog.bottomDialogSingleButton(myActivity, "FAILED", billPayResponse.data.message, "error", object : MyClick {
-                        override fun onClick() {
-
-                        }
-                    })
+                    Toast.makeText(myActivity, billPayResponse.message, Toast.LENGTH_SHORT).show()
                 }
-
             }
 
             override fun fail(from: String) {
-                bottomSheetDialog.dismiss()
                 ShowDialog.bottomDialogSingleButton(myActivity, "FAILED", from, "error", object : MyClick {
                     override fun onClick() {
-
+                        bottomSheetDialog.dismiss()
                     }
                 })
             }
         })
-
     }
-
 
     private fun validate(): Boolean {
         if (binding.edtAd1.text.toString().isEmpty()) {

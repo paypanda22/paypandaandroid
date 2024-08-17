@@ -558,7 +558,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             override fun success(from: String, message: String) {
                 val response: ReqRegistrationResponse =
                     Gson().fromJson(message, ReqRegistrationResponse::class.java)
+                val msg=response.msg
                 if (response.error == false) {
+
                     val showDialog = DialogOK(myActivity)
                    showDialog.showErrorDialog(
                         requireContext(),
@@ -567,11 +569,21 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         lottieWidth = 200,
                         lottieHeight = 200
                     )
+                    binding.edtName.text?.clear()
+                    binding.edtEmail.text?.clear()
+                    binding.edtRegMobile.text?.clear()
+                    binding.edtState.text.clear()
+                    binding.edtSponsorMobile.text?.clear()
+                    binding.rbLoginMethod.text?.clear()
+
+                }else{
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "fail", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(),"Email already exists", Toast.LENGTH_SHORT)
                     .show()
             }
         })

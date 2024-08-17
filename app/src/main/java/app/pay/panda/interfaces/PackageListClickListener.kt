@@ -5,4 +5,5 @@ import app.pay.panda.responsemodels.packageListResponse.Data
 
 interface PackageListClickListener {
     fun onItemClicked(holder:RecyclerView.ViewHolder,model:List<Data>,pos:Int)
+    fun onItemClickedDetail(holder:RecyclerView.ViewHolder,model:List<Data>,pos:Int)
 }

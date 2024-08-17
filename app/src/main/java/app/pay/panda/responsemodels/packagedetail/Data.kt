@@ -5,7 +5,7 @@ import androidx.annotation.Keep
 
 @Keep
 data class Data(
-    val BBPSWiseServices: List<Any> = listOf(),
+    val BBPSWiseServices: List<BBPSWiseService> = listOf(),
     val OtherComm: List<OtherComm> = listOf(),
     val _id: String = "",
     val banner_img: Any = Any(),
