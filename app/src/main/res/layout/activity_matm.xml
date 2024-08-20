@@ -5,15 +5,225 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".mAtm.MyAtmActivity">
 
-    <Button
-        android:id="@+id/btnProceed"
+    <View
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="?actionBarSize"
+        android:contentDescription="@string/back"
+        app:layout_constraintStart_toStartOf="@+id/topBar"
+        app:layout_constraintTop_toTopOf="@+id/topBar"
+        android:src="@drawable/left"
+        app:tint="@color/white" />
+    <TextView
+        style="@style/mostserrat_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:text="M-ATM"
+        app:layout_constraintStart_toStartOf="@+id/topBar"
+        app:layout_constraintEnd_toEndOf="@+id/topBar"
+        app:layout_constraintTop_toTopOf="@+id/topBar"
+        app:layout_constraintBottom_toBottomOf="@+id/topBar"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp" />
+
+    <TextView
+        android:id="@+id/tvSelectDevice"
+        style="@style/mostserrat_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:text="Select Device"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar" />
+    <RadioGroup
+        android:id="@+id/rgSelectDevice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tvSelectDevice"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rbPax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pax"
+            android:textSize="@dimen/_12ssp"
+            style="@style/mostserrat_bold"/>
+        <RadioButton
+            android:id="@+id/rbMoreFun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Morefun"
+            android:checked="true"
+            android:textSize="@dimen/_12ssp"
+            style="@style/mostserrat_bold"/>
+        <RadioButton
+            android:id="@+id/rbWiseasy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wiseasy"
+            android:textSize="@dimen/_12ssp"
+            style="@style/mostserrat_bold"/>
+        <RadioButton
+            android:id="@+id/rbA910"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A910"
+            android:textSize="@dimen/_12ssp"
+            style="@style/mostserrat_bold"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvSelectTransactionType"
+        style="@style/mostserrat_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:text="@string/select_transaction_type"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgSelectDevice" />
+    <RadioGroup
+        android:id="@+id/rgSelectTxnType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tvSelectTransactionType"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rbCw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cash Withdrawal"
+            android:checked="true"
+            android:textSize="@dimen/_12ssp"
+            style="@style/mostserrat_bold"/>
+        <RadioButton
+            android:id="@+id/rbBe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance Enquiry"
+            android:textSize="@dimen/_12ssp"
+            style="@style/mostserrat_bold"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvEnterMobile"
+        style="@style/mostserrat_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:text="Enter Customer Mobile"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgSelectTxnType" />
+    <EditText
+        android:id="@+id/edtMobile"
+        style="@style/mostserrat_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:background="@drawable/edit_text_round_bg_outline_padding"
+        android:hint="@string/enter_customer_mobile"
+        android:inputType="number"
+        android:maxLength="10"
+        android:textSize="@dimen/_14ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEnterMobile"
+        tools:ignore="Autofill,VisualLintTextFieldSize" />
+    <TextView
+        android:id="@+id/tvEnterAmount"
+        style="@style/mostserrat_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:text="Enter Amount to Withdrawal"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtMobile" />
+    <EditText
+        android:id="@+id/edtAmount"
+        style="@style/mostserrat_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:background="@drawable/edit_text_round_bg_outline_padding"
+        android:hint="@string/enter_amount"
+        android:inputType="number"
+        android:maxLength="5"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEnterAmount"
+        tools:ignore="Autofill,VisualLintTextFieldSize" />
+    <CheckBox
+        android:id="@+id/chkSkipReceipt"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_25sdp"
+        app:layout_constraintTop_toBottomOf="@+id/edtAmount"
+        android:layout_marginStart="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/do_you_want_to_skip_transaction_receipt"
+        style="@style/mostserrat_bold"
+        android:checked="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginTop="@dimen/_8sdp"/>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        style="@style/mostserrat_bold"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:background="@drawable/submitt_btn"
+        android:text="@string/proceed"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chkSkipReceipt"
+        tools:ignore="TextContrastCheck,VisualLintButtonSize,VisualLintBounds" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

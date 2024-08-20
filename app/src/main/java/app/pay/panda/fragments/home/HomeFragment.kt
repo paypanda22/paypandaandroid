@@ -33,6 +33,7 @@ import app.pay.panda.activity.IntroActivity
 import app.pay.panda.activity.QrCollectionActivity
 import app.pay.panda.activity.RechargeActivity
 import app.pay.panda.databinding.FragmentHomeBinding
+import app.pay.panda.dialog.DialogOK
 import app.pay.panda.fragments.login.RegisterFragment.UserTypeAdapter
 import app.pay.panda.fragments.reports.WalletRequestListFragment
 import app.pay.panda.helperclasses.Category

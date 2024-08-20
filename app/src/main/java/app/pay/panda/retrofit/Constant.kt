@@ -61,4 +61,6 @@ object Constant {
     const val SPONSOR_MOBILE_VISIBLE = "sponsor_mobile_visible"
     const val REFERAL_VISIBLE = "referal_visible"
     const val USER_TYPE_NAME = "user_type_name"
+    const val AES_KEY="d31f454d72ca36e9c645c7ef2b29face23c6413a558dbef00a18fc2a58e4f8db"
+    const val AES_IV="6bdf806c2ead6f3983e2042418434426"
 }

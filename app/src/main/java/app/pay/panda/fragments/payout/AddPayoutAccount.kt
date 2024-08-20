@@ -17,12 +17,15 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import app.pay.panda.BaseBottomFragment
 import app.pay.panda.activity.DashBoardActivity
+import app.pay.panda.activity.IntroActivity
 import app.pay.panda.activity.PayoutActivity
 import app.pay.panda.adapters.DmtBankAdapter
 import app.pay.panda.databinding.DialogCustomlotiFileBinding
 import app.pay.panda.dialog.DialogOK
 import app.pay.panda.helperclasses.ActivityExtensions
+import app.pay.panda.helperclasses.AesEncrypt
 import app.pay.panda.helperclasses.CustomProgressBar
 import app.pay.panda.helperclasses.ShowDialog
 import app.pay.panda.helperclasses.UserSession
@@ -43,87 +46,116 @@ class AddPayoutAccount : BaseFragment<FragmentAddPayoutAccountBinding>(FragmentA
     private lateinit var myActivity: FragmentActivity
     private var bankList = ArrayList<Data>()
     private var bankID = ""
-    private var bankVerified=false
+    private var bankVerified = false
     private var tvValidateBeneficiaryName = false
     override fun init() {
-        //   nullActivityCheck()
+        nullActivityCheck()
         userSession = UserSession(requireContext())
 
     }
-    private fun showCustomDialog() {
-        val dialog = Dialog(requireContext(), R.style.FullScreenDialogStyle)
-        val dbinding = DialogCustomlotiFileBinding.inflate(layoutInflater)
-        dialog.setContentView(dbinding.root)
 
-        // Set the dialog properties
-        dialog.setCancelable(false) // User cannot dismiss the dialog
-        dbinding.notifyButton.setOnClickListener {
-
-            Toast.makeText(requireContext(), "You will be notified", Toast.LENGTH_SHORT).show()
-            handleBackPressCustom()
+    private fun nullActivityCheck() {
+        if (activity != null) {
+            myActivity = activity as FragmentActivity
+        } else {
+            startActivity(Intent(context, IntroActivity::class.java))
         }
-        // Optionally, dismiss the dialog
-        dialog.dismiss()
-        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+    }
 
-        dialog.show()
-    }
-     fun handleBackPressCustom(): Boolean {
-        startActivity(Intent(requireContext(), DashBoardActivity::class.java))
-        requireActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
-        return true
-    }
+    //    private fun showCustomDialog() {
+//        val dialog = Dialog(requireContext(), R.style.FullScreenDialogStyle)
+//        val dbinding = DialogCustomlotiFileBinding.inflate(layoutInflater)
+//        dialog.setContentView(dbinding.root)
+//
+//        // Set the dialog properties
+//        dialog.setCancelable(false) // User cannot dismiss the dialog
+//        dbinding.notifyButton.setOnClickListener {
+//
+//            Toast.makeText(requireContext(), "You will be notified", Toast.LENGTH_SHORT).show()
+//            handleBackPressCustom()
+//        }
+//        // Optionally, dismiss the dialog
+//        dialog.dismiss()
+//        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+//
+//        dialog.show()
+//    }
+//     fun handleBackPressCustom(): Boolean {
+//        startActivity(Intent(requireContext(), DashBoardActivity::class.java))
+//        requireActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+//        return true
+//    }
     override fun addListeners() {
-        showCustomDialog()
-      /*  val showDialog = DialogOK(requireContext())
-        showDialog.showForceDialog(
-            requireContext(),
-            "Coming Soon","",
-            lottieResId = R.raw.celebration,
-            lottieWidth = 200,
-            lottieHeight = 200
-        )*/
+        //showCustomDialog()
+        /*  val showDialog = DialogOK(requireContext())
+          showDialog.showForceDialog(
+              requireContext(),
+              "Coming Soon","",
+              lottieResId = R.raw.celebration,
+              lottieWidth = 200,
+              lottieHeight = 200
+          )*/
 
-       /* binding.tvValidateBeneficiaryName.setOnClickListener {
-            if (bankID.isBlank()){
-                binding.edtBankName.error="Select Bank Name"
-            }else if (binding.edtAccountNumber.text.toString().isEmpty()){
-                binding.edtAccountNumber.error="Provide a Valid bank Account"
-            }else if (!ActivityExtensions.isValidIfsc(binding.edtIfsc.text.toString())){
-                binding.edtIfsc.error="Enter a Valid Ifsc Code"
-            }else{
+        binding.tvValidateBeneficiaryName.setOnClickListener {
+            if (bankID.isBlank()) {
+                binding.edtBankName.error = "Select Bank Name"
+            } else if (binding.edtAccountNumber.text.toString().isEmpty()) {
+                binding.edtAccountNumber.error = "Provide a Valid bank Account"
+            } else if (!ActivityExtensions.isValidIfsc(binding.edtIfsc.text.toString())) {
+                binding.edtIfsc.error = "Enter a Valid Ifsc Code"
+            } else {
                 verifyBankName()
             }
         }
         binding.btnAddBeneficiary.setOnClickListener {
-            if (binding.edtName.text.toString().isEmpty()){
-                binding.edtName.error="Enter a Account Holder Name"
-            }else if (binding.edtBankName.text.toString().isEmpty()){
-                showToast(requireContext(),"Select Bank Name")
-            }else if (!ActivityExtensions.isValidIfsc(binding.edtIfsc.text.toString())){
-                binding.edtIfsc.error="Enter a Valid IFSC"
-            }else if (binding.edtAccountNumber.text.toString().isEmpty()){
-                binding.edtAccountNumber.error="Enter Account Number"
-            }else if (!bankVerified){
-                Toast.makeText(requireContext(),"Please Verify bank Account First",Toast.LENGTH_SHORT).show()
-            } else{
+            if (binding.edtName.text.toString().isEmpty()) {
+                binding.edtName.error = "Enter a Account Holder Name"
+            } else if (binding.edtBankName.text.toString().isEmpty()) {
+                showToast(requireContext(), "Select Bank Name")
+            } else if (!ActivityExtensions.isValidIfsc(binding.edtIfsc.text.toString())) {
+                binding.edtIfsc.error = "Enter a Valid IFSC"
+            } else if (binding.edtAccountNumber.text.toString().isEmpty()) {
+                binding.edtAccountNumber.error = "Enter Account Number"
+            } else if (!bankVerified) {
+                Toast.makeText(requireContext(), "Please Verify bank Account First", Toast.LENGTH_SHORT).show()
+            }
+            else {
                 addBankDetails()
             }
         }
-    binding.ivCancel.setOnClickListener {
-        findNavController().popBackStack()
-    }
+
 
         binding.edtBankName.setOnClickListener {
             addbank()
         }
     }
-private fun addbank(){
-    UtilMethods.dmtBankList(requireContext(), object : MCallBackResponse {
-        override fun success(from: String, message: String) {
-            val response: DMTBankListResponse =
-                Gson().fromJson(message, DMTBankListResponse::class.java)
-            if (response.data.isEmpty()) {
+
+    private fun addbank() {
+        UtilMethods.dmtBankList(requireContext(), object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: DMTBankListResponse =
+                    Gson().fromJson(message, DMTBankListResponse::class.java)
+                if (response.data.isEmpty()) {
+                    ShowDialog.showDialog(
+                        requireActivity(),
+                        "Unable to Fetch bank List",
+                        from,
+                        "error",
+                        object : MyClick {
+                            override fun onClick() {
+                                findNavController().popBackStack()
+                            }
+                        })
+                } else {
+                    if (bankList.isNotEmpty()) {
+                        bankList.clear()
+                    }
+                    bankList.addAll(response.data)
+                    openBankListDialog()
+                }
+            }
+
+            override fun fail(from: String) {
                 ShowDialog.showDialog(
                     requireActivity(),
                     "Unable to Fetch bank List",
@@ -134,52 +166,32 @@ private fun addbank(){
                             findNavController().popBackStack()
                         }
                     })
-            } else {
-                if (bankList.isNotEmpty()) {
-                    bankList.clear()
-                }
-                bankList.addAll(response.data)
-                openBankListDialog()
             }
-        }
+        })
 
-        override fun fail(from: String) {
-            ShowDialog.showDialog(
-                requireActivity(),
-                "Unable to Fetch bank List",
-                from,
-                "error",
-                object : MyClick {
-                    override fun onClick() {
-                        findNavController().popBackStack()
-                    }
-                })
-        }
-    })
-*/
-}
-   /* private fun verifyBankName() {
-        val token=userSession.getData(Constant.USER_TOKEN).toString()
+    }
 
-        val requestData= hashMapOf<String,Any>()
-        requestData["name"]=binding.edtName.text.toString()
-        requestData["ifsc"]=binding.edtIfsc.text.toString()
-        requestData["phone"]=binding.edtAccountNumber.text.toString()
-        requestData["remarks"]=""
-        requestData["bankAccount"]=binding.edtAccountNumber.text.toString()
-        requestData["user_id"]=token
-        UtilMethods.verifyBankAccount(requireContext(),requestData,object:MCallBackResponse{
+    private fun verifyBankName() {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+        val requestData = hashMapOf<String, Any>()
+        requestData["name"] = binding.edtName.text.toString()
+        requestData["ifsc"] = binding.edtIfsc.text.toString()
+        requestData["phone"] = binding.edtAccountNumber.text.toString()
+        requestData["remarks"] = "Payout Bank Validation"
+        requestData["bankAccount"] = binding.edtAccountNumber.text.toString()
+        requestData["user_id"] = token
+        UtilMethods.verifyBankAccount(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                val response: VerifyBankResponse =Gson().fromJson(message, VerifyBankResponse::class.java)
-                bankVerified=true
-                binding.tvValidateBeneficiaryName.visibility= GONE
-               // binding.edtName.setText(response.data.data.nameAtBank)
-                Toast.makeText(requireContext(),"Bank Verified Successfully",Toast.LENGTH_SHORT).show()
+                val response: VerifyBankResponse = Gson().fromJson(message, VerifyBankResponse::class.java)
+                bankVerified = true
+                binding.tvValidateBeneficiaryName.visibility = GONE
+                // binding.edtName.setText(response.data.data.nameAtBank)
+                Toast.makeText(requireContext(), "Bank Verified Successfully", Toast.LENGTH_SHORT).show()
             }
 
             override fun fail(from: String) {
-                bankVerified=false
-                Toast.makeText(requireContext(),"Unable to Verify Bank Details",Toast.LENGTH_SHORT).show()
+                bankVerified = false
+                Toast.makeText(requireContext(), "Unable to Verify Bank Details", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -207,7 +219,7 @@ private fun addbank(){
                 pos: Int
             ) {
                 binding.edtBankName.setText(model[pos].bank_name)
-                bankID = model[pos].bankID
+                bankID = model[pos]._id
                 alertDialog.dismiss()
             }
         }
@@ -230,19 +242,18 @@ private fun addbank(){
     private fun addBankDetails() {
         val requestData = hashMapOf<String, Any>()
         val token = userSession.getData(Constant.USER_TOKEN).toString()
-        //   val phone=userSession.getData(Constant.MOBILE).toString()
-
         requestData["name"] = binding.edtName.text.toString()
         requestData["ifsc"] = binding.edtIfsc.text.toString()
-        requestData["phone"] = binding.edtMobile.text.toString()
-     *//*   requestData["bank_id"] = bankID*//*
-        requestData["bankAccount"] = binding.edtAccountNumber.text.toString()
-        requestData["user_id"] = token
-        val progressBar = CustomProgressBar()
-        UtilMethods.savePayoutDetails(requireContext(), requestData, object : MCallBackResponse {
-
+        requestData["mobile_number"] = binding.edtMobile.text.toString()
+        requestData["bankId"] = bankID
+        requestData["account_number"] = binding.edtAccountNumber.text.toString()
+        requestData["confirm_account_number"] = binding.edtAccountNumber.text.toString()
+        requestData["bank_proof"] ="ic_launcher_round.jpg.png"
+        requestData["bank_name"] =binding.edtBankName.text.toString()
+        requestData["isVerified"] =bankVerified
+        val encodedData=AesEncrypt.encodeObj(requestData)
+        UtilMethods.savePayoutDetails(requireContext(), token,encodedData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                progressBar.hideProgress()
                 userSession.setBoolData(Constant.ISBANK, true)
                 userSession.setIntData(Constant.LOGIN_STEPS, 4)
                 ShowDialog.bottomDialogSingleButton(myActivity,
@@ -267,10 +278,11 @@ private fun addbank(){
                         }
                     })
             }
-        })*/
-    //}
+        })
+    }
+
     override fun setData() {
-        // Set data to views
+
     }
 
 }

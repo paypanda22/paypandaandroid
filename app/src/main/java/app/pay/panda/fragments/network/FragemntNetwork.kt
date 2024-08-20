@@ -1,5 +1,8 @@
 package app.pay.panda.fragments.network
 
+
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import TransferMoneyDialogFragment
 import android.content.Intent
 import android.os.Bundle

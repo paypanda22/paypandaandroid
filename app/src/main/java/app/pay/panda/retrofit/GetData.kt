@@ -7,6 +7,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -339,6 +340,15 @@ interface GetData {
                 (@Query("service_id") serviceId: String
     ): Call<JsonObject>
 
+    @POST("api/mAtm/iServeU/mAtmSdkInitiate")
+    fun mAtmInitiate(@Body obj:Any):Call<JsonObject>
+
+    @GET("/api/user/referTo")
+    fun getNetwork(
+     @Query("page") page:String,
+     @Query("count") count:String,
+     @Query("id") id:String): Call<JsonObject>
+
     @GET("api/bbps_txn/invoice/{id}")
     fun getTxnByUtilityId(@Path("id") id: String): Call<JsonObject>
 
@@ -407,6 +417,20 @@ interface GetData {
 
     @GET("api/auth/recipientDelete")
     fun recipientDelete(@Body obj: Any): Call<JsonObject>
+
+
+
+
+
+
+    @DELETE("api/payout/bank/{accountID}")
+    fun deletePayoutAccount(@Path("accountID") accountID:String):Call<JsonObject>
+
+    @POST("api/payout/doTransaction")
+    fun doPayoutTransaction(@Body obj:Any):Call<JsonObject>
+
+
+
 
 
 
