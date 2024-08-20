@@ -1,14 +1,17 @@
 package app.pay.panda.helperclasses
 import android.util.Base64
+import android.util.Log
+import app.pay.panda.retrofit.Constant
 import com.google.gson.Gson
 import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec
 import javax.crypto.spec.IvParameterSpec
 
 object AesEncrypt {
-    fun encryptObject(obj: Any, key: String, iv: String): String? {
+    private fun encryptObject(obj: Any, key: String, iv: String): String? {
         try {
             val serializedObject = Gson().toJson(obj) // Assuming obj has a proper toJson method
+            Log.e("TAG", "encryptObject: => $serializedObject" )
             val keyBytes = hexStringToByteArray(key)
             val ivBytes = hexStringToByteArray(iv)
 
@@ -67,6 +70,13 @@ object AesEncrypt {
             data[i] = ((Character.digit(hexString[i * 2], 16) shl 4) + Character.digit(hexString[i * 2 + 1], 16)).toByte()
         }
         return data
+    }
+
+    fun encodeObj(obj:Any):Any{
+        val dataStr= encryptObject(obj, Constant.AES_KEY,Constant.AES_IV)
+        val encodeObj= hashMapOf<String,Any?>()
+        encodeObj["encode"]=dataStr
+        return encodeObj
     }
 
 

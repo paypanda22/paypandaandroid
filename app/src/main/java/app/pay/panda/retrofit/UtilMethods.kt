@@ -3236,13 +3236,13 @@ object UtilMethods {
         }
     }
 
-    fun savePayoutDetails(context: Context, obj: Any, callBackResponse: MCallBackResponse) {
+    fun savePayoutDetails(context: Context,token:String, obj: Any, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             val progressBar = CustomProgressBar()
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstance().create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .savePayoutDetails(obj).execute()
                     withContext(Dispatchers.Main) {
                         progressBar.hideProgress()
@@ -3309,13 +3309,45 @@ object UtilMethods {
     }
 
 
-    fun getNetwork(context: Context,token: String, callBackResponse: MCallBackResponse) {
+    fun deletePayoutAccount(context: Context,token: String,accountID:String, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            val progressBar = CustomProgressBar()
+            progressBar.showProgress(context)
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .deletePayoutAccount(accountID).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            progressBar.hideProgress()
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+                            progressBar.hideProgress()
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+                    progressBar.hideProgress()
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun getNetwork(context: Context,token: String,page:String,count:String,id:String="", callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
                         .create(GetData::class.java)
-                        .getNetwork().execute()
+                        .getNetwork(page,count,id).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
                             val responseBody = response.body() as JsonObject
@@ -3327,6 +3359,38 @@ object UtilMethods {
                     }
                 } catch (e: Exception) {
 
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun doPayoutTransaction(context: Context,token: String,obj:Any,callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            val progressBar = CustomProgressBar()
+            progressBar.showProgress(context)
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .doPayoutTransaction(obj).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            progressBar.hideProgress()
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+                            progressBar.hideProgress()
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+                    progressBar.hideProgress()
                     withContext(Dispatchers.Main) {
                         e.printStackTrace()
                         callBackResponse.fail("Request Failed.API ERROR")

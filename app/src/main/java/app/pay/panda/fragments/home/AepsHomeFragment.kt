@@ -41,14 +41,7 @@ class AepsHomeFragment : BaseFragment<FragmentAepsHomeBinding>(FragmentAepsHomeB
         nullActivityCheck()
         userSession = UserSession(requireContext())
         wallet= AepsWalletActions(myActivity,userSession)
-//        val request= hashMapOf<String,Any?>()
-//        request["name"]="Saurabh"
-//        request["Mobile"]="9807544556"
-//        val encrypt=AesEncrypt.encryptObject(request,"d31f454d72ca36e9c645c7ef2b29face23c6413a558dbef00a18fc2a58e4f8db","6bdf806c2ead6f3983e2042418434426")
-//        Log.e("ENCRYPT", "init:=>$encrypt", )
 
-//        val decrypt=AesEncrypt.decryptObject(encrypt.toString(),"d31f454d72ca36e9c645c7ef2b29face23c6413a558dbef00a18fc2a58e4f8db","6bdf806c2ead6f3983e2042418434426")
-//        Log.e("Decrypt", "init:=>$decrypt " )
 
     }
 
@@ -81,7 +74,7 @@ class AepsHomeFragment : BaseFragment<FragmentAepsHomeBinding>(FragmentAepsHomeB
             startActivity(Intent(activity,PayoutActivity::class.java))
         }
         binding.rlToWallet.setOnClickListener {
-            wallet.openTransferToWalletDialog()
+            wallet.openTransferToWalletDialog("wallet")
         }
 
 

@@ -55,4 +55,6 @@ object Constant {
     const val SCANNER_IMAGE="scanner_image"
     const val NOTIFICATION_COUNT="notification_count"
     const val RUPEE="\u20B9"
+    const val AES_KEY="d31f454d72ca36e9c645c7ef2b29face23c6413a558dbef00a18fc2a58e4f8db"
+    const val AES_IV="6bdf806c2ead6f3983e2042418434426"
 }

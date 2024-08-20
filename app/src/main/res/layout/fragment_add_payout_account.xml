@@ -4,51 +4,46 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ImageView
-        android:id="@+id/ivCancel"
-        android:layout_width="@dimen/_35sdp"
-        android:layout_height="@dimen/_35sdp"
-        android:src="@drawable/cancel_3"
-        android:layout_marginVertical="@dimen/_5sdp"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/cancelDialog" />
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/back"
+            android:src="@drawable/left"
+            app:tint="@color/white" />
+
+        <TextView
+            style="@style/mostserrat_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="Add Payout Bank Account"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+
+    </RelativeLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivCancel"
+        android:layout_below="@+id/topPanel"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/curved_background_with_shadow"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_20sdp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Add Bank"
-                    style="@style/mostserrat_bold"
-                    android:textAllCaps="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold"
-                    tools:ignore="TextSizeCheck" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginVertical="@dimen/_5sdp"
-                android:background="@color/bggrey_dark" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/EditTextInput2"
@@ -56,7 +51,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtName"
                     android:layout_width="match_parent"
-                    android:hint="Enter Your Name"
+                    android:hint="@string/enter_account_holder_name"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:maxLines="1" />
@@ -71,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:hint="@string/enter_your_mobile_number"
+                    android:hint="@string/enter_mobile_number"
                     android:maxLength="10"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>

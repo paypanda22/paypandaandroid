@@ -43,7 +43,6 @@
             android:src="@drawable/ic_plus"
             app:tint="@color/white" />
     </RelativeLayout>
-
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imageView"
         android:layout_width="@dimen/_75sdp"
