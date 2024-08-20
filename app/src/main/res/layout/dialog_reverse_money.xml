@@ -77,7 +77,7 @@
         android:textColor="@android:color/black"
         android:textStyle="bold"
         android:gravity="center"
-        android:inputType="number"
+        android:inputType="numberPassword"
         android:layout_gravity="center"
         android:shadowColor="@android:color/darker_gray"
         android:shadowDx="2"

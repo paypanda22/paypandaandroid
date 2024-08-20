@@ -35,6 +35,7 @@ import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.MyClick
 import app.pay.panda.responsemodels.dmtBankList.DMTBankListResponse
 import app.pay.panda.responsemodels.dmtBankList.Data
+import app.pay.panda.responsemodels.verifyBankName.VerifyBankResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.android.material.textfield.TextInputEditText

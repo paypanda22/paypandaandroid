@@ -138,7 +138,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 } else if (binding.edtPassword.text.toString().isEmpty()) {
                     binding.edtPassword.error = "Enter Password"
                     binding.edtPassword.setPaddingRelative(0, 0, 48.dpToPx(), 0)
-                } else {
+                }else if(binding.tv1.isChecked == false) {
+                    Toast.makeText(requireContext(), "Please Apply Terms and Conditions", Toast.LENGTH_SHORT).show()
+                }else {
                     checkPasswordMobile("phone", "+91" + binding.edtMobile.text.toString())
                 }
             } else {

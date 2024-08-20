@@ -220,6 +220,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 binding.edtName.error = "Enter Name"
             } else if (stateID.isEmpty()) {
                 showToast(requireContext(), "Select State First")
+            }else if(binding.tv1.isChecked==false){
+                Toast.makeText(myActivity, "Please Apply Terms and Conditions", Toast.LENGTH_SHORT).show()
             } else {
                 if (binding.chkNoreferal.isChecked) {
                     reqRegister()

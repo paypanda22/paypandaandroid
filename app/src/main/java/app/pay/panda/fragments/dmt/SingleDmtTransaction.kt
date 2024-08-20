@@ -65,10 +65,12 @@ class SingleDmtTransaction : BaseBottomFragment<FragmentSingleDmtTransactionBind
                     binding.tvShopName.text=response.data.invoice[0].shop_name.toString()
                     binding.tvBankName.text=response.data.invoice[0].bank_name.toString()
                     binding.tvCustomerName.text=response.data.invoice[0].customer_name
+                    binding.tvCustomerMobile.text=response.data.invoice[0].mobile_number
                     binding.tvBeneName.text=response.data.invoice[0].beneficiary_name
                     binding.tvAccountNumber.text=response.data.invoice[0].account_number
                     binding.tvAmount.text=response.data.invoice[0].totalAmount.toString()
                     binding.tvServiceCharge.text=response.data.invoice[0].charge.toString()
+                    binding.senderMobNo.text=response.data.invoice[0].customer_mobile.toString()
                     binding.tvTxnId.text="Batch No. : "+response.data.invoice[0].batchId.toString()
                     binding.reqTime.text=response.data.invoice[0].createdAt.toString()
                     if (list.isNotEmpty()){

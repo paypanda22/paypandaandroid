@@ -216,7 +216,6 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
             override fun success(from: String, message: String) {
                 val response: DmtTxnEnqResponse = Gson().fromJson(message, DmtTxnEnqResponse::class.java)
                 getTransactionList(start_date, end_date, count)
-            }
                // getTransactionList(start_date, end_date, count);
                 if (!response.error) {
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()

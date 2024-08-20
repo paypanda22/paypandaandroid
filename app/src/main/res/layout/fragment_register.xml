@@ -239,8 +239,9 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:gravity="center">
 
-                    <TextView
+                    <CheckBox
                         android:id="@+id/tv1"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/terms_and_conditions"
@@ -252,6 +253,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_2sdp"
                         android:layout_toEndOf="@id/tv1"
+                        android:layout_marginTop="@dimen/_6sdp"
                         android:text="@string/terms_conditions"
                         android:textColor="@color/blue_900"
                         android:textSize="@dimen/_8ssp"
@@ -264,6 +266,7 @@
                         android:layout_marginStart="@dimen/_2sdp"
                         android:layout_toEndOf="@id/tv2"
                         android:text="@string/and"
+                        android:layout_marginTop="@dimen/_6sdp"
                         android:textSize="@dimen/_8ssp" />
 
                     <TextView
@@ -275,6 +278,7 @@
                         android:text="@string/privacy_policy"
                         android:textColor="@color/blue_900"
                         android:textSize="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_6sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
