@@ -18,7 +18,7 @@ object Constant {
     const val MOBILE = "user_mobile"
     const val BUSINESS_NAME = "business_name"
     const val PROFILE_PIC = "user_profile"
-    const val USER_TYPE = "user_type"
+
     const val USER_TYPE_ID = "user_type_id"
     const val USER_ID = "userID"
     const val SHOP_NAME = "shop_name"
@@ -33,7 +33,7 @@ object Constant {
     const val ADHAAR_VERIFIED = "adhaarVerified"
     const val PAN_VERIFIED = "panVerified"
     const val IDENTITY_VERIFIED = "isIdentity_verified"
-    const val IS_GST = "is_gst"
+    const val IS_GST = "is_gstis_gst"
     const val GST_AVAILABLE = "isGstAvailable"
     const val PAN_NAME = "pan_name"
     const val PAN_NUMBER = "pan_number"
@@ -55,6 +55,12 @@ object Constant {
     const val SCANNER_IMAGE="scanner_image"
     const val NOTIFICATION_COUNT="notification_count"
     const val RUPEE="\u20B9"
+
+    const val ID="ID"
+    const val USERTYPE = "user_type"
+    const val SPONSOR_MOBILE_VISIBLE = "sponsor_mobile_visible"
+    const val REFERAL_VISIBLE = "referal_visible"
+    const val USER_TYPE_NAME = "user_type_name"
     const val AES_KEY="d31f454d72ca36e9c645c7ef2b29face23c6413a558dbef00a18fc2a58e4f8db"
     const val AES_IV="6bdf806c2ead6f3983e2042418434426"
 }

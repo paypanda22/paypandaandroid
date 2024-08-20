@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.compose.foundation.layout.Arrangement
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +34,7 @@ class PackageListAdapter(
         val rvServices: RecyclerView = itemView.findViewById(R.id.rvServices)
         val tvMore: TextView = itemView.findViewById(R.id.tvMore)
         val tvLess: TextView = itemView.findViewById(R.id.tvLess)
+        val commission: ImageView = itemView.findViewById(R.id.commission)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -64,6 +66,11 @@ class PackageListAdapter(
             }
 
         }
+        if(list[position].isPaid==true){
+            holder.tvBuyNow.visibility= VISIBLE
+        }else{
+            holder.tvBuyNow.visibility= GONE
+        }
 
         if (list[position].services.isNotEmpty()) {
             val servicesAdapter = PackageServicesAdapter(activity, list[position].services)
@@ -73,6 +80,9 @@ class PackageListAdapter(
 
         holder.tvBuyNow.setOnClickListener {
             click.onItemClicked(holder,list,position)
+        }
+        holder.commission.setOnClickListener{
+            click.onItemClickedDetail(holder,list,position)
         }
     }
 

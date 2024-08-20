@@ -57,7 +57,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+
+                    android:background="@drawable/edit_bold_background"
                     android:textAllCaps="true"
+
                     style="@style/mostserrat_bold"
                     android:layout_alignParentEnd="true"
                     android:textSize="@dimen/_10ssp"
@@ -97,7 +100,7 @@
             style="@style/mostserrat_bold"
             android:textColor="@color/black"
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/_15ssp"
+            android:textSize="@dimen/_13ssp"
             android:gravity="center|center_vertical"
             android:layout_weight="2"/>
     </LinearLayout>

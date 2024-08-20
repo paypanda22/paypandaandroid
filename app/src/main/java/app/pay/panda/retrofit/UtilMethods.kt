@@ -373,13 +373,7 @@ object UtilMethods {
                         if (response.isSuccessful && response.body() != null) {
                             val responseBody = response.body() as JsonObject
                             if (responseBody.has("error")) {
-                                val status = responseBody.get("error").asBoolean
-                                if (status) {
-                                    val message = responseBody.get("message").asString
-                                    callBackResponse.fail(message)
-                                } else {
-                                    callBackResponse.success("strresponse", responseBody.toString())
-                                }
+                                callBackResponse.success("strresponse", responseBody.toString())
                             } else {
                                 val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
@@ -3309,6 +3303,341 @@ object UtilMethods {
     }
 
 
+    fun getNetwork(context: Context,token: String, page:String,count:String, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .getNetwork(page,count).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun getNetworkRetailer(context: Context,token: String, page:String,count:String, id:String, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .getNetworkRetailer(page,count,id).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun viewReport(context: Context,token: String, page:String,count:String, to:String, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .viewReport(page,count,to).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun moneyTreansfer(context: Context,token: String,obj: Any, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .moneyTreansfer(obj).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun otpVarify(context: Context,token: String,obj: Any, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .otpVarify(obj).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+ fun earningReport(context: Context,obj: Any, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstance()
+                        .create(GetData::class.java)
+                        .earningReport(obj).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun distributerDashboard(context: Context,token: String,date: Any, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .distributerDashboard(date.toString()).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun getUserDetail(context: Context,token: String, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .getUserDetail().execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun resendOTP(context: Context, obj: Any,token: String,  callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            val progressBar = CustomProgressBar()
+            progressBar.showProgress(context)
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
+                        .resendOTP(obj).execute()
+                    withContext(Dispatchers.Main) {
+                        progressBar.hideProgress()
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            if (responseBody.has("error")) {
+                                val status = responseBody.get("error").asBoolean
+                                if (status) {
+                                    val message = responseBody.get("message").asString
+                                    callBackResponse.fail(message)
+                                } else {
+                                    callBackResponse.success("strresponse", responseBody.toString())
+                                }
+                            } else {
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
+                                callBackResponse.fail(message)
+                            }
+
+                        } else {
+                            progressBar.hideProgress()
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+                    progressBar.hideProgress()
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun paymentRequestToUser(context: Context,token: String,obj: Any, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .paymentRequestToUser(obj).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun resendOtpForTPin(context: Context,token: String, callBackResponse: MCallBackResponse) {
+    if (isNetworkAvailable(context)) {
+        val progressBar = CustomProgressBar()
+        progressBar.showProgress(context)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                    .create(GetData::class.java)
+                    .resendOtpForTPin().execute()
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful && response.body() != null) {
+                        progressBar.hideProgress()
+                        val responseBody = response.body() as JsonObject
+                        callBackResponse.success("strresponse", responseBody.toString())
+                    } else {
+                        progressBar.hideProgress()
+                        callBackResponse.fail("Request Failed.Response Body Null")
+                    }
+                }
+            } catch (e: Exception) {
+                progressBar.hideProgress()
+                withContext(Dispatchers.Main) {
+                    e.printStackTrace()
+                    callBackResponse.fail("Request Failed.API ERROR")
+                }
+            }
+        }
+    } else {
+        Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+    }
+}
     fun deletePayoutAccount(context: Context,token: String,accountID:String, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             val progressBar = CustomProgressBar()
@@ -3381,16 +3710,15 @@ object UtilMethods {
                         .doPayoutTransaction(obj).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
-                            progressBar.hideProgress()
                             val responseBody = response.body() as JsonObject
                             callBackResponse.success("strresponse", responseBody.toString())
                         } else {
-                            progressBar.hideProgress()
+
                             callBackResponse.fail("Request Failed.Response Body Null")
                         }
                     }
                 } catch (e: Exception) {
-                    progressBar.hideProgress()
+
                     withContext(Dispatchers.Main) {
                         e.printStackTrace()
                         callBackResponse.fail("Request Failed.API ERROR")
@@ -3398,6 +3726,132 @@ object UtilMethods {
                 }
             }
         } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun paymentRequestToAdmin(context: Context,token: String,obj: Any, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .paymentRequestToAdmin(obj).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun packageDatails(context: Context, id:String,token: String, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
+                        .packageDatails(id).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun bbpsServices(context: Context,
+                     token: String,
+                     package_id: String,
+                     service_id: String,
+                     page: String,
+                     count: String,
+        callBackResponse: MCallBackResponse
+    ) {
+        if (isNetworkAvailable(context)) {
+//            val progressBar = CustomProgressBar()
+//            progressBar.showProgress(context)
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
+                        .bbpsServices(package_id, service_id, page, count).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            // progressBar.hideProgress()
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+                            // progressBar.hideProgress()
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+                    // progressBar.hideProgress()
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun recipientDelete(context: Context,token: String,obj: Any, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+
+
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
+                        .create(GetData::class.java)
+                        .recipientDelete(obj).execute()
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful && response.body() != null) {
+                            // progressBar.hideProgress()
+                            val responseBody = response.body() as JsonObject
+                            callBackResponse.success("strresponse", responseBody.toString())
+                        } else {
+                            // progressBar.hideProgress()
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+                    // progressBar.hideProgress()
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        }
+        else {
             Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
         }
     }

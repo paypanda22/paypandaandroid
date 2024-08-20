@@ -67,7 +67,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_bank_account_added"
+            android:text="No Record Found"
             android:textSize="@dimen/_12ssp"
             android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center"

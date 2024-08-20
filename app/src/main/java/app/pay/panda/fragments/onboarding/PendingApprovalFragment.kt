@@ -29,7 +29,7 @@ class PendingApprovalFragment : BaseFragment<FragmentPendingApprovalBinding>(Fra
     }
 
     override fun addListeners() {
-        binding.ivBack.setOnClickListener{
+    /*    binding.ivBack.setOnClickListener{
             val builder = AlertDialog.Builder(requireContext())
             builder.setMessage("Are You Sure You Want to Exit?")
                 .setTitle("Exit !")
@@ -39,7 +39,7 @@ class PendingApprovalFragment : BaseFragment<FragmentPendingApprovalBinding>(Fra
                 .setPositiveButton("Exit") { dialog, which ->
                     activity?.finishAffinity()
                 }.show()
-        }
+        }*/
         binding.btnSubmit.setOnClickListener{
             val builder = AlertDialog.Builder(requireContext())
             builder.setMessage("Are You Sure You Want to Exit?")

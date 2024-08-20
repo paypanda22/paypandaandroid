@@ -146,6 +146,14 @@
                 android:text="@string/_200"
                 android:textSize="@dimen/_12ssp"
                 />
+            <RadioButton
+                android:id="@+id/more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/mostserrat_bold"
+                android:text="All"
+                android:textSize="@dimen/_12ssp"
+                />
 
         </RadioGroup>
 

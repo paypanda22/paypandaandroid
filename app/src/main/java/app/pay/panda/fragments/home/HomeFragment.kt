@@ -1,12 +1,26 @@
 package app.pay.panda.fragments.home
 
+import CustomTypefaceSpan
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.view.Gravity
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.AutoCompleteTextView
+import android.widget.PopupMenu
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import app.pay.panda.BaseFragment
+import app.pay.panda.PaymentRequestDialogFragment
 import app.pay.panda.R
 import app.pay.panda.activity.ActivationPackages
 import app.pay.panda.activity.AepsAllActions
@@ -20,6 +34,8 @@ import app.pay.panda.activity.QrCollectionActivity
 import app.pay.panda.activity.RechargeActivity
 import app.pay.panda.databinding.FragmentHomeBinding
 import app.pay.panda.dialog.DialogOK
+import app.pay.panda.fragments.login.RegisterFragment.UserTypeAdapter
+import app.pay.panda.fragments.reports.WalletRequestListFragment
 import app.pay.panda.helperclasses.Category
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.MyGlide
@@ -29,7 +45,10 @@ import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.MyClick
 import app.pay.panda.mAtm.MyAtmActivity
+import app.pay.panda.responsemodels.distributerDashobord.DashboardResponse
 import app.pay.panda.responsemodels.serviceStatus.CheckServiceStatusResponse
+import app.pay.panda.responsemodels.userid.UserIDResponse
+import app.pay.panda.responsemodels.usertype.UserTypeResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.gson.Gson
@@ -39,11 +58,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private lateinit var userSession: UserSession
     private lateinit var myActivity:FragmentActivity
     private lateinit var resetTPIN: ResetTPIN
+
     override fun init() {
+
+
         nullActivityCheck()
+
         userSession = UserSession(requireContext())
         resetTPIN=ResetTPIN(myActivity,userSession)
         resetTPIN.resetTPin()
+        val userType = userSession.getData(Constant.USER_TYPE_NAME)
+
+        if (userType.equals("Super Distributor") || userType.equals("Distributor")) {
+      binding.llAepsWallet.visibility=View.GONE
+      binding.retailerDashboard.visibility=View.GONE
+      binding.distributerDashboard.visibility=View.VISIBLE
+
+        }else{
+            binding.retailerDashboard.visibility=View.VISIBLE
+            binding.distributerDashboard.visibility=View.GONE
+        }
+        distributerDashboard("3-8-2024")
+        val name = userSession.getData(Constant.NAME)
+        binding.tvCongratulations.text = "Congratulations! Dear $name, now you have become our partner with PayPanda."
+        binding.tvCongratulations.isSelected = true // Enable marquee
+        getUserDetail()
     }
 
     private fun nullActivityCheck() {
@@ -53,7 +92,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             startActivity(Intent(context,IntroActivity::class.java))
         }
     }
+    override fun onResume() {
+        super.onResume()
+        binding.tvCongratulations.isSelected = true // Ensure marquee is active
 
+
+    }
 
 
     override fun addListeners() {
@@ -193,6 +237,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
         }
 
+        binding.transactionStatus.setOnClickListener{
+            findNavController().navigate(R.id.action_global_walletRequestListFragment2)
+
+        }
     }
 
 
@@ -282,6 +330,72 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             binding.profileImage
         )
 
+    }
+
+    private fun distributerDashboard(date: String) {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+        UtilMethods.distributerDashboard(requireContext(), token,date, object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: DashboardResponse =
+                    Gson().fromJson(message, DashboardResponse::class.java)
+                if (!response.error) {
+
+       binding.totalDebit.text= buildString {
+           append(response.data.wallet.debitTotal.toString())
+           append(" ₹")
+
+           binding.totalCredit.text= buildString {
+               append(response.data.wallet.creditTotal.toString())
+               append(" ₹")
+
+           }
+           binding.totaltxn.text= buildString {
+               append(response.data.dmtTotal.toString())
+               append(" ₹")
+
+           }
+           binding.disputeRequest.text= buildString {
+               append(response.data.disputeRequest.toString())
+
+
+           }
+       }
+
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Unable To Fetch Services Status",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun fail(from: String) {
+               // Toast.makeText(requireContext(), "Unable To Fetch Services Status", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+    private fun getUserDetail() {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+        UtilMethods.getUserDetail(requireContext(), token, object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: UserIDResponse =
+                    Gson().fromJson(message, UserIDResponse::class.java)
+                if (!response.error!!) {
+                    userSession.setData(Constant.ID,response.data?._id.toString())
+
+
+                } else {
+                    Toast.makeText(requireContext(), "Unable to Load Bank List", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+            override fun fail(from: String) {
+                Toast.makeText(requireContext(), "Unable to Load Bank List", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
     }
 
 }

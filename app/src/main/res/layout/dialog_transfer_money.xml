@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/green_50">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Transfer Money"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/blue_900"
+        style="@style/mostserrat_extra_bold"
+        tools:text="Transfer Money" />
+
+    <TextView
+        android:id="@+id/tvBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:layout_gravity="center" />
+    <TextView
+        android:id="@+id/refer_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:text="Refer ID - RT10525184"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:shadowColor="@android:color/darker_gray"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/EditTextInput2">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fund"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter amount (minimum 100)"
+            android:drawablePadding="@dimen/_10sdp"
+            android:maxLength="15"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            style="@style/mostserrat_bold"
+            android:background="@color/white"
+            android:textColorHint="@color/bggrey"
+            android:drawableTint="@color/bggrey_dark"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:id="@+id/edtTPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:hint="Enter Tpin"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:inputType="numberPassword"
+        android:layout_gravity="center"
+        android:shadowColor="@android:color/darker_gray"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        />
+    <Button
+        android:id="@+id/btnTransfer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transfer"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

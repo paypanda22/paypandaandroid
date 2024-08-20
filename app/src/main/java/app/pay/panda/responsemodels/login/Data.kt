@@ -28,5 +28,8 @@ data class Data(
     val pan_number: String? = "",
     val profile: String? = "",
     val state: String? = "",
-    val user: String? = ""
-)
+    val user: String? = "",
+    val user_type_id: String? = "",
+    val user_type_name: String? = "",
+
+        )

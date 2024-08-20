@@ -47,7 +47,7 @@ class WalletTransactionReport : BaseFragment<FragmentWalletTransactionReportBind
         val token=userSession.getData(Constant.USER_TOKEN).toString()
         val requestData= hashMapOf<String,Any?>()
         requestData["user_id"]=token
-        requestData["count"]=100
+        requestData["count"]=900
         requestData["page"]=0
         requestData["start_date"]=startDate
         requestData["end_date"]=endDate

@@ -1,5 +1,6 @@
 package app.pay.panda.fragments.aepsFragments
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -13,8 +14,10 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.BaseFragment
@@ -36,6 +39,8 @@ import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.ScannerListClick
 import app.pay.panda.responsemodels.aepsTxnList.AepsTransactionsResponse
 import app.pay.panda.responsemodels.aepsTxnList.Data
+import app.pay.panda.responsemodels.singleutility.SingleUtilityTransaction
+import app.pay.panda.retrofit.ApiMethods
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.gson.Gson
@@ -45,6 +50,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
     private lateinit var txnList:MutableList<Data>
+
     private var txnCount=25
     override fun init() {
         nullActivityCheck()
@@ -110,7 +116,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         binding.ivFilter.setOnClickListener {
            openFilterDialog()
         }
-
+        binding.ivBack.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun openFilterDialog() {
@@ -182,7 +188,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         val receipt=SingleAepsTransaction()
         val bundle=Bundle()
         bundle.apply {
-            putString("date",model[pos].createdAt)
+            putString("date",model[pos].createdAt.toString())
             putString("bankRrn",model[pos].bank_rrn.toString())
             putString("bankName",model[pos].bank_name.toString())
             putString("balAmount",model[pos].bal_amount.toString())
@@ -193,5 +199,6 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         receipt.arguments=bundle
         receipt.show(parentFragmentManager, receipt.tag)
     }
+
 
 }

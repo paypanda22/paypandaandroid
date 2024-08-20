@@ -2,6 +2,7 @@ package app.pay.panda.fragments.login
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -9,7 +10,11 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
@@ -22,6 +27,8 @@ import app.pay.panda.activity.IntroActivity
 import app.pay.panda.adapters.StateListAdapter
 import app.pay.panda.databinding.FragmentRegisterBinding
 import app.pay.panda.databinding.OtpDialogBinding
+import app.pay.panda.dialog.DialogOK
+import app.pay.panda.fragments.PrivacyPolicy
 import app.pay.panda.fragments.TermsAndConditions
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CustomProgressBar
@@ -43,8 +50,6 @@ import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
-import android.widget.RadioButton
-import app.pay.panda.dialog.DialogOK
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import org.json.JSONObject
@@ -54,27 +59,26 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private lateinit var myActivity: FragmentActivity
     private lateinit var bottomSheetDialog: Dialog
     private lateinit var dBinding: OtpDialogBinding
-    private var refID=""
+    private var refID = ""
     private var userId = ""
-    private var accountType = ""
+    private var selectedUserTypeId: String? = null
 
     private var mobileVerified = false
     private var sponsorverified = false
-    private var mobile=""
-    private var isReferral=1
-    private var stateID=""
-    private lateinit var userTypelist:MutableList<Data>
-    private val progressBar=CustomProgressBar()
+    private var mobile = ""
+    private var isReferral = 1
+    private var stateID = ""
+    private lateinit var userTypelist: MutableList<Data>
+    private val progressBar = CustomProgressBar()
     private var stateList = ArrayList<app.pay.panda.responsemodels.statelist.Data>()
-    private val radioButtonIdToUserIdMap = mutableMapOf<Int, String>()
 
     override fun init() {
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         nullActivityCheck()
 
         userSession = UserSession(requireContext())
-        mobile=arguments?.getString("mobile")?:""
-        if (mobile.isNotEmpty()){
+        mobile = arguments?.getString("mobile") ?: ""
+        if (mobile.isNotEmpty()) {
             binding.edtRegMobile.setText(mobile)
         }
         getUseType()
@@ -91,10 +95,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     override fun addListeners() {
 
-        binding.edtState.setOnClickListener{
-            UtilMethods.getStateList(requireContext(),"101", object : MCallBackResponse {
+        binding.edtState.setOnClickListener {
+            UtilMethods.getStateList(requireContext(), "101", object : MCallBackResponse {
                 override fun success(from: String, message: String) {
-                    val response: StateListResponse = Gson().fromJson(message, StateListResponse::class.java)
+                    val response: StateListResponse =
+                        Gson().fromJson(message, StateListResponse::class.java)
                     if (stateList.isNotEmpty()) {
                         stateList.clear()
                     }
@@ -109,28 +114,28 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             })
         }
         binding.chkNoreferal.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (binding.chkNoreferal.isChecked) {
-                    if (!ActivityExtensions.isValidMobile(binding.edtRegMobile.text.toString())) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Provide a Valid Mobile",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        binding.chkNoreferal.isChecked=false
-                    } else if (!ActivityExtensions.isValidEmail(binding.edtEmail.text.toString())) {
-                        binding.edtEmail.error = "Invalid Email Address Provided"
-                        binding.chkNoreferal.isChecked=false
-                    } else if (binding.edtName.text.toString().isEmpty()) {
-                        binding.edtName.error = "Enter Name"
-                        binding.chkNoreferal.isChecked=false
-                    } else if (stateID.isEmpty()) {
-                        showToast(requireContext(), "Select State First")
-                        binding.chkNoreferal.isChecked=false
-                    } else {
-                        onBoardingRequest()
-                        binding.chkNoreferal.isChecked=false
-                    }
+            if (binding.chkNoreferal.isChecked) {
+                if (!ActivityExtensions.isValidMobile(binding.edtRegMobile.text.toString())) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Provide a Valid Mobile",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.chkNoreferal.isChecked = false
+                } else if (!ActivityExtensions.isValidEmail(binding.edtEmail.text.toString())) {
+                    binding.edtEmail.error = "Invalid Email Address Provided"
+                    binding.chkNoreferal.isChecked = false
+                } else if (!ActivityExtensions.isValidName(binding.edtName.text.toString())) {
+                    binding.edtName.error = "Enter Name"
+                    binding.chkNoreferal.isChecked = false
+                } else if (stateID.isEmpty()) {
+                    showToast(requireContext(), "Select State First")
+                    binding.chkNoreferal.isChecked = false
+                } else {
+                    onBoardingRequest()
+                    binding.chkNoreferal.isChecked = false
                 }
+            }
 
 
             isReferral = 0
@@ -139,17 +144,18 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 ContextCompat.getDrawable(myActivity, R.drawable.submitt_btn_dialog_light_grey)
 
         }
-            /*}else{
+        /*}else{
                 isReferral=1
                 binding.edtSponsorMobile.isEnabled=true
                 binding.edtSponsorMobile.background=null
             }*/
         binding.tv2.setOnClickListener {
-            val tncFragment=TermsAndConditions()
-            tncFragment.show(myActivity.supportFragmentManager,"TAG")
+            val tncFragment = TermsAndConditions()
+            tncFragment.show(myActivity.supportFragmentManager, "TAG")
         }
         binding.tv4.setOnClickListener {
-            openBrowser("https://bbps.paypanda.in/privacy-policy/")
+            val policy= PrivacyPolicy()
+            policy.show(myActivity.supportFragmentManager,"TAG")
         }
         binding.edtRegMobile.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -159,12 +165,22 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (binding.edtRegMobile.text.toString().length == 10) {
                     if (ActivityExtensions.isValidMobile(binding.edtRegMobile.text.toString())) {
-                        checkMobile("+91"+binding.edtRegMobile.text.toString())
+                        checkMobile("+91" + binding.edtRegMobile.text.toString())
                     } else {
-                        binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_phone_base, 0, R.drawable.ic_cancel_red, 0)
+                        binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                            R.drawable.ic_phone_base,
+                            0,
+                            R.drawable.ic_cancel_red,
+                            0
+                        )
                     }
                 } else {
-                    binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_phone_base, 0, 0, 0)
+                    binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                        R.drawable.ic_phone_base,
+                        0,
+                        0,
+                        0
+                    )
                     mobileVerified = false
                 }
             }
@@ -175,7 +191,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         })
 
 
-        binding.edtSponsorMobile.addTextChangedListener(object : TextWatcher {
+        /*   binding.edtSponsorMobile.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -193,32 +209,77 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
             }
         })
-
+*/
         binding.rlSubmit.setOnClickListener {
-
-        }
-        if (!ActivityExtensions.isValidMobile(binding.edtRegMobile.text.toString())){
-            Toast.makeText(requireContext(),"Provide a Valid Mobile",Toast.LENGTH_SHORT).show()
-        }else if (!ActivityExtensions.isValidEmail(binding.edtEmail.text.toString())) {
-            binding.edtEmail.error = "Invalid Email Address Provided"
-        } else if (binding.edtName.text.toString().isEmpty()) {
-            binding.edtName.error = "Enter Name"
-        }else if (stateID.isEmpty()){
-            showToast(requireContext(),"Select State First")
-        } else{
-            if (binding.chkNoreferal.isChecked){
-                reqRegister()
-            }else{
-                if (!sponsorverified){
-                    binding.edtSponsorMobile.error = "Enter a Valid Sponsor Code"
-                }else{
+            if (!ActivityExtensions.isValidMobile(binding.edtRegMobile.text.toString())) {
+                Toast.makeText(requireContext(), "Provide a Valid Mobile", Toast.LENGTH_SHORT)
+                    .show()
+            } else if (!ActivityExtensions.isValidEmail(binding.edtEmail.text.toString())) {
+                binding.edtEmail.error = "Invalid Email Address Provided"
+            } else if (!ActivityExtensions.isValidName(binding.edtName.text.toString())) {
+                binding.edtName.error = "Enter Name"
+            } else if (stateID.isEmpty()) {
+                showToast(requireContext(), "Select State First")
+            }else if(binding.tv1.isChecked==false){
+                Toast.makeText(myActivity, "Please Apply Terms and Conditions", Toast.LENGTH_SHORT).show()
+            } else {
+                if (binding.chkNoreferal.isChecked) {
+                    reqRegister()
+                } else {
+                    /*  if (!sponsorverified) {
+                        binding.edtSponsorMobile.error = "Enter a Valid Sponsor Code"
+                    } else {*/
                     sendOtp(binding.edtRegMobile.text.toString())
+                    //  }
                 }
+
             }
 
         }
+        // Inside your onItemClickListener
+        binding.rbLoginMethod.setOnItemClickListener { parent, view, position, id ->
+            selectedUserTypeId = userTypelist[position]._id
+            val selectedUserType = parent.getItemAtPosition(position) as String
+            updateVisibilityBasedOnUserType(selectedUserType)
+        }
 
     }
+    private fun updateVisibilityBasedOnUserType(selectedUserType: String) {
+        val isSponsorMobileVisible: Boolean
+        val isReferalVisible: Boolean
+
+        if (selectedUserType == "Super Distributor" || selectedUserType == "whiteLabel") {
+            binding.edtSponsorMobile.visibility = View.GONE
+            binding.edtSponsorMobileLayout.visibility = View.GONE
+            binding.referal.visibility = View.GONE
+            isSponsorMobileVisible = false
+            isReferalVisible = false
+        } else {
+            binding.edtSponsorMobile.visibility = View.VISIBLE
+            binding.edtSponsorMobileLayout.visibility = View.VISIBLE
+            binding.referal.visibility = View.VISIBLE
+            isSponsorMobileVisible = true
+            isReferalVisible = true
+        }
+
+        // Save visibility states in SharedPreferences
+        userSession.setBoolData(Constant.SPONSOR_MOBILE_VISIBLE, isSponsorMobileVisible)
+        userSession.setBoolData(Constant.REFERAL_VISIBLE, isReferalVisible)
+        userSession.setData(Constant.USER_TYPE_NAME, selectedUserType)
+    }
+
+
+
+    // Call this function in onResume
+    override fun onResume() {
+        super.onResume()
+
+        // Retrieve the last selected user type from SharedPreferences
+        val lastUserType = userSession.getData(Constant.USER_TYPE_NAME)
+        updateVisibilityBasedOnUserType(lastUserType.toString())
+    }
+
+
 
     private fun openStateListDialog() {
         val dialogView = layoutInflater.inflate(R.layout.lyt_rv_name_search_item_list, null)
@@ -237,7 +298,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         alertDialog.show()
 
         val clickListner = object : StateListClickListner {
-            override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<app.pay.panda.responsemodels.statelist.Data>, pos: Int) {
+            override fun onItemClicked(
+                holder: RecyclerView.ViewHolder,
+                model: List<app.pay.panda.responsemodels.statelist.Data>,
+                pos: Int
+            ) {
                 binding.edtState.setText(model[pos].name)
                 stateID = model[pos]._id
                 alertDialog.dismiss()
@@ -247,7 +312,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         val stateListAdapter = StateListAdapter(myActivity, stateList, clickListner)
         rvList.adapter = stateListAdapter
         rvList.layoutManager = LinearLayoutManager(myActivity)
-        edtName.addTextChangedListener(object:TextWatcher{
+        edtName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -262,21 +327,20 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         })
 
 
-
-
     }
 
     private fun reqRegister() {
-        val requestData= hashMapOf<String,Any?>()
-        requestData["name"]=binding.edtName.text.toString()
-        requestData["email"]=binding.edtEmail.text.toString()
-        requestData["mobileNo"]=binding.edtRegMobile.text.toString()
-        requestData["latitude"]=userSession.getData(Constant.M_LAT)
-        requestData["longitude"]=userSession.getData(Constant.M_LONG)
-        ApiMethods.registrationRequest(requireContext(),requestData,object:MCallBackResponse{
+        val requestData = hashMapOf<String, Any?>()
+        requestData["name"] = binding.edtName.text.toString()
+        requestData["email"] = binding.edtEmail.text.toString()
+        requestData["mobileNo"] = binding.edtRegMobile.text.toString()
+        requestData["latitude"] = userSession.getData(Constant.M_LAT)
+        requestData["longitude"] = userSession.getData(Constant.M_LONG)
+        ApiMethods.registrationRequest(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                val response:ReqRegistrationResponse=Gson().fromJson(message,ReqRegistrationResponse::class.java)
-                if (response.error==false){
+                val response: ReqRegistrationResponse =
+                    Gson().fromJson(message, ReqRegistrationResponse::class.java)
+                if (response.error == false) {
                     ShowDialog.bottomDialogSingleButton(myActivity,
                         "Account Created Successfully",
                         "You account has been created successfully.Press OK to proceed to login screen",
@@ -286,7 +350,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                                 findNavController().navigate(R.id.action_verifyRegistrationOtp_to_loginFragment)
                             }
                         })
-                }else{
+                } else {
                     response.message?.let {
                         ShowDialog.bottomDialogSingleButton(myActivity,
                             "Account Not Created",
@@ -315,12 +379,19 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             }
         })
     }
+
     private fun checkSponsorCode(sCode: String) {
         UtilMethods.checkSponsorCode(requireContext(), sCode, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                val response: CheckSponsorResponse = Gson().fromJson(message, CheckSponsorResponse::class.java)
+                val response: CheckSponsorResponse =
+                    Gson().fromJson(message, CheckSponsorResponse::class.java)
                 sponsorverified = true
-                binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_phone_base, 0, R.drawable.ic_check_green, 0)
+                binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_phone_base,
+                    0,
+                    R.drawable.ic_check_green,
+                    0
+                )
                 binding.tvSponsorName.text = response.data?.user?.name.toString()
                 binding.tvSponsorName.visibility = View.VISIBLE
             }
@@ -336,7 +407,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private fun checkMobile(mobile: String) {
         UtilMethods.chkMobile(requireContext(), mobile, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                val response: CheckMobileResponse = Gson().fromJson(message, CheckMobileResponse::class.java)
+                val response: CheckMobileResponse =
+                    Gson().fromJson(message, CheckMobileResponse::class.java)
                 if (response.data.isExist) {
                     ShowDialog.bottomDialogSingleButton(myActivity,
                         "Mobile is Already Registered",
@@ -347,12 +419,21 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                             }
                         })
                 } else {
-                    binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_phone_base, 0, R.drawable.ic_check_green, 0)
+                    binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                        R.drawable.ic_phone_base,
+                        0,
+                        R.drawable.ic_check_green,
+                        0
+                    )
                 }
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "Unable to Check Mobile Number Status", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Unable to Check Mobile Number Status",
+                    Toast.LENGTH_SHORT
+                ).show()
                 findNavController().popBackStack()
 
             }
@@ -364,38 +445,43 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private fun sendOtp(mobile: String) {
         progressBar.showProgress(requireContext())
         val requestData = hashMapOf<String, Any?>()
-        requestData["emailId"]=binding.edtEmail.text.toString()
+        //requestData["emailId"] = binding.edtEmail.text.toString()
         requestData["mobileNo"] = "+91$mobile"
-        UtilMethods.getRegistrationOtp(requireContext(), requestData, object : MCallBackResponse {
+        UtilMethods.sendOtpMobile(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                val response: RegisterOtpResponse = Gson().fromJson(message, RegisterOtpResponse::class.java)
-                if (!response.error){
-                    if (response.data.user?.isNotEmpty()==true) {
+                val response: RegisterOtpResponse =
+                    Gson().fromJson(message, RegisterOtpResponse::class.java)
+                if (!response.error) {
+                    if (response.data.user?.isNotEmpty() == true) {
                         progressBar.hideProgress()
-                        val token=response.data.user.toString()
+                        val token = response.data.user.toString()
                         val bundle = Bundle()
                         bundle.putString("phone", binding.edtRegMobile.text.toString())
                         bundle.putString("email", binding.edtEmail.text.toString())
                         bundle.putString("password", binding.edtRegMobile.text.toString())
                         bundle.putString("token", token)
-                        bundle.putString("isReferral",isReferral.toString())
-                        bundle.putString("userTypeId",accountType)
-                        bundle.putString("name",binding.edtName.text.toString())
-                        bundle.putString("refID",binding.edtSponsorMobile.text.toString())
-                        findNavController().navigate(R.id.action_registerFragment_to_verifyRegistrationOtp,bundle)
+                        bundle.putString("isReferral", isReferral.toString())
+                        bundle.putString("userTypeId", selectedUserTypeId)
+                        bundle.putString("name", binding.edtName.text.toString())
+                        bundle.putString("refID", binding.edtSponsorMobile.text.toString())
+                        bundle.putString("state",stateID)
+                        findNavController().navigate(
+                            R.id.action_registerFragment_to_verifyRegistrationOtp,
+                            bundle
+                        )
                     } else {
                         progressBar.hideProgress()
-                        showToast(requireContext(),response.message)
+                        showToast(requireContext(), response.message)
                     }
-                }else{
-                    showToast(requireContext(),response.message)
+                } else {
+                    showToast(requireContext(), response.message)
                 }
 
             }
 
             override fun fail(from: String) {
                 progressBar.hideProgress()
-                showToast(requireContext(),from)
+                showToast(requireContext(), from)
             }
         })
 
@@ -408,8 +494,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     }
 
     fun backPressed() {
-        Toast.makeText(requireContext(),"RegistrFragment",Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "RegistrFragment", Toast.LENGTH_SHORT).show()
     }
+
     private fun openBrowser(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
@@ -419,68 +506,40 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         UtilMethods.userType(requireContext(), token, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                val response: UserTypeResponse = Gson().fromJson(message, UserTypeResponse::class.java)
+                val response: UserTypeResponse =
+                    Gson().fromJson(message, UserTypeResponse::class.java)
                 if (!response.error) {
-                    userTypelist= mutableListOf()
-                    userTypelist = response.data.toMutableList()
+                    // Extracting user_type from the response data
+                    userTypelist=response.data.toMutableList()
+                    userTypelist.addAll(response.data)
+                    val userTypeList = response.data.mapNotNull {
+                        it.user_type
 
-                    // Create and add RadioButtons to the RadioGroup dynamically
-                    for ((index, data) in userTypelist.withIndex()) {
-                        val radioButton = RadioButton(context)
-                        radioButton.id = View.generateViewId() // Generate a unique ID for each RadioButton
-                        radioButton.text = data.user_type
-
-                        // Store the mapping of RadioButton ID to user ID
-                        radioButtonIdToUserIdMap[radioButton.id] = data._id.toString()
-
-                        // Add the RadioButton to the RadioGroup
-                        binding.rbLoginMethod.addView(radioButton)
                     }
 
-                    // Call the UI update function after adding all RadioButtons
-                    updateUIAfterAddingRadioButtons()
 
-                    // Set RadioButton click listener
-                    binding.rbLoginMethod.setOnCheckedChangeListener { group, checkedId ->
+                    // Set the custom adapter for the AutoCompleteTextView
+                    val adapter = UserTypeAdapter(requireContext(), userTypeList)
 
-                        accountType = radioButtonIdToUserIdMap[checkedId].toString()
+                    val autoCompleteTextView: AutoCompleteTextView =
+                       binding.rbLoginMethod
+                    autoCompleteTextView.setAdapter(adapter)
 
-                        handleRadioButtonClick(accountType)
-                    }
                 } else {
-                    Toast.makeText(requireContext(), "Unable to Load Bank List", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Unable to Load Bank List", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "Unable to Load Bank List", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Unable to Load Bank List", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
     }
 
-    private fun updateUIAfterAddingRadioButtons() {
-        if (binding.rbLoginMethod.childCount > 0) {
-            binding.edtSponsorMobileLayout.visibility = View.GONE
-            (binding.rbLoginMethod.getChildAt(0) as RadioButton).isChecked = true
-            binding.rbLoginMethod.background = ContextCompat.getDrawable(myActivity, R.drawable.bg_btn_grey)
-        }
-    }
-    private fun handleRadioButtonClick(selectedUserId: String?) {
-        // Example visibility logic
-        when (selectedUserId) {
-            "id1" -> {
-                // Set visibility for id1
-                binding.edtSponsorMobileLayout.visibility = View.GONE
-            }
-            "id2" -> {
-                // Set visibility for id2
-                binding.edtSponsorMobileLayout.visibility = View.VISIBLE
-            }
-            else -> {
-                binding.edtSponsorMobileLayout.visibility = View.VISIBLE
-            }
-        }
-    }
+
+
 
 
 
@@ -501,7 +560,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             override fun success(from: String, message: String) {
                 val response: ReqRegistrationResponse =
                     Gson().fromJson(message, ReqRegistrationResponse::class.java)
+                val msg=response.msg
                 if (response.error == false) {
+
                     val showDialog = DialogOK(myActivity)
                    showDialog.showErrorDialog(
                         requireContext(),
@@ -510,13 +571,36 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         lottieWidth = 200,
                         lottieHeight = 200
                     )
+                    binding.edtName.text?.clear()
+                    binding.edtEmail.text?.clear()
+                    binding.edtRegMobile.text?.clear()
+                    binding.edtState.text.clear()
+                    binding.edtSponsorMobile.text?.clear()
+                    binding.rbLoginMethod.text?.clear()
+
+                }else{
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "fail", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(),"Email already exists", Toast.LENGTH_SHORT)
                     .show()
             }
         })
+    }
+    class UserTypeAdapter(context: Context, private val userTypeList: List<String>) : ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, userTypeList) {
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = super.getView(position, convertView, parent)
+            // Customize your view here if needed
+            return view
+        }
+
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = super.getDropDownView(position, convertView, parent)
+            // Customize your dropdown view here if needed
+            return view
+        }
     }
 }

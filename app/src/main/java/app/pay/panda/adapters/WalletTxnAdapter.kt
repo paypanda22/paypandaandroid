@@ -23,6 +23,8 @@ class WalletTxnAdapter(
         val amount:TextView=itemView.findViewById(R.id.amount)
         val openingBal:TextView=itemView.findViewById(R.id.openingBal)
         val closingBal:TextView=itemView.findViewById(R.id.closingBal)
+        val txnType:TextView=itemView.findViewById(R.id.txnType)
+        val txn_id:TextView=itemView.findViewById(R.id.txn_id)
 
 
     }
@@ -42,6 +44,8 @@ class WalletTxnAdapter(
         holder.tvTxnTitle.text=list[position].message
         holder.openingBal.text=list[position].o_bal.toString()
         holder.closingBal.text=list[position].c_bal.toString()
+        holder.txn_id.text=list[position].txn_id.toString()
+        holder.txnType.text=list[position].trans_type.toString()
         if (list[position].type=="credit"){
             holder.amount.text="+"+list[position].amount.toString()
             holder.amount.setTextColor(ContextCompat.getColor(activity,R.color.green_700))

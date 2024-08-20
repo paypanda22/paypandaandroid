@@ -19,5 +19,6 @@ data class Data(
     val type: String="",
     val updatedAt: String="",
     val user_id: String="",
-    val txn_id:String=""
+    val txn_id:String="",
+    val status:Int=1
 )

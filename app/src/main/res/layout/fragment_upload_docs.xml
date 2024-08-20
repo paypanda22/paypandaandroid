@@ -63,6 +63,7 @@
                 app:cardElevation="@dimen/_2sdp"
                 app:cardUseCompatPadding="true">
                 <RelativeLayout
+                    android:id="@+id/ivUploadFront"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_8sdp">
@@ -88,7 +89,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <ImageView
-                            android:id="@+id/ivUploadFront"
+
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_20sdp"
                             android:layout_alignParentEnd="true"
@@ -107,6 +108,7 @@
                 app:cardElevation="@dimen/_2sdp"
                 app:cardUseCompatPadding="true">
             <RelativeLayout
+                android:id="@+id/ivUploadBack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_5sdp">
@@ -132,7 +134,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <ImageView
-                            android:id="@+id/ivUploadBack"
+
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_20sdp"
                             android:layout_alignParentEnd="true"
@@ -153,6 +155,7 @@
                 app:cardUseCompatPadding="true">
 
                 <RelativeLayout
+                    android:id="@+id/ivUploadPan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_8sdp">
@@ -179,7 +182,7 @@
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
-                        android:id="@+id/ivUploadPan"
+
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"
@@ -199,6 +202,7 @@
                 app:cardUseCompatPadding="true">
 
                 <RelativeLayout
+                    android:id="@+id/ivUploadBank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_8sdp">
@@ -225,7 +229,7 @@
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
-                        android:id="@+id/ivUploadBank"
+
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"
@@ -244,6 +248,7 @@
                 app:cardUseCompatPadding="true">
 
                 <RelativeLayout
+                    android:id="@+id/ivUploadGst"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_8sdp">
@@ -270,7 +275,7 @@
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
-                        android:id="@+id/ivUploadGst"
+
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"
@@ -290,6 +295,7 @@
                 app:cardUseCompatPadding="true">
 
                 <RelativeLayout
+                    android:id="@+id/ivUploadShopFront"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_8sdp">
@@ -316,7 +322,7 @@
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
-                        android:id="@+id/ivUploadShopFront"
+
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"
@@ -336,6 +342,7 @@
                 app:cardUseCompatPadding="true">
 
                 <RelativeLayout
+                    android:id="@+id/ivUploadShopInside"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_8sdp">
@@ -362,7 +369,7 @@
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
-                        android:id="@+id/ivUploadShopInside"
+
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"

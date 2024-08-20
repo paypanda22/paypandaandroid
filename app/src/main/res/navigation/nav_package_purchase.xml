@@ -10,4 +10,19 @@
         android:name="app.pay.panda.fragments.buyPackage.PackageListFragment"
         android:label="fragment_package_list"
         tools:layout="@layout/fragment_package_list" />
+
+
+    <fragment
+        android:id="@+id/packagedetail"
+        android:name="app.pay.panda.fragments.buyPackage.FragmentPackageDetail"
+        android:label="fragment_package_list"
+        tools:layout="@layout/fragment_package_detail" >
+    </fragment>
+    <action
+        android:id="@+id/fragment_package_list_to_fragment_package_detail"
+        app:destination="@id/packagedetail"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@anim/slide_out_right"/>
 </navigation>

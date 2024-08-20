@@ -1,11 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.reports.WalletRequestListFragment">
+
+<RelativeLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.reports.WalletRequestListFragment">
+   >
 
     <RelativeLayout
         android:id="@+id/topPanel"
@@ -35,47 +42,77 @@
 
     </RelativeLayout>
 
-        <RadioGroup
-            android:id="@+id/rbLoginMethod"
-            android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/rbLoginMethod"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/topPanel"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_below="@+id/topPanel"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_gravity="center"
-            android:padding="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-                 <RadioButton
-                     android:id="@+id/Company"
-                     style="@style/mostserrat_bold"
-                     android:textSize="@dimen/_10sdp"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_marginEnd="@dimen/_3sdp"
-                     android:layout_weight="1"
-                     android:background="@drawable/rectanle_backgound_primary"
-                     android:buttonTint="@color/white"
-                     android:checked="true"
-                     android:text="Company"
-                     android:textColor="@color/white"
-                     tools:ignore="TouchTargetSizeCheck" />
+            <ImageView
+                android:id="@+id/profile"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/customer_type"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp" />
 
-              <RadioButton
-                  android:textColor="@color/white"
-                  android:id="@+id/Distributor"
-                  android:buttonTint="@color/white"
-                  android:background="@drawable/rectanle_backgound_primary"
-                  style="@style/mostserrat_bold"
-                  android:textSize="@dimen/_10sdp"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
 
-                  android:layout_weight="1"
-                  android:text="Distributor/ Sup/Distributer"
-                  tools:ignore="TouchTargetSizeCheck" />
-        </RadioGroup>
+                <TextView
+                    android:id="@+id/transactionName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wallet Request List"
+                    android:textColor="@color/black_promo"
+                    style="@style/mostserrat_bold"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+                <!--
+                                        <TextView
+                                            android:id="@+id/transactionDate"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="07 May 2019"
+                                            android:textSize="14sp"
+                                            android:textColor="@android:color/darker_gray" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+
+                <ImageView
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/down"
+
+                    android:textColor="@android:color/holo_green_dark" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
   <!--  <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -127,3 +164,4 @@
         android:src="@drawable/loading_anim" />
 
 </RelativeLayout>
+</FrameLayout>

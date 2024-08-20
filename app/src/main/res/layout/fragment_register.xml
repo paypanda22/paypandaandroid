@@ -107,65 +107,27 @@
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtSponsorMobileLayout"
-                style="@style/EditTextInput2">
 
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtSponsorMobile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_person_base"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:hint="Partner code/Reffer Id"
-                    android:inputType="text"
-                    android:maxLength="10" />
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_5sdp">
-                <CheckBox
-                    android:id="@+id/chkNoreferal"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/chkNoreferal"
-                    android:layout_centerVertical="true"
-                    android:text="@string/i_do_not_have_any_referal_code"
-                    android:textSize="@dimen/_12ssp"
-                    style="@style/mostserrat_bold"
-                    android:textColor="@color/colorAccent"/>
-
-            </RelativeLayout>
-            <TextView
-                android:id="@+id/tvSponsorName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/mostserrat_bold"
-                android:gravity="end"
-                android:visibility="gone"
-                android:textColor="@color/green" />
-            <TextView
+       <!--     <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/select_account_type"
                 style="@style/mostserrat_bold"
                 android:textColor="@color/black"
-                android:layout_marginStart="@dimen/_10sdp"/>
-            <RadioGroup
+                android:layout_marginStart="@dimen/_10sdp"/>-->
+         <!--   <RadioGroup
                 android:id="@+id/rbLoginMethod"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:orientation="horizontal">
+
+            </RadioGroup>-->
 
            <!--     <RadioButton
                     android:id="@+id/rbMobile"
@@ -193,8 +155,75 @@
                     android:layout_weight="1"
                     android:text="Distributor"
                     tools:ignore="TouchTargetSizeCheck" />-->
-            </RadioGroup>
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:endIconMode="dropdown_menu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/rbLoginMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/customer_type"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:padding="@dimen/_13sdp"
+                    android:textSize="@dimen/_12ssp"
+                    android:hint="Select Account Type"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtSponsorMobileLayout"
+                android:visibility="gone"
+                style="@style/EditTextInput2">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSponsorMobile"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_person_base"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="Partner code/Reffer Id"
+                    android:inputType="text"
+                    android:maxLength="10" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:id="@+id/referal"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5sdp">
+                <CheckBox
+                    android:id="@+id/chkNoreferal"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/chkNoreferal"
+                    android:layout_centerVertical="true"
+                    android:text="@string/i_do_not_have_any_referal_code"
+                    android:textSize="@dimen/_12ssp"
+                    style="@style/mostserrat_bold"
+                    android:textColor="@color/colorAccent"/>
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tvSponsorName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/mostserrat_bold"
+                android:gravity="end"
+                android:visibility="gone"
+                android:textColor="@color/green" />
             <RelativeLayout
                 android:id="@+id/rlBottom"
                 android:layout_width="match_parent"
@@ -210,8 +239,9 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:gravity="center">
 
-                    <TextView
+                    <CheckBox
                         android:id="@+id/tv1"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/terms_and_conditions"
@@ -223,6 +253,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_2sdp"
                         android:layout_toEndOf="@id/tv1"
+                        android:layout_marginTop="@dimen/_6sdp"
                         android:text="@string/terms_conditions"
                         android:textColor="@color/blue_900"
                         android:textSize="@dimen/_8ssp"
@@ -235,6 +266,7 @@
                         android:layout_marginStart="@dimen/_2sdp"
                         android:layout_toEndOf="@id/tv2"
                         android:text="@string/and"
+                        android:layout_marginTop="@dimen/_6sdp"
                         android:textSize="@dimen/_8ssp" />
 
                     <TextView
@@ -246,6 +278,7 @@
                         android:text="@string/privacy_policy"
                         android:textColor="@color/blue_900"
                         android:textSize="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_6sdp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 

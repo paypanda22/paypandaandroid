@@ -83,6 +83,29 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_fragment_network"
+            app:destination="@id/FragmentNetwork"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_earning_report"
+            app:destination="@id/FragmentEarningRepoat"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_aeps_transaction_list"
+            app:destination="@id/AepsTransactionList"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <action
@@ -192,5 +215,19 @@
         android:name="app.pay.panda.fragments.reports.UtilityTransactions"
         android:label="fragment_utility_transactions"
         tools:layout="@layout/fragment_utility_transactions" />
-
+    <fragment
+        android:id="@+id/FragmentNetwork"
+        android:name="app.pay.panda.fragments.network.FragemntNetwork"
+        android:label="fragment_fragment_network"
+        tools:layout="@layout/fragment_fragemnt_network" />
+    <fragment
+        android:id="@+id/FragmentEarningRepoat"
+        android:name="app.pay.panda.fragments.earningreport.FragmentEarnningReport"
+        android:label="fragment_earning_report"
+        tools:layout="@layout/fragment_earnning_report" />
+    <fragment
+        android:id="@+id/AepsTransactionList"
+        android:name="app.pay.panda.fragments.aepsFragments.AepsTransactionList"
+        android:label="@string/fragment_aeps_action"
+        tools:layout="@layout/fragment_aeps_transaction_list" />
 </navigation>

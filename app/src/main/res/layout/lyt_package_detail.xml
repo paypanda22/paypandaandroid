@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardUseCompatPadding="true"
+    app:strokeColor="@color/colorPrimaryDark"
+    app:strokeWidth="1dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:weightSum="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            style="@style/mostserrat_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="Satart Amount :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/blue_900"/>
+                        <TextView
+                            android:id="@+id/startAmt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="3214"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            style="@style/mostserrat_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="End Amount :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/blue_900"/>
+
+                        <TextView
+                            android:id="@+id/endAmt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text=""
+                            android:maxLength="15"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9ssp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:weightSum="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        style="@style/mostserrat_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="Charge :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/blue_900"/>
+                        <TextView
+                            android:id="@+id/charge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="charge"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlOpen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            style="@style/mostserrat_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="Retailer Commission :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/blue_900"/>
+                        <TextView
+                            android:id="@+id/retailer_comm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="0.00"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/mostserrat_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="Charge Type :"
+                            android:textColor="@color/blue_900"
+                            android:textSize="@dimen/_9ssp" />
+
+                        <TextView
+                            android:id="@+id/ChargeType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text=""
+                            android:maxLength="15"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9ssp" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rlClosing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text=" Type :"
+                            android:textSize="@dimen/_9ssp"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/blue_900"/>
+
+                        <TextView
+                            android:id="@+id/RetailerCommissionType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text=""
+                            android:maxLength="15"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9ssp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bggrey_dark"
+                android:layout_marginVertical="@dimen/_3sdp"/>
+
+        </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

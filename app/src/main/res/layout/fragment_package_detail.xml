@@ -1,0 +1,208 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            app:tint="@color/white"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/back"
+            android:src="@drawable/left" />
+
+        <TextView
+            style="@style/mostserrat_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="Package Detail"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+    </RelativeLayout>
+    <!-- CardView containing BBPS Services and Service Operator List -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- BBPS Services Expandable Section Header -->
+            <LinearLayout
+                android:id="@+id/llBBPSHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/ivBBPSArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/arrow_right_1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="BBPS Services"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_vertical" />
+
+            </LinearLayout>
+
+            <!-- BBPS Services Expandable Content -->
+            <LinearLayout
+                android:id="@+id/llBBPSContent"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvServiceOperatorList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Service Operator List"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerServiceOperator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/spinner_background"
+                       />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Commissions Expandable Section -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:id="@+id/llCommissionsHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/ivCommissionsArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/arrow_right_1" />
+
+            <TextView
+                android:id="@+id/comissionName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Commissions"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    <!-- Commissions Expandable Content -->
+    <LinearLayout
+        android:id="@+id/llCommissionsContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:visibility="gone"> <!-- Initially hidden -->
+
+        <TextView
+            android:id="@+id/comDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Commissions Details"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Add more content as needed -->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:visibility="gone"
+        android:id="@+id/rvPackageList"/>
+    <LinearLayout
+        android:id="@+id/llNoData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:src="@drawable/no_data_folder"
+            app:tint="@color/bggrey_dark" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Commission Found"
+            android:textSize="@dimen/_12ssp"
+            android:gravity="center"
+            style="@style/mostserrat_bold"/>
+    </LinearLayout>
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="@dimen/_75sdp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:src="@drawable/loading_anim" />
+
+</LinearLayout>
+</LinearLayout>

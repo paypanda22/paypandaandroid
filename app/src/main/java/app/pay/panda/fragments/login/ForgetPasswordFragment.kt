@@ -14,6 +14,7 @@ import app.pay.panda.BaseFragment
 import app.pay.panda.R
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.databinding.FragmentForgetPasswordBinding
+import app.pay.panda.fragments.PrivacyPolicy
 import app.pay.panda.fragments.TermsAndConditions
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CommonClass
@@ -52,7 +53,8 @@ class ForgetPasswordFragment : BaseFragment<FragmentForgetPasswordBinding>(Fragm
             tncFragment.show(myActivity.supportFragmentManager,"TAG")
         }
         binding.tv4.setOnClickListener {
-            openBrowser("https://bbps.paypanda.in/privacy-policy/")
+            val policy= PrivacyPolicy()
+            policy.show(myActivity.supportFragmentManager,"TAG")
         }
 
         binding.rbLoginMethod.setOnCheckedChangeListener { group, checkedId ->

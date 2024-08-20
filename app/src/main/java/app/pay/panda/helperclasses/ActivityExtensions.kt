@@ -17,6 +17,11 @@ class ActivityExtensions {
                 false
             }
         }
+        fun isValidName(name: String): Boolean {
+            val trimmedName = name.trim()
+            val nameRegex = "^[a-zA-Z]+(\\s[a-zA-Z]+)*$" // This regex allows letters and spaces only
+            return trimmedName.isNotEmpty() && trimmedName.matches(nameRegex.toRegex())
+        }
 
         fun isValidEmail(email:String):Boolean{
             val emailRegex="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$"

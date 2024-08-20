@@ -1,18 +1,22 @@
 package app.pay.panda.fragments.buyPackage
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.BaseFragment
@@ -27,15 +31,19 @@ import app.pay.panda.databinding.FragmentPackageListBinding
 import app.pay.panda.databinding.LytDialogPackagePricingBinding
 import app.pay.panda.helperclasses.FingerPrintScanner
 import app.pay.panda.helperclasses.MyGlide
+import app.pay.panda.helperclasses.ShowDialog
 import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.helperclasses.Utils.Companion.showToast
 import app.pay.panda.interfaces.MCallBackResponse
+import app.pay.panda.interfaces.MyClick
 import app.pay.panda.interfaces.PackageListClickListener
 import app.pay.panda.interfaces.PackagePriceClick
 import app.pay.panda.interfaces.ScannerListClick
+import app.pay.panda.responsemodels.PostApiResponse
 import app.pay.panda.responsemodels.packageListResponse.Data
 import app.pay.panda.responsemodels.packageListResponse.PackageListResponse
 import app.pay.panda.responsemodels.packageListResponse.Price
+import app.pay.panda.retrofit.ApiMethods
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.gson.Gson
@@ -50,7 +58,7 @@ class PackageListFragment : BaseFragment<FragmentPackageListBinding>(FragmentPac
     private lateinit var dBinding: LytDialogPackagePricingBinding
     private var package_id = ""
     private var package_price = "0"
-
+    private lateinit var txnDetailList:MutableList<app.pay.panda.responsemodels.packagedetail.Data>
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
@@ -121,6 +129,15 @@ class PackageListFragment : BaseFragment<FragmentPackageListBinding>(FragmentPac
     override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
         package_id = model[pos]._id.toString()
         model[pos].prices?.let { openBuyDialog(model[pos].package_name, it) }
+
+    }
+
+    override fun onItemClickedDetail(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
+        package_id = model[pos]._id.toString()
+        val bundle = Bundle().apply {
+            putString("id", package_id)
+        }
+        findNavController().navigate(R.id.fragment_package_list_to_fragment_package_detail,bundle)
     }
 
     private fun openBuyDialog(packageName: String?, prices: List<Price>) {
@@ -154,9 +171,23 @@ class PackageListFragment : BaseFragment<FragmentPackageListBinding>(FragmentPac
                 requestData["user_id"]=token
                 UtilMethods.purchasePackage(requireContext(),requestData,object:MCallBackResponse{
                     override fun success(from: String, message: String) {
+                        val response: PostApiResponse = Gson().fromJson(message, PostApiResponse::class.java)
+                        if(!response.error){
+                        ShowDialog.bottomDialogSingleButton(myActivity,
+                            "Congratulations!",
+                            response.message,
+                            "success",
+                            object : MyClick {
+                                override fun onClick() {
+                                    findNavController().popBackStack()
+                                    buyNowDialog.dismiss()
+                                }
+                            })
 
-
-                    }
+                    }else{
+                            Toast.makeText(activity, response.message, Toast.LENGTH_SHORT).show()
+                        }
+                        }
 
                     override fun fail(from: String) {
 

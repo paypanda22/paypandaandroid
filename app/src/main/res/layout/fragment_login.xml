@@ -150,12 +150,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llForm" />
 
-    <TextView
+    <CheckBox
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/terms_and_conditions"
         android:textSize="@dimen/_8ssp"
         app:layout_constraintEnd_toStartOf="@+id/tv2"

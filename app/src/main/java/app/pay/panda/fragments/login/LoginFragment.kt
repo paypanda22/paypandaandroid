@@ -23,6 +23,7 @@ import app.pay.panda.R
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.databinding.FragmentLoginBinding
 import app.pay.panda.databinding.LytLoginDialogBinding
+import app.pay.panda.fragments.PrivacyPolicy
 import app.pay.panda.fragments.TermsAndConditions
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CommonClass
@@ -70,7 +71,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             tncFragment.show(myActivity.supportFragmentManager, "TAG")
         }
         binding.tv4.setOnClickListener {
-            openBrowser("https://bbps.paypanda.in/privacy-policy/")
+            val policyfgmt=PrivacyPolicy()
+            policyfgmt.show(myActivity.supportFragmentManager,"TAG")
+
         }
 
 
@@ -135,7 +138,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 } else if (binding.edtPassword.text.toString().isEmpty()) {
                     binding.edtPassword.error = "Enter Password"
                     binding.edtPassword.setPaddingRelative(0, 0, 48.dpToPx(), 0)
-                } else {
+                }else if(binding.tv1.isChecked == false) {
+                    Toast.makeText(requireContext(), "Please Apply Terms and Conditions", Toast.LENGTH_SHORT).show()
+                }else {
                     checkPasswordMobile("phone", "+91" + binding.edtMobile.text.toString())
                 }
             } else {
@@ -224,16 +229,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                         bundle.putString("refID", refID)
                         findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
                     } else {
+                        val bundle = Bundle()
+                        findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
                         Toast.makeText(requireContext(), "Unable to Send Otp to your mobile", Toast.LENGTH_SHORT).show()
                     }
                 }else{
+                    val bundle = Bundle()
+                    findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
+
                     showToast(requireContext(),response.message)
                 }
 
             }
 
             override fun fail(from: String) {
-               showToast(requireContext(),from)
+                val bundle = Bundle()
+                findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
+
+                showToast(requireContext(),from)
             }
         })
 

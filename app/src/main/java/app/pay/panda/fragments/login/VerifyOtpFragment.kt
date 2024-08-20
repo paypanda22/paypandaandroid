@@ -3,6 +3,7 @@ package app.pay.panda.fragments.login
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
@@ -30,6 +31,7 @@ import app.pay.panda.interfaces.OnBackPressedListner
 import app.pay.panda.responsemodels.forgetpassword.ForgetPasswordResponse
 import app.pay.panda.responsemodels.login.LoginResponse
 import app.pay.panda.responsemodels.newForgetPasswordVerify.ForgetPasswordVerifyResponse
+import app.pay.panda.responsemodels.newlogin.NewLoginResponse
 import app.pay.panda.responsemodels.register.RegisterResponse
 import app.pay.panda.responsemodels.verifyOtp.VerifyOtpResponse
 import app.pay.panda.retrofit.ApiMethods
@@ -58,6 +60,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
+
         entity = arguments?.getString("entity").toString()
         entityType = arguments?.getString("entityType").toString()
         type = arguments?.getString("type").toString()
@@ -152,6 +155,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
             } else {
                 timeLeftInMillis = 60000
                 setTimer()
+                resendOTP("phone",entity)
             }
         }
         binding.ivBack.setOnClickListener { findNavController().popBackStack() }
@@ -166,7 +170,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
                     if (entityType=="phone"){
                         verifyMobileOtp()
                     }else{
-                        verifyEmailOtp()
+                       // verifyEmailOtp()
                     }
                 }
 
@@ -199,6 +203,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
             }
         })
     }
+
 
     private fun verifyMobileOtp() {
         val requestData = hashMapOf<String, Any?>()
@@ -270,6 +275,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
                 if (response.error==false){
                     val createSession = response.data?.let { userSession.createUserSession(it) }
                     if (createSession == true) {
+                        userSession.setData(Constant.USER_TYPE_NAME,response.data.user_type_name.toString())
                         sendToMainScreen();
                     } else {
                         Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
@@ -309,7 +315,44 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
         }
     }
 
-    override fun onPause() {
+
+    private fun resendOTP(loginType: String, entity: String) {
+
+        val requestData = hashMapOf<String, Any?>()
+        requestData["user_id"] = refID
+        requestData["entity"] = entity
+        requestData["password"] = password
+        requestData["deviceId"] = CommonClass.getDeviceId(myActivity)
+
+        val getHash = GetKeyHash(myActivity)
+        val finalData = getHash.getHash(requestData)
+        UtilMethods.resendOTP(requireContext(), finalData, refID,object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: NewLoginResponse =
+                    Gson().fromJson(message, NewLoginResponse::class.java)
+                if (response.error == false) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Otp send successfully to your mobile number",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Unable to Send Otp to your mobile",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                }
+
+            }
+
+            override fun fail(from: String) {
+                showToast(requireContext(), from)
+            }
+        })
+    }
+        override fun onPause() {
         super.onPause()
         if (isTimerRunning) {
             cancelTimer()

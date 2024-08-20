@@ -56,7 +56,6 @@
                     android:layout_width="@dimen/_12sdp"
                     android:layout_height="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_8sdp"
-
                     android:layout_toEndOf="@+id/currBal"
                     android:src="@drawable/ic_drop_down"
                     app:tint="@color/white" />
@@ -322,6 +321,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/retailerDashboard"
             android:layout_marginTop="@dimen/_10sdp"
             android:scrollbars="none">
 
@@ -1573,6 +1573,439 @@
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+        <LinearLayout
+            android:id="@+id/distributer_dashboard"
+                  android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
+            tools:context=".YourActivity"
+            android:background="@color/white">
+
+            <ImageView
+                android:layout_width="@dimen/_160sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/horizontal_logo"/>
+
+            <TextView
+                android:id="@+id/tvCongratulations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                style="@style/mostserrat_bold"
+                android:text=""
+                android:textColor="@color/indigo_900"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:scrollHorizontally="true"
+                android:singleLine="true" />
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:paddingLeft="@dimen/_20sdp"
+    android:padding="@dimen/_20sdp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="4dp"
+
+                    android:layout_margin="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:backgroundTint="@color/green_bow"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/deposit"
+                            android:contentDescription="Debit Icon"
+                            android:backgroundTint="@color/blue_900"/>
+
+                        <TextView
+                            android:id="@+id/totalDebit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:layout_gravity="center"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/black_promo"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Debit"
+                            android:layout_gravity="center"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/red_700"
+                            android:textSize="14sp"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="4dp"
+                    android:layout_margin="4dp"
+                  >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/credit_card"
+                            android:layout_gravity="center"
+                            android:contentDescription="Dispute Icon"
+                            android:backgroundTint="@color/blue_900"/>
+
+                        <TextView
+                            android:id="@+id/totalCredit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:text="1723.27 ₹"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/black_promo"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Credit"
+                            android:layout_gravity="center"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/green_700"
+                            android:textSize="14sp"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/linear_today"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/transaction"
+
+                            android:contentDescription="Debit Icon"
+                            android:backgroundTint="@color/blue_900"/>
+
+                        <TextView
+                            android:id="@+id/totaltxn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="10 ₹"
+                            android:layout_gravity="center"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/black_promo"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Txn"
+                            android:layout_gravity="center"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/blue_A700"
+                            android:textSize="14sp"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/linear_days"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_dispute"
+                            android:layout_gravity="center"
+                            android:contentDescription="Dispute Icon"
+                            android:backgroundTint="@color/blue_900"/>
+
+                        <TextView
+                            android:id="@+id/dispute_request"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:text="27 ₹"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/black_promo"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dispute Request"
+                            android:layout_gravity="center"
+                            style="@style/mostserrat_bold"
+                            android:textColor="@color/pending"
+                            android:textSize="14sp"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+</LinearLayout>
+           <!-- <LinearLayout
+                android:id="@+id/reports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_8sdp">
+
+
+                <LinearLayout
+                    android:id="@+id/linear_today"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_box_1"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/tv_today"
+                        android:src="@drawable/transaction"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+
+                        android:textSize="@dimen/_12sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/totaltxn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blue_900"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="10 ₹"
+                        style="@style/mostserrat_bold"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/today_qty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/mostserrat_bold"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="Total Txn"
+                        android:textColor="@color/blue_900"
+                        android:textSize="@dimen/_12sdp" />
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linear_days"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_box_2"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:backgroundTint="@color/blue_50"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/ic_dispute"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dispute_request"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="27 ₹"
+                        style="@style/mostserrat_bold"
+                        android:textColor="@color/blue_900"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/month_qty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="Dispute Request"
+                        style="@style/mostserrat_bold"
+                        android:textColor="@color/blue_900"
+                        android:textSize="@dimen/_12sdp" />
+
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>-->
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/transactionStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/profile"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/user_1_"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/transactionName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Wallet Request"
+                            android:textColor="@color/black_promo"
+                            style="@style/mostserrat_bold"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+<!--
+                        <TextView
+                            android:id="@+id/transactionDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="07 May 2019"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/darker_gray" />-->
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:layout_height="25dp"
+                          android:src="@drawable/open"
+
+                            android:textColor="@android:color/holo_green_dark" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
 
 
     </RelativeLayout>

@@ -67,8 +67,8 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
         requestData["user_id"] = token
         requestData["count"] = count
         requestData["page"] = 0
-        requestData["min_amt"] = 100
-        requestData["max_amt"] = 5000
+        requestData["min_amt"] = 0
+        requestData["max_amt"] = 0
         requestData["start_date"] = startDate
         requestData["end_date"] = endDate
 
@@ -89,6 +89,9 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
 
                                 2 -> {
                                     openOtpDialog(model[pos])
+                                }
+                                4->{
+
                                 }
 
                                 else -> {
@@ -207,13 +210,19 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
     private fun refreshTransactionStatus(model: Tran) {
         binding.rvDmtTransactions.visibility = VISIBLE
         binding.llNoData.visibility = GONE
-        binding.imageView.visibility = VISIBLE
+        binding.imageView.visibility = GONE
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         UtilMethods.dmtTxnEnquiry(requireContext(), model._id.toString(), token, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: DmtTxnEnqResponse = Gson().fromJson(message, DmtTxnEnqResponse::class.java)
                 getTransactionList(start_date, end_date, count)
-            }
+               // getTransactionList(start_date, end_date, count);
+                if (!response.error) {
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                }
+                }
 
             override fun fail(from: String) {
                 Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
@@ -281,6 +290,9 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
 
                 R.id.rb200 -> {
                     count = 200
+                }
+                R.id.more -> {
+                    count=400
                 }
             }
         }

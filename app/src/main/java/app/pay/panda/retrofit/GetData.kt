@@ -352,6 +352,77 @@ interface GetData {
     @GET("api/bbps_txn/invoice/{id}")
     fun getTxnByUtilityId(@Path("id") id: String): Call<JsonObject>
 
+    @GET("/api/user/referTo")
+    fun getNetwork(
+        @Query("page") page: String,
+        @Query("count") count: String
+    ): Call<JsonObject>
+
+    @GET("/api/user/referTo")
+    fun getNetworkRetailer(
+        @Query("page") page: String,
+        @Query("count") count: String,
+        @Query("id") id: String,
+    ): Call<JsonObject>
+
+    @GET("/api/report/fundtransfer")
+    fun viewReport(
+        @Query("page") page: String,
+        @Query("count") count: String,
+        @Query("to") to: String,
+    ): Call<JsonObject>
+
+    @POST("/api/user/fundTransferToRefer")
+    fun moneyTreansfer(@Body obj:Any): Call<JsonObject>
+
+    @POST("/api/user/fundReverseVerify")
+    fun otpVarify(@Body obj:Any): Call<JsonObject>
+
+    @POST("/api/mainwallet/public/filter")
+    fun earningReport(@Body obj:Any): Call<JsonObject>
+
+    @GET("/api/dashboard/public")
+    fun distributerDashboard(@Query("date") date: String
+    ): Call<JsonObject>
+
+    @GET("/api/auth/mb/get/profile")
+    fun getUserDetail(): Call<JsonObject>
+
+    @POST("api/auth/mb/login/resendOtp")
+    fun resendOTP(@Body obj: Any): Call<JsonObject>
+
+    @PUT("api/paymentrequesttouser/transfer")
+    fun paymentRequestToUser(@Body obj: Any): Call<JsonObject>
+
+    @POST("api/paymentRequestToUser/admin")
+    fun paymentRequestToAdmin(@Body obj: Any): Call<JsonObject>
+
+
+
+
+    @GET("api/auth/resendOtpForTpin")
+    fun resendOtpForTPin(): Call<JsonObject>
+    @GET("api/auth/resendOtp")
+    fun resendOtpTPin(@Body obj: Any): Call<JsonObject>
+
+
+    @GET("api/package/public/{id}")
+    fun packageDatails(@Path("id") id: String): Call<JsonObject>
+    @GET("api/package/bbps/commision")
+    fun bbpsServices(@Query("package_id") package_id: String,
+                     @Query("service_id") service_id: String,
+                     @Query("page") page: String,
+                     @Query("count") count: String): Call<JsonObject>
+
+
+    @GET("api/auth/recipientDelete")
+    fun recipientDelete(@Body obj: Any): Call<JsonObject>
+
+
+
+
+
+
     @DELETE("api/payout/bank/{accountID}")
     fun deletePayoutAccount(@Path("accountID") accountID:String):Call<JsonObject>
 
