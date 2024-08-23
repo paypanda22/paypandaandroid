@@ -1,7 +1,10 @@
 package app.pay.panda.responsemodels.dmtSettings
 
+
+import androidx.annotation.Keep
+
+@Keep
 data class Data(
-    val bankVerificationCharge: Int=0,
-    val defaultApi: String="",
-    val dmtApiType: String=""
+    val defaultApi: String = "",
+    val dmtApiType: List<DmtApiType> = listOf()
 )

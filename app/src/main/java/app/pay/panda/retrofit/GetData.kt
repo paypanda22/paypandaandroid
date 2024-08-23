@@ -143,7 +143,7 @@ interface GetData {
     @GET("api/bank/public")
     fun getCompanyBankList(): Call<JsonObject>
 
-    @GET("api/setting/bankVerify")
+    @GET("api/setting/dmtType")
     fun getDmtSettings(): Call<JsonObject>
 
     @POST("api/dmt_txn/refund/verify")
@@ -428,6 +428,9 @@ interface GetData {
 
     @POST("api/payout/doTransaction")
     fun doPayoutTransaction(@Body obj:Any):Call<JsonObject>
+
+    @POST("api/eko/recipientDelete")
+    fun deleteDmtBeneficiary(@Body obj:Any):Call<JsonObject>
 
 
 

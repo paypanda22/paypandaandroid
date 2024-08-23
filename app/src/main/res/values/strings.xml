@@ -566,5 +566,6 @@
     <string name="do_you_want_to_skip_transaction_receipt">Do You want to skip Receipt ?</string>
     <string name="enter_account_holder_name">Enter Account Holder Name</string>
     <string name="are_you_sure_you_want_to_delete">Are you sure, You want to delete this Account ?</string>
+    <string name="account_verification">Account Verification</string>
 
 </resources>

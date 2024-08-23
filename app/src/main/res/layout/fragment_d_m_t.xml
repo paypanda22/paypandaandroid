@@ -56,40 +56,14 @@
             android:id="@+id/rl_edt_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <RadioGroup
-                android:id="@+id/rgBank"
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:orientation="horizontal"
-                android:visibility="visible">
-                <RadioButton
-                    android:id="@+id/rbBank1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/bank_1"
-                    style="@style/mostserrat_bold"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:buttonTint="@color/white"
-                    android:background="@drawable/rectanle_backgound_primary"
-                    android:layout_marginEnd="@dimen/_3sdp"
-                    android:textColor="@color/white"/>
-                <RadioButton
-                    android:id="@+id/rbBank2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/bank_2"
-                    android:layout_weight="1"
-                    android:background="@drawable/rectanle_backgound"
-                    android:layout_marginEnd="@dimen/_3sdp"
-                    style="@style/mostserrat_bold"/>
-            </RadioGroup>
+                android:id="@+id/rvDmtApiType"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/EditTextInput3"
-                android:layout_below="@+id/rgBank"
+                android:layout_below="@+id/rvDmtApiType"
                 android:layout_marginTop="@dimen/_10sdp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtCustomerNumber"

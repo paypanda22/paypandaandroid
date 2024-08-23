@@ -11,8 +11,28 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/_10sdp"
         android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Bank Name"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:textSize="@dimen/_12ssp"
+                style="@style/mostserrat_bold"
+                android:layout_marginVertical="@dimen/_5sdp"/>
+            <ImageView
+                android:id="@+id/ivDismiss"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_cancel_red"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/EditTextInput2">
+            style="@style/EditTextInput5">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtName"
                 android:layout_width="match_parent"

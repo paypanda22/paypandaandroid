@@ -5,5 +5,5 @@ import app.pay.panda.responsemodels.dmtBeneficiaryList.Data
 
 interface RecipientListClickListner {
 
-    fun onItemClicked(holder:RecyclerView.ViewHolder, model:List<Data>, pos:Int)
+    fun onRecipientItemClick(holder:RecyclerView.ViewHolder, model:List<Data>, pos:Int)
 }
