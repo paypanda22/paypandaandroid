@@ -20,10 +20,10 @@ class DmtActivity : BaseActivity<ActivityDmtBinding>() {
     private lateinit var userSession: UserSession
     private lateinit var navController: NavController
 
-    override fun getViewBinding(): ActivityDmtBinding =ActivityDmtBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivityDmtBinding = ActivityDmtBinding.inflate(layoutInflater)
 
     override fun init(savedInstanceState: Bundle?) {
-        userSession= UserSession(this@DmtActivity)
+        userSession = UserSession(this@DmtActivity)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_navs) as NavHostFragment
         navController = navHostFragment.navController
     }
@@ -39,15 +39,20 @@ class DmtActivity : BaseActivity<ActivityDmtBinding>() {
     override fun handleBackPressCustom(): Boolean {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_navs) as NavHostFragment
         val navController = navHostFragment.navController
-        val currentFragment=navController.currentDestination
+        val currentFragment =  navHostFragment.childFragmentManager.primaryNavigationFragment
         //val currentFragment=navHostFragment.childFragmentManager.fragments[0]
-        if (currentFragment!!.id == R.id.DMTFragment2) {
+        if (navController.currentDestination!!.id == R.id.DMTFragment2) {
             startActivity(Intent(this@DmtActivity, DashBoardActivity::class.java))
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         } else {
-            navController.popBackStack()
+            if (currentFragment is OnBackPressedListner) {
+                currentFragment.backPressed()
+            } else {
+                navController.popBackStack()
+            }
+
         }
-       return true
+        return true
     }
 
     override fun onClick(v: View?) {

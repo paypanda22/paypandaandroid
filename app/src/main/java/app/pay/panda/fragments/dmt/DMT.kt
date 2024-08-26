@@ -38,6 +38,7 @@ import app.pay.panda.responsemodels.dmtTransaction.DMTMakeTransactionResponse
 import app.pay.panda.responsemodels.verifyBankName.VerifyBankResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
+import app.pay.panda.reusable.Utills.setOnTextChangedListener
 import com.google.gson.Gson
 
 class DMT(
@@ -84,11 +85,22 @@ class DMT(
         dBinding.tvAcNumber.text = recipient.account
         dBinding.tvBankName.text = recipient.bank
         dBinding.tvLimit.text = avlLimit.toString()
-        dBinding.tvIfscCode.text=recipient.ifsc.toString()
+        dBinding.tvIfscCode.text = recipient.ifsc.toString()
+        dBinding.edtAmount.setOnTextChangedListener { charSequence, i, i2, i3 ->
+            if (charSequence.toString().length>1){
+                val amount=charSequence.toString().toInt()
+                if (amount<100 || amount>700){
+                    dBinding.btnPay.isEnabled=false
+                    dBinding.btnPay.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.bg_btn_grey))
+                }else{
+                    dBinding.btnPay.isEnabled=true
+                    dBinding.btnPay.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.bg_btn_green))
+                }
+            }
+        }
 
         if (recipient.isVerified) {
-            dBinding.tvValidateBene.visibility = GONE
-            dBinding.tvValidateText.visibility = GONE
+            dBinding.llVerify.visibility = GONE
             dBinding.tvStatus.text = "Verified"
             dBinding.ivStatus.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_check_green))
             dBinding.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.green_700))
@@ -131,31 +143,30 @@ class DMT(
 
         dBinding.btnPay.setOnClickListener {
             if (dBinding.edtAmount.text.toString().isEmpty()) {
-                dBinding.edtAmount.error = "Enter a Valid Amount"
-            }  else {
+                showToast(activity,"Enter a Valid Amount")
+            } else {
                 val amt = dBinding.edtAmount.text?.toString()?.toInt() ?: 0
                 if (amt > avlLimit) {
-                    dBinding.edtAmount.error = "Invalid Amount"
-                    Toast.makeText(activity, "Amount should be less than available limit", Toast.LENGTH_SHORT).show()
+                    showToast(activity,"Amount should be less than available limit")
                 } else {
-                    if (dBinding.llMode.visibility== VISIBLE){
-                        dBinding.llTPin.visibility= VISIBLE
-                        dBinding.llMode.visibility= GONE
+                    if (dBinding.llMode.visibility == VISIBLE) {
+                        dBinding.llTPin.visibility = VISIBLE
+                        dBinding.llMode.visibility = GONE
                         dBinding.ivEdit.setOnClickListener {
                             if (dBinding.edtAmount.isEnabled) {
                                 dBinding.edtAmount.isEnabled = false
-                                dBinding.edtAmount.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.submitt_btn_dialog_light_grey))
+                                dBinding.edtAmount.setBackgroundDrawable(ContextCompat.getDrawable(activity, R.drawable.submitt_btn_dialog_light_grey))
                             } else {
                                 dBinding.edtAmount.isEnabled = true
-                                dBinding.edtAmount.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.submitt_btn_small_white))
+                                dBinding.edtAmount.setBackgroundDrawable(ContextCompat.getDrawable(activity, R.drawable.submitt_btn_small_white))
                             }
                         }
-                        dBinding.edtAmount.setTextColor(ContextCompat.getColor(activity,R.color.black))
-                        dBinding.edtAmount.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.submitt_btn_dialog_light_grey))
-                    }else{
-                        if (dBinding.edtTPin.text.toString().length<4){
-                            showToast(activity,"Enter Your Transaction Pin")
-                        }else{
+                        dBinding.edtAmount.setTextColor(ContextCompat.getColor(activity, R.color.black))
+                        dBinding.edtAmount.setBackgroundDrawable(ContextCompat.getDrawable(activity, R.drawable.submitt_btn_dialog_light_grey))
+                    } else {
+                        if (dBinding.edtTPin.text.toString().length < 4) {
+                            showToast(activity, "Enter Your Transaction Pin")
+                        } else {
                             makeTransaction(recipient, dBinding, customerName, customerMobile, dmtDialog)
                         }
 
@@ -195,6 +206,7 @@ class DMT(
                     dBinding.tvStatus.text = "Verified"
                     dBinding.ivStatus.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_check_green))
                     dBinding.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.green_700))
+                    dBinding.llVerify.visibility = GONE
                 } else {
                     Toast.makeText(activity, response.message, Toast.LENGTH_SHORT).show()
                 }
@@ -231,8 +243,8 @@ class DMT(
         requestData["customer_mobile"] = customerMobile
         requestData["bank_id"] = recipient.bankId
         requestData["api_id"] = apiID
-        requestData["pincode"]=""
-        requestData["tpin"] =dBinding.edtTPin.text.toString()
+        requestData["pincode"] = ""
+        requestData["tpin"] = dBinding.edtTPin.text.toString()
 
         UtilMethods.dmtMakeTransaction(activity, requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
@@ -244,7 +256,7 @@ class DMT(
                         ShowDialog.bottomDialogSingleButton(activity, "Transaction Initiated",
                             response.message, "pending", object : MyClick {
                                 override fun onClick() {
-                                    dmtDialog.dismiss()
+                                    //dmtDialog.dismiss()
                                 }
                             })
                     }
@@ -252,7 +264,7 @@ class DMT(
                     ShowDialog.bottomDialogSingleButton(activity, "ERROR",
                         response.message, "error", object : MyClick {
                             override fun onClick() {
-                                dmtDialog.dismiss()
+                              //  dmtDialog.dismiss()
                             }
                         })
 
@@ -264,7 +276,7 @@ class DMT(
                 ShowDialog.showDialog(activity, "ERROR",
                     "REQUEST FAILED", "error", object : MyClick {
                         override fun onClick() {
-                            dmtDialog.dismiss()
+                           // dmtDialog.dismiss()
                         }
                     })
             }
@@ -304,6 +316,11 @@ class DMT(
         dBinding.edtBankName.setOnClickListener {
             openBankListDialog(dBinding, dmtDialog)
         }
+        dBinding.edtAccountNumber.setOnTextChangedListener { charSequence, i, i2, i3 -> dBinding.llVerify.visibility = VISIBLE }
+        dBinding.edtName.setOnTextChangedListener { charSequence, i, i2, i3 -> dBinding.llVerify.visibility = VISIBLE }
+        dBinding.edtIfsc.setOnTextChangedListener { charSequence, i, i2, i3 -> dBinding.llVerify.visibility = VISIBLE }
+        dBinding.edtBankName.setOnTextChangedListener { charSequence, i, i2, i3 -> dBinding.llVerify.visibility = VISIBLE }
+
         dBinding.lytBankList.setEndIconOnClickListener { openBankListDialog(dBinding, dmtDialog) }
 
 
@@ -314,14 +331,12 @@ class DMT(
         }
         dBinding.ivCancel.setOnClickListener { dmtDialog.cancel() }
         dBinding.tvValidateBeneficiaryName.setOnClickListener {
-            if (dBinding.edtName.text.toString().isEmpty()) {
+            if (dBinding.edtName.text.toString().trim().isEmpty() || dBinding.edtName.text.toString().trim().isBlank()) {
                 dBinding.edtName.error = "Enter Beneficiary Name"
             } else if (!ActivityExtensions.isValidIfsc(dBinding.edtIfsc.text.toString())) {
                 dBinding.edtIfsc.error = "Enter a Valid IFSC Code"
             } else if (dBinding.edtAccountNumber.text.toString().isEmpty()) {
                 dBinding.edtAccountNumber.error = "Enter Account Number"
-            } else if (!ActivityExtensions.isValidMobile(dBinding.edtMobile.text.toString())) {
-                dBinding.edtMobile.error = "Enter a Valid Mobile"
             } else {
                 validateBeneficiary(dBinding)
             }
@@ -347,6 +362,7 @@ class DMT(
             override fun success(from: String, message: String) {
                 val response: VerifyBankResponse = Gson().fromJson(message, VerifyBankResponse::class.java)
                 dBinding.edtName.setText(response.data.bank_account_name)
+                dBinding.llVerify.visibility = GONE
                 Toast.makeText(activity, "Bank Verified Successfully", Toast.LENGTH_SHORT).show()
             }
 
@@ -368,7 +384,7 @@ class DMT(
         requestData["bank_id"] = bankID
         requestData["api_id"] = apiID
         requestData["recipient_name"] = dBinding.edtName.text.toString()
-        requestData["recipient_mobile"] = dBinding.edtMobile.text.toString()
+        requestData["recipient_mobile"] = userSession.getData(Constant.MOBILE).toString()
         requestData["user_id"] = token
         UtilMethods.addEkoRecipient(activity, requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
@@ -406,11 +422,8 @@ class DMT(
     }
 
     private fun validateData(dBinding: LytDialogAddRecipientBinding): Boolean {
-        if (dBinding.edtName.text.toString().isEmpty()) {
+        if (dBinding.edtName.text.toString().trim().isEmpty()) {
             dBinding.edtName.error = "Enter Name"
-            return false
-        } else if (!ActivityExtensions.isValidMobile(dBinding.edtMobile.text.toString())) {
-            dBinding.edtMobile.error = "Enter a Valid Mobile"
             return false
         } else if (dBinding.edtBankName.text.toString().isEmpty()) {
             Toast.makeText(activity, "Select Bank First", Toast.LENGTH_SHORT).show()
@@ -470,6 +483,7 @@ class DMT(
         bankListDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         bankListDialog.window?.attributes?.windowAnimations ?: R.style.DialogAnimationBottom
         bankListDialog.window?.setGravity(Gravity.BOTTOM)
+        bankListBinding.ivDismiss.setOnClickListener { bankListDialog.dismiss() }
         val clickListener = object : BankListClickListner {
             override fun onItemClicked(
                 holder: RecyclerView.ViewHolder,

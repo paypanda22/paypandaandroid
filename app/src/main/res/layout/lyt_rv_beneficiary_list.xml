@@ -14,6 +14,7 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_centerVertical="true"
             android:src="@drawable/bank_color"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +55,22 @@
                 android:maxLines="1"
                 android:maxLength="35"
                 android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tvVerified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Verified"
+                android:visibility="gone"
+                style="@style/mostserrat_bold"
+                android:drawableEnd="@drawable/ic_baseline_check_circle_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:textSize="@dimen/_10ssp"
+                android:textAllCaps="true"
+                android:maxLines="1"
+                android:maxLength="35"
+                android:textColor="@color/green_900"/>
         </LinearLayout>
+
         <ImageView
             android:id="@+id/ivDelete"
             android:layout_width="@dimen/_20sdp"

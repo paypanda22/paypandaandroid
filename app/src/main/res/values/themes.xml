@@ -132,6 +132,7 @@
         <item name="hintAnimationEnabled">true</item>
     </style>
 
+
     <style name="mostserrat_bold">
         <item name="fontFamily">@font/mostserrat_bold</item>
     </style>

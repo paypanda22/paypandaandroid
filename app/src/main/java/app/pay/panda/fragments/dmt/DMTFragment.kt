@@ -16,6 +16,8 @@ import app.pay.panda.BaseFragment
 import app.pay.panda.R
 import app.pay.panda.activity.DashBoardActivity
 import app.pay.panda.activity.IntroActivity
+import app.pay.panda.adapters.DeleteRecipient
+import app.pay.panda.adapters.DmtApiTypeAdapter
 import app.pay.panda.adapters.RecipientListAdapter
 import app.pay.panda.databinding.FragmentDMTBinding
 import app.pay.panda.helperclasses.ActivityExtensions
@@ -23,24 +25,30 @@ import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.ShowDialog
 
 import app.pay.panda.helperclasses.UserSession
+import app.pay.panda.helperclasses.Utils.Companion.showToast
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.MyClick
 import app.pay.panda.interfaces.MyClick2
+import app.pay.panda.interfaces.OnBackPressedListner
 import app.pay.panda.interfaces.RecipientListClickListner
+import app.pay.panda.responsemodels.deleteBene.DeleteBeneResponse
 import app.pay.panda.responsemodels.dmtBeneficiaryList.Data
 import app.pay.panda.responsemodels.dmtBeneficiaryList.RecipientListResponse
+import app.pay.panda.responsemodels.dmtSettings.DmtApiType
 import app.pay.panda.responsemodels.dmtSettings.DmtSettingsResponse
 import app.pay.panda.responsemodels.dmtcustomer.GetCustomerInfoResponse
+import app.pay.panda.retrofit.CommonApiCall
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.gson.Gson
 
 
-class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate) {
+class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate),DmtApiTypeAdapter.DmtTypeClickListener , DeleteRecipient,RecipientListClickListner {
     private lateinit var myActivity: FragmentActivity
     private lateinit var userSession: UserSession
     private var customerName = ""
     private var customerMobile = ""
+
     private var avlLimit = 0
     private var recipients = ArrayList<Data>()
     private lateinit var dmt: DMT
@@ -57,52 +65,19 @@ class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate
             override fun success(from: String, message: String) {
                 val response: DmtSettingsResponse = Gson().fromJson(message, DmtSettingsResponse::class.java)
                 if (!response.error) {
-                    userSession.setIntData(Constant.VERIFICATION_CHARGE, response.data.bankVerificationCharge)
-                    apiID = response.data.defaultApi
-                    if (response.data.dmtApiType == "eko") {
-                        binding.rbBank2.visibility = GONE
-                        apiID = "eko"
-                        binding.llNoService.visibility = GONE
-                        binding.rlMainContent.visibility = VISIBLE
-                        binding.imageView.visibility = GONE
-                    } else if (response.data.dmtApiType == "Paysprint") {
-                        binding.rbBank1.visibility = GONE
-                        apiID = "Paysprint"
-                        binding.rbBank2.background = ContextCompat.getDrawable(myActivity, R.drawable.rectanle_backgound_primary)
-                        binding.rbBank2.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                        binding.rbBank2.buttonTintList = ContextCompat.getColorStateList(myActivity, R.color.white)
-                        binding.rbBank2.isChecked = true
-                        binding.llNoService.visibility = GONE
-                        binding.rlMainContent.visibility = VISIBLE
-                        binding.imageView.visibility = GONE
-                    } else if (response.data.dmtApiType == "both") {
-                        binding.rgBank.visibility = VISIBLE
-                        if (response.data.defaultApi == "eko") {
-                            binding.rbBank1.isChecked = true
-                            apiID = "eko"
-                            binding.rbBank1.background = ContextCompat.getDrawable(myActivity, R.drawable.rectanle_backgound_primary)
-                            binding.rbBank1.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                            binding.rbBank1.buttonTintList = ContextCompat.getColorStateList(myActivity, R.color.white)
-                            binding.rbBank2.background = ContextCompat.getDrawable(myActivity, R.drawable.rectanle_backgound)
-                            binding.rbBank2.setTextColor(ContextCompat.getColor(myActivity, R.color.black))
-                            binding.rbBank2.buttonTintList = ContextCompat.getColorStateList(myActivity, R.color.black)
-                        } else {
-                            binding.rbBank2.isChecked = true
-                            apiID = "Paysprint"
-                            binding.rbBank2.background = ContextCompat.getDrawable(myActivity, R.drawable.rectanle_backgound_primary)
-                            binding.rbBank2.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                            binding.rbBank2.buttonTintList = ContextCompat.getColorStateList(myActivity, R.color.white)
-                            binding.rbBank1.background = ContextCompat.getDrawable(myActivity, R.drawable.rectanle_backgound)
-                            binding.rbBank1.setTextColor(ContextCompat.getColor(myActivity, R.color.black))
-                            binding.rbBank1.buttonTintList = ContextCompat.getColorStateList(myActivity, R.color.black)
+                    if (response.data.dmtApiType.isNotEmpty()){
+                        apiID=response.data.defaultApi
+                        val defaultPosition=response.data.dmtApiType.indexOfFirst { it._id == apiID }
+                        val dmtAPIAdapter=DmtApiTypeAdapter(myActivity,response.data.dmtApiType,this@DMTFragment,defaultPosition)
+                        binding.rvDmtApiType.adapter=dmtAPIAdapter
+                        binding.rvDmtApiType.layoutManager = LinearLayoutManager(myActivity, LinearLayoutManager.HORIZONTAL, false)
+                        dmtAPIAdapter.setDefaultSelectedPosition()
 
-                        }
-                        dmt = DMT(this@DMTFragment, myActivity, binding, userSession, apiID)
+
                         binding.llNoService.visibility = GONE
                         binding.rlMainContent.visibility = VISIBLE
                         binding.imageView.visibility = GONE
-
-                    } else {
+                    }else{
                         binding.llNoService.visibility = VISIBLE
                         binding.rlMainContent.visibility = GONE
                         binding.imageView.visibility = GONE
@@ -182,29 +157,6 @@ class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate
             dmt.openAddBeneficiaryAccount(customerMobile)
 
         }
-
-        binding.rgBank.setOnCheckedChangeListener { group, checkedId ->
-            if (checkedId == R.id.rbBank1) {
-                apiID = "eko"
-                binding.rbBank1.background = ContextCompat.getDrawable(myActivity, R.drawable.rectanle_backgound_primary)
-                binding.rbBank1.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                binding.rbBank1.buttonTintList = ContextCompat.getColorStateList(myActivity, R.color.white)
-                binding.rbBank2.background = ContextCompat.getDrawable(myActivity, R.drawable.rectanle_backgound)
-                binding.rbBank2.setTextColor(ContextCompat.getColor(myActivity, R.color.black))
-                binding.rbBank2.buttonTintList = ContextCompat.getColorStateList(myActivity, R.color.black)
-                binding.edtCustomerNumber.text?.clear()
-            } else {
-                apiID = "Paysprint"
-                binding.rbBank2.background = ContextCompat.getDrawable(myActivity, R.drawable.rectanle_backgound_primary)
-                binding.rbBank2.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                binding.rbBank2.buttonTintList = ContextCompat.getColorStateList(myActivity, R.color.white)
-                binding.rbBank1.background = ContextCompat.getDrawable(myActivity, R.drawable.rectanle_backgound)
-                binding.rbBank1.setTextColor(ContextCompat.getColor(myActivity, R.color.black))
-                binding.rbBank1.buttonTintList = ContextCompat.getColorStateList(myActivity, R.color.black)
-                binding.edtCustomerNumber.text?.clear()
-            }
-        }
-
     }
 
 
@@ -314,15 +266,7 @@ class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate
                         recipients.clear()
                     }
                     recipients.addAll(response.data)
-                    val beneficiaryListClick = object : RecipientListClickListner {
-                        override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
-                            dmt = DMT(this@DMTFragment, myActivity, binding, userSession, apiID)
-                            dmt.openMakeTransactionDialog(
-                                model[pos], avlLimit, customerName, customerMobile
-                            )
-                        }
-                    }
-                    val recipientListAdapter = RecipientListAdapter(myActivity, recipients, beneficiaryListClick)
+                    val recipientListAdapter = RecipientListAdapter(myActivity, recipients, this@DMTFragment,this@DMTFragment)
                     binding.rvBeneficiaryList.adapter = recipientListAdapter
                     binding.rvBeneficiaryList.layoutManager = LinearLayoutManager(myActivity)
 
@@ -386,5 +330,43 @@ class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate
     override fun setData() {
 
     }
+
+    override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<DmtApiType>, pos: Int) {
+        apiID=model[pos]._id
+    }
+
+    override fun onDeleteIconClicked(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
+        val requestData= hashMapOf<String,Any?>()
+        requestData["customer_mobile"]=binding.edtCustomerNumber.text.toString()
+        requestData["recipient_id"]=model[pos].recipient_id.toString()
+        requestData["api_id"]=apiID
+        requestData["user_id"]=userSession.getData(Constant.USER_TOKEN).toString()
+        CommonApiCall.deleteDmtBeneficiary(requireContext(),"",requestData,null,object:MCallBackResponse{
+            override fun success(from: String, message: String) {
+                val response:DeleteBeneResponse=Gson().fromJson(message,DeleteBeneResponse::class.java)
+                if (!response.error){
+                    recipients.removeAt(pos)
+                    val recipientListAdapter = RecipientListAdapter(myActivity, recipients, this@DMTFragment,this@DMTFragment)
+                    binding.rvBeneficiaryList.adapter = recipientListAdapter
+                    binding.rvBeneficiaryList.layoutManager = LinearLayoutManager(myActivity)
+                }else{
+                    showToast(requireContext(),response.message)
+                }
+
+            }
+
+            override fun fail(from: String) {
+                showToast(requireContext(),from)
+            }
+        })
+    }
+
+    override fun onRecipientItemClick(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
+        dmt = DMT(this@DMTFragment, myActivity, binding, userSession, apiID)
+        dmt.openMakeTransactionDialog(
+            model[pos], avlLimit, customerName, customerMobile
+        )
+    }
+
 
 }

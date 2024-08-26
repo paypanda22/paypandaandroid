@@ -9,7 +9,7 @@
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/ivBack"
@@ -17,6 +17,7 @@
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:contentDescription="@string/back"
+            android:visibility="gone"
             android:src="@drawable/left"
             app:tint="@color/white" />
 
@@ -27,7 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:text="Aeps Transation Report"
+            android:visibility="gone"
+            android:text="Aeps Transaction Report"
             android:gravity="end"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
@@ -36,11 +38,12 @@
             android:id="@+id/ivFilter"
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="39dp"
-           android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/txt"
             android:src="@drawable/filter_filled"
-            app:tint="@color/white" />
+            app:tint="@color/colorPrimaryDark" />
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/llMainContent"

@@ -183,6 +183,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:text=""
+                android:maxLength="25"
                 style="@style/mostserrat_bold"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
@@ -250,28 +251,35 @@
             </LinearLayout>
 
         </RelativeLayout>
-        <TextView
-            android:id="@+id/tvValidateBene"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/llVerify"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@drawable/submitt_btn_water_blue"
-            android:paddingVertical="@dimen/_2sdp"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:text="@string/validate_beneficiary"
-            android:textColor="@color/white"
-            style="@style/mostserrat_bold"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/tvValidateText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="@string/you_will_be_charged_3_for_beneficiary_validation"
-            android:textColor="@color/red"
-            android:textSize="@dimen/_8ssp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvValidateBene"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/submitt_btn_water_blue"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:text="Account Verification"
+                android:textColor="@color/white"
+                style="@style/mostserrat_bold"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvValidateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/you_will_be_charged_3_for_beneficiary_validation"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_8ssp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
 
 
@@ -280,14 +288,13 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            style="@style/EditTextInput5"
+            android:hint="@string/enter_amount">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_amount"
                 android:drawableStart="@drawable/ic_rupee"
                 android:drawablePadding="@dimen/_10sdp"
                 android:drawableTint="@color/colorPrimaryDark"
@@ -311,6 +318,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:padding="@dimen/_5sdp"
+            android:visibility="gone"
             android:layout_marginEnd="@dimen/_15sdp"
             android:clickable="true"
             android:focusable="true"/>
@@ -399,7 +407,7 @@
                android:layout_gravity="center_horizontal"
                android:layout_marginBottom="@dimen/_10sdp"
                android:focusableInTouchMode="true"
-               android:inputType="number"
+               android:inputType="numberPassword"
                style="@style/mostserrat_bold"
                android:textColor="@color/black"
                android:textSize="@dimen/_20ssp"
@@ -417,7 +425,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:background="@drawable/bg_btn_green"
+        android:background="@drawable/bg_btn_grey"
         android:text="@string/confirm_amp_pay"
         android:textColor="@color/white"
         android:textStyle="bold"

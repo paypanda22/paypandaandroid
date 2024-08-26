@@ -124,11 +124,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
         binding.llCashDeposit.setOnClickListener {
 
-            startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
-            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-//            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
+//            startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
 //            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-            //checkService("Aeps Cash Deposit", "206")
+////            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
+////            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+            checkService("Aeps Cash Deposit", "206")
         }
         binding.llDmt.setOnClickListener {
             startActivity(Intent(activity, DmtActivity::class.java))
