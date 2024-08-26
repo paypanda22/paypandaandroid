@@ -81,7 +81,7 @@ class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(Fra
     private fun getTransactionList(startDate: String, endDate: String, billerId: String, pageNo: String, txnCount: String, categoryId: String) {
         binding.rvTransactionList.visibility=GONE
         binding.imageView.visibility= VISIBLE
-        binding.    llNoData.visibility= GONE
+        binding.llNoData.visibility= GONE
         val token=userSession.getData(Constant.USER_TOKEN).toString()
         UtilMethods.getUtilityTransactions(requireContext(), token,startDate, endDate, billerId, pageNo, txnCount, categoryId, object : MCallBackResponse {
             override fun success(from: String, message: String) {
@@ -154,7 +154,7 @@ class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(Fra
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "Unable to Load List", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -171,12 +171,12 @@ class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(Fra
                     // Open the dialog after the list is updated
                     openServiceTypeListDialogId(dBinding.edtBillers)
                 } else {
-                    Toast.makeText(requireContext(), "Unable to Load List", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "Unable to Load List", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
             }
         })
     }

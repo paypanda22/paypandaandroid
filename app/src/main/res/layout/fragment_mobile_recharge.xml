@@ -195,7 +195,7 @@
                         android:layout_height="@dimen/_35sdp"
                         android:visibility="visible"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:src="@drawable/airtel"
+                        android:src="@drawable/mobile_recharge"
                         />
                 </LinearLayout>
 

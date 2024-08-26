@@ -25,6 +25,7 @@ class RequestListAdminAdapter(
         val tvStatus: TextView =itemView.findViewById(R.id.tvStatus)
         val tvAmount: TextView =itemView.findViewById(R.id.tvAmount)
         val user_type: TextView =itemView.findViewById(R.id.user_type)
+        val User_Name: TextView =itemView.findViewById(R.id.User_Name)
 
     }
 
@@ -42,6 +43,8 @@ class RequestListAdminAdapter(
         /*  holder.tvRequestedTo.text=list[position].bank*/
         holder.tvAmount.text = list[position].amount.toString()
         holder.user_type.text = list[position].user_type
+        holder.User_Name.text = list[position].user_id
+
         holder.tvStatus.text = list[position].status
         if (list[position].status == "Approved") {
             holder.mcvRequestItem.setCardBackgroundColor(
@@ -73,6 +76,7 @@ class RequestListAdminAdapter(
             val id = request._id ?: "N/A"
             val mobile = request.user_mobile ?: "N/A"
             val userType = request.user_id ?: "N/A"
+            val remark = request.remark ?: "N/A"
             requestWallletClick.onItemClicked(
                 holder,
                 list,
@@ -82,7 +86,8 @@ class RequestListAdminAdapter(
                 request.status,
                 id,
                 mobile,
-                userType
+                userType,
+                remark
             )
         }
     }

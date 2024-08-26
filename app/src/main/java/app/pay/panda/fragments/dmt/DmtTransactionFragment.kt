@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
@@ -23,8 +24,10 @@ import app.pay.panda.BaseFragment
 import app.pay.panda.R
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.adapters.DmtTransactionListAdapter
+import app.pay.panda.databinding.DialogViewDmtBinding
 import app.pay.panda.databinding.FragmentDmtTransactionBinding
 import app.pay.panda.databinding.LytDmtFilterBinding
+import app.pay.panda.databinding.LytItemViewReportBinding
 import app.pay.panda.databinding.LytUtilityFilterBinding
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CommonClass
@@ -46,6 +49,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
     private var start_date = ""
     private var end_date = ""
     private var txnList = ArrayList<Tran>()
+    private lateinit var dmtTxnAdapter: DmtTransactionListAdapter
     private var customerMobile = ""
     private var accountNumber = ""
     private var count = 25
@@ -92,6 +96,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
                                 }
                                 4->{
 
+                                    openViewDetailDialog(model[pos])
                                 }
 
                                 else -> {
@@ -100,7 +105,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
                             }
                         }
                     }
-                    val dmtTxnAdapter = DmtTransactionListAdapter(myActivity, txnList, clickListner)
+                    dmtTxnAdapter = DmtTransactionListAdapter(myActivity, txnList, clickListner)
                     binding.rvDmtTransactions.adapter = dmtTxnAdapter
                     binding.rvDmtTransactions.layoutManager = LinearLayoutManager(myActivity)
 
@@ -219,6 +224,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
                // getTransactionList(start_date, end_date, count);
                 if (!response.error) {
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                    dmtTxnAdapter.notifyDataSetChanged()
                 }else{
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
                 }
@@ -244,7 +250,80 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
         binding.ivBack.setOnClickListener { findNavController().popBackStack() }
         binding.ivMenu.setOnClickListener { openTransactionFilterDialog() }
     }
+private fun openViewDetailDialog(model: Tran){
+    val openDialog: Dialog=Dialog(myActivity)
+    val binding= DialogViewDmtBinding.inflate(myActivity.layoutInflater)
+    binding.root.background= ContextCompat.getDrawable(myActivity, R.drawable.curved_background_with_shadow)
+    openDialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+    openDialog.setContentView(binding.root)
+    openDialog.window
+        ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    openDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    openDialog.window?.attributes?.windowAnimations ?: R.style.DialogAnimationBottom
+    openDialog.window?.setGravity(Gravity.BOTTOM)
+    binding.OpeningBalance.text=model.o_bal.toString()
+    binding.ClosingBalance.text=model.c_bal.toString()
+    binding.txnId.text=model.txn_id.toString()
+    binding.BeneficiaryName.text=model.beneficiary_name.toString()
+    binding.AccountNo.text=model.account_number.toString()
+    binding.TransactionDate.text=model.updatedAt.toString()
+    binding.BankName.text=model.bank_name.toString()
+    binding.IFSCCode.text=model.ifsc_code.toString()
+    binding.RemitterMobileNo.text=model.customer_mobile.toString()
+    binding.Amount.text=model.amount.toString()
+    binding.Charges.text=model.charge.toString()
+    binding.Commissions.text=model.commission.toString()
+    binding.TDS.text=model.tds.toString()
+  /*  if(binding.Commissions.text.equals("")){
+        binding.Commissions.text="N/A"
+    }else{
+        binding.Commissions.text=model.commission.toString()
+    }
+   if(binding.TDS.text.equals("")){
+       binding.TDS.text="N/A"
+   }else{
+       binding.TDS.text=model.TDS.toString()
+   }*/
+    if (model.response == 1.toString()) {
+        when (model.tx_status.toString()) {
+            "0" -> {
+                binding.Status.text = "SUCCESS"
+            }
+            "1" -> {
+                binding.Status.text = "FAILED"
+            }
+            "2" -> {
+                binding.Status.text = "In PROCESS"
+            }
+            "3" -> {
+                binding.Status.text = "Initiate Refund"
+            }
+            "4" -> {
+                binding.Status.text = "Refunded"
+            }
+            "5" -> {
+                binding.Status.text = "In PROCESS"
+            }
+        }
+    } else if (model.response == 2.toString()) {
+        binding.Status.text = "SUCCESS"
 
+
+
+    }else if(model.response == 3.toString()){
+        binding.Status.text = "FAILED"
+    }else{
+        binding.Status.text = "Pending"
+    }
+    binding.UTRNoRRNNo.text=model.utr.toString()
+
+    binding.btnProceed.setOnClickListener{
+        openDialog.dismiss()
+    }
+    openDialog.setCancelable(true)
+    openDialog.show()
+
+}
     private fun openTransactionFilterDialog() {
         val filterDialog: Dialog = Dialog(myActivity)
         val dBinding = LytDmtFilterBinding.inflate(myActivity.layoutInflater)

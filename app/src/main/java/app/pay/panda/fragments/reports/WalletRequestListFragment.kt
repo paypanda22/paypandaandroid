@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import android.view.Gravity
+import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
@@ -53,7 +56,7 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
         userSession = UserSession(requireContext())
         getWalletRequestList()
         //   getTransferToList()
-
+      //  walletRequestListDist()
 
     }
             /* private fun getTransferToList() {
@@ -102,20 +105,27 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
 
 
     private fun getWalletRequestList() {
-        val progressBar = CustomProgressBar()
-        progressBar.showProgress(requireContext())
+
         val token=userSession.getData(Constant.USER_TOKEN).toString()
         val requestData= hashMapOf<String,Any?>()
+        requestData["bank"]=""
         requestData["user_id"]=token
+        requestData["end_date"]=""
+        requestData["start_date"]=""
+        requestData["status"]=""
+        requestData["sortKey"]=""
+        requestData["sortType"]=""
         requestData["count"]=50
         requestData["page"]=0
         UtilMethods.walletRequestList(requireContext(),requestData,object:MCallBackResponse{
             override fun success(from: String, message: String) {
-                progressBar.hideProgress()
+
                 val response: WalletRequestListResponse =
                     Gson().fromJson(message, WalletRequestListResponse::class.java)
+
                 if (!response.error){
-                    progressBar.hideProgress()
+
+
                     txnList= mutableListOf()
                     txnList.addAll(response.data.requestList)
                     val adapter=RequestListAdapter(myActivity,txnList)
@@ -127,7 +137,7 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
                     binding.llNoData.visibility= GONE
                     binding.imageView.visibility= GONE
                 }else{
-                    progressBar.hideProgress()
+
                     binding.rvWalletRequestList.visibility=GONE
                     binding.llNoData.visibility= VISIBLE
                     binding.imageView.visibility= GONE
@@ -135,7 +145,7 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
             }
 
             override fun fail(from: String) {
-                progressBar.hideProgress()
+
                 binding.rvWalletRequestList.visibility=GONE
                 binding.llNoData.visibility= VISIBLE
                 binding.imageView.visibility= GONE
@@ -156,9 +166,12 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
                 progressBar.hideProgress()
                 val response: WalletRequestListResponse =
                     Gson().fromJson(message, WalletRequestListResponse::class.java)
+                txnList.clear()
                 if (!response.error){
+
                     progressBar.hideProgress()
                     txnList= mutableListOf()
+
                     txnList.addAll(response.data.requestList)
 
                     val adapter= RequestListAdapterDist(myActivity,txnList)
@@ -213,20 +226,28 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
                     adminList.addAll(response.data.requestList)
                     val clickListner = object : RequetWalletClick {
                         override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<app.pay.panda.responsemodels.Request>, pos: Int, amount: String, date: String, status: String,
-                                                   id:String,mobile:String,userType:String) {
-                            val paymentRequestDialogFragment = PaymentRequestDialogFragment()
-                            val bundle = Bundle().apply {
-                                putString("amount", amount)
-                                putString("date", date)
-                                putString("status", status)
-                                putString("id", id)
-                                putString("mobile", mobile)
-                                putString("userType", userType)
+                                                   id:String,mobile:String,userType:String,remark:String) {
+                            if (status.equals("Approved")){
+                                Toast.makeText(myActivity, "Status is Already Approved", Toast.LENGTH_SHORT).show()
+                            }else {
+                                val paymentRequestDialogFragment = PaymentRequestDialogFragment()
+                                val bundle = Bundle().apply {
+                                    putString("amount", amount)
+                                    putString("date", date)
+                                    putString("status", status)
+                                    putString("id", id)
+                                    putString("mobile", mobile)
+                                    putString("userType", userType)
+                                    putString("remark", remark)
+                                }
+
+                                paymentRequestDialogFragment.arguments = bundle
+
+                                paymentRequestDialogFragment.show(
+                                    childFragmentManager,
+                                    "PaymentRequestDialogFragment"
+                                )
                             }
-                            paymentRequestDialogFragment.arguments = bundle
-
-                            paymentRequestDialogFragment.show(childFragmentManager, "PaymentRequestDialogFragment")
-
                         }
                     }
                     val adapter= RequestListAdminAdapter(myActivity,adminList,clickListner)
@@ -278,11 +299,42 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
         binding.rbLoginMethod.setOnClickListener { view ->
             val popup = PopupMenu(activity, view)
 
-            popup.gravity = Gravity.END or Gravity.BOTTOM
-
+            // Inflate the menu first
             val inflater: MenuInflater = popup.menuInflater
             inflater.inflate(R.menu.menu_options, popup.menu)
 
+            val userType = userSession.getData(Constant.USER_TYPE_NAME)
+            Log.d("UserType", "User type: $userType")  // Log the user type
+
+            // Now modify the visibility based on the user type
+            when (userType) {
+                "Retailer" -> {
+                    Log.d("Menu", "Setting Retailer menu visibility")
+                    popup.menu.findItem(R.id.Company)?.isVisible = true
+                    popup.menu.findItem(R.id.Super_Distributer)?.isVisible = true
+                    popup.menu.findItem(R.id.Distributer)?.isVisible = false
+                    popup.menu.findItem(R.id.member)?.isVisible = false
+                }
+                "Distributor" -> {
+                    Log.d("Menu", "Setting Distributor menu visibility")
+                    popup.menu.findItem(R.id.Company)?.isVisible = true
+                    popup.menu.findItem(R.id.Super_Distributer)?.isVisible = true
+                    popup.menu.findItem(R.id.member)?.isVisible = true
+                    popup.menu.findItem(R.id.Distributer)?.isVisible = false
+                }
+                "Super Distributor" -> {
+                    Log.d("Menu", "Setting Super Distributor menu visibility")
+                    popup.menu.findItem(R.id.Company)?.isVisible = true
+                    popup.menu.findItem(R.id.Super_Distributer)?.isVisible = false
+                    popup.menu.findItem(R.id.member)?.isVisible = true
+                    popup.menu.findItem(R.id.Distributer)?.isVisible = false
+                }
+                else -> {
+                    Log.d("Menu", "User type not recognized")
+                }
+            }
+
+            // Customize menu item appearance
             for (i in 0 until popup.menu.size()) {
                 val menuItem = popup.menu.getItem(i)
                 val spannableTitle = SpannableString(menuItem.title)
@@ -325,16 +377,62 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
                         paymentRequestToAdmin()
                         true
                     }
+                    R.id.member->{
+                        paymentRequestToAdmin()
+                        true
+                    }
                     else -> false
                 }
             }
 
+            popup.gravity = Gravity.END or Gravity.BOTTOM
             popup.show() // Show the popup menu
         }
+
     }
 
     override fun setData() {
 
     }
+   /* @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_options, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+    @Deprecated("Deprecated in Java")
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+
+        val userType = userSession.getData(Constant.USER_TYPE_NAME)
+        Log.d("UserType", "User type: $userType")  // Log the user type
+
+        when (userType) {
+            "Retailer" -> {
+                Log.d("Menu", "Setting Retailer menu visibility")
+                menu.findItem(R.id.Company)?.isVisible = true
+                menu.findItem(R.id.Super_Distributer)?.isVisible = true
+                menu.findItem(R.id.Distributer)?.isVisible = false
+                menu.findItem(R.id.member)?.isVisible = false
+            }
+            "Distributor" -> {
+                Log.d("Menu", "Setting Distributor menu visibility")
+                menu.findItem(R.id.Company)?.isVisible = true
+                menu.findItem(R.id.Super_Distributer)?.isVisible = true
+                menu.findItem(R.id.member)?.isVisible = true
+                menu.findItem(R.id.Distributer)?.isVisible = false
+            }
+            "Super Distributor" -> {
+                Log.d("Menu", "Setting Super Distributor menu visibility")
+                menu.findItem(R.id.Company)?.isVisible = true
+                menu.findItem(R.id.Super_Distributer)?.isVisible = false
+                menu.findItem(R.id.member)?.isVisible = true
+                menu.findItem(R.id.Distributer)?.isVisible = false
+            }
+            else -> {
+                Log.d("Menu", "User type not recognized")
+            }
+        }
+    }*/
+
 
 }

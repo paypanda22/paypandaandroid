@@ -24,6 +24,7 @@ import app.pay.panda.activity.IntroActivity
 import app.pay.panda.databinding.FragmentLoginBinding
 import app.pay.panda.databinding.LytLoginDialogBinding
 import app.pay.panda.fragments.PrivacyPolicy
+import app.pay.panda.fragments.RefundPolicyFragment
 import app.pay.panda.fragments.TermsAndConditions
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CommonClass
@@ -73,6 +74,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.tv4.setOnClickListener {
             val policyfgmt=PrivacyPolicy()
             policyfgmt.show(myActivity.supportFragmentManager,"TAG")
+
+        }
+        binding.tv5.setOnClickListener {
+            val refundpolicy=RefundPolicyFragment()
+            refundpolicy.show(myActivity.supportFragmentManager,"TAG")
 
         }
 

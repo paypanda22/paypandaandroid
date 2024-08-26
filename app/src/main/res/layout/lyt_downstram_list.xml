@@ -29,10 +29,11 @@
                 android:layout_height="wrap_content"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_9sdp"
                 android:shadowDx="2"
                 style="@style/mostserrat_bold"
                 android:shadowDy="2"
+
                 android:shadowRadius="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -88,7 +89,7 @@
                 android:text="R006605"
                 style="@style/mostserrat_bold"
                 android:textColor="@color/blue_900"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_8sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/NAme"
             app:layout_constraintBottom_toTopOf="@id/retailer" />
@@ -105,7 +106,7 @@
                 android:shadowRadius="3"
                 android:drawableEnd="@drawable/arrow_below"
                 android:textColor="@color/blue_900"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_8sdp"
             app:layout_constraintBottom_toTopOf="@+id/main_wallet"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/refer_id" />
@@ -116,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:text="₹ 230.75"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
             android:textStyle="bold"
                 style="@style/mostserrat_extra_bold"
             app:layout_constraintEnd_toStartOf="@+id/is_approved"
@@ -132,7 +133,7 @@
                 android:text="Approved"
                 style="@style/mostserrat_bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/main_wallet" />

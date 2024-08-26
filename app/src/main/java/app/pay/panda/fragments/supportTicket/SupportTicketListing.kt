@@ -1,5 +1,6 @@
 package app.pay.panda.fragments.supportTicket
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,11 +10,13 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.BaseFragment
 import app.pay.panda.R
 import app.pay.panda.activity.IntroActivity
+import app.pay.panda.adapters.PackaeServiceAdapter
 import app.pay.panda.adapters.SupportTicketListAdapter
 import app.pay.panda.databinding.FragmentAddSupportTicketBinding
 import app.pay.panda.databinding.FragmentSupportTicketListingBinding
@@ -21,8 +24,11 @@ import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.helperclasses.Utils.Companion.showToast
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.SupportTicketClick
+import app.pay.panda.responsemodels.PackageServices.PackageServicesResponse
 import app.pay.panda.responsemodels.supportTickets.DataX
 import app.pay.panda.responsemodels.supportTickets.SupportTicketListResponse
+import app.pay.panda.responsemodels.ticketHistory.Data
+import app.pay.panda.responsemodels.ticketHistory.TicktHistoryResponse
 import app.pay.panda.responsemodels.ticketReply.TicketReplyResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
@@ -35,6 +41,7 @@ class SupportTicketListing : BaseFragment<FragmentSupportTicketListingBinding>(F
     private lateinit var myActivity: FragmentActivity
     private lateinit var list: MutableList<DataX>
     private lateinit var attachments: MutableList<String>
+
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
@@ -109,13 +116,20 @@ class SupportTicketListing : BaseFragment<FragmentSupportTicketListingBinding>(F
         when (type) {
             "reply" -> {
                 val token = userSession.getData(Constant.USER_TOKEN).toString()
-                attachments= mutableListOf()
+                attachments = mutableListOf()
                 val requestData = hashMapOf<String, Any?>()
                 requestData["user_id"] = token
                 requestData["dispute_id"] = model[pos]._id
                 requestData["chat"] = editText.text.toString()
                 requestData["attachments"] = attachments
-                sendReply(requestData, editText,edt)
+                sendReply(requestData, editText, edt)
+            }
+
+            "history" -> {
+                val bundle = Bundle().apply {
+                    putString("dispute_id", model[pos]._id)
+                }
+                findNavController().navigate(R.id.supportTicketHistory, bundle)
             }
         }
     }
@@ -139,5 +153,7 @@ class SupportTicketListing : BaseFragment<FragmentSupportTicketListingBinding>(F
             }
         })
     }
+
+
 
 }

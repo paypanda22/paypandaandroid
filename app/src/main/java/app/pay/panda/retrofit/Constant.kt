@@ -8,6 +8,7 @@ object Constant {
     const val FROM = "from"
     const val TPINSTATUS = "tpinstatus"
     const val MainBase_URL = "https://devapi.paypandabnk.com/"
+   // const val MainBase_URL = "https://api.paypanda.in/"
     const val MainBase_URL_2 = "https://cloud.yoopay.in/"
     const val Image_Base_URL = "https://api.yoopay.in/img/"
     const val PIMAGE_URL="https://api.paypandabnk.com/api/cloudinary/"

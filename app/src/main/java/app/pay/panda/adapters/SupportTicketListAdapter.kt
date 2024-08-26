@@ -8,6 +8,10 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.R
 import app.pay.panda.helperclasses.Utils.Companion.showToast
@@ -67,6 +71,10 @@ class SupportTicketListAdapter(
             }else{
                 click.onItemClicked(holder,list,position,"reply",holder.edtReplyMessage,holder.lytReply)
             }
+        }
+        holder.tvHistory.setOnClickListener{
+            click.onItemClicked(holder,list,position,"history",holder.edtReplyMessage,holder.lytReply)
+
         }
     }
 }

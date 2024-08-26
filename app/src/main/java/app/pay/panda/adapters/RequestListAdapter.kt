@@ -20,6 +20,7 @@ class RequestListAdapter(
         val tvRequestedTo:TextView=itemView.findViewById(R.id.tvRequestedTo)
         val tvStatus:TextView=itemView.findViewById(R.id.tvStatus)
         val tvAmount:TextView=itemView.findViewById(R.id.tvAmount)
+        //val User_Name:TextView=itemView.findViewById(R.id.User_Name)
 
     }
 
@@ -36,6 +37,7 @@ class RequestListAdapter(
         holder.tvRequestedTo.text=list[position].bank
         holder.tvAmount.text=list[position].amount.toString()
         holder.tvStatus.text=list[position].status
+
         if (list[position].status=="Approved"){
             holder.mcvRequestItem.setCardBackgroundColor(
                 ContextCompat.getColor(

@@ -245,7 +245,7 @@
                     android:inputType="numberPassword"
                     android:itemBackground="@drawable/box"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp"
+                    android:textSize="@dimen/_10ssp"
                     android:textStyle="bold"
                     app:itemCount="3"
                     app:itemSpacing="@dimen/_10sdp"

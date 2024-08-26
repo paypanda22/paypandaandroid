@@ -323,14 +323,14 @@
                     app:tint="@color/colorPrimaryDark" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/view"
-                    android:layout_width="20dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="64dp"
+                    android:id="@+id/viewdata"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="115dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toEndOf="@id/date"
                     android:gravity="center"
-                    android:visibility="visible"
-                    app:srcCompat="@drawable/ic_eye_icon"
+                    app:srcCompat="@drawable/view"
                     app:tint="@color/colorPrimaryDark" />
 
                 <androidx.appcompat.widget.AppCompatImageView

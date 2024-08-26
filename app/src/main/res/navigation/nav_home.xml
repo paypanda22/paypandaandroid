@@ -106,6 +106,13 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_c_m_s_transaction_report"
+            app:destination="@id/CMSTransactionReport"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <action
@@ -211,6 +218,12 @@
         android:label="fragment_support_ticket_host"
         tools:layout="@layout/fragment_support_ticket_host" />
     <fragment
+        android:id="@+id/supportTicketHistory"
+        android:name="app.pay.panda.fragments.supportTicket.TicketHistoryFragment"
+        android:label="fragment_ticket_history"
+        tools:layout="@layout/fragment_ticket_history" />
+
+    <fragment
         android:id="@+id/utilityTransactions"
         android:name="app.pay.panda.fragments.reports.UtilityTransactions"
         android:label="fragment_utility_transactions"
@@ -226,8 +239,13 @@
         android:label="fragment_earning_report"
         tools:layout="@layout/fragment_earnning_report" />
     <fragment
-        android:id="@+id/AepsTransactionList"
-        android:name="app.pay.panda.fragments.aepsFragments.AepsTransactionList"
+        android:id="@+id/CMSTransactionReport"
+        android:name="app.pay.panda.fragments.reports.CMSTransactionReport"
         android:label="@string/fragment_aeps_action"
         tools:layout="@layout/fragment_aeps_transaction_list" />
+    <fragment
+        android:id="@+id/AepsTransactionList"
+        android:name="app.pay.panda.fragments.aepsFragments.AepsTransactionList"
+        android:label="fragment_c_m_s_transaction_report"
+        tools:layout="@layout/fragment_c_m_s_transaction_report" />
 </navigation>

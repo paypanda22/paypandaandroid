@@ -25,7 +25,9 @@ import app.pay.panda.R
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.adapters.AepsTxnAdapter
 import app.pay.panda.adapters.ScannerListAdapter
+import app.pay.panda.databinding.DialogAepsInvoiceBinding
 import app.pay.panda.databinding.DialogScannerDevicesBinding
+import app.pay.panda.databinding.DialogViewDmtBinding
 import app.pay.panda.databinding.FragmentAepsTransactionListBinding
 import app.pay.panda.databinding.LytAepsFilterBinding
 import app.pay.panda.helperclasses.ActivityExtensions
@@ -39,6 +41,7 @@ import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.ScannerListClick
 import app.pay.panda.responsemodels.aepsTxnList.AepsTransactionsResponse
 import app.pay.panda.responsemodels.aepsTxnList.Data
+import app.pay.panda.responsemodels.dmttxnlist.Tran
 import app.pay.panda.responsemodels.singleutility.SingleUtilityTransaction
 import app.pay.panda.retrofit.ApiMethods
 import app.pay.panda.retrofit.Constant
@@ -75,7 +78,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         requestData["txn_id"]=""
         UtilMethods.aepsTransactionList(requireContext(),requestData,object:MCallBackResponse{
             override fun success(from: String, message: String) {
-                val response:AepsTransactionsResponse=Gson().fromJson(message,AepsTransactionsResponse::class.java)
+                val response: AepsTransactionsResponse =Gson().fromJson(message,AepsTransactionsResponse::class.java)
                 if (!response.error){
                     txnList= mutableListOf()
                     txnList.addAll(response.data)
@@ -200,5 +203,45 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         receipt.show(parentFragmentManager, receipt.tag)
     }
 
+    override fun onItemClickInvoice(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
+        openViewDetailDialog(model[pos])
+    }
 
+    override fun onItemClickEnquery(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
+
+    }
+
+    private fun openViewDetailDialog(model: Data){
+        val openDialog: Dialog=Dialog(myActivity)
+        val binding= DialogAepsInvoiceBinding.inflate(myActivity.layoutInflater)
+        binding.root.background= ContextCompat.getDrawable(myActivity, R.drawable.curved_background_with_shadow)
+        openDialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        openDialog.setContentView(binding.root)
+        openDialog.window
+            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        openDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        openDialog.window?.attributes?.windowAnimations ?: R.style.DialogAnimationBottom
+        openDialog.window?.setGravity(Gravity.BOTTOM)
+        binding.OpeningBalance.text=model.opening_balance.toString()
+        binding.ClosingBalance.text=model.closing_balance.toString()
+        binding.txnId.text=model.txn_id.toString()
+        binding.BeneficiaryName.text=model.user_name.toString()
+       // binding.AccountNo.text=model..toString()
+        binding.TransactionDate.text=model.updatedAt.toString()
+        binding.BankName.text=model.bank_name.toString()
+        //binding.IFSCCode.text=model..toString()
+        binding.RemitterMobileNo.text=model.customer_mobile.toString()
+        binding.Amount.text=model.amount.toString()
+       // binding.Charges.text=model.charge.toString()
+        binding.Commissions.text=model.commission.toString()
+        binding.TDS.text=model.user_tds.toString()
+
+
+        binding.btnProceed.setOnClickListener{
+            openDialog.dismiss()
+        }
+        openDialog.setCancelable(true)
+        openDialog.show()
+
+    }
 }

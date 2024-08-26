@@ -61,12 +61,17 @@ class SingleUtilityTransaction : BaseBottomFragment<FragmentSingleUtilityTransac
 
                     binding.billerName.text=response.data.operator_name
                     binding.number.text=response.data.user_id.mobile
-                    binding.shopName.text=response.data.user_id.shop_name
-                    binding.customerName.text=response.data.user_id.name
+                    binding.Name.text=response.data.user_id.name
+                    binding.ShopName.text=response.data.user_id.shop_name
+                    binding.TxnIdnew.text=response.data.txn_id
                     binding.operatorRefId.text=response.data.txnReferenceId
                     binding.amount.text=response.data.amount
-                    binding.finalAmount.text=response.data.amount
+                    binding.amount.text=response.data.amount
                     binding.txnId.text=response.data.txnReferenceId
+                    binding.serviceName.text=response.data.category_id.service_name
+                    binding.ConsumerNo.text=response.data.ca_num
+                    binding.name1.text=response.data.user_id.name
+                    binding.shopnam.text=response.data.user_id.shop_name
                 } else {
                     Toast.makeText(requireContext(), "Unable to fetch Txn Details", Toast.LENGTH_SHORT).show()
                 }

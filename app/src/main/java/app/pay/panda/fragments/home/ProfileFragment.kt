@@ -126,6 +126,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.card5.setOnClickListener{
             findNavController().navigate(R.id.action_profileFragment_to_fragment_aeps_transaction_list)
         }
+        binding.card10.setOnClickListener{
+           findNavController().navigate(R.id.action_profileFragment_to_fragment_c_m_s_transaction_report)
+        }
     }
 
     override fun setData() {

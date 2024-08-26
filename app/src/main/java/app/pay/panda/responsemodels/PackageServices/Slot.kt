@@ -14,7 +14,7 @@ data class Slot(
     val distributor_comm_type: String = "",
     val end_amt: Int = 0,
     val isActive: Boolean = false,
-    val master_distributer_com: Double = 0.0,
+    val master_distributer_com: Int = 0,
     val master_distributer_com_type: String = "",
     val start_amt: Int = 0
 )

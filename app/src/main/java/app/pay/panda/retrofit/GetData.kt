@@ -74,8 +74,8 @@ interface GetData {
     @POST("api/verification/gstNoSave")
     fun updateGstDetails(@Body obj: Any): Call<JsonObject>
 
-   // @POST("api/verification/bankAccount")
-    @POST("api/verification/bankVerification")
+    @POST("api/verification/bankAccount")
+   // @POST("api/verification/bankVerification")
     fun verifyBankAccount(@Body obj: Any): Call<JsonObject>
 
     @Multipart
@@ -158,8 +158,8 @@ interface GetData {
     @POST("api/paymentRequest/addrequest")
     fun addPaymentRequest(@Body obj: Any): Call<JsonObject>
 
-   /* @POST("api/paymentRequestToUser/user")*/
-    @POST("api/paymentRequest/user/all")
+    @POST("api/paymentRequestToUser/user")
+   /* @POST("api/paymentRequest/user/all")*/
     fun walletRequestList(@Body obj: Any): Call<JsonObject>
 
     @POST("api/paymentRequestToUser/user/all")
@@ -433,11 +433,21 @@ interface GetData {
     fun deleteDmtBeneficiary(@Body obj:Any):Call<JsonObject>
 
 
+    @GET("api/dmtdisputechat/public")
+    fun dmtdisputechat(@Query("dispute_id") dispute_id: String,
+                     @Query("count") count: String,
+                     @Query("page") page: String): Call<JsonObject>
 
 
-
-
-
+    @GET("api/cms/public")
+    fun getCMsTransactionList(
+        @Query("start_date") startDate: String?,
+        @Query("end_date") endDate: String?,
+        @Query("customer_mobile") customerMobile: String?,
+        @Query("page") page: String,
+        @Query("count") count: String,
+        @Query("txn_id") txnId: String?
+    ): Call<JsonObject>
 
 
 

@@ -24,6 +24,7 @@ class RequestListAdapterDist (
         val tvStatus: TextView =itemView.findViewById(R.id.tvStatus)
         val tvAmount: TextView =itemView.findViewById(R.id.tvAmount)
         val user_type: TextView =itemView.findViewById(R.id.user_type)
+        val User_Name: TextView =itemView.findViewById(R.id.User_Name)
 
     }
 
@@ -37,11 +38,12 @@ class RequestListAdapterDist (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val request = list[position]
-        holder.tvRequestedTo.text = list[position].requestTo?.name
+        holder.tvRequestedTo.text = list[position].bank
         /*  holder.tvRequestedTo.text=list[position].bank*/
         holder.tvAmount.text = list[position].amount.toString()
-        holder.user_type.text = list[position].requestTo?.user_type_id?.user_type.toString()
+        holder.user_type.text = list[position].method
         holder.tvStatus.text = list[position].status
+        holder.User_Name.text = list[position].user_id
         if (list[position].status == "Approved") {
             holder.mcvRequestItem.setCardBackgroundColor(
                 ContextCompat.getColor(

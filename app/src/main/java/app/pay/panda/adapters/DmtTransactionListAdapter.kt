@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
@@ -36,7 +38,7 @@ class DmtTransactionListAdapter(
         val refresh: AppCompatImageView =itemView.findViewById(R.id.refresh)
         val ivOtp:AppCompatImageView=itemView.findViewById(R.id.ivOtp)
         val ivShare:AppCompatImageView=itemView.findViewById(R.id.ivShare)
-        val view:AppCompatImageView=itemView.findViewById(R.id.view)
+        val view: ImageView =itemView.findViewById(R.id.viewdata)
 
 
 
@@ -64,55 +66,82 @@ class DmtTransactionListAdapter(
             holder.commission.text=list[position].commission.toString()
             holder.customer.text=list[position].customer_mobile.toString()
             holder.date.text=list[position].createdAt.toString()
-            when(list[position].response){
-                2->{
-                    holder.tvStatus.text = "SUCCESS"
-                    holder.refresh.setVisibility(View.GONE)
-                    holder.ivOtp.setVisibility(View.GONE)
-                    holder.ivShare.setVisibility(View.VISIBLE)
-                    holder.txstatus.text="SUCCESS"
-                    holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.white))
-                    holder.tvStatus.setBackgroundDrawable(ContextCompat.getDrawable(activity, R.drawable.btn_success))
-                    holder.txstatus.text="SUCCESS"
-                }
-                3->{
-                    holder.tvStatus.text = "FAILED"
-                    holder.refresh.setVisibility(View.VISIBLE)
-                    holder.ivOtp.setVisibility(View.GONE)
-                    holder.ivShare.setVisibility(View.GONE)
-                    holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.white))
-                    holder.tvStatus.setBackgroundDrawable(ContextCompat.getDrawable(activity, R.drawable.btn_failed))
-                    holder.txstatus.text="FAILED"
-                }
-                else->{
-                    holder.tvStatus.text = "IN PROCESS"
-                    holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.black))
-                    holder.refresh.setVisibility(View.GONE)
-                    holder.tvStatus.setBackgroundDrawable(ContextCompat.getDrawable(activity, R.drawable.btn_pending))
-                    if (list[position].tx_status.toString().toInt()==2  ||list[position].tx_status.toString().toInt()==5){
-                        holder.refresh.setVisibility(View.VISIBLE)
-                        holder.ivOtp.setVisibility(View.GONE)
-                        holder.ivShare.setVisibility(View.GONE)
-                        holder.txstatus.text="In PROCESS"
-                    }else if (list[position].tx_status.toString().toInt()==3){
-                        holder.refresh.setVisibility(View.GONE)
-                        holder.ivOtp.setVisibility(View.VISIBLE)
-                        holder.ivShare.setVisibility(View.GONE)
-                        holder.txstatus.text="Refund Pending"
-                    }else if (list[position].tx_status.toString().toInt()==0){
-                        holder.refresh.setVisibility(View.GONE)
-                        holder.ivOtp.setVisibility(View.GONE)
-                        holder.ivShare.setVisibility(View.VISIBLE)
-                        holder.txstatus.text="SUCCESS"
-                    } else{
-                        holder.refresh.setVisibility(View.VISIBLE)
-                        holder.ivOtp.setVisibility(View.GONE)
-                        holder.ivShare.setVisibility(View.GONE)
-                        holder.txstatus.text="In PROCESS"
+            // Assuming item is a data class with response and tx_status properties
+            if (list[position].response == 1.toString()) {
+                when (list[position].tx_status.toString()) {
+                    "0" -> {
+                        holder.tvStatus.text = "SUCCESS"
+                        holder.refresh.visibility = View.GONE
+                        holder.ivOtp.visibility = View.GONE
+                        holder.ivShare.visibility = View.VISIBLE
+                        holder.txstatus.text = "SUCCESS"
+                        holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.white))
+                        holder.tvStatus.background = ContextCompat.getDrawable(activity, R.drawable.btn_success)
+                    }
+                    "1" -> {
+                        holder.tvStatus.text = "FAILED"
+                        holder.refresh.visibility = View.VISIBLE
+                        holder.ivOtp.visibility = View.GONE
+                        holder.ivShare.visibility = View.GONE
+                        holder.txstatus.text = "FAILED"
+                        holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.white))
+                        holder.tvStatus.background = ContextCompat.getDrawable(activity, R.drawable.btn_failed)
+                    }
+                    "2" -> {
+                        holder.tvStatus.text = "In PROCESS"
+                        holder.refresh.visibility = View.VISIBLE
+                        holder.ivOtp.visibility = View.GONE
+                        holder.ivShare.visibility = View.GONE
+                        holder.txstatus.text = "In PROCESS"
+                        holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.black))
+                        holder.tvStatus.background = ContextCompat.getDrawable(activity, R.drawable.btn_pending)
+                    }
+                    "3" -> {
+                        holder.refresh.visibility = View.GONE
+                        holder.ivOtp.visibility = View.VISIBLE
+                        holder.ivShare.visibility = View.GONE
+                        holder.txstatus.text = "Initiate Refund"
+                        holder.tvStatus.text = "Initiate Refund"
+                        holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.black))
+                        holder.tvStatus.background = ContextCompat.getDrawable(activity, R.drawable.btn_pending)
+                    }
+                    "4" -> {
+                        holder.refresh.visibility = View.GONE
+                        holder.ivOtp.visibility = View.GONE
+                        holder.ivShare.visibility = View.VISIBLE
+                        holder.txstatus.text = "Refunded"
+                        holder.tvStatus.text = "Refunded"
+                        holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.white))
+                        holder.tvStatus.background = ContextCompat.getDrawable(activity, R.drawable.btn_success)
+                    }
+                    "5" -> {
+                        holder.refresh.visibility = View.VISIBLE
+                        holder.ivOtp.visibility = View.GONE
+                        holder.ivShare.visibility = View.GONE
+                        holder.txstatus.text = "In PROCESS"
+                        holder.tvStatus.text = "In PROCESS"
+                        holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.black))
+                        holder.tvStatus.background = ContextCompat.getDrawable(activity, R.drawable.btn_pending)
                     }
                 }
-
+            } else if (list[position].response == 2.toString()) {
+                holder.tvStatus.text = "SUCCESS"
+                holder.refresh.visibility = View.GONE
+                holder.ivOtp.visibility = View.GONE
+                holder.ivShare.visibility = View.VISIBLE
+                holder.txstatus.text = "SUCCESS"
+                holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.white))
+                holder.tvStatus.background = ContextCompat.getDrawable(activity, R.drawable.btn_success)
+            } else if (list[position].response == 3.toString()) {
+                holder.tvStatus.text = "FAILED"
+                holder.refresh.visibility = View.VISIBLE
+                holder.ivOtp.visibility = View.GONE
+                holder.ivShare.visibility = View.GONE
+                holder.txstatus.text = "FAILED"
+                holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.white))
+                holder.tvStatus.background = ContextCompat.getDrawable(activity, R.drawable.btn_failed)
             }
+
 
             holder.ivShare.setOnClickListener{
                 if (holder.ivShare.visibility==VISIBLE){
@@ -128,12 +157,14 @@ class DmtTransactionListAdapter(
                 if (holder.refresh.visibility==VISIBLE){
                     clickListener.onItemClicked(holder,list,position,1)
                 }
-                holder.view.setOnClickListener{
-                    clickListener.onItemClicked(holder,list,position,4)
+
+            }
+            holder.view.setOnClickListener {
+
+                if (holder.view.visibility == VISIBLE) {
+                    clickListener.onItemClicked(holder, list, position, 4)
                 }
             }
-
-
 
         }catch(e:Exception){
             e.printStackTrace()

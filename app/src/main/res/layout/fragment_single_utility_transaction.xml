@@ -112,7 +112,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_below="@+id/top_anim"
+
                 android:layout_marginTop="@dimen/_2sdp"
                 android:background="@color/black" />
         </LinearLayout>
@@ -122,6 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/top"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,12 +131,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:text="Reffer Id : "
+                    android:text="Name : "
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_11ssp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/shop_name"
+                    android:id="@+id/Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -147,67 +148,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_below="@+id/top_anim"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/bggrey" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:weightSum="1">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.65"
-                    android:text="biller name"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/biller_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.35"
-                    android:gravity="end"
-                    android:text=""
-                    android:textColor="@color/bggrey_dark"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_below="@+id/top_anim"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/bggrey" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:weightSum="1">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.65"
-                    android:text="Customer Name :"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/customer_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.35"
-                    android:gravity="end"
-                    android:text=""
-                    android:textColor="@color/bggrey_dark"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_below="@+id/top_anim"
+
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@color/bggrey" />
             <RelativeLayout
@@ -220,7 +161,7 @@
                     android:layout_alignParentStart="true"
                     android:text="Number : "
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_11ssp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/number"
@@ -232,9 +173,13 @@
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
 
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/bggrey" />
             <RelativeLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp">
@@ -242,12 +187,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:text="Txn Mode :"
+                    android:text="CSP Name : "
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_11ssp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/txn_mode"
+                    android:id="@+id/ShopName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -256,6 +201,73 @@
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/bggrey" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:weightSum="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.65"
+                    android:text="Txn Id :"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/TxnIdnew"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:gravity="end"
+                    android:text=""
+                    android:textColor="@color/bggrey_dark"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/bggrey" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:weightSum="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.65"
+                    android:text="Service Provider"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/biller_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:gravity="end"
+                    android:text=""
+                    android:textColor="@color/bggrey_dark"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/bggrey" />
 
             <RelativeLayout
                 android:visibility="gone"
@@ -287,20 +299,20 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_below="@+id/top_anim"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@color/bggrey" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/BBPSRefNo"
                 android:layout_marginTop="@dimen/_10sdp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:text="Operator Ref :"
+                    android:text="BBPS Ref No. :"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_11ssp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/operator_ref_id"
@@ -315,7 +327,60 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_below="@+id/top_anim"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/bggrey" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="Service :"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/service_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text=""
+                    android:textColor="@color/bggrey_dark"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/bggrey" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="Consumer No. :"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/Consumer_No"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text=""
+                    android:textColor="@color/bggrey_dark"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@color/bggrey" />
             <RelativeLayout
@@ -328,7 +393,7 @@
                     android:layout_alignParentStart="true"
                     android:text="Amount :"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_11ssp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/amount"
@@ -343,63 +408,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_below="@+id/top_anim"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/bggrey" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:text="Service Charge :"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/service_charge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text=""
-                    android:textColor="@color/bggrey_dark"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_below="@+id/top_anim"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/bggrey" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:text="Final Amount :"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/final_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text=""
-                    android:textColor="@color/bggrey_dark"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_below="@+id/top_anim"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@color/bggrey" />
             <RelativeLayout
@@ -425,14 +433,33 @@
                         android:layout_height="@dimen/_45sdp"
                         android:layout_alignParentStart="true"
                         android:src="@drawable/user_male" />
+
                     <TextView
-                        android:id="@+id/mrch_dets"
+                        android:id="@+id/name1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text=""
-                        android:textColor="@color/green_700"
-                        android:textSize="@dimen/_12ssp"
+                        android:text="name"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        style="@style/mostserrat_bold"
+                        android:layout_marginLeft="@dimen/_25sdp"
+                        android:layout_toEndOf="@+id/userImage"
+                        android:textColor="@color/blue_900"
+                        android:textSize="@dimen/_11ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/shopnam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_toEndOf="@+id/userImage"
+                        android:layout_marginLeft="@dimen/_25sdp"
+                        android:text="dfdfgfh"
+                        style="@style/mostserrat_bold"
+                        android:textColor="@color/blue_900"
+                        android:textSize="@dimen/_11ssp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </RelativeLayout>

@@ -14,12 +14,13 @@
         android:padding="@dimen/_8sdp">
 
         <RelativeLayout
+            android:background="@color/transparent"
             android:id="@+id/bill_fetch_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/biller_name"
+                android:id="@+id/sub_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -34,15 +35,16 @@
 
 
             <TextView
-                android:id="@+id/sub_title"
+                android:id="@+id/txnId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/biller_name"
+                android:layout_toEndOf="@+id/sub_title"
                 android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:gravity="left"
-                android:text="@string/enter_otp_received_on_customer_s_mobile"
+                android:text=""
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_14ssp"/>
 
 
         </RelativeLayout>
@@ -57,6 +59,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="Beneficiary Name"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
@@ -81,6 +85,8 @@
                 android:layout_alignParentStart="true"
                 android:text="Account No"
                 android:textSize="@dimen/_10ssp"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -104,6 +110,8 @@
                 android:layout_alignParentStart="true"
                 android:text="Transaction Date"
                 android:textSize="@dimen/_10ssp"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -126,6 +134,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="Bank Name"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
@@ -149,6 +159,8 @@
             android:layout_alignParentStart="true"
             android:text="IFSC Code"
             android:textSize="@dimen/_10ssp"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <TextView
@@ -171,6 +183,9 @@
                 android:layout_alignParentStart="true"
                 android:text="Remitter Mobile No"
                 android:textSize="@dimen/_10ssp"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+
                 android:textStyle="bold" />
 
             <TextView
@@ -192,6 +207,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="Amount"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
@@ -210,10 +227,12 @@
             android:layout_marginVertical="@dimen/_5sdp">
 
             <TextView
+                style="@style/mostserrat_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="Charges"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
@@ -236,6 +255,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="Commissions"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
@@ -258,6 +279,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="TDS"
+
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
@@ -280,6 +304,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="UTR No/RRN No"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
@@ -302,6 +328,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="Opening Balance"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
@@ -324,6 +352,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="Closing Balance"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
@@ -346,6 +376,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="Status"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 

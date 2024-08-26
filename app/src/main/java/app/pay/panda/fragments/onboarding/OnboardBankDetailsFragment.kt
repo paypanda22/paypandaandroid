@@ -220,14 +220,14 @@ class OnboardBankDetailsFragment : BaseFragment<FragmentOnboardBankDetailsBindin
                 val response: VerifyBankResponse =Gson().fromJson(message,VerifyBankResponse::class.java)
                 bankVerified=true
                 binding.tvVerifyBank.visibility=GONE
-                binding.edtName.setText(response.data.bank_account_name)
+                binding.edtName.setText(response.data.data.nameAtBank)
                 Toast.makeText(requireContext(),"Bank Verified Successfully",Toast.LENGTH_SHORT).show()
 
             }
 
             override fun fail(from: String) {
                 bankVerified=false
-                Toast.makeText(requireContext(),"Unable to Verify Bank Details",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),from,Toast.LENGTH_SHORT).show()
             }
         })
     }

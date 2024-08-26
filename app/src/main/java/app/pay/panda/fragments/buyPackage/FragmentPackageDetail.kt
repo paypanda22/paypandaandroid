@@ -20,13 +20,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import app.pay.panda.BaseFragment
 import app.pay.panda.R
 import app.pay.panda.activity.IntroActivity
+import app.pay.panda.adapters.PackaeServiceAdapter
 
 import app.pay.panda.databinding.FragmentPackageDetailBinding
+import app.pay.panda.helperclasses.CustomProgressBar
 import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.interfaces.MCallBackResponse
-
+import app.pay.panda.responsemodels.PackageServices.Data
 import app.pay.panda.responsemodels.PackageServices.PackageServicesResponse
 import app.pay.panda.responsemodels.PackageServices.Slot
+
 import app.pay.panda.responsemodels.packagedetail.BBPSWiseService
 
 import app.pay.panda.responsemodels.packagedetail.OtherComm
@@ -42,7 +45,8 @@ class FragmentPackageDetail : BaseFragment<FragmentPackageDetailBinding>(Fragmen
     private lateinit var myActivity: FragmentActivity
     private lateinit var txnDetailList:MutableList<OtherComm>
     private lateinit var dataid:MutableList<BBPSWiseService>
-    private lateinit var bbpsWiseService:MutableList<Slot>
+    private lateinit var bbpsWiseService:MutableList<Data>
+
     private var packageId: String? = null
     private var selectedServiceId: String? = null
     private var bbpsServiceNames: String? = null
@@ -72,12 +76,14 @@ class FragmentPackageDetail : BaseFragment<FragmentPackageDetailBinding>(Fragmen
 
         // Toggle Commissions Section
         binding.llCommissionsHeader.setOnClickListener {
+
             if (binding.llCommissionsContent.visibility == View.VISIBLE) {
                 binding.llCommissionsContent.visibility = View.GONE
                 binding.ivCommissionsArrow.setImageResource(R.drawable.arrow_right_1)
                 binding.llNoData.visibility = GONE
                 binding.rvPackageList.visibility = GONE
-                binding.imageView.visibility = GONE// Arrow pointing right when collapsed
+
+
             } else {
                 binding.llCommissionsContent.visibility = View.VISIBLE
                 binding.ivCommissionsArrow.setImageResource(R.drawable.down_line) // Arrow pointing down when expanded
@@ -85,21 +91,24 @@ class FragmentPackageDetail : BaseFragment<FragmentPackageDetailBinding>(Fragmen
                 if (::myActivity.isInitialized) {
                     // Ensure txnDetailList has data before setting the adapter
                     if (txnDetailList.isNotEmpty()) {
+
                         val packageAdapter = PackageDetailAdapter(txnDetailList)
                         binding.rvPackageList.adapter = packageAdapter
                         binding.rvPackageList.layoutManager = LinearLayoutManager(myActivity)
-
                         binding.llNoData.visibility = GONE
                         binding.rvPackageList.visibility = VISIBLE
                         binding.imageView.visibility = GONE
+
                     } else {
                         // Handle case where txnDetailList is empty
                         binding.llNoData.visibility = VISIBLE
                         binding.rvPackageList.visibility = GONE
                         binding.imageView.visibility = GONE
                         binding.comDetail.visibility= GONE
+
                     }
                 } else {
+
                     // Handle case where myActivity is not initialized
                     Toast.makeText(requireContext(), "Activity is not initialized", Toast.LENGTH_SHORT).show()
                 }
@@ -153,25 +162,32 @@ class FragmentPackageDetail : BaseFragment<FragmentPackageDetailBinding>(Fragmen
     private fun bbpsServices() {
         val token = userSession.getData(Constant.USER_TOKEN).toString()
 
-        UtilMethods.bbpsServices(requireContext(), token,packageId.toString(),selectedServiceId.toString(),"0","4", object : MCallBackResponse {
+        UtilMethods.bbpsServices(requireContext(), token,packageId.toString(),selectedServiceId.toString(),"0","20", object : MCallBackResponse {
             @SuppressLint("SetTextI18n")
             override fun success(from: String, message: String) {
                 val response: PackageServicesResponse = Gson().fromJson(message, PackageServicesResponse::class.java)
                 if (!response.error){
+                    bbpsWiseService = mutableListOf()
                     if (bbpsWiseService.isNotEmpty()){
                         bbpsWiseService.clear()
                     }
-                    bbpsWiseService.addAll(response.data.slots)
+                    bbpsWiseService.addAll(response.data)
+                    val packageserviceAdapter = PackaeServiceAdapter(bbpsWiseService)
+                    binding.rvPackageserviceList.adapter = packageserviceAdapter
+                    binding.rvPackageserviceList.layoutManager = LinearLayoutManager(myActivity)
 
+                    binding.llNoData1.visibility = GONE
+                    binding.rvPackageserviceList.visibility = VISIBLE
+                    binding.imageView1.visibility = GONE
                     } else {
-                        binding.llNoData.visibility = GONE
+                        binding.llNoData1.visibility = GONE
                         binding.imageView.visibility = GONE
-                        binding.rvPackageList.visibility = GONE
+                        binding.rvPackageserviceList.visibility = GONE
                     }
                 }
             override fun fail(from: String) {
-                binding.imageView.visibility = GONE
-                binding.rvPackageList.visibility = GONE
+                binding.imageView1.visibility = GONE
+                binding.rvPackageserviceList.visibility = GONE
              //   Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
             }
         })

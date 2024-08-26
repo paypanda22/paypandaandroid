@@ -1,9 +1,11 @@
 package app.pay.panda.responsemodels.userid
 
 
+import androidx.annotation.Keep
 
-data class UserIDResponse (
-    val `data`: Data?,
-    val error: Boolean?,
-    val statusCode: String?
+@Keep
+data class UserIDResponse(
+    val `data`: Data = Data(),
+    val error: Boolean = false,
+    val statusCode: String = ""
 )

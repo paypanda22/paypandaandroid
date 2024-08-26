@@ -57,6 +57,29 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_5sdp"
         android:id="@+id/rvPriceList"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <CheckBox
+        android:id="@+id/chkRememberMe"
+        style="@style/mostserrat_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20sdp"
+        android:text=""
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_10ssp"
+        tools:ignore="TouchTargetSizeCheck" />
+    <TextView
+        android:id="@+id/textViewTermsConditions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I agree to the terms and condition"
+        style="@style/mostserrat_bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold" />
+</LinearLayout>
     <LinearLayout
         android:id="@+id/llPin"
         android:layout_width="match_parent"
@@ -77,12 +100,12 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/_10sdp"
             android:focusableInTouchMode="true"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:itemBackground="@drawable/box"
             style="@style/mostserrat_bold"
             android:layout_marginVertical="@dimen/_10sdp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_10sdp"
             android:textStyle="bold"
             app:itemCount="4"
             app:itemSpacing="@dimen/_8sdp"

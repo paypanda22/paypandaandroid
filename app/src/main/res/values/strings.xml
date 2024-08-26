@@ -16,7 +16,7 @@
     <!-- Spannable Text-->
     <string name="terms_and_conditions">By continuing, you agree to</string>
     <string name="terms_conditions">Terms &amp; Conditions</string>
-    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_policy">Privacy Policy.</string>
     <string name="and">and</string>
     <string name="most_trusted_amp_secure_app"><![CDATA[Most Trusted & Secure App]]></string>
     <string name="_0000000000">0000000000</string>
@@ -568,4 +568,10 @@
     <string name="are_you_sure_you_want_to_delete">Are you sure, You want to delete this Account ?</string>
     <string name="account_verification">Account Verification</string>
 
+    <string name="termsconditions">
+        1. The subscriptions validity is only valid for 30/90/180/365 days after the date of purchase.<br /><br />
+        2. Your wallet will be debited for the amount automatically renewed when your subscription expires.<br /><br />
+        3. The Retailer will be switched to the same plan on the same day if he cancels the subscription at any moment.<br /><br />
+        4. After being deducted, subscription fees are not refundable.
+    </string>
 </resources>
