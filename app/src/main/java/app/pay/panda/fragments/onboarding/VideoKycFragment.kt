@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
@@ -80,13 +81,14 @@ class VideoKycFragment : BaseFragment<FragmentVideoKycBinding>(FragmentVideoKycB
             override fun fail(from: String) {
                 userSession.setBoolData(Constant.ISVIDEO,true)
                 userSession.setIntData(Constant.LOGIN_STEPS,6)
-                ShowDialog.bottomDialogSingleButton(myActivity,
+                /*ShowDialog.bottomDialogSingleButton(myActivity,
                     "Video Uploaded Successfully",
                     "Video Kyc is Completed, Now Proceed to Self Declaration","success",object:MyClick{
                         override fun onClick() {
                             findNavController().popBackStack()
                         }
-                    })
+                    })*/
+                Toast.makeText(myActivity, from, Toast.LENGTH_SHORT).show()
             }
         })
 

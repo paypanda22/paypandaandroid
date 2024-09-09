@@ -9,6 +9,9 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.Gravity
 import android.view.View
 import android.view.View.GONE
@@ -65,6 +68,8 @@ class PackageListFragment : BaseFragment<FragmentPackageListBinding>(FragmentPac
         nullActivityCheck()
         userSession = UserSession(requireContext())
         getPackageList()
+
+
     }
 
     private fun getPackageList() {
@@ -158,6 +163,10 @@ class PackageListFragment : BaseFragment<FragmentPackageListBinding>(FragmentPac
         val priceAdapter = PackagePriceAdapter(myActivity, prices, this@PackageListFragment)
         dBinding.rvPriceList.adapter = priceAdapter
         dBinding.rvPriceList.layoutManager = LinearLayoutManager(myActivity)
+        dBinding.textViewTermsConditions.text = Html.fromHtml(
+            "I agree to the <font color='#2e3192'>terms and condition</font>",
+            Html.FROM_HTML_MODE_LEGACY
+        )
 
         dBinding.textViewTermsConditions.setOnClickListener {
             val dialog = AlertDialog.Builder(myActivity)
@@ -166,7 +175,9 @@ class PackageListFragment : BaseFragment<FragmentPackageListBinding>(FragmentPac
             dialog.setView(dialogView)
             dialog.setPositiveButton("OK", null)
             dialog.show()
+
         }
+
         dBinding.btnBuyNow.setOnClickListener {
             if (dBinding.chkRememberMe.isChecked.equals(true)) {
 

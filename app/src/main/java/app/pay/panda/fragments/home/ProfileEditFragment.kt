@@ -176,6 +176,9 @@ class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding>(FragmentPro
             })
 
         }
+        binding.Certificate.setOnClickListener{
+            findNavController().navigate(R.id.certificate)
+        }
 
     }
     private fun getUserDetail() {

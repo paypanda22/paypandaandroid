@@ -32,6 +32,7 @@ class UtilityTransactionAdapter(
         val charges:TextView=itemView.findViewById(R.id.charges)
         val date:TextView=itemView.findViewById(R.id.date)
         val ivShare:AppCompatImageView=itemView.findViewById(R.id.ivShare)
+        val refresh:AppCompatImageView=itemView.findViewById(R.id.refresh)
 
     }
 
@@ -53,18 +54,21 @@ class UtilityTransactionAdapter(
                 holder.tvStatus.text="SUCCESS"
                 holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.white))
                 holder.ivShare.visibility=VISIBLE
+                holder.refresh.visibility=GONE
             }
             3->{
                 holder.tvStatus.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.btn_failed))
                 holder.tvStatus.text="FAILED"
                 holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.white))
                 holder.ivShare.visibility= GONE
+                holder.refresh.visibility=VISIBLE
             }
             else->{
                 holder.tvStatus.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.btn_pending))
                 holder.tvStatus.text="IN-PROCESS"
                 holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.black))
                 holder.ivShare.visibility= GONE
+                holder.refresh.visibility=VISIBLE
             }
         }
         holder.tvBankName.text=list[position].operator_name.toString()
@@ -78,6 +82,9 @@ class UtilityTransactionAdapter(
             if (holder.ivShare.visibility==VISIBLE){
                 click.onItemClicked(holder,list,position,3)
             }
+        }
+        holder.refresh.setOnClickListener{
+            click.onItemClicked(holder,list,position,2)
         }
     }
 }

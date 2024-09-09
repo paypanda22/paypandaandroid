@@ -17,7 +17,7 @@ class RequestListAdapterDist (
     private val activity: Activity,
     private val list:List<Request>,
 
-) : RecyclerView.Adapter<RequestListAdapterDist.ViewHolder>() {
+    ) : RecyclerView.Adapter<RequestListAdapterDist.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val mcvRequestItem: MaterialCardView =itemView.findViewById(R.id.mcvRequestItem)
         val tvRequestedTo: TextView =itemView.findViewById(R.id.tvRequestedTo)
@@ -41,7 +41,7 @@ class RequestListAdapterDist (
         holder.tvRequestedTo.text = list[position].bank
         /*  holder.tvRequestedTo.text=list[position].bank*/
         holder.tvAmount.text = list[position].amount.toString()
-        holder.user_type.text = list[position].method
+        holder.user_type.text = list[position].remark
         holder.tvStatus.text = list[position].status
         holder.User_Name.text = list[position].user_id
         if (list[position].status == "Approved") {

@@ -160,8 +160,9 @@ class AepsTxnAdapter(
         holder.viewdata.setOnClickListener{
             click.onItemClickInvoice(holder, list, position)
         }
+
         holder.refresh.setOnClickListener{
-            click.onItemClickEnquery(holder, list, position)
+            click.onItemClickEnquery(holder, list, position,list[position].type)
         }
     }
 }

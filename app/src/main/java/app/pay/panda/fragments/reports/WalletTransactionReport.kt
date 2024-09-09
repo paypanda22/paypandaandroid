@@ -1,7 +1,11 @@
 package app.pay.panda.fragments.reports
 
+import android.R
 import android.content.Intent
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +16,7 @@ import app.pay.panda.databinding.FragmentWalletTransactionReportBinding
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.interfaces.MCallBackResponse
+import app.pay.panda.responsemodels.utilitytxn.Data
 import app.pay.panda.responsemodels.walletTxn.Wallet
 import app.pay.panda.responsemodels.walletTxn.WalletTxnReportResponse
 import app.pay.panda.retrofit.Constant
@@ -25,10 +30,15 @@ class WalletTransactionReport : BaseFragment<FragmentWalletTransactionReportBind
     private var start_date = ""
     private var end_date = ""
     private var list=ArrayList<Wallet>()
+    var transactionTypes = listOf<String>()
+    private var  selectedItem:String = ""
+    private var  selectedItemtype:String = ""
+    var Types = listOf<String>()
+    private var count= 25
     override fun init() {
         nullActivityCheck()
         userSession=UserSession(requireContext())
-        getTransactionList(start_date,end_date)
+       getTransactionList(start_date,end_date, count,"","","","")
         val todayDate = CommonClass.getLiveTime("yyyy-MM-dd")
         binding.edtFromDate.setText(todayDate)
         binding.edtToDate.setText(todayDate)
@@ -43,14 +53,18 @@ class WalletTransactionReport : BaseFragment<FragmentWalletTransactionReportBind
         }
     }
 
-    private fun getTransactionList(startDate:String,endDate:String) {
+    private fun getTransactionList(startDate:String,endDate:String,count:Int,order_id:String,trans_type:String,txn_id:String,type:String) {
         val token=userSession.getData(Constant.USER_TOKEN).toString()
         val requestData= hashMapOf<String,Any?>()
         requestData["user_id"]=token
-        requestData["count"]=900
+        requestData["count"]=count
         requestData["page"]=0
         requestData["start_date"]=startDate
         requestData["end_date"]=endDate
+        requestData["order_id"]=order_id
+        requestData["trans_type"]=trans_type
+        requestData["txn_id"]=txn_id
+        requestData["type"]=type
         UtilMethods.walletTxnReport(requireContext(),requestData,object:MCallBackResponse{
             override fun success(from: String, message: String) {
                val response:WalletTxnReportResponse=Gson().fromJson(message,WalletTxnReportResponse::class.java)
@@ -98,12 +112,88 @@ class WalletTransactionReport : BaseFragment<FragmentWalletTransactionReportBind
 
     override fun addListeners() {
         binding.ivBack.setOnClickListener { findNavController().popBackStack() }
-        binding.ivMenu.setOnClickListener { toggleFilterLayout() }
+        binding.ivMenu.setOnClickListener {
+            toggleFilterLayout()
+            transactionTypes = listOf("Select Transaction Type",
+                "refund",
+                "recharge",
+                "transfer",
+                "order",
+                "bill_pay",
+                "pan",
+                "fastag",
+                "credit_card",
+                "lic_bill",
+                "qr_code",
+                "add-wallet",
+                "onBoarding",
+                "fromAEPS",
+                "reversal",
+                "ureversal",
+                "ucommission",
+                "validate_beneficiary",
+                "dmt",
+                "dmt_rev",
+                "admintrf",
+                "cms"
+            )
+            val adapter = ArrayAdapter(myActivity, R.layout.simple_spinner_item, transactionTypes)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerServiceOperator.adapter = adapter
+
+
+            Types= listOf("Select Type","All","credit","debit")
+            val adapterType=ArrayAdapter(myActivity,R.layout.simple_spinner_item,Types)
+            adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+            binding.typeOperator.adapter=adapterType
+        }
+
+
+
 binding.tvFilterTransactions.setOnClickListener{
-    getTransactionList(binding.edtFromDate.text.toString(),binding.edtToDate.text.toString())
+
+    getTransactionList(binding.edtFromDate.text.toString(),binding.edtToDate.text.toString(),count,binding.txnId.text.toString(),selectedItemtype,binding.txnId.text.toString(),selectedItem)
 }
+        binding.spinnerServiceOperator.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                if(position==0){
+                    selectedItemtype=""
+                }else {
+                    selectedItemtype = transactionTypes[position]
+                }
+            }
 
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Handle no selection if necessary
+            }
+        }
 
+        binding.rgCount.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                app.pay.panda.R.id.rb25 -> {
+                    count = 25
+                }
+
+                app.pay.panda.R.id.rb50 -> {
+                    count =50
+                }
+
+                app.pay.panda.R.id.rb100 -> {
+                    count = 100
+                }
+
+                app.pay.panda.R.id.rb150 -> {
+                    count = 150
+                }
+
+                app.pay.panda.R.id.rb200 -> {
+                    count = 200
+                }
+                app.pay.panda.R.id.more -> {
+                    count=900
+                }
+            }
+        }
     }
 
     private fun toggleFilterLayout() {

@@ -34,6 +34,7 @@ class SupportTicketListAdapter(
         val tvHistory:TextView=itemView.findViewById(R.id.tvHistory)
         val tvReply:TextView=itemView.findViewById(R.id.tvReply)
         val tvDepartment:TextView=itemView.findViewById(R.id.tvDepartment)
+
         val tvService:TextView=itemView.findViewById(R.id.tvService)
         val edtReplyMessage:TextInputEditText=itemView.findViewById(R.id.edtReplyMessage)
         val lytReply:TextInputLayout=itemView.findViewById(R.id.lytReply)
@@ -55,8 +56,9 @@ class SupportTicketListAdapter(
         holder.tvSubject.text=list[position].subject
         holder.tvMessage.text=list[position].name+" ( "+list[position].mobile+" )"
         holder.tvDate.text=list[position].createdAt
-        holder.tvDepartment.text=list[position].department_id
+        holder.tvDepartment.text=list[position].refer_code
         holder.tvService.text=list[position].service_id
+      //  holder.ticketNo.text=list[position].tic
 
         holder.tvReply.setOnClickListener {
            if (holder.lytReply.visibility==VISIBLE){

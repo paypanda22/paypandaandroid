@@ -118,6 +118,9 @@ class BusinessDetailsFragment : BaseFragment<FragmentBusinessDetailsBinding>(Fra
                 requestData["business_pincode"] = binding.edtPincode.text.toString()
                 requestData["pincode"] = binding.edtPincode.text.toString()
                 requestData["user_id"] = token
+                requestData["business_state"] = binding.edtState.text.toString()
+                requestData["shop_name"] = binding.edtShopName.text.toString()
+                requestData["business_Area"] = binding.edtArea.text.toString()
                 UtilMethods.updateGstDetails(requireContext(), requestData, object : MCallBackResponse {
                     override fun success(from: String, message: String) {
                         val response: GstUpdateResponse = Gson().fromJson(message, GstUpdateResponse::class.java)

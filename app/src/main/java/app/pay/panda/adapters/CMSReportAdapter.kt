@@ -13,11 +13,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.R
 import app.pay.panda.adapters.CMSReportAdapter.ViewHolder
+import app.pay.panda.interfaces.CMSInvoicClick
+import app.pay.panda.interfaces.UtilityTransactionClick
 import app.pay.panda.responsemodels.cmsreportresponse.Data
 
 class CMSReportAdapter (
     private val activity: Activity,
-    private val list:List<Data>
+    private val list:List<Data>,
+    private val click: CMSInvoicClick
 ): RecyclerView.Adapter<ViewHolder>() {
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         val billerID: TextView =itemView.findViewById(R.id.billerId)
@@ -30,6 +33,7 @@ class CMSReportAdapter (
         val date: TextView =itemView.findViewById(R.id.date)
         val tvStatus:TextView=itemView.findViewById(R.id.tvStatus)
         val ivShare: AppCompatImageView =itemView.findViewById(R.id.ivShare)
+        val refresh: AppCompatImageView =itemView.findViewById(R.id.refresh)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CMSReportAdapter.ViewHolder {
         return CMSReportAdapter.ViewHolder(
@@ -59,19 +63,31 @@ class CMSReportAdapter (
                 holder.tvStatus.text="SUCCESS"
                 holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.white))
                 holder.ivShare.visibility= VISIBLE
+                holder.refresh.visibility= GONE
             }
             3->{
                 holder.tvStatus.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.btn_failed))
                 holder.tvStatus.text="FAILED"
                 holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.white))
                 holder.ivShare.visibility= GONE
+                holder.refresh.visibility= VISIBLE
             }
             else->{
                 holder.tvStatus.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.btn_pending))
                 holder.tvStatus.text="PENDING"
                 holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.black))
                 holder.ivShare.visibility= GONE
+                holder.refresh.visibility= VISIBLE
             }
         }
+        holder.ivShare.setOnClickListener{
+            if (holder.ivShare.visibility==VISIBLE){
+                click.onItemClicked(holder,list,position,list[position].status.toString())
+            }
+        }
+        holder.refresh.setOnClickListener({
+            click.onItemClicked(holder,list,position,list[position].status.toString())
+        })
     }
+
 }

@@ -34,6 +34,7 @@ class PackageListAdapter(
         val rvServices: RecyclerView = itemView.findViewById(R.id.rvServices)
         val tvMore: TextView = itemView.findViewById(R.id.tvMore)
         val tvLess: TextView = itemView.findViewById(R.id.tvLess)
+        val date: TextView = itemView.findViewById(R.id.date)
         val commission: ImageView = itemView.findViewById(R.id.commission)
     }
 
@@ -48,6 +49,7 @@ class PackageListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         MyGlide.with(activity, Uri.parse(Constant.PIMAGE_URL + list[position].icon_img), holder.ivIcon)
         holder.tvTitle.text = list[position].package_name
+        holder.date.text = "Exp Date:-"+list[position].history.toString()
         val desc = Html.fromHtml(list[position].description, Html.FROM_HTML_MODE_COMPACT)
         holder.tvDesc.text = desc
         if (desc.toString().length > 80) {

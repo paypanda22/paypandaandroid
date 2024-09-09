@@ -36,7 +36,7 @@ class SingleUtilityTransaction : BaseBottomFragment<FragmentSingleUtilityTransac
     private lateinit var userSession: UserSession
     private var batchId = ""
     private var list = ArrayList<Data>()
-
+    val data = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userSession = UserSession(requireContext())
@@ -45,6 +45,7 @@ class SingleUtilityTransaction : BaseBottomFragment<FragmentSingleUtilityTransac
 
     override fun init() {
         getTxnByUtilityId()
+
     }
 
     private fun getTxnByUtilityId() {
@@ -58,7 +59,11 @@ class SingleUtilityTransaction : BaseBottomFragment<FragmentSingleUtilityTransac
                     if (list.isNotEmpty()) {
                         list.clear()
                     }
+                    val serviceLabel = getServiceLabel(response.data.operator_name)
 
+// Set the label to the TextView or other UI element
+                    binding.consumnumber1.text = serviceLabel
+                   // getServiceLabel(response.data.operator_name)
                     binding.billerName.text=response.data.operator_name
                     binding.number.text=response.data.user_id.mobile
                     binding.Name.text=response.data.user_id.name
@@ -81,6 +86,49 @@ class SingleUtilityTransaction : BaseBottomFragment<FragmentSingleUtilityTransac
                 Toast.makeText(requireContext(), "Unable to fetch Txn", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+    fun getServiceLabel(serviceName: String): String {
+        val serviceLabels = mapOf(
+            "Credit Card" to "Credit Card Number",
+            "Aeps Bank Withdraw" to "Aadhaar Number",
+                                        "Aeps Cash Deposit" to "Aadhaar Number",
+            "B2B" to "Reference Number",
+            "Broadband Postpaid" to "Customer ID",
+            "CMS" to "Customer ID",
+            "Cable TV" to "Subscriber ID",
+            "Clubs and Associations" to "Member ID",
+            "DMT" to "Beneficiary Account",
+            "DTH" to "Biller Number",
+            "Donation" to "Donor ID",
+            "Education Fees" to "Student ID",
+            "Electricity" to "Consumer Number",
+            "Fastag" to "Vehicle Number",
+            "Gas" to "Consumer Number",
+            "Health Insurance" to "Policy Number",
+            "Water" to "Consumer Number",
+            "Subscription" to "Subscription ID",
+            "Rental" to "Tenant ID",
+            "Recurring Deposit" to "Account Number",
+            "Recharge" to "Mobile Number",
+            "Quick Dhan" to "Transaction ID",
+            "Payout" to "Beneficiary ID",
+            "NCMC Recharge" to "Card Number",
+            "Municipal Taxes" to "Property ID",
+            "Municipal Services" to "Service ID",
+            "Mobile Prepaid" to "Mobile Number",
+            "Mobile Postpaid" to "Mobile Number",
+            "Metro Recharge" to "Card Number",
+            "Loan Repayment" to "Loan Account Number",
+            "Life Insurance" to "Policy Number",
+            "Landline Postpaid" to "Landline Number",
+            "LPG Gas" to "LPG ID",
+            "Insurance" to "Policy Number",
+            "Housing Society" to "Member ID",
+            "Hospital and Pathology" to "Patient ID",
+            "SBI Card" to "SBI Card"
+        )
+
+        return serviceLabels[serviceName] ?: "Reference Number"
     }
 
     override fun addListeners() {

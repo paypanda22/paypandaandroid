@@ -336,7 +336,7 @@ private fun openViewDetailDialog(model: Tran){
         filterDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         filterDialog.window?.attributes?.windowAnimations ?: R.style.DialogAnimationBottom
         filterDialog.window?.setGravity(Gravity.BOTTOM)
-
+        dBinding.edtCustomerNumber.hint="Filter By Mobile No"
         val todayDate = CommonClass.getLiveTime("yyyy-MM-dd")
         dBinding.edtFromDate.setText(todayDate)
         dBinding.edtToDate.setText(todayDate)

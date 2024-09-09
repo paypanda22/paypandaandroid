@@ -87,6 +87,7 @@ class PersonalDetailsFragment : BaseFragment<FragmentPersonalDetailsBinding>(Fra
                 requestData["country"] = countryID
                 requestData["presentAddr"] = binding.edtPresetAddress.text.toString()
                 requestData["alternate_mobileNo"] = binding.edtAltMobile.text.toString()
+                requestData["educationQualification"] = binding.edtQualification.text.toString()
                 UtilMethods.updatePersonalDetails(requireContext(), requestData, object : MCallBackResponse {
                     override fun success(from: String, message: String) {
                         userSession.setBoolData(Constant.ISPERSONALDETAILS,true)

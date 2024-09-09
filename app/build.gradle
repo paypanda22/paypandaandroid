@@ -126,7 +126,9 @@ dependencies {
     //Generate Qr Code
     implementation 'com.google.zxing:core:3.4.1'
     implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
-
+    //ssl
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
     //I-ServeU M-ATM
     implementation 'com.gitlab.isu_service:commondependecy:matm_sdk_stag_0.0.6'
@@ -143,5 +145,7 @@ dependencies {
 //    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 //    implementation "com.karumi:dexter:5.0.0"
 //    implementation 'com.github.yalantis:ucrop:2.2.6'
+///for qr generator
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
 
 }

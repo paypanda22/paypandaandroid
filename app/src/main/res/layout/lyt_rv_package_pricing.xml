@@ -105,6 +105,29 @@
                 android:textSize="@dimen/_10ssp"/>
 
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_amount"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:layout_alignParentStart="true"
+                android:textSize="@dimen/_10ssp"/>
+            <TextView
+                android:id="@+id/total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_0_00"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/green_700"
+                android:layout_alignParentEnd="true"
+                android:textSize="@dimen/_10ssp"/>
+
+        </RelativeLayout>
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

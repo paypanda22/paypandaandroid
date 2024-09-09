@@ -42,10 +42,12 @@
             app:tint="@color/white" />
     </RelativeLayout>
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/topPanel"
-        android:visibility="gone"
+         android:background="@color/white"
+
         android:padding="@dimen/_5sdp"
         android:orientation="vertical"
         android:layout_marginBottom="@dimen/_10sdp"
@@ -83,12 +85,117 @@
                     android:hint="@string/select_to_date"
                     android:importantForAutofill="no" />
             </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txn_idlyt"
+            style="@style/EditTextInput4">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txn_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Filter by Order / Id Txn Id"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:baselineAligned="false">
+
+            <Spinner
+                android:id="@+id/typeOperator"
+                android:layout_width="164dp"
+                android:padding="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spinner_background" />
+
+            <Spinner
+                android:id="@+id/spinnerServiceOperator"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spinner_background" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_number_of_transactions"
+            android:textSize="@dimen/_12ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/mostserrat_bold"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textColor="@color/colorAccent"/>
+        <RadioGroup
+            android:id="@+id/rgCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rb25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/mostserrat_bold"
+                android:text="@string/_25"
+                android:checked="true"
+                android:textSize="@dimen/_12ssp"
+                />
+            <RadioButton
+                android:id="@+id/rb50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/mostserrat_bold"
+                android:text="@string/_50"
+                android:textSize="@dimen/_12ssp"
+                />
+            <RadioButton
+                android:id="@+id/rb100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/mostserrat_bold"
+                android:text="100"
+                android:textSize="@dimen/_12ssp"
+                />
+            <RadioButton
+                android:id="@+id/rb150"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/mostserrat_bold"
+                android:text="@string/_150"
+                android:textSize="@dimen/_12ssp"
+                />
+            <RadioButton
+                android:id="@+id/rb200"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/mostserrat_bold"
+                android:text="@string/_200"
+                android:textSize="@dimen/_12ssp"
+                />
+            <RadioButton
+                android:id="@+id/more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/mostserrat_bold"
+                android:text="All"
+                android:textSize="@dimen/_12ssp"
+                />
+
+        </RadioGroup>
 
 
         <TextView
             android:id="@+id/tvFilterTransactions"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/submitt_btn_dialog_green"

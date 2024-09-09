@@ -71,7 +71,7 @@ class EarningReportAdapter (
                 } else {
                     val filterPattern = constraint.toString().trim().toLowerCase()
                     earningReportlist.filter {
-                        it.order_id.contains(filterPattern, ignoreCase = true) ||
+                        it.txn_id.contains(filterPattern, ignoreCase = true) ||
                                 it.trans_type.contains(filterPattern, ignoreCase = true)
                     }.toMutableList()
                 }

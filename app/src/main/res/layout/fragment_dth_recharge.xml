@@ -102,7 +102,7 @@
 
                 <EditText
                     android:id="@+id/edtMobile"
-                    android:layout_width="@dimen/_225sdp"
+                    android:layout_width="@dimen/_245sdp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"

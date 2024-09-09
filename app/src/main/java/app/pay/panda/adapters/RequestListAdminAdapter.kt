@@ -42,7 +42,7 @@ class RequestListAdminAdapter(
         holder.tvRequestedTo.text = list[position].user_type
         /*  holder.tvRequestedTo.text=list[position].bank*/
         holder.tvAmount.text = list[position].amount.toString()
-        holder.user_type.text = list[position].user_type
+        holder.user_type.text = list[position].remark
         holder.User_Name.text = list[position].user_id
 
         holder.tvStatus.text = list[position].status
