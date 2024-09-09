@@ -17,7 +17,9 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.json.JSONObject
+import retrofit2.Retrofit
 import java.io.File
+import kotlin.math.log
 
 
 object UtilMethods {
@@ -36,29 +38,34 @@ object UtilMethods {
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstance().create(GetData::class.java)
-                        .chkMobile(mobileNo).execute()
+
+                    val instant:Retrofit?=RetrofitFactory.getRetrofitInstance()
+                    val response = instant?.create(GetData::class.java)
+                        ?.chkMobile(mobileNo)?.execute()
                     withContext(Dispatchers.Main) {
                         progressBar.hideProgress()
-                        if (response.isSuccessful && response.body() != null) {
-                            val responseBody = response.body() as JsonObject
-                            if (responseBody.has("error")) {
-                                val status = responseBody.get("error").asBoolean
-                                if (status) {
-                                    val message = responseBody.get("message").asString
-                                    callBackResponse.fail(message)
+                        response?.body().let {
+                            if (response?.isSuccessful == true) {
+                                val responseBody = response.body() as JsonObject
+                                if (responseBody.has("error")) {
+                                    val status = responseBody.get("error").asBoolean
+                                    if (status) {
+                                        val message = responseBody.get("message").asString
+                                        callBackResponse.fail(message)
+                                    } else {
+                                        callBackResponse.success("strresponse", responseBody.toString())
+                                    }
                                 } else {
-                                    callBackResponse.success("strresponse", responseBody.toString())
+                                    val message = responseBody.get("message").asString ?: "Unknown Error"
+                                    callBackResponse.fail(message)
                                 }
-                            } else {
-                                val message = responseBody.get("message").asString ?: "Unknown Error"
-                                callBackResponse.fail(message)
-                            }
 
-                        } else {
-                            progressBar.hideProgress()
-                            callBackResponse.fail("Request Failed.Response Body Null")
+                            } else {
+                                progressBar.hideProgress()
+                                callBackResponse.fail("Request Failed.Response Body Null")
+                            }
                         }
+
                     }
                 } catch (e: Exception) {
                     progressBar.hideProgress()
@@ -72,6 +79,7 @@ object UtilMethods {
             Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
         }
     }
+
 
     fun chkEmail(context: Context, email: String, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {

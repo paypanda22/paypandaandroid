@@ -1,13 +1,29 @@
 package app.pay.panda.retrofit
 
+import android.content.Context
+import app.pay.panda.R
 import app.pay.panda.retrofit.Constant.MainBase_URL
 import app.pay.panda.retrofit.Constant.MainBase_URL_2
+import okhttp3.Cache
+import okhttp3.ConnectionPool
+import okhttp3.Dns
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.io.InputStream
+import java.security.KeyStore
+import java.security.cert.CertificateFactory
 import java.util.concurrent.TimeUnit
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLSession
+import javax.net.ssl.TrustManager
+import javax.net.ssl.TrustManagerFactory
+import javax.net.ssl.X509TrustManager
+import java.security.cert.Certificate;
+
 
 object RetrofitFactory {
     fun getRetrofitInstance(): Retrofit {
@@ -21,9 +37,11 @@ object RetrofitFactory {
                 chain.proceed(newRequest)
             }
             .addInterceptor(loggingInterceptor)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
-            .connectTimeout(120, TimeUnit.SECONDS)
+            .dns(Dns.SYSTEM)
+            .connectionPool(ConnectionPool(5, 5, TimeUnit.MINUTES))
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
             .build()
         return Retrofit.Builder()
             .baseUrl(MainBase_URL)
@@ -44,9 +62,9 @@ object RetrofitFactory {
                 chain.proceed(newRequest)
             }
             .addInterceptor(loggingInterceptor)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
-            .connectTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
             .build()
         return Retrofit.Builder()
             .baseUrl(MainBase_URL_2)
@@ -68,10 +86,11 @@ object RetrofitFactory {
                     .build()
                 chain.proceed(newRequest)
             }
+
             .addInterceptor(loggingInterceptor)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
-            .connectTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
             .build()
         return Retrofit.Builder()
             .baseUrl(MainBase_URL)
@@ -80,5 +99,62 @@ object RetrofitFactory {
             .client(client)
             .build()
     }
+
+//    fun getRetrofitInstanceTest(context: Context): Retrofit? {
+//        return try {
+//            val certInputStream: InputStream = context.resources.openRawResource(R.raw.pp_cert)
+//
+//            val certificateFactory = CertificateFactory.getInstance("X.509")
+//
+//            val certificate = certificateFactory.generateCertificate(certInputStream)
+//
+//            val keyStore = KeyStore.getInstance(KeyStore.getDefaultType()).apply {
+//                load(null, null)
+//                setCertificateEntry("pp_cert", certificate)
+//            }
+//
+//            val trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).apply {
+//                init(keyStore)
+//            }
+//
+//            val trustManager = trustManagerFactory.trustManagers[0] as X509TrustManager
+//
+//            val sslContext = SSLContext.getInstance("TLS").apply {
+//                init(null, arrayOf(trustManager), null)
+//            }
+//            val loggingInterceptor = HttpLoggingInterceptor().apply {
+//                level = HttpLoggingInterceptor.Level.BODY
+//            }
+////            val cacheSize = (5 * 1024 * 1024).toLong() // 5 MB cache
+////            val cache = Cache(context.cacheDir, cacheSize)
+//            val okHttpClient = OkHttpClient.Builder()
+//                .sslSocketFactory(sslContext.socketFactory, trustManager)
+//                .hostnameVerifier { hostname, _ ->
+//                    hostname.equals("devapi.paypanda.in", ignoreCase = true)
+//                }
+//                .addInterceptor { chain ->
+//                    val newRequest = chain.request().newBuilder()
+//                        .build()
+//                    chain.proceed(newRequest)
+//                }
+//                .addInterceptor(loggingInterceptor)
+//                .dns(Dns.SYSTEM)
+//                .connectionPool(ConnectionPool(5, 5, TimeUnit.MINUTES))
+//                .readTimeout(30, TimeUnit.SECONDS)
+//                .writeTimeout(30, TimeUnit.SECONDS)
+//                .connectTimeout(30, TimeUnit.SECONDS)
+//                .build()
+//
+//            Retrofit.Builder()
+//                .baseUrl(MainBase_URL)
+//                .client(okHttpClient)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build()
+//
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//            null
+//        }
+//    }
 
 }

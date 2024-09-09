@@ -32,7 +32,6 @@
         android:icon="@drawable/pp_app_icon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/pp_app_icon"
-        android:supportsRtl="true"
         android:theme="@style/Theme.Paypanda"
         tools:replace="android:name"
         tools:targetApi="31">

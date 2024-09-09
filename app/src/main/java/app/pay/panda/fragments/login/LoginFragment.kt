@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -138,10 +139,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 } else if (binding.edtPassword.text.toString().isEmpty()) {
                     binding.edtPassword.error = "Enter Password"
                     binding.edtPassword.setPaddingRelative(0, 0, 48.dpToPx(), 0)
-                }else if(binding.tv1.isChecked == false) {
+                }else if(!binding.tv1.isChecked) {
                     Toast.makeText(requireContext(), "Please Apply Terms and Conditions", Toast.LENGTH_SHORT).show()
                 }else {
-                    checkPasswordMobile("phone", "+91" + binding.edtMobile.text.toString())
+                    //checkPasswordMobile("phone", "+91" + binding.edtMobile.text.toString())
+                    openOtpDialog("phone","+91"+binding.edtMobile.text.toString())
                 }
             } else {
                 if (!ActivityExtensions.isValidEmail(binding.edtEmail.text.toString())) {
@@ -212,7 +214,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         requestData["entity"] = entity
         requestData["password"] = binding.edtPassword.text.toString()
         requestData["deviceId"] = CommonClass.getDeviceId(requireActivity())
-
         val getHash = GetKeyHash(myActivity)
         val finalData = getHash.getHash(requestData)
         UtilMethods.userLogin(requireContext(), finalData, object : MCallBackResponse {
@@ -222,30 +223,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     if (response.data?.user?.isNotEmpty()==true) {
                         refID = response.data.user.toString()
                         val bundle = Bundle()
-                        bundle.putString("entity", binding.edtMobile.text.toString())
-                        bundle.putString("entityType", loginType)
-                        bundle.putString("type", "login")
-                        bundle.putString("password", binding.edtPassword.text.toString())
-                        bundle.putString("refID", refID)
+                        bundle.apply {
+                            putString("entity", binding.edtMobile.text.toString())
+                            putString("entityType", loginType)
+                            putString("type", "login")
+                            putString("password", binding.edtPassword.text.toString())
+                            putString("refID", refID)
+                        }
                         findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
                     } else {
-                        val bundle = Bundle()
-                        findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
                         Toast.makeText(requireContext(), "Unable to Send Otp to your mobile", Toast.LENGTH_SHORT).show()
                     }
                 }else{
-                    val bundle = Bundle()
-                    findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
-
                     showToast(requireContext(),response.message)
                 }
 
             }
 
             override fun fail(from: String) {
-                val bundle = Bundle()
-                findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
-
                 showToast(requireContext(),from)
             }
         })
@@ -292,6 +287,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         UtilMethods.chkMobile(requireContext(), "+91" + binding.edtMobile.text.toString(), object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: CheckMobileResponse = Gson().fromJson(message, CheckMobileResponse::class.java)
+                Log.e("Serialize", "chkMobile: ")
                 if (response.data.isExist) {
                     binding.edtMobile.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_phone_base, 0, R.drawable.ic_check_green, 0)
                 } else {
