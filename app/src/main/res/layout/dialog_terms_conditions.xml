@@ -12,13 +12,15 @@
         android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
+        style="@style/mostserrat_extra_bold"
         android:layout_gravity="center"
         android:paddingBottom="16dp"/>
 
     <TextView
         android:id="@+id/textViewTermsContent"
         android:layout_width="match_parent"
-        android:textColor="@color/black_promo"
         android:layout_height="wrap_content"
-        android:text="@string/termsconditions"/>
+        android:text="@string/termsconditions"
+        android:textColor="@color/black_promo" />
+
 </LinearLayout>

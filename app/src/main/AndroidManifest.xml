@@ -6,6 +6,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -28,14 +30,23 @@
         android:name=".mAtm.BaseApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
+        android:exported="false"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/pp_app_icon"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@drawable/pp_app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Paypanda"
+        android:usesCleartextTraffic="true"
         tools:replace="android:name"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.SacnQrActitivy"
+            android:exported="false" />
+
         <activity
             android:name=".activity.NetworkDownline"
             android:exported="false" />

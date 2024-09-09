@@ -57,6 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_5sdp"
         android:id="@+id/rvPriceList"/>
+
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -74,11 +76,11 @@
         android:id="@+id/textViewTermsConditions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I agree to the terms and condition"
         style="@style/mostserrat_bold"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/black_promo"
         android:textSize="@dimen/_10ssp"
         android:textStyle="bold" />
+
 </LinearLayout>
     <LinearLayout
         android:id="@+id/llPin"

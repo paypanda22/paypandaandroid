@@ -144,7 +144,7 @@ class DthRechargeFragment : BaseFragment<FragmentDthRechargeBinding>(FragmentDth
 
         binding.edtOperatorName.setOnClickListener { getOperatorList() }
 
-        binding.ivChangeOperator.setOnClickListener { getOperatorList() }
+       // binding.ivChangeOperator.setOnClickListener { getOperatorList() }
 
         binding.btnSubmit.setOnClickListener {
             if (binding.edtMobile.text.toString().isEmpty()) {

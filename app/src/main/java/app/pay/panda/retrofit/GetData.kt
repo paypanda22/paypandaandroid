@@ -107,6 +107,14 @@ interface GetData {
     @POST("api/dmt_txn/trans")
     fun dmtMakeTransaction(@Body obj: Any): Call<JsonObject>
 
+    //otpPopup_for-dmt
+    @GET("dmt/onboardingOtpValidate")
+    fun getOnboardingOtpValidate(@Query("mobile") mobileNo: String,
+                                 @Query("api_id") apiId: String,
+                                 @Query("user_id") user_id: String,
+                                 @Query("otp") otp: String): Call<JsonObject>
+
+
     @POST("api/dmt_txn/report")
     fun dmtTransactionList(@Body obj: Any): Call<JsonObject>
 
@@ -158,11 +166,12 @@ interface GetData {
     @POST("api/paymentRequest/addrequest")
     fun addPaymentRequest(@Body obj: Any): Call<JsonObject>
 
-    @POST("api/paymentRequestToUser/user")
+    @POST("api/paymentRequest/user")
    /* @POST("api/paymentRequest/user/all")*/
     fun walletRequestList(@Body obj: Any): Call<JsonObject>
 
-    @POST("api/paymentRequestToUser/user/all")
+ /*   @POST("api/paymentRequestToUser/user/all")*/
+    @POST("api/paymentRequestToUser/user")
     fun walletRequestListDist(@Body obj: Any): Call<JsonObject>
 
     @GET("api/service_user_permission/isAvail/{serviceID}")
@@ -343,49 +352,55 @@ interface GetData {
     @POST("api/mAtm/iServeU/mAtmSdkInitiate")
     fun mAtmInitiate(@Body obj:Any):Call<JsonObject>
 
-    @GET("/api/user/referTo")
+    @GET("api/user/referTo")
     fun getNetwork(
      @Query("page") page:String,
-     @Query("count") count:String,
-     @Query("id") id:String): Call<JsonObject>
+     @Query("count") count:Int,
+     @Query("id") id:String,
+     @Query("name") name:String,
+     @Query("mobile") mobile:String,
+     @Query("refer_id") refer_id:String): Call<JsonObject>
 
     @GET("api/bbps_txn/invoice/{id}")
     fun getTxnByUtilityId(@Path("id") id: String): Call<JsonObject>
 
-    @GET("/api/user/referTo")
+    @GET("api/user/referTo")
     fun getNetwork(
         @Query("page") page: String,
-        @Query("count") count: String
+        @Query("count") count: Int
     ): Call<JsonObject>
 
-    @GET("/api/user/referTo")
+    @GET("api/user/referTo")
     fun getNetworkRetailer(
         @Query("page") page: String,
-        @Query("count") count: String,
+        @Query("count") count: Int,
         @Query("id") id: String,
+        @Query("name") name:String,
+        @Query("mobile") mobile:String,
+        @Query("refer_id") refer_id:String
     ): Call<JsonObject>
 
-    @GET("/api/report/fundtransfer")
+    @GET("api/report/fundtransfer")
     fun viewReport(
         @Query("page") page: String,
         @Query("count") count: String,
         @Query("to") to: String,
     ): Call<JsonObject>
 
-    @POST("/api/user/fundTransferToRefer")
+    @POST("api/user/fundTransferToRefer")
     fun moneyTreansfer(@Body obj:Any): Call<JsonObject>
 
-    @POST("/api/user/fundReverseVerify")
+    @POST("api/user/fundReverseVerify")
     fun otpVarify(@Body obj:Any): Call<JsonObject>
 
-    @POST("/api/mainwallet/public/filter")
+    @POST("api/mainwallet/public/filter")
     fun earningReport(@Body obj:Any): Call<JsonObject>
 
-    @GET("/api/dashboard/public")
+    @GET("api/dashboard/public")
     fun distributerDashboard(@Query("date") date: String
     ): Call<JsonObject>
 
-    @GET("/api/auth/mb/get/profile")
+    @GET("api/auth/mb/get/profile")
     fun getUserDetail(): Call<JsonObject>
 
     @POST("api/auth/mb/login/resendOtp")
@@ -394,7 +409,8 @@ interface GetData {
     @PUT("api/paymentrequesttouser/transfer")
     fun paymentRequestToUser(@Body obj: Any): Call<JsonObject>
 
-    @POST("api/paymentRequestToUser/admin")
+    //@POST("api/paymentRequestToUser/admin")
+    @POST("api/paymentRequestToUser/user/all")
     fun paymentRequestToAdmin(@Body obj: Any): Call<JsonObject>
 
 
@@ -417,7 +433,12 @@ interface GetData {
 
     @GET("api/auth/recipientDelete")
     fun recipientDelete(@Body obj: Any): Call<JsonObject>
-
+    @GET("api/aeps/cashdeposit/enquiry/{id}")
+    fun cashDipositEnquiry(@Path("id") id: String): Call<JsonObject>
+    @GET("api/aeps/enquiry/{id}")
+    fun cashwidrawl(@Path("id") id: String): Call<JsonObject>
+    @GET("api/aeps/adhaarpay/enquiry/{id}")
+    fun adhaarPayEnquiry(@Path("id") id: String): Call<JsonObject>
 
 
 
@@ -448,6 +469,57 @@ interface GetData {
         @Query("count") count: String,
         @Query("txn_id") txnId: String?
     ): Call<JsonObject>
+
+    @GET("api/cms/invoice/{id}")
+    fun cmsInvoice(@Path("id") id: String): Call<JsonObject>
+    @GET("api/cms/enquiry/{id}")
+    fun cmsEnquiry(@Path("id") id: String): Call<JsonObject>
+
+    @POST("api/adhaarPay/Public")
+    fun aadharPayReport(@Body obj:Any): Call<JsonObject>
+    @POST("api/aepswallet/public/filter")
+    fun aepswalletReport(@Body obj:Any): Call<JsonObject>
+
+    @GET("api/payout/public")
+    fun payoutReport( @Query("start_date") start_date: String,
+                      @Query("end_date") end_date: String,
+                      @Query("txn_id") txn_id: String,
+                      @Query("page") page: String,
+                      @Query("count") count: String): Call<JsonObject>
+    @GET("api/payout/invoice/{id}")
+    fun aepsPayoutInvoice(@Path("id") id: String): Call<JsonObject>
+    @GET("api/payout/trans/enquiry/{id}")
+    fun aepsPayoutEnquiry(@Path("id") id: String): Call<JsonObject>
+    @GET("api/recharge_txn/status/check/{id}")
+    fun bbpsRechargEnquiry(@Path("id") id: String): Call<JsonObject>
+
+
+
+
+    @GET("api/packagePayment/history")
+    fun packagePaymenthistory(@Query("start_date") start_date: String,
+                               @Query("end_date") end_date: String,
+                               @Query("package_id") package_id: String,
+                               @Query("page") page: String,
+                               @Query("count") count: String): Call<JsonObject>
+    @GET("api/user/certificate")
+    fun certificate(): Call<JsonObject>
+    @GET("api/service_user_permission/service/list")
+    fun allServices(): Call<JsonObject>
+
+    @GET("api/billPayment/billenquiry/{id}")
+    fun bbpsEnquiry(@Path("id") id: String): Call<JsonObject>
+
+    @GET("api/department/public")
+    fun department(): Call<JsonObject>
+
+    @GET("api/dmtDisputePriority/public")
+    fun dmtDisputePriority(): Call<JsonObject>
+
+    @GET("api/dmtstatus/public")
+    fun dmtstatus(): Call<JsonObject>
+
+
 
 
 

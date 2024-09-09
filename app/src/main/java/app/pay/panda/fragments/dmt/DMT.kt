@@ -361,12 +361,12 @@ class DMT(
         UtilMethods.verifyBankAccount(activity, requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: VerifyBankResponse = Gson().fromJson(message, VerifyBankResponse::class.java)
-<<<<<<< Updated upstream
-                dBinding.edtName.setText(response.data.bank_account_name)
+
+               // dBinding.edtName.setText(response.data.n)
                 dBinding.llVerify.visibility = GONE
-=======
+
                 dBinding.edtName.setText(response.data.data.bankName)
->>>>>>> Stashed changes
+
                 Toast.makeText(activity, "Bank Verified Successfully", Toast.LENGTH_SHORT).show()
             }
 

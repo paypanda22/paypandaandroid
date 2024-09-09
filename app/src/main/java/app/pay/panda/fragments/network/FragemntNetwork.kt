@@ -4,15 +4,21 @@ package app.pay.panda.fragments.network
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import TransferMoneyDialogFragment
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,16 +27,22 @@ import app.pay.panda.BaseFragment
 import app.pay.panda.R
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.adapters.DownStreamAdapter
+import app.pay.panda.adapters.DownStreamDistributerAdapter
 import app.pay.panda.adapters.DownstreamRetailAdapter
 import app.pay.panda.adapters.UtilityTransactionAdapter
 import app.pay.panda.databinding.FragmentFragemntNetworkBinding
+import app.pay.panda.databinding.LytDmtFilterBinding
+import app.pay.panda.databinding.LytNetworkFilterBinding
 import app.pay.panda.fragments.ReverseMoneyDialogFragment
 import app.pay.panda.fragments.ViewReportDialogFragment
+import app.pay.panda.helperclasses.ActivityExtensions
+import app.pay.panda.helperclasses.CommonClass
 
 import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.interfaces.DownStreamClick
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.UtilityTransactionClick
+import app.pay.panda.responsemodels.downstramdistributer.DonwStreamDistributerResponse
 import app.pay.panda.responsemodels.downstreamRetailerResponse.DownstreamRetailarResp
 import app.pay.panda.responsemodels.downstreamresponse.Data
 import app.pay.panda.responsemodels.downstreamresponse.DownstreamResponse
@@ -47,25 +59,32 @@ class FragemntNetwork : BaseFragment<FragmentFragemntNetworkBinding>(FragmentFra
     private lateinit var myActivity: FragmentActivity
     private lateinit var downstramlist:MutableList<Data>
     private lateinit var downstramlistRetailer:MutableList<app.pay.panda.responsemodels.downstreamRetailerResponse.Data>
+    private lateinit var downstramlistDistributer:MutableList<app.pay.panda.responsemodels.downstramdistributer.Data>
     private var page = "0"
-    private var count = "50"
-
+    private var count = 50
+    private var start_date = ""
+    private var end_date = ""
+    private var name = ""
+    private var mobile = ""
+    private var refer_id = ""
+    private var customerMobile = ""
+    private var accountNumber = ""
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
 
         val userType = userSession.getData(Constant.USER_TYPE_NAME)
         if (userType.equals("Super Distributor") ) {
-            getNetwork(page,count)
+            getNetwork(page,count,"",name,mobile,refer_id)
         }else if(userType.equals("Distributor")){
             val id = userSession.getData(Constant.ID)
-            getNetworkRetailerDist(page,count, id.toString())
+            getNetworkRetailerDist(page,count, id.toString(),name,mobile,refer_id)
         }
     }
-    private fun getNetwork(pageNo: String, txnCount: String) {
+    private fun getNetwork(pageNo: String, txnCount: Int,id:String,name:String,mobile:String,refer_id:String) {
         binding.llNoData.visibility = View.GONE
         val token = userSession.getData(Constant.USER_TOKEN).toString()
-        UtilMethods.getNetwork(requireContext(), token, pageNo, txnCount, object : MCallBackResponse {
+        UtilMethods.getNetwork(myActivity, token, pageNo, txnCount,id,name,mobile, refer_id, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 try {
                     val response: DownstreamResponse = Gson().fromJson(message, DownstreamResponse::class.java)
@@ -76,7 +95,7 @@ class FragemntNetwork : BaseFragment<FragmentFragemntNetworkBinding>(FragmentFra
                                 override fun onItemClicked(holder: DownStreamAdapter.ViewHolder, downstramlist: MutableList<Data>, position: Int, callback: (List<app.pay.panda.responsemodels.downstreamRetailerResponse.Data>) -> Unit) {
                                     // Fetch the retailer data and then call the callback
 
-                                    getNetworkRetailer(page,count,downstramlist[position]._id,holder)
+                                    getNetworkRetailer(page,count,downstramlist[position]._id,name,mobile,refer_id,holder)
 
                                 }
                                 override fun onTransferMoneyClicked(holder: DownStreamAdapter.ViewHolder, downstramlist: MutableList<Data>, position: Int) {
@@ -142,10 +161,10 @@ class FragemntNetwork : BaseFragment<FragmentFragemntNetworkBinding>(FragmentFra
         })
     }
 
-        private fun getNetworkRetailer(pageNo: String, txnCount: String, id: String, holder: RecyclerView.ViewHolder) {
+        private fun getNetworkRetailer(pageNo: String, txnCount: Int, id:String,name:String,mobile:String,refer_id:String, holder: RecyclerView.ViewHolder) {
             binding.llNoData.visibility = View.GONE
             val token = userSession.getData(Constant.USER_TOKEN).toString()
-            UtilMethods.getNetworkRetailer(requireContext(), token, pageNo, txnCount, id, object : MCallBackResponse {
+            UtilMethods.getNetworkRetailer(requireContext(), token, pageNo, txnCount, id,name,mobile,refer_id, object : MCallBackResponse {
                 override fun success(from: String, message: String) {
                     try {
                         // Use the custom Gson instance with the deserializer
@@ -204,14 +223,14 @@ class FragemntNetwork : BaseFragment<FragmentFragemntNetworkBinding>(FragmentFra
         }
 
 
-    private fun getNetworkRetailerDist(pageNo: String, txnCount: String, id: String) {
+    private fun getNetworkRetailerDist(pageNo: String, txnCount: Int,id:String,name:String,mobile:String,refer_id:String) {
         binding.llNoData.visibility = View.GONE
         val token = userSession.getData(Constant.USER_TOKEN).toString()
-        UtilMethods.getNetworkRetailer(requireContext(), token, pageNo, txnCount, id, object : MCallBackResponse {
+        UtilMethods.getNetworkRetailer(requireContext(), token, pageNo, txnCount, id,name,mobile,refer_id, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 try {
                     // Use the custom Gson instance with the deserializer
-                    val response: DownstreamRetailarResp = Gson().fromJson(message, DownstreamRetailarResp::class.java)
+                    val response: DonwStreamDistributerResponse = Gson().fromJson(message, DonwStreamDistributerResponse::class.java)
 
                     // Proceed with your existing logic
                     if (!response.error) {
@@ -219,11 +238,11 @@ class FragemntNetwork : BaseFragment<FragmentFragemntNetworkBinding>(FragmentFra
                             if (response.data.isNotEmpty()) {
 
 
-                                downstramlistRetailer = response.data.toMutableList()
-                                downstramlistRetailer.clear() // Clear existing data
-                                downstramlistRetailer.addAll(response.data) // Add new data
+                                downstramlistDistributer = response.data.toMutableList()
+                                downstramlistDistributer.clear() // Clear existing data
+                                downstramlistDistributer.addAll(response.data) // Add new data
                                 // Set up the nested RecyclerView
-                                val adapter = DownstreamRetailAdapter(myActivity, downstramlistRetailer)
+                                val adapter = DownStreamDistributerAdapter(myActivity, downstramlistDistributer)
                                binding.recydlerlist.adapter = adapter
                                 binding.recydlerlist.layoutManager = LinearLayoutManager(myActivity)
                                 binding.recydlerlist.visibility = View.VISIBLE
@@ -279,6 +298,66 @@ class FragemntNetwork : BaseFragment<FragmentFragemntNetworkBinding>(FragmentFra
     }
     override fun addListeners() {
         binding.ivBack.setOnClickListener { findNavController().popBackStack() }
+        binding.ivMenu.setOnClickListener { openTransactionFilterDialog() }
+    }
+    private fun openTransactionFilterDialog() {
+        val filterDialog = Dialog(myActivity)
+        val dBinding = LytNetworkFilterBinding.inflate(myActivity.layoutInflater)
+        dBinding.root.background =
+            ContextCompat.getDrawable(myActivity, R.drawable.curved_background_with_shadow)
+        filterDialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        filterDialog.setContentView(dBinding.root)
+        filterDialog.window
+            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        filterDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        filterDialog.window?.attributes?.windowAnimations ?: R.style.DialogAnimationBottom
+        filterDialog.window?.setGravity(Gravity.BOTTOM)
+         dBinding.date.visibility=GONE
+        val todayDate = CommonClass.getLiveTime("yyyy-MM-dd")
+        dBinding.edtFromDate.setText(todayDate)
+        dBinding.edtToDate.setText(todayDate)
+        dBinding.rgCount.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.rb25 -> {
+                    count = 25
+                }
+
+                R.id.rb50 -> {
+                    count =50
+                }
+
+                R.id.rb100 -> {
+                    count = 100
+                }
+
+                R.id.rb150 -> {
+                    count = 150
+                }
+
+                R.id.rb200 -> {
+                    count = 200
+                }
+                R.id.more -> {
+                    count=400
+                }
+            }
+        }
+        dBinding.btnSubmit.setOnClickListener {
+
+                val userType = userSession.getData(Constant.USER_TYPE_NAME)
+                if (userType.equals("Super Distributor") ) {
+                    getNetwork(page,count,"",dBinding.editname.text.toString(),dBinding.edtMob.text.toString(),dBinding.edtrefer.text.toString())
+                }else if(userType.equals("Distributor")){
+                    val id = userSession.getData(Constant.ID)
+                    getNetworkRetailerDist(page,count, id.toString(),dBinding.editname.text.toString(),dBinding.edtMob.text.toString(),dBinding.edtrefer.text.toString())
+                }
+               // getTransactionList(start_date, end_date, count);
+
+            filterDialog.dismiss()
+        }
+
+        filterDialog.setCancelable(true)
+        filterDialog.show()
     }
 
     override fun setData() {

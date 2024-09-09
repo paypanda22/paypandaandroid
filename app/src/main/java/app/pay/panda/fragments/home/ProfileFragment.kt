@@ -39,6 +39,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
    binding.card7.visibility=View.GONE
    binding.card10.visibility=View.GONE
    binding.packages.visibility=View.GONE
+   binding.adharpay.visibility=View.GONE
+   binding.aepsWalletReport.visibility=View.GONE
+   binding.aepsPayoutReport.visibility=View.GONE
+   binding.PackageHistoryReport.visibility=View.GONE
+   binding.card10.visibility=View.GONE
         }
         if (userType.equals("Retailer")) {
             binding.earningreport.visibility=View.GONE
@@ -128,6 +133,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
         binding.card10.setOnClickListener{
            findNavController().navigate(R.id.action_profileFragment_to_fragment_c_m_s_transaction_report)
+        }
+        binding.adharpay.setOnClickListener{
+           findNavController().navigate(R.id.action_profileFragment_to_fragment_aadhar_pay_report)
+        }
+        binding.aepsWalletReport.setOnClickListener{
+            findNavController().navigate(R.id.action_profileFragment_to_fragment_aeps_wallet_report)
+        }
+        binding.aepsPayoutReport.setOnClickListener{
+            findNavController().navigate(R.id.action_profileFragment_to_fragment_aeps_payout_report)
+        }
+        binding.PackageHistoryReport.setOnClickListener{
+            findNavController().navigate(R.id.action_profileFragment_to_fragment_package_history_report)
         }
     }
 

@@ -61,36 +61,48 @@ binding.ivBack.setOnClickListener{
     private fun dmtdisputechat() {
         val token = userSession.getData(Constant.USER_TOKEN).toString()
 
-        UtilMethods.dmtdisputechat(requireContext(), token,id.toString(),"20","0", object : MCallBackResponse {
+        UtilMethods.dmtdisputechat(requireContext(), token, id.toString(), "20", "0", object : MCallBackResponse {
             @SuppressLint("SetTextI18n")
             override fun success(from: String, message: String) {
                 val response: TicktHistoryResponse = Gson().fromJson(message, TicktHistoryResponse::class.java)
-                if (!response.error){
+                if (!response.error) {
+                    binding.imageView.visibility = VISIBLE
                     ticketHistoryList = mutableListOf()
-                    if (ticketHistoryList.isNotEmpty()){
-                        binding.llNoData.visibility = VISIBLE
-                        ticketHistoryList.clear()
-                    }
+
+                    // Clear previous data
+                    ticketHistoryList.clear()
+
+                    // Add new data
                     ticketHistoryList.addAll(response.data)
 
-                    val ticketHistoryAdapter = TicketHistoryAdapter(myActivity,ticketHistoryList)
-                    binding.rvTicketHostoryList.adapter = ticketHistoryAdapter
-                    binding.rvTicketHostoryList.layoutManager = LinearLayoutManager(myActivity)
+                    if (ticketHistoryList.isNotEmpty()) {
+                        // If data is available, show the RecyclerView and hide the "No Data" layout
+                        val ticketHistoryAdapter = TicketHistoryAdapter(myActivity, ticketHistoryList)
+                        binding.rvTicketHostoryList.adapter = ticketHistoryAdapter
+                        binding.rvTicketHostoryList.layoutManager = LinearLayoutManager(myActivity)
 
-                    binding.llNoData.visibility = GONE
-                    binding.rvTicketHostoryList.visibility = VISIBLE
-                    binding.imageView.visibility = GONE
+                        binding.llNoData.visibility = GONE
+                        binding.rvTicketHostoryList.visibility = VISIBLE
+                        binding.imageView.visibility = GONE
+                    } else {
+                        // If the list is empty, show the "No Data" layout
+                        binding.llNoData.visibility = VISIBLE
+                        binding.rvTicketHostoryList.visibility = GONE
+                        binding.imageView.visibility = GONE
+                    }
                 } else {
+                    // Handle error case
                     binding.llNoData.visibility = VISIBLE
                     binding.imageView.visibility = VISIBLE
                     binding.rvTicketHostoryList.visibility = GONE
                 }
             }
+
             override fun fail(from: String) {
-                binding.imageView.visibility = VISIBLE
+                // Handle API failure case
+                binding.imageView.visibility = GONE
                 binding.llNoData.visibility = VISIBLE
                 binding.rvTicketHostoryList.visibility = GONE
-                //   Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
             }
         })
     }

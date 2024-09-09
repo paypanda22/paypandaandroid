@@ -41,6 +41,8 @@ import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.ScannerListClick
 import app.pay.panda.responsemodels.aepsTxnList.AepsTransactionsResponse
 import app.pay.panda.responsemodels.aepsTxnList.Data
+import app.pay.panda.responsemodels.aepsenquiry.AepsEnquiryResponse
+import app.pay.panda.responsemodels.cmsinvoice.CMSInvoiceResponse
 import app.pay.panda.responsemodels.dmttxnlist.Tran
 import app.pay.panda.responsemodels.singleutility.SingleUtilityTransaction
 import app.pay.panda.retrofit.ApiMethods
@@ -53,7 +55,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
     private lateinit var txnList:MutableList<Data>
-
+private lateinit var  txnAdapter:AepsTxnAdapter
     private var txnCount=25
     override fun init() {
         nullActivityCheck()
@@ -83,7 +85,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
                     txnList= mutableListOf()
                     txnList.addAll(response.data)
 
-                    val txnAdapter=AepsTxnAdapter(myActivity,txnList,this@AepsTransactionList)
+                     txnAdapter=AepsTxnAdapter(myActivity,txnList,this@AepsTransactionList)
                     binding.rvTxnList.adapter=txnAdapter
                     binding.rvTxnList.layoutManager=LinearLayoutManager(myActivity)
 
@@ -134,6 +136,7 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         filterDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         filterDialog.window?.attributes?.windowAnimations ?: R.style.DialogAnimationBottom
         filterDialog.window?.setGravity(Gravity.BOTTOM)
+
         dBinding.edtFromDate.setOnClickListener { CommonClass.showDatePickerDialog(myActivity,dBinding.edtFromDate) }
         dBinding.edtToDate.setOnClickListener {
             if (dBinding.edtFromDate.text.toString().isEmpty()){
@@ -207,8 +210,74 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
         openViewDetailDialog(model[pos])
     }
 
-    override fun onItemClickEnquery(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
+    override fun onItemClickEnquery(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int,type:String) {
+        when (type) {
+            "CW" -> {
+                cashwidrawl(model[pos]._id)
+            }
 
+            "MS" -> {
+
+            }
+
+            "BE" -> {
+
+            }
+
+            "AP" -> {
+               // adhaarPayEnquiry(model[pos]._id)
+            }
+
+            "CD" -> {
+                cashDipositEnquiry(model[pos]._id)
+            }
+
+            else -> {
+
+            }
+
+
+        }
+    }
+    private fun cashDipositEnquiry(id:String) {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+
+        UtilMethods.cashDipositEnquiry(requireContext(), id, token, object : MCallBackResponse {
+            @SuppressLint("SetTextI18n")
+            override fun success(from: String, message: String) {
+                val response: AepsEnquiryResponse = Gson().fromJson(message, AepsEnquiryResponse::class.java)
+                if (!response.error) {
+                    txnAdapter.notifyDataSetChanged()
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun fail(from: String) {
+                Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+    private fun cashwidrawl(id:String) {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+
+        UtilMethods.cashwidrawl(requireContext(), id, token, object : MCallBackResponse {
+            @SuppressLint("SetTextI18n")
+            override fun success(from: String, message: String) {
+                val response: AepsEnquiryResponse = Gson().fromJson(message, AepsEnquiryResponse::class.java)
+                if (!response.error) {
+                    txnAdapter.notifyDataSetChanged()
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun fail(from: String) {
+                Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun openViewDetailDialog(model: Data){

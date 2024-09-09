@@ -7,5 +7,6 @@ data class Price(
     val mrp: Int?=0,
     val sale_rate: Int?=0,
     val tax: Int?=0,
-    val tax_type: String?=""
+    val tax_type: String?="",
+    val real_value: String?=""
 )

@@ -43,13 +43,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+
             android:orientation="vertical"
             android:padding="@dimen/_15ssp">
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/message"
+                android:textColor="@color/colorPrimaryDark"
+                style="@style/mostserrat_bold"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold" />
             <LinearLayout
                 android:id="@+id/ll1"
                 android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="visible">

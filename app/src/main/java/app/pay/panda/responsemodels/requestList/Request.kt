@@ -8,7 +8,7 @@ data class Request(
     val __v: Int = 0,
     val _id: String = "",
     val account_number: String = "",
-    val amount: Int = 0,
+    val amount: String = "",
     val approved_by: String = "",
     val bank: String = "",
     val bankRef: String = "",

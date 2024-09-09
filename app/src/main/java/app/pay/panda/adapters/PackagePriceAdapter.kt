@@ -29,6 +29,7 @@ class PackagePriceAdapter(
         val tvDuration: TextView =itemView.findViewById(R.id.tvDuration)
         val tvSalePrice: TextView =itemView.findViewById(R.id.tvSalePrice)
         val tvTax: TextView =itemView.findViewById(R.id.tvTax)
+        val total_amount: TextView =itemView.findViewById(R.id.total_amount)
         val mcvBackGround: MaterialCardView =itemView.findViewById(R.id.mcvBackGround)
     }
 
@@ -43,6 +44,7 @@ class PackagePriceAdapter(
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.tvPrice.text=RUPEE+" "+list[position].mrp.toString()
+        holder.total_amount.text=RUPEE+" "+list[position].real_value.toString()
         holder.tvDuration.text=list[position].duration.toString()+" "+list[position].duration_type.toString()
         holder.tvSalePrice.text=RUPEE+" "+list[position].sale_rate.toString()
         holder.tvTax.text=list[position].tax.toString()+" "+list[position].tax_type.toString()

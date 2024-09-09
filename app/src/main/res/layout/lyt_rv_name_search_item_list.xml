@@ -25,6 +25,7 @@
                 android:layout_marginVertical="@dimen/_5sdp"/>
             <ImageView
                 android:id="@+id/ivDismiss"
+                android:visibility="gone"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentEnd="true"

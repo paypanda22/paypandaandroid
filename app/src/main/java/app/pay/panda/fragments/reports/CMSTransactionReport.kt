@@ -1,5 +1,6 @@
 package app.pay.panda.fragments.reports
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -13,6 +14,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
@@ -28,8 +30,10 @@ import app.pay.panda.databinding.LytUtilityFilterBinding
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.helperclasses.Utils.Companion.showToast
+import app.pay.panda.interfaces.CMSInvoicClick
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.UtilityTransactionClick
+import app.pay.panda.responsemodels.aepsenquiry.AepsEnquiryResponse
 import app.pay.panda.responsemodels.cmsreportresponse.CMSReportResponse
 import app.pay.panda.responsemodels.utilitytxn.Data
 import app.pay.panda.responsemodels.utilitytxn.UtilityTxnResponse
@@ -44,6 +48,7 @@ class CMSTransactionReport : BaseFragment<FragmentCMSTransactionReportBinding>(F
     private var start_date = ""
     private var end_date = ""
     private var count = 25
+    private lateinit var txnAdapter:CMSReportAdapter
     private lateinit var dBinding: LytUtilityFilterBinding
     private lateinit var cmslist:MutableList<app.pay.panda.responsemodels.cmsreportresponse.Data>
     override fun init() {
@@ -85,8 +90,29 @@ class CMSTransactionReport : BaseFragment<FragmentCMSTransactionReportBinding>(F
                     if (response.data.isNotEmpty()) {
                         cmslist = mutableListOf()
                         cmslist.addAll(response.data)
+                        val clickListner = object : CMSInvoicClick {
+                            override fun onItemClicked(
+                                holder: RecyclerView.ViewHolder,
+                                model: List<app.pay.panda.responsemodels.cmsreportresponse.Data>,
+                                pos: Int,
+                                stsus: String
+                            ) {
+                                when (stsus) {
+                                    "1" -> {
+                                        cmsEnquiry(model[pos]._id)
+                                    }
 
-                        val txnAdapter = CMSReportAdapter(myActivity, cmslist)
+                                    "2" -> {
+                                        openShareReceipt(model[pos]._id.toString())
+                                    }
+
+                                    else -> {
+                                        cmsEnquiry(model[pos]._id)
+                                    }
+                                }
+                            }
+                        }
+                         txnAdapter = CMSReportAdapter(myActivity, cmslist,clickListner)
                         binding.rvcmsTransactions.adapter = txnAdapter
                         binding.rvcmsTransactions.layoutManager = LinearLayoutManager(myActivity)
 
@@ -108,7 +134,26 @@ class CMSTransactionReport : BaseFragment<FragmentCMSTransactionReportBinding>(F
             }
         })
     }
+    private fun cmsEnquiry(id:String) {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
 
+        UtilMethods.cmsEnquiry(requireContext(), id, token, object : MCallBackResponse {
+            @SuppressLint("SetTextI18n")
+            override fun success(from: String, message: String) {
+                val response: AepsEnquiryResponse = Gson().fromJson(message, AepsEnquiryResponse::class.java)
+                if (!response.error) {
+                    txnAdapter.notifyDataSetChanged()
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun fail(from: String) {
+                Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
     private fun openFilterDialog() {
 
         val filterDialog: Dialog = Dialog(myActivity)
@@ -174,5 +219,12 @@ class CMSTransactionReport : BaseFragment<FragmentCMSTransactionReportBinding>(F
         } else {
             myActivity = activity as FragmentActivity
         }
+    }
+    private fun openShareReceipt(id: String) {
+        val bottomSheet = SingleCMSTransaction()
+        val bundle = Bundle()
+        bundle.putString("id", id)
+        bottomSheet.arguments = bundle
+        bottomSheet.show(parentFragmentManager, bottomSheet.tag)
     }
 }

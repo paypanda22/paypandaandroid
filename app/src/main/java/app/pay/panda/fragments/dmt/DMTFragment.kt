@@ -1,11 +1,17 @@
 package app.pay.panda.fragments.dmt
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Gravity
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
@@ -20,6 +26,8 @@ import app.pay.panda.adapters.DeleteRecipient
 import app.pay.panda.adapters.DmtApiTypeAdapter
 import app.pay.panda.adapters.RecipientListAdapter
 import app.pay.panda.databinding.FragmentDMTBinding
+import app.pay.panda.databinding.LytDmtFilterBinding
+import app.pay.panda.databinding.LytDmtOtoBinding
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.ShowDialog
@@ -37,6 +45,7 @@ import app.pay.panda.responsemodels.dmtBeneficiaryList.RecipientListResponse
 import app.pay.panda.responsemodels.dmtSettings.DmtApiType
 import app.pay.panda.responsemodels.dmtSettings.DmtSettingsResponse
 import app.pay.panda.responsemodels.dmtcustomer.GetCustomerInfoResponse
+import app.pay.panda.responsemodels.dmtotp.DMTOtpResponse
 import app.pay.panda.retrofit.CommonApiCall
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
@@ -233,7 +242,9 @@ class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate
                                     binding.edtCustomerNumber.text?.clear()
                                 }
                             })
-                    } else {
+                    } else if (response.statusCode == "007") {
+                        openTransactionFilterDialog()
+                    }   else {
                         Toast.makeText(requireContext(), "Unable to fetch customer details.", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -368,5 +379,58 @@ class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate
         )
     }
 
+    private fun getOnboardingOtpValidate(otp:String) {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+        UtilMethods.getOnboardingOtpValidate(requireContext(), binding.edtCustomerNumber.text.toString(), token, apiID,otp ,object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                CommonClass.hideKeyBoard(myActivity, binding.edtCustomerNumber)
+                val response: DMTOtpResponse =
+                    Gson().fromJson(message, DMTOtpResponse::class.java)
+                if (!response.error) {
+                    ShowDialog.bottomDialogSingleButton(myActivity,
+                        "Congratulations!",
+                        "Bank3 OnBoarding Successful",
+                        "success",
+                        object : MyClick {
+                            override fun onClick() {
+                                findNavController().popBackStack()
+                            }
+                        })
 
+                }else{
+                    showToast(requireContext(), "Something went wrong")
+                }
+
+            }
+
+            override fun fail(from: String) {
+                showToast(requireContext(), from)
+            }
+        })
+    }
+
+    private fun openTransactionFilterDialog() {
+        val filterDialog: Dialog = Dialog(myActivity)
+        val dBinding = LytDmtOtoBinding.inflate(myActivity.layoutInflater)
+        dBinding.root.background =
+            ContextCompat.getDrawable(myActivity, R.drawable.curved_background_with_shadow)
+        filterDialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        filterDialog.setContentView(dBinding.root)
+        filterDialog.window
+            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        filterDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        filterDialog.window?.attributes?.windowAnimations ?: R.style.DialogAnimationBottom
+        filterDialog.window?.setGravity(Gravity.BOTTOM)
+        dBinding.btnVerify.setOnClickListener{
+            if(dBinding.etOtp.text.toString().isNotEmpty()){
+                Toast.makeText(requireContext(), "Please Enter Otp...", Toast.LENGTH_SHORT).show()
+            }else{
+                getOnboardingOtpValidate(dBinding.etOtp.text.toString())
+            }
+
+        }
+
+        filterDialog.setCancelable(true)
+        filterDialog.show()
+    }
 }

@@ -165,7 +165,7 @@ class CommonClass {
                 },
                 year, month, day
             )
-
+            datePickerDialog.datePicker.maxDate = calendar.timeInMillis
             datePickerDialog.show()
         }
 
