@@ -71,15 +71,15 @@ class MyAtmActivity : BaseActivity<ActivityMatmBinding>(), MATMOnFinishListener 
         binding.btnSubmit.setOnClickListener {
             if (validate()) {
                 val initiateTxnModel = InitiateTxnModel(
-                    "upitestret",
+                    "paypandaapi",
                     "android",
                     "PayPanda",
-                    "42Zuw71Ok7e2TGAgHPKttM7PFGMspJLLy3ewq15dhgjtGM9l",
-                    "MDB9krmA8OqYdgjTKflkXXU7BTNAJgVDEWBmhWjQ8YBvAPNKNPLbxnJGSKcKiEV9",
+                    "31ce608004db0fec63e7f6232930bbee53b979b452e6dda5898e405df9d6ed4d018c119164bb2a3f903b725ed9950e61",
+                    "67d624dd646168c5c1c87256210591b09c5b90d3b38b74cb5f33f50290fc1310372d9b2b142285e4f17188e22b48d9d1d335848907839d3ea989c143ffd53779",
                     deviceName,
                     deviceName,
                     userSession.getData(Constant.M_LAT).toString(),
-                    "upitestret",
+                    "paypandaapi",
                     userSession.getData(Constant.M_LONG).toString(),
                     "",
                     "",
@@ -125,20 +125,21 @@ class MyAtmActivity : BaseActivity<ActivityMatmBinding>(), MATMOnFinishListener 
                         paramC = "",
                         device_type = deviceName,
                         device_name = deviceName,
-                        apiUserName = "upitestret",
+                        apiUserName = "paypandaapi",
                         user_mobile_number = binding.edtMobile.text.toString(),
-                        userName = userSession.getData(Constant.NAME).toString(),
+                        userName = "SIDDHARTH BEHERA",
                         clientRefID = response.data.clientRef_id.toString(),
                         clientID = "42Zuw71Ok7e2TGAgHPKttM7PFGMspJLLy3ewq15dhgjtGM9l",
                         clientSecret = "MDB9krmA8OqYdgjTKflkXXU7BTNAJgVDEWBmhWjQ8YBvAPNKNPLbxnJGSKcKiEV9",
-                        loginID = "upitestret",
+                        loginID = "paypandaapi",
                         skipReceipt = binding.chkSkipReceipt.isChecked,
                         themeColor = themeColor
                     )
                     val request = Gson().toJson(requestModel)
-                    val intent = Intent(this@MyAtmActivity, MatmActivity::class.java)
-                    intent.putExtra("data", request)
-                    startActivity(intent)
+                    Log.e("DATA", "success: $request" )
+//                    val intent = Intent(this@MyAtmActivity, MatmActivity::class.java)
+//                    intent.putExtra("data", request)
+//                    startActivity(intent)
                 } else {
                     showToast(this@MyAtmActivity, "Unable to Start Transaction")
                 }

@@ -49,7 +49,6 @@ import app.pay.panda.responsemodels.disputeMaster.Service
 import app.pay.panda.responsemodels.uploadImage.UploadImageResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
-import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
 import java.io.File
 
@@ -69,70 +68,70 @@ class AddSupportTicket : BaseFragment<FragmentAddSupportTicketBinding>(FragmentA
     private lateinit var servicestList: MutableList<Service>
     private var fileType = ""
 
-    private val startForProfileImageResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            val resultCode = result.resultCode
-            val data = result.data
-            when (resultCode) {
-                Activity.RESULT_OK -> {
-                    val fileUri = data?.data!!
-                    val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(myActivity.contentResolver, fileUri)
-
-                    when (fileType) {
-                        "attachment1" -> {
-                            binding.attachment1.visibility = VISIBLE
-                            binding.iv1.visibility = GONE
-                            binding.attachment1.setImageBitmap(bitmap)
-                            val path: String = getRealPathFromURI(fileUri)
-                            val file: File = File(path)
-                            uploadImage(file)
-                        }
-
-                        "attachment2" -> {
-                            binding.attachment2.visibility = VISIBLE
-                            binding.iv2.visibility = GONE
-                            binding.attachment2.setImageBitmap(bitmap)
-                            val path: String = getRealPathFromURI(fileUri)
-                            val file: File = File(path)
-                            uploadImage(file)
-                        }
-
-                        "attachment3" -> {
-                            binding.attachment3.visibility = VISIBLE
-                            binding.iv3.visibility = GONE
-                            binding.attachment3.setImageBitmap(bitmap)
-                            val path: String = getRealPathFromURI(fileUri)
-                            val file: File = File(path)
-                            uploadImage(file)
-                        }
-
-                        "attachment4" -> {
-                            binding.attachment4.visibility = VISIBLE
-                            binding.iv4.visibility = GONE
-                            binding.attachment4.setImageBitmap(bitmap)
-                            val path: String = getRealPathFromURI(fileUri)
-                            val file: File = File(path)
-                            uploadImage(file)
-                        }
-
-
-                        else -> {
-                            Toast.makeText(requireContext(), "Invalid Document Type Selected", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-
-                ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(myActivity, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-                }
-
-                else -> {
-                    Toast.makeText(myActivity, "Task Cancelled", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-
-        }
+//    private val startForProfileImageResult =
+//        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+//            val resultCode = result.resultCode
+//            val data = result.data
+//            when (resultCode) {
+//                Activity.RESULT_OK -> {
+//                    val fileUri = data?.data!!
+//                    val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(myActivity.contentResolver, fileUri)
+//
+//                    when (fileType) {
+//                        "attachment1" -> {
+//                            binding.attachment1.visibility = VISIBLE
+//                            binding.iv1.visibility = GONE
+//                            binding.attachment1.setImageBitmap(bitmap)
+//                            val path: String = getRealPathFromURI(fileUri)
+//                            val file: File = File(path)
+//                            uploadImage(file)
+//                        }
+//
+//                        "attachment2" -> {
+//                            binding.attachment2.visibility = VISIBLE
+//                            binding.iv2.visibility = GONE
+//                            binding.attachment2.setImageBitmap(bitmap)
+//                            val path: String = getRealPathFromURI(fileUri)
+//                            val file: File = File(path)
+//                            uploadImage(file)
+//                        }
+//
+//                        "attachment3" -> {
+//                            binding.attachment3.visibility = VISIBLE
+//                            binding.iv3.visibility = GONE
+//                            binding.attachment3.setImageBitmap(bitmap)
+//                            val path: String = getRealPathFromURI(fileUri)
+//                            val file: File = File(path)
+//                            uploadImage(file)
+//                        }
+//
+//                        "attachment4" -> {
+//                            binding.attachment4.visibility = VISIBLE
+//                            binding.iv4.visibility = GONE
+//                            binding.attachment4.setImageBitmap(bitmap)
+//                            val path: String = getRealPathFromURI(fileUri)
+//                            val file: File = File(path)
+//                            uploadImage(file)
+//                        }
+//
+//
+//                        else -> {
+//                            Toast.makeText(requireContext(), "Invalid Document Type Selected", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                }
+//
+//                ImagePicker.RESULT_ERROR -> {
+//                    Toast.makeText(myActivity, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+//                }
+//
+//                else -> {
+//                    Toast.makeText(myActivity, "Task Cancelled", Toast.LENGTH_SHORT).show()
+//                }
+//
+//            }
+//
+//        }
 
     override fun init() {
         nullActivityCheck()
@@ -346,13 +345,13 @@ class AddSupportTicket : BaseFragment<FragmentAddSupportTicketBinding>(FragmentA
     }
 
     private fun takeImage() {
-        ImagePicker.with(this)
-            .compress(1024)         //Final image size will be less than 1 MB(Optional)
-            .crop(1f, 2f)
-            .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
-            .createIntent { intent ->
-                startForProfileImageResult.launch(intent)
-            }
+//        ImagePicker.with(this)
+//            .compress(1024)         //Final image size will be less than 1 MB(Optional)
+//            .crop(1f, 2f)
+//            .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+//            .createIntent { intent ->
+//                startForProfileImageResult.launch(intent)
+//            }
     }
 
     private fun getRealPathFromURI(contentURI: Uri): String {

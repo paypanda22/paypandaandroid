@@ -17,7 +17,9 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.json.JSONObject
+import retrofit2.Retrofit
 import java.io.File
+import kotlin.math.log
 
 
 object UtilMethods {
@@ -36,30 +38,33 @@ object UtilMethods {
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstance().create(GetData::class.java)
-                        .chkMobile(mobileNo).execute()
+                    val instant:Retrofit?=RetrofitFactory.getRetrofitInstance()
+                    val response = instant?.create(GetData::class.java)
+                        ?.chkMobile(mobileNo)?.execute()
                     withContext(Dispatchers.Main) {
                         progressBar.hideProgress()
-                        if (response.isSuccessful && response.body() != null) {
-                            val responseBody = response.body() as JsonObject
-                            if (responseBody.has("error")) {
-                                val status = responseBody.get("error").asBoolean
-                                if (status) {
-                                    val message = responseBody.get("message").asString
-                                    callBackResponse.fail(message)
+                        response?.body().let {
+                            if (response?.isSuccessful == true) {
+                                val responseBody = response.body() as JsonObject
+                                if (responseBody.has("error")) {
+                                    val status = responseBody.get("error").asBoolean
+                                    if (status) {
+                                        val message = responseBody.get("message").asString
+                                        callBackResponse.fail(message)
+                                    } else {
+                                        callBackResponse.success("strresponse", responseBody.toString())
+                                    }
                                 } else {
-                                    callBackResponse.success("strresponse", responseBody.toString())
+                                    val message = responseBody.get("message").asString ?: "Unknown Error"
+                                    callBackResponse.fail(message)
                                 }
-                            } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
-                                callBackResponse.fail(message)
-                            }
 
-                        } else {
-                            progressBar.hideProgress()
-                            callBackResponse.fail("Request Failed.Response Body Null")
+                            } else {
+                                progressBar.hideProgress()
+                                callBackResponse.fail("Request Failed.Response Body Null")
+                            }
                         }
+
                     }
                 } catch (e: Exception) {
                     progressBar.hideProgress()
@@ -73,6 +78,7 @@ object UtilMethods {
             Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
         }
     }
+
 
     fun chkEmail(context: Context, email: String, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
@@ -92,8 +98,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -134,8 +139,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -176,8 +180,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -218,8 +221,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -259,8 +261,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -301,8 +302,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -345,8 +345,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -383,8 +382,7 @@ object UtilMethods {
                             if (responseBody.has("error")) {
                                 callBackResponse.success("strresponse", responseBody.toString())
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -412,8 +410,7 @@ object UtilMethods {
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
-                        .create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .dashBoardData().execute()
                     withContext(Dispatchers.Main) {
                         progressBar.hideProgress()
@@ -428,8 +425,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -457,8 +453,7 @@ object UtilMethods {
 //            progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
-                        .create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .dashBoardData().execute()
                     withContext(Dispatchers.Main) {
                         // progressBar.hideProgress()
@@ -473,8 +468,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -517,8 +511,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -561,8 +554,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -605,8 +597,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -649,8 +640,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -693,8 +683,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -737,8 +726,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -781,8 +769,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -825,8 +812,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -869,8 +855,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -898,10 +883,8 @@ object UtilMethods {
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val requestBody =
-                        RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-                    val imageRequest =
-                        MultipartBody.Part.createFormData("image", file.name, requestBody)
+                    val requestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                    val imageRequest = MultipartBody.Part.createFormData("image", file.name, requestBody)
 
                     val response = RetrofitFactory.getRetrofitInstance().create(GetData::class.java)
                         .uploadImage(imageRequest).execute()
@@ -919,8 +902,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -962,8 +944,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -1006,8 +987,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -1050,8 +1030,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -1073,12 +1052,7 @@ object UtilMethods {
         }
     }
 
-    fun uploadKycVideo(
-        context: Context,
-        file: File,
-        token: String,
-        callBackResponse: MCallBackResponse
-    ) {
+    fun uploadKycVideo(context: Context, file: File, token: String, callBackResponse: MCallBackResponse) {
         if (!isNetworkAvailable(context)) {
             Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
             return
@@ -1089,8 +1063,7 @@ object UtilMethods {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val requestBody = RequestBody.create("video/mp4".toMediaTypeOrNull(), file)
-                val videoRequest =
-                    MultipartBody.Part.createFormData("video", file.name, requestBody)
+                val videoRequest = MultipartBody.Part.createFormData("video", file.name, requestBody)
 
                 val tokenP = RequestBody.create(
                     "text/plain".toMediaTypeOrNull(),
@@ -1151,8 +1124,7 @@ object UtilMethods {
                                     callBackResponse.success("strresponse", responseBody.toString())
                                 }
                             } else {
-                                val message =
-                                    responseBody.get("message").asString ?: "Unknown Error"
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
                                 callBackResponse.fail(message)
                             }
 
@@ -1174,20 +1146,13 @@ object UtilMethods {
         }
     }
 
-    fun getDmtCustomerInfo(
-        context: Context,
-        mobile: String,
-        token: String,
-        apiId: String,
-        callBackResponse: MCallBackResponse
-    ) {
+    fun getDmtCustomerInfo(context: Context, mobile: String, token: String, apiId: String, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             val progressBar = CustomProgressBar()
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
-                        .create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .getDmtCustomerInfo(mobile, apiId).execute()
                     withContext(Dispatchers.Main) {
                         progressBar.hideProgress()
@@ -1212,20 +1177,13 @@ object UtilMethods {
         }
     }
 
-    fun getBeneficiaryList(
-        context: Context,
-        mobile: String,
-        token: String,
-        apiId: String,
-        callBackResponse: MCallBackResponse
-    ) {
+    fun getBeneficiaryList(context: Context, mobile: String, token: String, apiId: String, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             val progressBar = CustomProgressBar()
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
-                        .create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .getBeneficiaryList(mobile, apiId).execute()
                     withContext(Dispatchers.Main) {
                         progressBar.hideProgress()
@@ -1467,19 +1425,13 @@ object UtilMethods {
         }
     }
 
-    fun dmtTxnEnquiry(
-        context: Context,
-        txID: String,
-        token: String,
-        callBackResponse: MCallBackResponse
-    ) {
+    fun dmtTxnEnquiry(context: Context, txID: String, token: String, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             val progressBar = CustomProgressBar()
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
-                        .create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .dmtTxnEnquiry(txID).execute()
                     withContext(Dispatchers.Main) {
                         progressBar.hideProgress()
@@ -1535,17 +1487,11 @@ object UtilMethods {
         }
     }
 
-    fun getTxnByBatchId(
-        context: Context,
-        batchId: String,
-        token: String,
-        callBackResponse: MCallBackResponse
-    ) {
+    fun getTxnByBatchId(context: Context, batchId: String, token: String, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
-                        .create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .getTxnByBatchId(batchId).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
@@ -1685,9 +1631,8 @@ object UtilMethods {
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response =
-                        RetrofitFactory.getRetrofitYooPayInstance().create(GetData::class.java)
-                            .getPinCodeData(pincode).execute()
+                    val response = RetrofitFactory.getRetrofitYooPayInstance().create(GetData::class.java)
+                        .getPinCodeData(pincode).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
                             progressBar.hideProgress()
@@ -1777,8 +1722,7 @@ object UtilMethods {
         if (isNetworkAvailable(context)) {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
-                        .create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .getTransferTo().execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
@@ -1857,19 +1801,13 @@ object UtilMethods {
         }
     }
 
-    fun isServiceAvailable(
-        context: Context,
-        serviceID: String,
-        token: String,
-        callBackResponse: MCallBackResponse
-    ) {
+    fun isServiceAvailable(context: Context, serviceID: String, token: String, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             val progressBar = CustomProgressBar()
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
-                        .create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .isServiceAvailable(serviceID).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
@@ -1962,8 +1900,7 @@ object UtilMethods {
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
-                        .create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .aepsBankList().execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
@@ -1994,9 +1931,8 @@ object UtilMethods {
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response =
-                        RetrofitFactory.getRetrofitYooPayInstance().create(GetData::class.java)
-                            .checkFData(fData).execute()
+                    val response = RetrofitFactory.getRetrofitYooPayInstance().create(GetData::class.java)
+                        .checkFData(fData).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
                             progressBar.hideProgress()
@@ -2082,18 +2018,13 @@ object UtilMethods {
         }
     }
 
-    fun getUserAadhaarAddress(
-        context: Context,
-        token: String,
-        callBackResponse: MCallBackResponse
-    ) {
+    fun getUserAadhaarAddress(context: Context, token: String, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             val progressBar = CustomProgressBar()
             progressBar.showProgress(context)
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token)
-                        .create(GetData::class.java)
+                    val response = RetrofitFactory.getRetrofitInstanceWithToken(token).create(GetData::class.java)
                         .getUserAadhaarAddress().execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
