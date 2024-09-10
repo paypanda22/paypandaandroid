@@ -9,6 +9,10 @@
         android:icon="@drawable/support" />
     <item
         android:id="@+id/Distributer"
+        android:title="Fund Request by Distributer"
+        android:icon="@drawable/ic_home_2_" />
+    <item
+        android:id="@+id/member"
         android:title="Fund Request by Member"
         android:icon="@drawable/ic_home_2_" />
 </menu>

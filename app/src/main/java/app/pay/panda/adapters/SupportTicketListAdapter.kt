@@ -8,6 +8,10 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.R
 import app.pay.panda.helperclasses.Utils.Companion.showToast
@@ -30,6 +34,7 @@ class SupportTicketListAdapter(
         val tvHistory:TextView=itemView.findViewById(R.id.tvHistory)
         val tvReply:TextView=itemView.findViewById(R.id.tvReply)
         val tvDepartment:TextView=itemView.findViewById(R.id.tvDepartment)
+
         val tvService:TextView=itemView.findViewById(R.id.tvService)
         val edtReplyMessage:TextInputEditText=itemView.findViewById(R.id.edtReplyMessage)
         val lytReply:TextInputLayout=itemView.findViewById(R.id.lytReply)
@@ -51,8 +56,9 @@ class SupportTicketListAdapter(
         holder.tvSubject.text=list[position].subject
         holder.tvMessage.text=list[position].name+" ( "+list[position].mobile+" )"
         holder.tvDate.text=list[position].createdAt
-        holder.tvDepartment.text=list[position].department_id
+        holder.tvDepartment.text=list[position].refer_code
         holder.tvService.text=list[position].service_id
+      //  holder.ticketNo.text=list[position].tic
 
         holder.tvReply.setOnClickListener {
            if (holder.lytReply.visibility==VISIBLE){
@@ -67,6 +73,10 @@ class SupportTicketListAdapter(
             }else{
                 click.onItemClicked(holder,list,position,"reply",holder.edtReplyMessage,holder.lytReply)
             }
+        }
+        holder.tvHistory.setOnClickListener{
+            click.onItemClicked(holder,list,position,"history",holder.edtReplyMessage,holder.lytReply)
+
         }
     }
 }

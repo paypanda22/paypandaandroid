@@ -63,6 +63,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/EditTextInput4"
+        android:id="@+id/edtServiceType1"
         app:endIconMode="dropdown_menu">
         <AutoCompleteTextView
             android:id="@+id/edtServiceType"
@@ -75,9 +76,22 @@
             android:hint="@string/filter_by_service_category"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:visibility="gone"
+        android:id="@+id/number"
+        style="@style/EditTextInput4">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txnID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="filter by txn Id"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/EditTextInput4"
+        android:id="@+id/edtBillers1"
         app:endIconMode="dropdown_menu">
         <AutoCompleteTextView
             android:id="@+id/edtBillers"

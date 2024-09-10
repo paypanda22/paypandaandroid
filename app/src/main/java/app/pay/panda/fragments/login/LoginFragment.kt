@@ -25,6 +25,7 @@ import app.pay.panda.activity.IntroActivity
 import app.pay.panda.databinding.FragmentLoginBinding
 import app.pay.panda.databinding.LytLoginDialogBinding
 import app.pay.panda.fragments.PrivacyPolicy
+import app.pay.panda.fragments.RefundPolicyFragment
 import app.pay.panda.fragments.TermsAndConditions
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CommonClass
@@ -74,6 +75,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.tv4.setOnClickListener {
             val policyfgmt=PrivacyPolicy()
             policyfgmt.show(myActivity.supportFragmentManager,"TAG")
+
+        }
+        binding.tv5.setOnClickListener {
+            val refundpolicy=RefundPolicyFragment()
+            refundpolicy.show(myActivity.supportFragmentManager,"TAG")
 
         }
 
@@ -142,6 +148,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }else if(!binding.tv1.isChecked) {
                     Toast.makeText(requireContext(), "Please Apply Terms and Conditions", Toast.LENGTH_SHORT).show()
                 }else {
+                  //  openOtpDialog("phone", "+91" + binding.edtMobile.text.toString());
+                   // checkPasswordMobile("phone", "+91" + binding.edtMobile.text.toString())
                     //checkPasswordMobile("phone", "+91" + binding.edtMobile.text.toString())
                     openOtpDialog("phone","+91"+binding.edtMobile.text.toString())
                 }
@@ -173,7 +181,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             override fun success(from: String, message: String) {
                 val response: PasswordCheckResponse = Gson().fromJson(message, PasswordCheckResponse::class.java)
                 if (!response.error) {
-                    openOtpDialog("phone", entity);
+                    //openOtpDialog("phone", entity);
 
                 } else {
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
@@ -209,7 +217,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         })
     }
 
-    private fun openOtpDialog(loginType: String, entity: String) {
+   /* private fun openOtpDialog(loginType: String, entity: String) {
         val requestData = hashMapOf<String, Any?>()
         requestData["entity"] = entity
         requestData["password"] = binding.edtPassword.text.toString()
@@ -245,7 +253,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         })
 
-    }
+    }*/
 
     private fun checkEmail(emailText: String) {
         progressBar.showProgress(requireContext())
@@ -281,7 +289,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         })
     }
-
 
     private fun checkMobile() {
         UtilMethods.chkMobile(requireContext(), "+91" + binding.edtMobile.text.toString(), object : MCallBackResponse {
@@ -321,6 +328,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     }
 
+
     override fun setData() {
 
     }
@@ -335,6 +343,88 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
        binding.edtPassword.error=null
 
     }
+
+   /* private fun openOtpDialog(loginType: String, entity: String) {
+        val requestData = hashMapOf<String, Any?>()
+        requestData["entity"] = entity
+        requestData["password"] = binding.edtPassword.text.toString()
+        requestData["deviceId"] = CommonClass.getDeviceId(requireActivity())
+
+        val getHash = GetKeyHash(myActivity)
+        val finalData = getHash.getHash(requestData)
+        UtilMethods.userLogin(requireContext(), finalData, object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: NewLoginResponse = Gson().fromJson(message, NewLoginResponse::class.java)
+                if (response.error==false){
+                    if (response.data?.user?.isNotEmpty()==true) {
+                        refID = response.data.user.toString()
+                        val bundle = Bundle()
+                        bundle.putString("entity", binding.edtMobile.text.toString())
+                        bundle.putString("entityType", loginType)
+                        bundle.putString("type", "login")
+                        bundle.putString("password", binding.edtPassword.text.toString())
+                        bundle.putString("refID", refID)
+                        findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
+                    } else {
+                        val bundle = Bundle()
+                        findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
+                        Toast.makeText(requireContext(), "Unable to Send Otp to your mobile", Toast.LENGTH_SHORT).show()
+                    }
+                }else{
+                    val bundle = Bundle()
+                    findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
+
+                    showToast(requireContext(),response.message)
+                }
+
+            }
+
+            override fun fail(from: String) {
+                // val bundle = Bundle()
+                //  findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
+
+                showToast(requireContext(),from)
+            }
+        })
+
+    }*/
+   private fun openOtpDialog(loginType: String, entity: String) {
+       val requestData = hashMapOf<String, Any?>()
+       requestData["entity"] = entity
+       requestData["password"] = binding.edtPassword.text.toString()
+       requestData["deviceId"] = CommonClass.getDeviceId(requireActivity())
+       val getHash = GetKeyHash(myActivity)
+       val finalData = getHash.getHash(requestData)
+       UtilMethods.userLogin(requireContext(), finalData, object : MCallBackResponse {
+           override fun success(from: String, message: String) {
+               val response: NewLoginResponse = Gson().fromJson(message, NewLoginResponse::class.java)
+               if (response.error==false){
+                   if (response.data?.user?.isNotEmpty()==true) {
+                       refID = response.data.user.toString()
+                       val bundle = Bundle()
+                       bundle.apply {
+                           putString("entity", binding.edtMobile.text.toString())
+                           putString("entityType", loginType)
+                           putString("type", "login")
+                           putString("password", binding.edtPassword.text.toString())
+                           putString("refID", refID)
+                       }
+                       findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment, bundle)
+                   } else {
+                       Toast.makeText(requireContext(), "Unable to Send Otp to your mobile", Toast.LENGTH_SHORT).show()
+                   }
+               }else{
+                   showToast(requireContext(),response.message)
+               }
+
+           }
+
+           override fun fail(from: String) {
+               showToast(requireContext(),from)
+           }
+       })
+
+   }
 
     fun Int.dpToPx(): Int {
         return (this * Resources.getSystem().displayMetrics.density).toInt()

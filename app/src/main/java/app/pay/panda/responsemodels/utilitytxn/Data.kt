@@ -13,4 +13,6 @@ data class Data(
     val txnReferenceId: String?="",
     val txn_id: String?="",
     val ca_num: String?="",
+    val service_name: String?="",
+    val service_category: String?="",
 )

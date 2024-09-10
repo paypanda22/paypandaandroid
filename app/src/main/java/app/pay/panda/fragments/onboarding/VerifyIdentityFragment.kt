@@ -69,6 +69,7 @@ class VerifyIdentityFragment : BaseFragment<FragmentVerifyIdentityBinding>(Fragm
                 if (binding.edtPanNumber.text.toString().length == 10) {
                     if (ActivityExtensions.isValidPan(binding.edtPanNumber.text.toString())) {
                         binding.edtPanNumber.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_green, 0)
+                        binding.btnPan.text="VERIFY"
                     }else{
                         binding.edtPanNumber.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     }
@@ -104,9 +105,9 @@ class VerifyIdentityFragment : BaseFragment<FragmentVerifyIdentityBinding>(Fragm
             builder.setMessage("Do you want to Edit Pan Number ?")
                 .setTitle("Edit Pan Number !")
                 .setNegativeButton("YES") { _, _ ->
-                    userSession.setBoolData(Constant.PAN_VERIFIED,false)
-                    binding.lytPanNumber.visibility= VISIBLE
-                    binding.tvBtnPan.visibility= GONE
+                    userSession.setBoolData(Constant.PAN_VERIFIED, false)
+                    binding.lytPanNumber.visibility = VISIBLE
+                    binding.tvBtnPan.visibility = GONE
                 }
                 .setPositiveButton("No") { dialog, _ ->
                     dialog.dismiss()
@@ -129,6 +130,9 @@ class VerifyIdentityFragment : BaseFragment<FragmentVerifyIdentityBinding>(Fragm
                 binding.llPanName.visibility = View.VISIBLE
                 binding.tvPanVerifiedName.text = response.data?.name.toString()
                 binding.btnPan.text = "NEXT"
+                binding.lytPanNumber.visibility = GONE
+                binding.tvBtnPan.visibility = VISIBLE
+
 
             }
 

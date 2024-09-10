@@ -16,7 +16,7 @@
     <!-- Spannable Text-->
     <string name="terms_and_conditions">By continuing, you agree to</string>
     <string name="terms_conditions">Terms &amp; Conditions</string>
-    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_policy">Privacy Policy.</string>
     <string name="and">and</string>
     <string name="most_trusted_amp_secure_app"><![CDATA[Most Trusted & Secure App]]></string>
     <string name="_0000000000">0000000000</string>
@@ -385,6 +385,7 @@
     <string name="fragment_aeps_action">Fragment Aeps Action</string>
     <string name="aeps_onboarding">Aeps OnBoarding</string>
     <string name="review_onboarding_details">Review OnBoarding Details</string>
+    <string name="message">"For now, we need an L0 device for AEPS for a few days because we will provide you with options for all devices after a few days. Thank you."</string>
     <string name="warning">Before Proceeding for AEPS Onboarding Process Please Note That You should have Original Copies of Your Aadhaar Card and PAN Card with you.</string>
     <string name="name_">Name :</string>
     <string name="email">Email :</string>
@@ -417,7 +418,7 @@
     <string name="merchant_auth_completed">Merchant Auth Completed</string>
     <string name="mini_statement">Mini\nStatement</string>
     <string name="no_aeps_transaction_found">No Aeps Transaction Found</string>
-    <string name="user_profile_view_edit">User Profile View/Edit</string>
+    <string name="user_profile_view_edit">Profile Setting</string>
     <string name="utility_transaction_report">Utility Transaction Report</string>
     <string name="bank_withdrawals_report">Bank Withdrawals Report</string>
     <string name="aeps_transactions_report">Aeps Transactions Report</string>
@@ -508,6 +509,7 @@
     <string name="enter_ca_number">Enter CA Number</string>
     <string name="select_service_category">Select Service Category</string>
     <string name="filter_by_biller_name">Filter By Biller Name</string>
+    <string name="filter_by_biller_email">Filter By Email </string>
     <string name="filter_by_biller_name_id">Filter By Biller Name or Refer Id</string>
     <string name="filter_by_service_category">Filter By Service Category</string>
     <string name="filter_by_ca_number">Filter By CA Number</string>
@@ -567,5 +569,13 @@
     <string name="enter_account_holder_name">Enter Account Holder Name</string>
     <string name="are_you_sure_you_want_to_delete">Are you sure, You want to delete this Account ?</string>
     <string name="account_verification">Account Verification</string>
+
+    <string name="termsconditions">
+    1. The subscriptions validity is only for 30/90/180/365 days after the date of purchase.\n\n
+    2. Your wallet will be debited for the amount automatically renewed when your subscription expires.\n\n
+    3. The Retailer will be switched to the same plan on the same day if he cancels the subscription at any moment.\n\n
+    4. After being deducted, subscription fees are not refundable.
+</string>
+
 
 </resources>

@@ -147,9 +147,27 @@ class OnboardingStatusFragment : BaseFragment<FragmentOnboardingStatusBinding>(F
             onStepButtonClick(5,requireContext())
         }
         binding.mcvVideoKyc.setOnClickListener {
-            val dialogKYCInstruction = DialogKYCInstruction()
-            dialogKYCInstruction.show(myActivity.supportFragmentManager, "KYCInstructionDialog")
-            onStepButtonClick(6,requireContext())
+        /*    val dialogKYCInstruction = DialogKYCInstruction()
+            dialogKYCInstruction.show(myActivity.supportFragmentManager, "KYCInstructionDialog")*/
+           // onStepButtonClick(6,requireContext())
+
+            val clickedStep = 6
+            val loginSteps = userSession.getIntData(Constant.LOGIN_STEPS)
+
+            // Check if the steps are completed
+            when {
+                clickedStep <= loginSteps -> Toast.makeText(requireContext(), "This step is already completed.", Toast.LENGTH_SHORT).show()
+                clickedStep > loginSteps + 1 -> {
+                    val previousStepName = getStepName(loginSteps)
+                    Toast.makeText(requireContext(), "Please complete $previousStepName step.", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    // Show the dialog if the previous steps are completed
+                    val dialogKYCInstruction = DialogKYCInstruction()
+                    dialogKYCInstruction.show(myActivity.supportFragmentManager, "KYCInstructionDialog")
+                    navigateToStep(clickedStep)
+                }
+            }
         }
         binding.chkTnc.setOnCheckedChangeListener { _, _ ->
             if (userSession.getIntData(Constant.LOGIN_STEPS) >= 6) {

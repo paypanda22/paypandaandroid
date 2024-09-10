@@ -1,12 +1,17 @@
 package app.pay.panda.fragments.buyPackage
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.text.Html
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.Gravity
 import android.view.View
 import android.view.View.GONE
@@ -63,6 +68,8 @@ class PackageListFragment : BaseFragment<FragmentPackageListBinding>(FragmentPac
         nullActivityCheck()
         userSession = UserSession(requireContext())
         getPackageList()
+
+
     }
 
     private fun getPackageList() {
@@ -156,43 +163,68 @@ class PackageListFragment : BaseFragment<FragmentPackageListBinding>(FragmentPac
         val priceAdapter = PackagePriceAdapter(myActivity, prices, this@PackageListFragment)
         dBinding.rvPriceList.adapter = priceAdapter
         dBinding.rvPriceList.layoutManager = LinearLayoutManager(myActivity)
+        dBinding.textViewTermsConditions.text = Html.fromHtml(
+            "I agree to the <font color='#2e3192'>terms and condition</font>",
+            Html.FROM_HTML_MODE_LEGACY
+        )
+
+        dBinding.textViewTermsConditions.setOnClickListener {
+            val dialog = AlertDialog.Builder(myActivity)
+           // dBinding.textViewTermsConditions.text = Html.fromHtml(getString(R.string.termsconditions))
+            val dialogView = layoutInflater.inflate(R.layout.dialog_terms_conditions, null)
+            dialog.setView(dialogView)
+            dialog.setPositiveButton("OK", null)
+            dialog.show()
+
+        }
 
         dBinding.btnBuyNow.setOnClickListener {
-            if (dBinding.llPin.visibility!= VISIBLE){
-                showToast(requireContext(),"Select Package First")
-            }else if (dBinding.edtTPin.text.toString().length<4){
-                showToast(requireContext(),"Enter Transaction Pin")
-            }else{
-                val token=userSession.getData(Constant.USER_TOKEN).toString()
-                val requestData= hashMapOf<String,Any?>()
-                requestData["package_id"]=package_id
-                requestData["tpin"]=dBinding.edtTPin.text.toString()
-                requestData["price"]=package_price
-                requestData["user_id"]=token
-                UtilMethods.purchasePackage(requireContext(),requestData,object:MCallBackResponse{
-                    override fun success(from: String, message: String) {
-                        val response: PostApiResponse = Gson().fromJson(message, PostApiResponse::class.java)
-                        if(!response.error){
-                        ShowDialog.bottomDialogSingleButton(myActivity,
-                            "Congratulations!",
-                            response.message,
-                            "success",
-                            object : MyClick {
-                                override fun onClick() {
-                                    findNavController().popBackStack()
-                                    buyNowDialog.dismiss()
+            if (dBinding.chkRememberMe.isChecked.equals(true)) {
+
+                if (dBinding.llPin.visibility != VISIBLE) {
+                    showToast(requireContext(), "Select Package First")
+                } else if (dBinding.edtTPin.text.toString().length < 4) {
+                    showToast(requireContext(), "Enter Transaction Pin")
+                } else {
+                    val token = userSession.getData(Constant.USER_TOKEN).toString()
+                    val requestData = hashMapOf<String, Any?>()
+                    requestData["package_id"] = package_id
+                    requestData["tpin"] = dBinding.edtTPin.text.toString()
+                    requestData["price"] = package_price
+                    requestData["user_id"] = token
+                    UtilMethods.purchasePackage(
+                        requireContext(),
+                        requestData,
+                        object : MCallBackResponse {
+                            override fun success(from: String, message: String) {
+                                val response: PostApiResponse =
+                                    Gson().fromJson(message, PostApiResponse::class.java)
+                                if (!response.error) {
+                                    ShowDialog.bottomDialogSingleButton(myActivity,
+                                        "Congratulations!",
+                                        response.message,
+                                        "success",
+                                        object : MyClick {
+                                            override fun onClick() {
+                                                findNavController().popBackStack()
+                                                buyNowDialog.dismiss()
+                                            }
+                                        })
+
+                                } else {
+                                    Toast.makeText(activity, response.message, Toast.LENGTH_SHORT)
+                                        .show()
                                 }
-                            })
+                            }
 
-                    }else{
-                            Toast.makeText(activity, response.message, Toast.LENGTH_SHORT).show()
-                        }
-                        }
-
-                    override fun fail(from: String) {
-
-                    }
-                })
+                            override fun fail(from: String) {
+                                Toast.makeText(activity, from, Toast.LENGTH_SHORT).show()
+                            }
+                        })
+                }
+            } else {
+                Toast.makeText(activity, "Please Apply Terms and Conditions", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 

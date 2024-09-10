@@ -2,6 +2,7 @@ package app.pay.panda
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,7 @@ class PaymentRequestDialogFragment : DialogFragment() {
     private var id: String? = ""
     private var mobile: String? = ""
     private var userType: String? = ""
+    private var remark: String? = ""
 
     private var _binding: FragmentPaymentRequestDialogBinding? = null
     private val binding get() = _binding!!
@@ -49,27 +51,38 @@ class PaymentRequestDialogFragment : DialogFragment() {
             id = it.getString("id")
             mobile = it.getString("mobile")
             userType = it.getString("userType")
+            remark = it.getString("remark")
         }
-        userSession= UserSession(requireContext())
+        binding.remark.text = remark
+        userSession = UserSession(requireContext())
         // Populate the spinner
         val statusArray = arrayOf("Pending", "Rejected", "Approved")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, statusArray)
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, statusArray)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerStatus.adapter = adapter
         val position = statusArray.indexOf(status)
         if (position >= 0) {
             binding.spinnerStatus.setSelection(position)
         }
-        binding.txtdate.text=date
-        binding.amount.text= amount.toString()
+        binding.txtdate.text = date
+        binding.amount.text = amount.toString()
+        //binding.remark.text= remark
 
         // Set up listeners for buttons
         binding.btnClose.setOnClickListener {
             dismiss()
         }
+        if (status.equals("Approved")) {
 
-        binding.btnUpdate.setOnClickListener {
-            paymentRequestToUser()
+        } else {
+            binding.btnUpdate.setOnClickListener {
+                if (binding.edtTPin.text.isEmpty()) {
+                    binding.edtTPin.error="Please Enter TPin"
+                } else{
+                    paymentRequestToUser()
+            }
+        }
         }
     }
     private fun paymentRequestToUser() {

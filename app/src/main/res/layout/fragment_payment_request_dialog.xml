@@ -86,12 +86,13 @@
             android:textColor="@color/black"
             android:text="Remarks :" />
 
-        <EditText
+        <TextView
+            android:id="@+id/remark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="tes"
+            android:hint="Enter remark"
+            android:textSize="@dimen/_11sdp"
             android:textColor="@color/grey_80"
-            android:enabled="false"
             android:background="@drawable/edit_text_round_bg_outline" />
     </LinearLayout>
 
@@ -113,6 +114,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter TPin"
+            android:inputType="numberPassword"
+            android:textSize="@dimen/_13sdp"
             android:textColor="@color/grey_80"
             android:background="@drawable/edit_text_round_bg_outline" />
 
@@ -120,6 +123,8 @@
             android:id="@+id/tvTPinError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:textSize="@dimen/_10sdp"
             android:text="TPIN is required"
             android:textColor="@android:color/holo_red_dark"
             android:visibility="gone" />

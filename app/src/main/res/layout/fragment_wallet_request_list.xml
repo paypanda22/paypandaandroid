@@ -40,6 +40,17 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
 
+        <ImageView
+            android:id="@+id/ivMenu"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:contentDescription="@string/back"
+            android:src="@drawable/filter_funnel"
+            app:tint="@color/white" />
+
     </RelativeLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -134,7 +145,7 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone"
+
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
@@ -157,6 +168,7 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imageView"
+        android:visibility="gone"
         android:layout_width="@dimen/_75sdp"
         android:layout_height="@dimen/_75sdp"
         android:layout_centerInParent="true"

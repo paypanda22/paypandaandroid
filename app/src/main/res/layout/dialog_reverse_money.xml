@@ -73,7 +73,7 @@
         android:visibility="gone"
         android:background="@color/white"
         android:hint="Enter Tpin"
-        android:textSize="18sp"
+        android:textSize="@dimen/dimen_10dp"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         android:gravity="center"

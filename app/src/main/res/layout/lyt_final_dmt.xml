@@ -410,7 +410,7 @@
                android:inputType="numberPassword"
                style="@style/mostserrat_bold"
                android:textColor="@color/black"
-               android:textSize="@dimen/_20ssp"
+               android:textSize="@dimen/_10sdp"
                android:textStyle="bold"
                app:itemCount="4"
                app:itemSpacing="@dimen/_8sdp"

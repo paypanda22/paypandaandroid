@@ -42,7 +42,6 @@ import app.pay.panda.responsemodels.forgetPin.ForgetPinResponse
 import app.pay.panda.responsemodels.miniStatement.Ministatement
 import app.pay.panda.responsemodels.pinChange.PasswordChangeResponse
 import app.pay.panda.responsemodels.resendOtpForTpin.resendOtpForTpinResponse
-import app.pay.panda.responsemodels.userid.UserIDResponse
 import app.pay.panda.responsemodels.verifyOtp.VerifyOtpResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods

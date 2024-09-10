@@ -32,7 +32,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
 
-   <!--     <ImageView
+        <ImageView
             android:id="@+id/ivMenu"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_20sdp"
@@ -41,7 +41,7 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:contentDescription="@string/back"
             android:src="@drawable/filter_funnel"
-            app:tint="@color/white" />-->
+            app:tint="@color/white" />
     </RelativeLayout>
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imageView"

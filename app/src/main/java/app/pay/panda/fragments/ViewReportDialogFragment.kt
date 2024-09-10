@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.R
@@ -61,7 +63,7 @@ class ViewReportDialogFragment : DialogFragment() {
 
         val value = arguments?.getString(ARG_KEY)
         if (value != null) {
-            viewReport("1", "10", value, recyclerView)
+            viewReport("0", "10", value, recyclerView)
         }
     }
 
@@ -78,6 +80,10 @@ class ViewReportDialogFragment : DialogFragment() {
                         val adapter = ViewReportAdapter(myActivity, viewlist)
                         recyclerView.adapter = adapter
                         recyclerView.visibility = View.VISIBLE
+                    }else{
+
+                        Toast.makeText(requireContext(), "No data found", Toast.LENGTH_SHORT).show()
+                        //findNavController().popBackStack()
                     }
                 } catch (e: JsonSyntaxException) {
                     e.printStackTrace()

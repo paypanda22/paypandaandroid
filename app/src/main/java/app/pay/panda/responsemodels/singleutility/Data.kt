@@ -12,4 +12,5 @@ data class Data (
     val txnReferenceId: String? ="",
     val createdAt: String="",
     val `user_id`: UserID = UserID(),
+    val `category_id`: Categoryid = Categoryid(),
 )

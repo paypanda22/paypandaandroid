@@ -16,7 +16,7 @@ import javax.crypto.Mac
 class GetKeyHash(val activity: Activity) {
     private val key = "325566674364381861A37D259D5F1";
 
-    private fun printKeyHash(context: Context): String {
+    /*private fun printKeyHash(context: Context): String {
         var key = ""
         try {
             val packageInfo = context.packageManager.getPackageInfo(context.packageName, PackageManager.GET_SIGNATURES)
@@ -41,9 +41,9 @@ class GetKeyHash(val activity: Activity) {
             key = ""
         }
         return key
-    }
+    }*/
 
-    fun printKeyHashHex(context: Context) {
+   /* fun printKeyHashHex(context: Context) {
         try {
             val packageInfo = context.packageManager.getPackageInfo(
                 context.packageName,
@@ -67,7 +67,7 @@ class GetKeyHash(val activity: Activity) {
         } catch (e: NoSuchAlgorithmException) {
             e.printStackTrace()
         }
-    }
+    }*/
 
     fun getHash(requestData:HashMap<String,Any?>): HashMap<String,Any?> {
         val gson = Gson()

@@ -72,23 +72,75 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/aadharTv"
             style="@style/EditTextInput4">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtCustomerNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/filter_by_customer_mobile"/>
+                android:maxLines="1"
+               />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtAccountNumber1"
             style="@style/EditTextInput4">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtAccountNumber"
                 android:layout_width="match_parent"
+                android:maxLines="1"
                 android:layout_height="wrap_content"
                 android:hint="@string/filter_by_account_number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txn_idlyt"
+            style="@style/EditTextInput4">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txn_id"
+                android:layout_width="match_parent"
+                android:maxLines="1"
+                android:layout_height="wrap_content"
+                android:hint="Filter by Txn Id"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/orderID"
+            android:visibility="gone"
+            style="@style/EditTextInput4">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/orderIdtv"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Filter by Order Id"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/referIdtv"
+            android:visibility="gone"
+            style="@style/EditTextInput4">
+            <Spinner
+                android:id="@+id/spinnerServiceOperator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spinner_background"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:id="@+id/typeOperator1"
+            android:layout_height="@dimen/_36sdp"
+            style="@style/EditTextInput4">
+            <Spinner
+
+                android:id="@+id/typeOperator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_background" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <TextView

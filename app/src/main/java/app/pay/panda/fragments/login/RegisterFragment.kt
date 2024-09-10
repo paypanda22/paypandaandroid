@@ -29,6 +29,7 @@ import app.pay.panda.databinding.FragmentRegisterBinding
 import app.pay.panda.databinding.OtpDialogBinding
 import app.pay.panda.dialog.DialogOK
 import app.pay.panda.fragments.PrivacyPolicy
+import app.pay.panda.fragments.RefundPolicyFragment
 import app.pay.panda.fragments.TermsAndConditions
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CustomProgressBar
@@ -37,6 +38,7 @@ import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.helperclasses.Utils.Companion.showToast
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.MyClick
+import app.pay.panda.interfaces.MyClick2
 import app.pay.panda.interfaces.StateListClickListner
 import app.pay.panda.responsemodels.CheckSponsorCode.CheckSponsorResponse
 import app.pay.panda.responsemodels.chkmobile.CheckMobileResponse
@@ -157,6 +159,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             val policy= PrivacyPolicy()
             policy.show(myActivity.supportFragmentManager,"TAG")
         }
+        binding.tv6.setOnClickListener{
+            val policy= RefundPolicyFragment()
+            policy.show(myActivity.supportFragmentManager,"TAG")
+        }
         binding.edtRegMobile.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -191,7 +197,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         })
 
 
-        /*   binding.edtSponsorMobile.addTextChangedListener(object : TextWatcher {
+           binding.edtSponsorMobile.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -209,7 +215,26 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
             }
         })
-*/
+       /* binding.edtEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // You can leave this empty
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val email = binding.edtEmail.text.toString().trim()
+
+                // Check if the email is not empty and is in valid email format
+
+
+                    checkEmail(email)
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // You can leave this empty
+            }
+        })*/
+
         binding.rlSubmit.setOnClickListener {
             if (!ActivityExtensions.isValidMobile(binding.edtRegMobile.text.toString())) {
                 Toast.makeText(requireContext(), "Provide a Valid Mobile", Toast.LENGTH_SHORT)
@@ -226,11 +251,18 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 if (binding.chkNoreferal.isChecked) {
                     reqRegister()
                 } else {
-                    /*  if (!sponsorverified) {
-                        binding.edtSponsorMobile.error = "Enter a Valid Sponsor Code"
-                    } else {*/
-                    sendOtp(binding.edtRegMobile.text.toString())
-                    //  }
+                    // Check if edtSponsorMobile is visible
+                    if (binding.edtSponsorMobile.visibility == View.VISIBLE) {
+                        if (!sponsorverified) {
+                            binding.edtSponsorMobile.error = "Enter a Valid Refer Id"
+                        } else {
+                            sendOtp(binding.edtRegMobile.text.toString())
+                        }
+                    } else {
+                        // edtSponsorMobile is not visible, just send the OTP
+                        checkEmail(binding.edtEmail.text.toString())
+
+                    }
                 }
 
             }
@@ -501,7 +533,32 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
+    private fun checkEmail(emailText: String) {
+      //  progressBar.showProgress(requireContext())
+        UtilMethods.chkEmail(requireContext(), emailText, object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: CheckMobileResponse =
+                    Gson().fromJson(message, CheckMobileResponse::class.java)
+                if (response.data.isExist) {
+                  //  progressBar.hideProgress()
+                    Toast.makeText(
+                        requireContext(),
+                        "Email is already Exist",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.edtEmail.text?.clear()
+                }else{
+                    sendOtp(binding.edtRegMobile.text.toString())
+                }
 
+            }
+
+            override fun fail(from: String) {
+              //  progressBar.hideProgress()
+              //  Toast.makeText(requireContext(), "", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
     private fun getUseType() {
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         UtilMethods.userType(requireContext(), token, object : MCallBackResponse {

@@ -60,17 +60,22 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/EditTextInput4">
+        style="@style/EditTextInput4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_56sdp">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtMobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/enter_customer_mobile"
             android:inputType="number"
-            android:maxLength="10"
-            android:hint="@string/enter_customer_mobile"/>
+            android:maxLength="10" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_46sdp"
         style="@style/EditTextInput4">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtAadhaar"
@@ -79,6 +84,8 @@
             android:inputType="number"
             android:maxLength="12"
             android:hint="@string/enter_customer_aadhaar"/>
+
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.R
-import app.pay.panda.helperclasses.Category
+import app.pay.panda.responsemodels.allservices.Category
 
 class ServiceCategoryAdapter(
     private val activity: Activity,
@@ -26,6 +26,6 @@ class ServiceCategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvName.text=list[position].name
+        holder.tvName.text=list[position].data[position].service_name
     }
 }

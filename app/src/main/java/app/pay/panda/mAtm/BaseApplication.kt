@@ -10,8 +10,10 @@ import org.koin.core.context.GlobalContext.startKoin
 class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        val koin: KoinApplication = create(this)
+        SSLConfig.init(this)
+    /*    val koin: KoinApplication = create(this)
             .modules(matmModule)
-        startKoin(koin)
+        startKoin(koin)*/
+
     }
 }

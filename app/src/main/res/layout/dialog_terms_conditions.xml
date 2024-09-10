@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_16sdp">
+
+    <TextView
+        android:id="@+id/textViewDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terms and Conditions"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        style="@style/mostserrat_extra_bold"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewTermsContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/termsconditions"
+        android:textColor="@color/black_promo" />
+
+</LinearLayout>

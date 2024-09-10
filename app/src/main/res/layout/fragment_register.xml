@@ -189,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_person_base"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:hint="Partner code/Reffer Id"
+                    android:hint="Partner code/Refer Id"
                     android:inputType="text"
                     android:maxLength="10" />
 
@@ -203,6 +203,7 @@
                 android:layout_marginBottom="@dimen/_5sdp">
                 <CheckBox
                     android:id="@+id/chkNoreferal"
+                    android:layout_marginLeft="@dimen/_2sdp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"/>
                 <TextView
@@ -228,32 +229,30 @@
                 android:id="@+id/rlBottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                >
+                android:layout_marginTop="@dimen/_5sdp">
 
                 <RelativeLayout
                     android:id="@+id/rlConfirm"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:gravity="center">
+                    android:layout_height="wrap_content">
 
                     <CheckBox
                         android:id="@+id/tv1"
-
+                        android:layout_marginRight="@dimen/_5sdp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="18dp"
+
+                        style="@style/mostserrat_bold"
                         android:text="@string/terms_and_conditions"
                         android:textSize="@dimen/_8ssp" />
 
                     <TextView
                         android:id="@+id/tv2"
+                        style="@style/mostserrat_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_2sdp"
                         android:layout_toEndOf="@id/tv1"
-                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
                         android:text="@string/terms_conditions"
                         android:textColor="@color/blue_900"
                         android:textSize="@dimen/_8ssp"
@@ -266,27 +265,62 @@
                         android:layout_marginStart="@dimen/_2sdp"
                         android:layout_toEndOf="@id/tv2"
                         android:text="@string/and"
-                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        style="@style/mostserrat_bold"
                         android:textSize="@dimen/_8ssp" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/policy"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_below="@+id/rlConfirm"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_2sdp"
-                        android:layout_toEndOf="@id/tv3"
+                        android:layout_marginStart="@dimen/_17sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        style="@style/mostserrat_bold"
                         android:text="@string/privacy_policy"
                         android:textColor="@color/blue_900"
                         android:textSize="@dimen/_8ssp"
-                        android:layout_marginTop="@dimen/_6sdp"
                         android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_toEndOf="@id/tv4"
+                        android:text="@string/and"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        style="@style/mostserrat_bold"
+                        android:textSize="@dimen/_8ssp" />
+                    <TextView
+                        android:id="@+id/tv6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_toEndOf="@+id/tv5"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        style="@style/mostserrat_bold"
+                        android:text="Refund policy"
+                        android:textColor="@color/blue_900"
+                        android:textSize="@dimen/_8ssp"
+                        android:textStyle="bold" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/rlSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
-                    android:layout_below="@+id/rlConfirm"
+                    android:layout_below="@+id/policy"
                     android:layout_marginVertical="@dimen/_10sdp"
                     android:background="@drawable/submitt_btn">
 
@@ -303,6 +337,8 @@
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold" />
                 </RelativeLayout>
+
+
 
             </RelativeLayout>
 

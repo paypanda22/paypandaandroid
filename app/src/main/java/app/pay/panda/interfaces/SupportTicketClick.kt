@@ -7,4 +7,4 @@ import com.google.android.material.textfield.TextInputEditText
 
 interface SupportTicketClick {
     fun onItemClicked(holder:RecyclerView.ViewHolder,model:List<DataX>,pos:Int,type:String,editText: TextInputEditText,edt:View)
-}
+   }

@@ -97,7 +97,45 @@
                         android:layout_marginTop="8dp"
                         android:background="@drawable/spinner_background"
                        />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_10sdp"
+                        android:visibility="gone"
+                        android:id="@+id/rvPackageserviceList"/>
+                    <LinearLayout
+                        android:id="@+id/llNoData1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="@dimen/_55sdp"
+                            android:layout_height="@dimen/_55sdp"
+                            android:src="@drawable/no_data_folder"
+                            app:tint="@color/bggrey_dark" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No Commission Found"
+                            android:textSize="@dimen/_12ssp"
+                            android:gravity="center"
+                            style="@style/mostserrat_bold"/>
+                    </LinearLayout>
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:src="@drawable/loading_anim" />
 
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

@@ -1,0 +1,323 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_share"
+    android:orientation="vertical">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        android:elevation="@dimen/_1sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/colorPrimary"
+        android:layout_margin="@dimen/_1sdp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/_1sdp"
+                android:paddingBottom="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/operatorImage"
+                    android:layout_width="@dimen/_30sdp"
+                    android:visibility="gone"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/transaction_history"
+                    android:layout_centerVertical="true" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toStartOf="@+id/tvAmount"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/operatorImage"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvBankName"
+                      style="@style/mostserrat_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="State Bank of India"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold"
+                        android:maxLength="35"
+                        android:ellipsize="marquee"
+                        android:textColor="@android:color/black" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvAccountNumber"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0000000000"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/green_A700" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAmount"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
+                    android:text="00000"
+                    android:textColor="@android:color/black" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/bggrey_dark"
+                android:layout_marginVertical="@dimen/_5sdp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:paddingStart="@dimen/_2sdp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                tools:ignore="RtlSymmetry">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="duration: "
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@android:color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/duration"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_9ssp"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MRP : "
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@android:color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/MRP"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="@dimen/_9ssp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="tax : "
+                            android:textSize="@dimen/_9ssp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tax"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.358"
+                            android:textSize="@dimen/_9ssp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:layout_marginTop="3dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Duration Type : "
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@android:color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/DurationType"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_9ssp"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Refer id : "
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@android:color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/referId"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="@dimen/_9ssp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="tax type : "
+                            android:textSize="@dimen/_9ssp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/taxtype"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="@dimen/_9ssp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/bggrey_dark"
+                android:layout_marginVertical="@dimen/_5sdp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/date"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0000-00-00 00:00:00"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/refresh"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_info"
+                    app:tint="@color/colorPrimaryDark" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/viewdata"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:layout_marginStart="115dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toEndOf="@id/date"
+                    android:gravity="center"
+                    app:srcCompat="@drawable/view"
+                    app:tint="@color/colorPrimaryDark" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivOtp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_otp"
+                    app:tint="@color/colorPrimaryDark" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivShare"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_share"
+                    app:tint="@color/colorPrimaryDark" />
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

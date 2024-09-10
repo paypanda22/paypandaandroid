@@ -17,27 +17,12 @@ class PrivacyPolicy : BaseBottomFragment<FragmentPrivacyPlooicyBinding>(Fragment
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
 
     override fun init() {
         nullActivityCheck()
         userSession= UserSession(requireContext())
-        binding.webView.settings.javaScriptEnabled = true
-        // Load the HTML file
+        binding.webView.settings.javaScriptEnabled = true // Load the HTML file
         binding.webView.loadUrl("file:///android_asset/PrivacyPolicy.html")
-    }
-
-    override fun addListeners() {
-        binding.ivCancel.setOnClickListener { dismiss() }
-        binding.btnOk.setOnClickListener { dismiss() }
-    }
-
-    override fun setData() {
-
     }
     private fun nullActivityCheck() {
         if (activity!=null){
@@ -46,5 +31,14 @@ class PrivacyPolicy : BaseBottomFragment<FragmentPrivacyPlooicyBinding>(Fragment
             startActivity(Intent(context, IntroActivity::class.java))
         }
     }
+    override fun addListeners() {
+        binding.ivCancel.setOnClickListener { dismiss() }
+        binding.btnOk.setOnClickListener { dismiss() }
+    }
+
+    override fun setData() {
+
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package app.pay.panda.fragments.reports
 
 import CategoryListIdResponse
+import android.annotation.SuppressLint
 import android.app.Dialog
 
 import android.content.Intent
@@ -43,8 +44,10 @@ import app.pay.panda.interfaces.BbpsCategoryIDClick
 import app.pay.panda.interfaces.DmtTxnClickListener
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.UtilityTransactionClick
+import app.pay.panda.responsemodels.aepsenquiry.AepsEnquiryResponse
 
 import app.pay.panda.responsemodels.bbpscatagory.CatagoryListResponse
+import app.pay.panda.responsemodels.bbpsenquiry.BbpsEnquiry
 
 import app.pay.panda.responsemodels.utilitytxn.Data
 
@@ -69,6 +72,7 @@ class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(Fra
     private lateinit var cateListId:MutableList<app.pay.panda.responsemodels.CategoryIdResponse.Data>
     private lateinit var dBinding: LytUtilityFilterBinding
     var tagValueId=""
+    private lateinit var txnAdapter:UtilityTransactionAdapter
 
     override fun init() {
 
@@ -81,7 +85,7 @@ class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(Fra
     private fun getTransactionList(startDate: String, endDate: String, billerId: String, pageNo: String, txnCount: String, categoryId: String) {
         binding.rvTransactionList.visibility=GONE
         binding.imageView.visibility= VISIBLE
-        binding.    llNoData.visibility= GONE
+        binding.llNoData.visibility= GONE
         val token=userSession.getData(Constant.USER_TOKEN).toString()
         UtilMethods.getUtilityTransactions(requireContext(), token,startDate, endDate, billerId, pageNo, txnCount, categoryId, object : MCallBackResponse {
             override fun success(from: String, message: String) {
@@ -94,10 +98,19 @@ class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(Fra
                             override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int, type: Int) {
                                 when (type) {
                                     1 -> {
-
+                                        if(model[pos].service_name.equals("Recharge")){
+                                            bbpsRechargEnquiry(model[pos]._id.toString())
+                                        }else{
+                                            bbpsEnquiry(model[pos]._id.toString())
+                                        }
                                     }
 
                                     2 -> {
+                                        if(model[pos].service_name.equals("Recharge")){
+                                            bbpsRechargEnquiry(model[pos]._id.toString())
+                                        }else{
+                                            bbpsEnquiry(model[pos]._id.toString())
+                                        }
 
                                     }
 
@@ -107,7 +120,7 @@ class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(Fra
                                 }
                             }
                         }
-                        val txnAdapter=UtilityTransactionAdapter(myActivity,list,clickListner)
+                        txnAdapter=UtilityTransactionAdapter(myActivity,list,clickListner)
                         binding.rvTransactionList.adapter=txnAdapter
                         binding.rvTransactionList.layoutManager=LinearLayoutManager(myActivity)
 
@@ -154,7 +167,7 @@ class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(Fra
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "Unable to Load List", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -171,12 +184,12 @@ class UtilityTransactions : BaseFragment<FragmentUtilityTransactionsBinding>(Fra
                     // Open the dialog after the list is updated
                     openServiceTypeListDialogId(dBinding.edtBillers)
                 } else {
-                    Toast.makeText(requireContext(), "Unable to Load List", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "Unable to Load List", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -372,6 +385,48 @@ dBinding.edtBillers.setOnClickListener{
         bottomSheet.arguments = bundle
         bottomSheet.show(parentFragmentManager, bottomSheet.tag)
     }
+    private fun bbpsEnquiry(id:String) {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
 
+        UtilMethods.bbpsEnquiry(requireContext(), id, token, object : MCallBackResponse {
+            @SuppressLint("SetTextI18n")
+            override fun success(from: String, message: String) {
+                val response: BbpsEnquiry = Gson().fromJson(message, BbpsEnquiry::class.java)
+                if (!response.error) {
+                    txnAdapter.notifyDataSetChanged()
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun fail(from: String) {
+                Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
+
+    private fun bbpsRechargEnquiry(id:String) {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+
+        UtilMethods.bbpsRechargEnquiry(requireContext(), id, token, object : MCallBackResponse {
+            @SuppressLint("SetTextI18n")
+            override fun success(from: String, message: String) {
+                val response: BbpsEnquiry = Gson().fromJson(message, BbpsEnquiry::class.java)
+                if (!response.error) {
+                    txnAdapter.notifyDataSetChanged()
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun fail(from: String) {
+                Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 }
 

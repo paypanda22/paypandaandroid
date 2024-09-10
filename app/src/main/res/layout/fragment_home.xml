@@ -325,14 +325,100 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:scrollbars="none">
 
+
+
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    style="@style/mostserrat_extra_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="All Services"
+                    android:visibility="gone"
+                    android:textColor="@color/blue_900"
+                    android:textSize="@dimen/_13ssp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:background="@color/colorPrimary" />
+
+
+            <!--    <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/otpanim"
+                    android:visibility=""
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_gravity="center"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/dash" />
+-->
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/lytQrCollection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:background="@drawable/rounded_back_circle"
+                        android:padding="@dimen/_10sdp"
+                        android:src="@drawable/scan_n_pay_color" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="QR Collect"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_8ssp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:id="@+id/llNoData"
+                    android:layout_width="match_parent"
+                    android:layout_height="614dp"
+                    android:layout_below="@+id/topPanel"
+
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/_65sdp"
+                        android:layout_height="@dimen/_65sdp"
+                        android:src="@drawable/ic_bank_1_"
+                        app:tint="@color/bggrey_dark" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+          <!--  <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/_5sdp">
 
-                <!-- Transfer Money -->
+                &lt;!&ndash; Transfer Money &ndash;&gt;
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -492,19 +578,19 @@
 
                         </LinearLayout>
 
-                        <!--                    <View-->
-                        <!--                        android:layout_width="match_parent"-->
-                        <!--                        android:layout_height="@dimen/_3sdp"-->
-                        <!--                        android:background="@color/colorPrimary" />-->
+                        &lt;!&ndash;                    <View&ndash;&gt;
+                        &lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;
+                        &lt;!&ndash;                        android:layout_height="@dimen/_3sdp"&ndash;&gt;
+                        &lt;!&ndash;                        android:background="@color/colorPrimary" />&ndash;&gt;
 
-                        <!--                    <View-->
-                        <!--                        android:layout_width="match_parent"-->
-                        <!--                        android:layout_height="@dimen/_3sdp"-->
-                        <!--                        android:background="@color/colorPrimaryDark" />-->
+                        &lt;!&ndash;                    <View&ndash;&gt;
+                        &lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;
+                        &lt;!&ndash;                        android:layout_height="@dimen/_3sdp"&ndash;&gt;
+                        &lt;!&ndash;                        android:background="@color/colorPrimaryDark" />&ndash;&gt;
 
                     </LinearLayout>
 
-                <!-- Cash Out -->
+                &lt;!&ndash; Cash Out &ndash;&gt;
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -667,21 +753,21 @@
 
                         </LinearLayout>
 
-                        <!--                    <View-->
-                        <!--                        android:layout_width="match_parent"-->
-                        <!--                        android:layout_height="@dimen/_3sdp"-->
-                        <!--                        android:background="@color/colorPrimary" />-->
+                        &lt;!&ndash;                    <View&ndash;&gt;
+                        &lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;
+                        &lt;!&ndash;                        android:layout_height="@dimen/_3sdp"&ndash;&gt;
+                        &lt;!&ndash;                        android:background="@color/colorPrimary" />&ndash;&gt;
 
-                        <!--                    <View-->
-                        <!--                        android:layout_width="match_parent"-->
-                        <!--                        android:layout_height="@dimen/_3sdp"-->
-                        <!--                        android:background="@color/colorPrimaryDark" />-->
+                        &lt;!&ndash;                    <View&ndash;&gt;
+                        &lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;
+                        &lt;!&ndash;                        android:layout_height="@dimen/_3sdp"&ndash;&gt;
+                        &lt;!&ndash;                        android:background="@color/colorPrimaryDark" />&ndash;&gt;
 
                     </LinearLayout>
 
 
 
-                <!-- Recharge & Bill Payment -->
+                &lt;!&ndash; Recharge & Bill Payment &ndash;&gt;
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -716,7 +802,7 @@
                             android:layout_margin="@dimen/_3sdp"
                             android:background="@color/colorPrimary" />
 
-                        <!-- Recharge & Bill Payment Row 1 -->
+                        &lt;!&ndash; Recharge & Bill Payment Row 1 &ndash;&gt;
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -848,7 +934,7 @@
 
                         </LinearLayout>
 
-                        <!-- Recharge & Bill Payment Row 2 -->
+                        &lt;!&ndash; Recharge & Bill Payment Row 2 &ndash;&gt;
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -978,7 +1064,7 @@
                             </LinearLayout>
 
                         </LinearLayout>
-                        <!-- Recharge & Bill Payment Row 3 -->
+                        &lt;!&ndash; Recharge & Bill Payment Row 3 &ndash;&gt;
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1111,7 +1197,7 @@
 
                     </LinearLayout>
 
-                <!-- Finance & Taxes -->
+                &lt;!&ndash; Finance & Taxes &ndash;&gt;
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1145,7 +1231,7 @@
                             android:layout_height="0.5dp"
                             android:layout_margin="@dimen/_3sdp"
                             android:background="@color/colorPrimary" />
-                        <!-- FINANCE ROW 1 -->
+                        &lt;!&ndash; FINANCE ROW 1 &ndash;&gt;
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -1276,7 +1362,7 @@
                             </LinearLayout>
 
                         </LinearLayout>
-                        <!-- FINANCE ROW 2 -->
+                        &lt;!&ndash; FINANCE ROW 2 &ndash;&gt;
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -1408,7 +1494,7 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                <!-- Other Services -->
+                &lt;!&ndash; Other Services &ndash;&gt;
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1440,7 +1526,7 @@
                         android:layout_height="0.5dp"
                         android:layout_margin="@dimen/_3sdp"
                         android:background="@color/colorPrimary" />
-                        <!-- Other Services Row 1 -->
+                        &lt;!&ndash; Other Services Row 1 &ndash;&gt;
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1571,11 +1657,11 @@
                         </LinearLayout>
                     </LinearLayout>
 
-            </LinearLayout>
+            </LinearLayout>-->
         </androidx.core.widget.NestedScrollView>
         <LinearLayout
             android:id="@+id/distributer_dashboard"
-                  android:visibility="gone"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

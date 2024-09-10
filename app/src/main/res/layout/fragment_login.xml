@@ -172,6 +172,7 @@
         android:text="@string/terms_conditions"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/_8ssp"
+        android:layout_marginTop="@dimen/_2sdp"
         app:layout_constraintEnd_toStartOf="@+id/tv3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv1"
@@ -183,25 +184,42 @@
         android:layout_height="wrap_content"
         android:text="@string/and"
         android:textSize="@dimen/_8ssp"
-        app:layout_constraintEnd_toStartOf="@+id/tv4"
+        app:layout_constraintEnd_toStartOf="@+id/tv2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv2"
         app:layout_constraintTop_toTopOf="@+id/tv2" />
 
     <TextView
         android:id="@+id/tv4"
-        style="@style/mostserrat_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:text="@string/privacy_policy"
+        style="@style/mostserrat_bold"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/_8ssp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv3"
-        app:layout_constraintTop_toTopOf="@+id/tv3" />
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv2" />
+
+    <TextView
+        android:id="@+id/tv5"
+        style="@style/mostserrat_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="65dp"
+        android:text="and Refund Policy"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/_8ssp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/btnSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tv4" />
 
     <Button
         android:id="@+id/btnSubmit"

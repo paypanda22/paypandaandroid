@@ -106,6 +106,50 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_aadhar_pay_report"
+            app:destination="@id/AadharPayReport"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_aeps_wallet_report"
+            app:destination="@id/AepsWalletReport"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_aeps_payout_report"
+            app:destination="@id/AepsPayoutReport"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_c_m_s_transaction_report"
+            app:destination="@id/CMSTransactionReport"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_fragment_package_history_report"
+            app:destination="@id/PackageHistoryReport"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>
+       <!-- <action
+            android:id="@+id/action_profileFragment_to_fragment_certificate"
+            app:destination="@id/certificate"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right"/>-->
     </fragment>
 
     <action
@@ -194,6 +238,11 @@
         android:label="fragment_profile_edit"
         tools:layout="@layout/fragment_profile_edit" />
     <fragment
+        android:id="@+id/certificate"
+        android:name="app.pay.panda.fragments.CertificateFragment"
+        android:label="fragment_certificate"
+        tools:layout="@layout/fragment_certificate" />
+    <fragment
         android:id="@+id/notificationsFragment"
         android:name="app.pay.panda.fragments.home.NotificationsFragment"
         android:label="fragment_notifications"
@@ -211,6 +260,12 @@
         android:label="fragment_support_ticket_host"
         tools:layout="@layout/fragment_support_ticket_host" />
     <fragment
+        android:id="@+id/supportTicketHistory"
+        android:name="app.pay.panda.fragments.supportTicket.TicketHistoryFragment"
+        android:label="fragment_ticket_history"
+        tools:layout="@layout/fragment_ticket_history" />
+
+    <fragment
         android:id="@+id/utilityTransactions"
         android:name="app.pay.panda.fragments.reports.UtilityTransactions"
         android:label="fragment_utility_transactions"
@@ -226,8 +281,36 @@
         android:label="fragment_earning_report"
         tools:layout="@layout/fragment_earnning_report" />
     <fragment
-        android:id="@+id/AepsTransactionList"
-        android:name="app.pay.panda.fragments.aepsFragments.AepsTransactionList"
+        android:id="@+id/CMSTransactionReport"
+        android:name="app.pay.panda.fragments.reports.CMSTransactionReport"
         android:label="@string/fragment_aeps_action"
         tools:layout="@layout/fragment_aeps_transaction_list" />
+    <fragment
+        android:id="@+id/AepsTransactionList"
+        android:name="app.pay.panda.fragments.aepsFragments.AepsTransactionList"
+        android:label="fragment_c_m_s_transaction_report"
+        tools:layout="@layout/fragment_c_m_s_transaction_report" />
+    <fragment
+        android:id="@+id/AadharPayReport"
+        android:name="app.pay.panda.fragments.reports.AadharPayReport"
+        android:label="fragment_aadhar_pay_report"
+        tools:layout="@layout/fragment_aadhar_pay_report" />
+
+    <fragment
+        android:id="@+id/AepsWalletReport"
+        android:name="app.pay.panda.fragments.reports.AepsWalletReport"
+        android:label="fragment_aeps_wallet_report"
+        tools:layout="@layout/fragment_aeps_wallet_report" />
+
+    <fragment
+        android:id="@+id/PackageHistoryReport"
+        android:name="app.pay.panda.fragments.reports.PackageHistoryReport"
+        android:label="fragment_package_history_report"
+        tools:layout="@layout/fragment_package_history_report" />
+    <fragment
+        android:id="@+id/AepsPayoutReport"
+        android:name="app.pay.panda.fragments.reports.AepsPayoutReport"
+        android:label="fragment_aeps_payout_report"
+        tools:layout="@layout/fragment_aeps_payout_report" />
+
 </navigation>

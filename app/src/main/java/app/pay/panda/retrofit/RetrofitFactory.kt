@@ -2,8 +2,9 @@ package app.pay.panda.retrofit
 
 import android.content.Context
 import app.pay.panda.R
-import app.pay.panda.retrofit.Constant.MainBase_URL
+
 import app.pay.panda.retrofit.Constant.MainBase_URL_2
+import app.pay.panda.retrofit.Constant.base_url
 import okhttp3.Cache
 import okhttp3.ConnectionPool
 import okhttp3.Dns
@@ -32,8 +33,7 @@ object RetrofitFactory {
         }
         val client = OkHttpClient.Builder()
             .addInterceptor { chain ->
-                val newRequest = chain.request().newBuilder()
-                    .build()
+                val newRequest = chain.request().newBuilder().build()
                 chain.proceed(newRequest)
             }
             .addInterceptor(loggingInterceptor)
@@ -43,8 +43,9 @@ object RetrofitFactory {
             .writeTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()
+
         return Retrofit.Builder()
-            .baseUrl(MainBase_URL)
+            .baseUrl(base_url)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
@@ -93,7 +94,7 @@ object RetrofitFactory {
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()
         return Retrofit.Builder()
-            .baseUrl(MainBase_URL)
+            .baseUrl(base_url)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)

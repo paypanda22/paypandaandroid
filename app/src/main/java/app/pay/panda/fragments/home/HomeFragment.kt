@@ -1,26 +1,19 @@
 package app.pay.panda.fragments.home
 
-import CustomTypefaceSpan
+import DynamicServicesAdapter
+import android.app.Dialog
 import android.content.Intent
-import android.graphics.Typeface
 import android.net.Uri
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
-import android.view.Gravity
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
-import android.widget.AutoCompleteTextView
-import android.widget.PopupMenu
+import android.view.Window
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.BaseFragment
-import app.pay.panda.PaymentRequestDialogFragment
 import app.pay.panda.R
 import app.pay.panda.activity.ActivationPackages
 import app.pay.panda.activity.AepsAllActions
@@ -30,35 +23,30 @@ import app.pay.panda.activity.BillPayment
 import app.pay.panda.activity.CashDepositActivity
 import app.pay.panda.activity.DmtActivity
 import app.pay.panda.activity.IntroActivity
-import app.pay.panda.activity.QrCollectionActivity
 import app.pay.panda.activity.RechargeActivity
 import app.pay.panda.databinding.FragmentHomeBinding
-import app.pay.panda.dialog.DialogOK
-import app.pay.panda.fragments.login.RegisterFragment.UserTypeAdapter
-import app.pay.panda.fragments.reports.WalletRequestListFragment
 import app.pay.panda.helperclasses.Category
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.MyGlide
 import app.pay.panda.helperclasses.ResetTPIN
-import app.pay.panda.helperclasses.ShowDialog
 import app.pay.panda.helperclasses.UserSession
+import app.pay.panda.interfaces.DynamicServicesClickListener
 import app.pay.panda.interfaces.MCallBackResponse
-import app.pay.panda.interfaces.MyClick
-import app.pay.panda.mAtm.MyAtmActivity
+import app.pay.panda.responsemodels.allservices.Data
 import app.pay.panda.responsemodels.distributerDashobord.DashboardResponse
 import app.pay.panda.responsemodels.serviceStatus.CheckServiceStatusResponse
 import app.pay.panda.responsemodels.userid.UserIDResponse
-import app.pay.panda.responsemodels.usertype.UserTypeResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.gson.Gson
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
+    DynamicServicesClickListener {
     private lateinit var userSession: UserSession
     private lateinit var myActivity:FragmentActivity
     private lateinit var resetTPIN: ResetTPIN
-
+var name=""
     override fun init() {
 
 
@@ -83,6 +71,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.tvCongratulations.text = "Congratulations! Dear $name, now you have become our partner with PayPanda."
         binding.tvCongratulations.isSelected = true // Enable marquee
         getUserDetail()
+        allServices()
     }
 
     private fun nullActivityCheck() {
@@ -122,12 +111,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
             }
         }
-        binding.llCashDeposit.setOnClickListener {
 
-//            startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
+
+        /*binding.llCashDeposit.setOnClickListener {
+
+            startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
+            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+//            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
 //            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-////            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
-////            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
             checkService("Aeps Cash Deposit", "206")
         }
         binding.llDmt.setOnClickListener {
@@ -135,19 +126,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
         }
 
-        binding.llBroadband.setOnClickListener {
-            operatorList("Broadband Billers", "166")
-        }
-
-        binding.llElectricity.setOnClickListener {
-            operatorList("Electricity Billers", Category.getIdByCategoryName("Electricity"))
-        }
-        binding.llLandline.setOnClickListener {
-            operatorList("Landline Bill Payment", Category.getIdByCategoryName("Landline"))
-        }
-        binding.llPipedGas.setOnClickListener {
-            operatorList("Pipped Gas Billers", Category.getIdByCategoryName("Gas"))
-        }
         binding.llEmi.setOnClickListener {
             operatorList("EMI Payment Billers", Category.getIdByCategoryName("Loan"))
         }
@@ -159,6 +137,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
         binding.llAepsLayout.setOnClickListener {
             checkService("AEPS", "206")
+        }
+        binding.llBroadband.setOnClickListener {
+            operatorList("Broadband Billers", "166")
+        }
+        binding.llElectricity.setOnClickListener {
+            operatorList("Electricity Billers", Category.getIdByCategoryName("Electricity"))
+        }
+        binding.llLandline.setOnClickListener {
+            operatorList("Landline Bill Payment", Category.getIdByCategoryName("Landline"))
+        }
+        binding.llPipedGas.setOnClickListener {
+            operatorList("Pipped Gas Billers", Category.getIdByCategoryName("Gas"))
         }
         binding.llBroadband.setOnClickListener {
             operatorList("Broadband Bill Payment", Category.getIdByCategoryName("Broadband"))
@@ -191,6 +181,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.llPostPaid.setOnClickListener {
             operatorList("Mobile Postpaid Billers", Category.getIdByCategoryName("Mobile Postpaid"))
         }
+        binding.llGooglePlay.setOnClickListener {
+            operatorList("Metro Card Recharge", Category.getIdByCategoryName("Metro Recharge"))
+        }
         binding.llMunicipalTax.setOnClickListener {
             operatorList("Municipal Tax Payment", Category.getIdByCategoryName("Municipal Taxes"))
         }
@@ -205,7 +198,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         binding.llLic.setOnClickListener {
-            //operatorList("Life Insurance Corporation", Category.getIdByCategoryName("LIC"))
+            operatorList("Life Insurance Corporation", Category.getIdByCategoryName("LIC"))
         }
         binding.llDonation.setOnClickListener {
             operatorList("Donation Billers", Category.getIdByCategoryName("Donation"))
@@ -216,13 +209,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.llClubs.setOnClickListener {
             operatorList("Clubs and Associations", Category.getIdByCategoryName("Clubs and Associations"))
         }
-        binding.llGooglePlay.setOnClickListener {
-            operatorList("Metro Card Recharge", Category.getIdByCategoryName("Metro Recharge"))
-        }
-
-
-        binding.llAddMoney.setOnClickListener { findNavController().navigate(R.id.action_global_requestWalletFragment) }
-        binding.rlNotifications.setOnClickListener { findNavController().navigate(R.id.action_global_notificationsFragment) }
         binding.llCms.setOnClickListener {
             startActivity(Intent(activity, AirtelCmsActivity::class.java))
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
@@ -236,6 +222,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             startActivity(Intent(activity, MyAtmActivity::class.java))
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
         }
+*/
+
+
+        binding.llAddMoney.setOnClickListener { findNavController().navigate(R.id.action_global_requestWalletFragment) }
+        binding.rlNotifications.setOnClickListener { findNavController().navigate(R.id.action_global_notificationsFragment) }
+
 
         binding.transactionStatus.setOnClickListener{
             findNavController().navigate(R.id.action_global_walletRequestListFragment2)
@@ -276,12 +268,40 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Unable To Fetch Services Status", Toast.LENGTH_SHORT).show()
+                //    Toast.makeText(requireContext(), "Unable To Fetch Services Status", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun fail(from: String) {
                 Toast.makeText(requireContext(), "Unable To Fetch Services Status", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun allServices(){
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+        UtilMethods.allServices(myActivity, token, object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: app.pay.panda.responsemodels.allservices.Category =
+                    Gson().fromJson(message, app.pay.panda.responsemodels.allservices.Category::class.java)
+                if (!response.error) {
+
+                        val adapter = DynamicServicesAdapter(myActivity, response.data,this@HomeFragment)
+                        binding.recyclerView.adapter = adapter
+                        binding.recyclerView.layoutManager = GridLayoutManager(myActivity,4)
+                    binding.llNoData.visibility=View.GONE
+                    binding.recyclerView.visibility=View.VISIBLE
+                } else {
+                    Toast.makeText(myActivity, response.error.toString(), Toast.LENGTH_SHORT).show()
+                    binding.llNoData.visibility=View.VISIBLE
+                    binding.recyclerView.visibility=View.GONE
+                }
+            }
+
+            override fun fail(from: String) {
+                Toast.makeText(myActivity, from, Toast.LENGTH_SHORT).show()
+                binding.llNoData.visibility=View.VISIBLE
+                binding.recyclerView.visibility=View.GONE
             }
         })
     }
@@ -381,7 +401,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             override fun success(from: String, message: String) {
                 val response: UserIDResponse =
                     Gson().fromJson(message, UserIDResponse::class.java)
-                if (!response.error!!) {
+                if (!response.error) {
                     userSession.setData(Constant.ID,response.data?._id.toString())
 
 
@@ -398,4 +418,158 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         })
     }
 
-}
+    override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
+        val serviceId = model[pos]._id
+        val serviceName = model[pos].service_name
+
+        println("Clicked Service ID: $serviceId, Service Name: $serviceName")  // Log for debugging
+        processServices( serviceName,serviceId)
+
+
+    }
+    fun processServices(service:String,id:String) {
+            when (id.trim()) {
+                "206"->{
+                    startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
+                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+//            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
+//            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+                    checkService("Aeps Cash Deposit", "206")
+                }
+                "19" -> {
+                    // Handle Credit Card
+                    operatorList("Credit Card Billers", Category.getIdByCategoryName("Credit Card"))
+                    println("Processing: ${service}")
+                }
+                "18" -> {
+                    // Handle Electricity
+                    operatorList("Electricity Billers", Category.getIdByCategoryName("Electricity"))
+                    println("Processing: ${service}")
+                }
+                "188" -> {
+                    // Handle DMT
+                    startActivity(Intent(myActivity, DmtActivity::class.java))
+                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+                    println("Processing: ${service}")
+                }
+                "9" -> {
+                    // Handle Fastag
+                    operatorList("FasTag Recharge Billers", Category.getIdByCategoryName("Fastag"))
+                    println("Processing: ${service}")
+                }
+                "12" -> {
+                    // Handle Landline Postpaid
+                    operatorList("Landline Bill Payment", Category.getIdByCategoryName("Landline"))
+                    println("Processing: ${service}")
+                }
+                "11" -> {
+                    // Handle Landline Gas
+                    operatorList("Pipped Gas Billers", Category.getIdByCategoryName("Gas"))
+                    println("Processing: ${service}")
+                }
+                "13" -> {
+                    // Handle Landline DTH
+                    startActivity(Intent(myActivity, RechargeActivity::class.java).putExtra("dest", "dth"))
+                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+                    println("Processing: ${service}")
+                }
+                "5" -> {
+                    // Handle Landline Broadband Postpaid
+                    operatorList("Broadband Billers", "166")
+                    println("Processing: ${service}")
+                }
+                "33" -> {
+                    // Handle Recharge
+                    startActivity(Intent(myActivity, RechargeActivity::class.java).putExtra("dest", "mobile"))
+                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+                    println("Processing: ${service}")
+                }
+                "28" -> {
+                    // Handle Water
+                    operatorList("Water Tax Payment", Category.getIdByCategoryName("Water"))
+                    println("Processing: ${service}")
+                }
+                "10" -> {
+                    // Handle Mobile Postpaid
+                    operatorList("Mobile Postpaid Billers", Category.getIdByCategoryName("Mobile Postpaid"))
+                    println("Processing: ${service}")
+                }
+                "207" -> {
+                    // Handle Aeps Bank Withdraw
+  startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
+                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+//            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
+//            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+                    checkService("Aeps Cash Deposit", "207")
+                    println("Processing: ${service}")
+                }
+                "208" -> {
+                    startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
+                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+//            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
+//            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+                    checkService("Aeps Cash Deposit", "208")
+                    // Handle Aeps Adhaar pay
+
+                    println("Processing: ${service}")
+                }
+                "35" -> {
+                    // Handle CMS
+                    startActivity(Intent(myActivity, AirtelCmsActivity::class.java))
+                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+                    println("Processing: ${service}")
+                }
+                "3" -> {
+                    // Handle Education Fees
+                    operatorList("Education Fees Billers", Category.getIdByCategoryName("Education"))
+                    println("Processing: ${service}")
+                }
+                "36" -> {
+                    // Handle Quick Dhan
+                    println("Processing: ${service}")
+                }
+                "15" -> {
+                    // Handle Hospital and Pathology
+                    println("Processing: ${service}")
+                }
+                "31" -> {
+                    // Handle NCMC Recharge
+                    println("Processing: ${service}")
+                }
+                "8" -> {
+                    // Handle Insurance
+                    operatorList("Insurance Billers", Category.getIdByCategoryName("Insurance"))
+                    println("Processing: ${service}")
+                }
+                "16" -> {
+                    // Handle LPG Gas
+                    println("Processing: ${service}")
+                }
+                else -> {
+                    showComingSoonPopup()
+                    // Handle default case
+                  /*  operatorList("LPG Booking Billers", Category.getIdByCategoryName("LPG Gas"))
+                    println("Processing: ${service} ")*/
+                }
+
+            }
+
+        // Optional: Handle icon if present
+
+        }
+    private fun showComingSoonPopup() {
+        val dialog = Dialog(myActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.popup_coming_soon)
+
+        val tvTitle = dialog.findViewById<TextView>(R.id.tvTitle)
+        val btnClose = dialog.findViewById<Button>(R.id.btnClose)
+
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+    }
+

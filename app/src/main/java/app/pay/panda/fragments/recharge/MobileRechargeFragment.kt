@@ -184,6 +184,7 @@ class MobileRechargeFragment : BaseFragment<FragmentMobileRechargeBinding>(Fragm
                     if (ActivityExtensions.isValidMobile(binding.edtMobile.text.toString())){
                         if (fetchNumberDetails){
                             checkOperatorDetails()
+
                         }
 
                     }else{
@@ -226,6 +227,7 @@ class MobileRechargeFragment : BaseFragment<FragmentMobileRechargeBinding>(Fragm
                         }
                         operatorList.addAll(response.data.operators)
                         openOperatorListDialog()
+
                     }else{
                         showToast(requireContext(),"Unable to Fetch Operator List")
                     }
@@ -272,6 +274,7 @@ class MobileRechargeFragment : BaseFragment<FragmentMobileRechargeBinding>(Fragm
                 if (!response.error){
                     fetchNumberDetails=false
                     binding.edtCircleName.setText(response.data.Circle)
+                    binding.edtOperatorName.setText(response.data.Operator.substring(0,12))
                     circleID=response.data.CircleCode
                 }else{
 
@@ -345,7 +348,7 @@ class MobileRechargeFragment : BaseFragment<FragmentMobileRechargeBinding>(Fragm
     override fun onSelectOperator(holder: RecyclerView.ViewHolder, model: List<Operator>, pos: Int) {
        binding.edtOperatorName.setText(model[pos].name)
         operatorID=model[pos]._id
-        setOperatorLogo()
+      //  setOperatorLogo()
         alertDialog.dismiss()
     }
 

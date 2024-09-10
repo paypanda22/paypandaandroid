@@ -319,5 +319,9 @@
     <color name="deep_purple_A400">#651FFF</color>
     <color name="deep_purple_A700">#6200EA</color>
 
-
+    <color name="certificate_background">#F4F4F4</color> <!-- Background color -->
+    <color name="certificate_text_primary">#333333</color> <!-- Primary text color -->
+    <color name="certificate_border">#006BA6</color> <!-- Border color -->
+    <color name="certificate_accent">#009BDF</color> <!-- Accent color -->
+    <color name="certificate_date_background">#E6F7FF</color> <!-- Date section background -->
 </resources>

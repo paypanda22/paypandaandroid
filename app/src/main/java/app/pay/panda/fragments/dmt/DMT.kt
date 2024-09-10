@@ -200,7 +200,7 @@ class DMT(
                 val response: VerifyBankResponse = Gson().fromJson(message, VerifyBankResponse::class.java)
                 if (!response.error) {
                     Toast.makeText(activity, "Bank Verified Successfully", Toast.LENGTH_SHORT).show()
-                    dBinding.tvAcName.text = response.data.bank_account_name.toString()
+                    dBinding.tvAcName.text = response.data.data.bankName.toString()
                     dBinding.tvValidateBene.visibility = GONE
                     dBinding.tvValidateText.visibility = GONE
                     dBinding.tvStatus.text = "Verified"
@@ -361,8 +361,12 @@ class DMT(
         UtilMethods.verifyBankAccount(activity, requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: VerifyBankResponse = Gson().fromJson(message, VerifyBankResponse::class.java)
-                dBinding.edtName.setText(response.data.bank_account_name)
+
+               // dBinding.edtName.setText(response.data.n)
                 dBinding.llVerify.visibility = GONE
+
+                dBinding.edtName.setText(response.data.data.bankName)
+
                 Toast.makeText(activity, "Bank Verified Successfully", Toast.LENGTH_SHORT).show()
             }
 

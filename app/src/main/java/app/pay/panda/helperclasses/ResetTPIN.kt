@@ -35,6 +35,8 @@ class ResetTPIN(
                     generateOtpForTPin()
                 }
             })
+        }else if(tPinStatus=="OV"){
+            openResetOtpDialog()
         }
     }
 

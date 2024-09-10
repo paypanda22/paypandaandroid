@@ -27,6 +27,7 @@ import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.responsemodels.pinSendOtp.PinSendOtpResponse
 import app.pay.panda.responsemodels.updateProfilePic.UpdateProfileImageResponse
 import app.pay.panda.responsemodels.uploadImage.UploadImageResponse
+import app.pay.panda.responsemodels.userid.UserIDResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.gson.Gson
@@ -133,6 +134,7 @@ class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding>(FragmentPro
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
+        getUserDetail()
     }
 
     private fun nullActivityCheck() {
@@ -173,7 +175,39 @@ class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding>(FragmentPro
             })
 
         }
+        binding.Certificate.setOnClickListener{
+            findNavController().navigate(R.id.certificate)
+        }
 
+    }
+    private fun getUserDetail() {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+        UtilMethods.getUserDetail(requireContext(), token, object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: UserIDResponse =
+                    Gson().fromJson(message, UserIDResponse::class.java)
+                if (!response.error!!) {
+                    //userSession.setData(Constant.ID,response.data?._id.toString())
+binding.Name.text=response.data.name
+binding.Email.text=response.data.email
+binding.MobileNumber.text=response.data.mobile
+binding.LockedAmount.text=response.data.locking_amt
+binding.PresentAddress.text=response.data.presentAddr
+binding.State.text=response.data.state
+binding.PinCode.text=response.data.pinCode
+binding.referCode.text=response.data.refer_id
+
+                } else {
+
+                    binding.pfile.visibility=View.GONE
+                }
+            }
+
+            override fun fail(from: String) {
+                binding.pfile.visibility=View.GONE
+
+            }
+        })
     }
 
     override fun setData() {

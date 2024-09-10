@@ -1,0 +1,187 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/transparent"
+    android:padding="@dimen/_8sdp">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="@dimen/_10ssp"
+        style="@style/mostserrat_bold"
+        android:textColor="@color/blue_900"
+        android:textStyle="bold"
+       />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/bggrey_dark"
+        android:layout_marginVertical="@dimen/_5sdp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_3sdp"
+        android:paddingStart="@dimen/_2sdp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="RtlSymmetry">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start Amt : "
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@android:color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/StartAmt"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Charge : "
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@android:color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/Charge"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/_10ssp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Retailer Commission : "
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/Retailer_Commission"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.358"
+                    android:textSize="@dimen/_10ssp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginTop="3dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="End Amt : "
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@android:color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/EndAmt"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="charge Type : "
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@android:color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/ChargeType"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/_10ssp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Type : "
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/CommissionType"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/_10ssp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/bggrey_dark"
+        android:layout_marginVertical="@dimen/_2sdp"/>
+</LinearLayout>

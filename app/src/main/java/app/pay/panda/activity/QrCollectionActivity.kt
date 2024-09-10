@@ -51,11 +51,11 @@ class QrCollectionActivity : BaseActivity<ActivityQrCollectionBinding>() {
         // Set the dialog properties
         dialog.setCancelable(false) // User cannot dismiss the dialog
         dialog.setCanceledOnTouchOutside(false)
-        dbinding.notifyButton.setOnClickListener {
+      /*  dbinding.notifyButton.setOnClickListener {
             Toast.makeText(this, "You will be notified", Toast.LENGTH_SHORT).show()
             // Handle button click here
             handleBackPressCustom()
-        }
+        }*/
             // Optionally, dismiss the dialog
             dialog.dismiss()
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)

@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View.GONE
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,6 +43,10 @@ class OnboardBankDetailsFragment : BaseFragment<FragmentOnboardBankDetailsBindin
         nullActivityCheck()
         userSession= UserSession(requireContext())
 
+        binding.edtName.addTextChangedListener(textWatcher)
+        binding.edtIfsc.addTextChangedListener(textWatcher)
+        binding.atvBankName.addTextChangedListener(textWatcher)
+        binding.edtAcNumber.addTextChangedListener(textWatcher)
     }
 
     private fun nullActivityCheck() {
@@ -219,19 +224,37 @@ class OnboardBankDetailsFragment : BaseFragment<FragmentOnboardBankDetailsBindin
             override fun success(from: String, message: String) {
                 val response: VerifyBankResponse =Gson().fromJson(message,VerifyBankResponse::class.java)
                 bankVerified=true
-                binding.tvVerifyBank.visibility=GONE
-                binding.edtName.setText(response.data.bank_account_name)
-                Toast.makeText(requireContext(),"Bank Verified Successfully",Toast.LENGTH_SHORT).show()
 
+                binding.edtName.setText(response.data.data.nameAtBank)
+                Toast.makeText(requireContext(),"Bank Verified Successfully",Toast.LENGTH_SHORT).show()
+                binding.tvVerifyBank.isClickable = false
+                binding.tvVerifyBank.isFocusable = false
+                binding.tvVerifyBank.setTextColor(ContextCompat.getColor(myActivity, R.color.bggrey))
+                binding.tvVerifyBank.setBackgroundColor(ContextCompat.getColor(myActivity, R.color.white))
             }
 
             override fun fail(from: String) {
                 bankVerified=false
-                Toast.makeText(requireContext(),"Unable to Verify Bank Details",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),from,Toast.LENGTH_SHORT).show()
             }
         })
     }
+    private fun enableVerifyBank() {
 
+        binding.tvVerifyBank.isClickable = true
+        binding.tvVerifyBank.isFocusable = true
+        binding.tvVerifyBank.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
+        binding.tvVerifyBank.setBackgroundColor(ContextCompat.getColor(myActivity, R.color.colorPrimaryDark))
+    }
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            enableVerifyBank() // Re-enable the Verify button
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
+    }
     override fun setData() {
 
     }

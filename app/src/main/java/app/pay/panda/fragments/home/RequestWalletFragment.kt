@@ -119,6 +119,7 @@ class RequestWalletFragment : BaseFragment<FragmentRequestWalletBinding>(Fragmen
         CommonClass.getDashBoardData(requireActivity(), userSession)
         binding.tvCurrBalance.text = userSession.getData(Constant.MAIN_WALET).toString()
         getTransferToList()
+       paymentDate= CommonClass.showDatePickerDialog(myActivity, binding.edtPaymentDate).toString()
     }
 
     private fun getTransferToList() {

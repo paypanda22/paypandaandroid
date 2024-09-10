@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.R
@@ -40,6 +41,8 @@ class AepsTxnAdapter(
         val rlStatus: RelativeLayout = itemView.findViewById(R.id.rlStatus)
         val ivType: ImageView = itemView.findViewById(R.id.ivType)
         val tvType: TextView = itemView.findViewById(R.id.tvType)
+        val viewdata: AppCompatImageView = itemView.findViewById(R.id.viewdata)
+        val refresh: AppCompatImageView = itemView.findViewById(R.id.refresh)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -108,7 +111,9 @@ class AepsTxnAdapter(
             holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.white))
             holder.tvType.setTextColor(ContextCompat.getColor(activity, R.color.white))
             holder.ivType.setColorFilter(ContextCompat.getColor(activity, R.color.white))
-            if (list[position].type=="CW" || list[position].type=="AP") holder.ivShare.visibility= VISIBLE
+            if (list[position].type=="CW" || list[position].type=="AP")
+                holder.ivShare.visibility= VISIBLE
+                holder.refresh.visibility= GONE
         } else if (list[position].status == 3) {
             holder.tvStatus.text = "FAILED"
             holder.rlStatus.setBackgroundColor(ContextCompat.getColor(activity, R.color.red_500))
@@ -116,20 +121,25 @@ class AepsTxnAdapter(
             holder.tvType.setTextColor(ContextCompat.getColor(activity, R.color.white))
             holder.ivType.setColorFilter(ContextCompat.getColor(activity, R.color.white))
             holder.ivShare.visibility= GONE
+            holder.refresh.visibility= VISIBLE
         } else if(list[position].status == 1){
             holder.tvStatus.text = "PENDING"
             holder.rlStatus.setBackgroundColor(ContextCompat.getColor(activity, R.color.yellow_500))
             holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.black))
             holder.tvType.setTextColor(ContextCompat.getColor(activity, R.color.black))
             holder.ivType.setColorFilter(ContextCompat.getColor(activity, R.color.black))
-           holder.ivShare.visibility= GONE
+
+            holder.ivShare.visibility= GONE
+            holder.refresh.visibility= VISIBLE
         }else{
             holder.tvStatus.text = "Refunded"
             holder.rlStatus.setBackgroundColor(ContextCompat.getColor(activity, R.color.blue_600))
             holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.white))
             holder.tvType.setTextColor(ContextCompat.getColor(activity, R.color.white))
             holder.ivType.setColorFilter(ContextCompat.getColor(activity, R.color.white))
-            if (list[position].type=="CW" || list[position].type=="AP") holder.ivShare.visibility= VISIBLE
+            if (list[position].type=="CW" || list[position].type=="AP")
+                holder.ivShare.visibility= VISIBLE
+                holder.refresh.visibility= GONE
         }
         holder.tvBankName.text = list[position].bank_name
         if (list[position].bank_rrn.isEmpty()) {
@@ -146,6 +156,13 @@ class AepsTxnAdapter(
         //holder.tvCreatedAt.text = CommonClass.formatDateTime(list[position].createdAt)
         holder.ivShare.setOnClickListener {
             click.onItemClick(holder, list, position)
+        }
+        holder.viewdata.setOnClickListener{
+            click.onItemClickInvoice(holder, list, position)
+        }
+
+        holder.refresh.setOnClickListener{
+            click.onItemClickEnquery(holder, list, position,list[position].type)
         }
     }
 }
