@@ -35,6 +35,7 @@ import app.pay.panda.responsemodels.uploadImage.UploadImageResponse
 import app.pay.panda.responsemodels.walletRequest.WalletRequestResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
 import java.io.File
 
@@ -51,33 +52,33 @@ class RequestWalletFragment : BaseFragment<FragmentRequestWalletBinding>(Fragmen
     private var method = "IMPS"
     private var uploaded_path = ""
     private var account_number = ""
-//    private val startForProfileImageResult =
-//        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-//            val resultCode = result.resultCode
-//            val data = result.data
-//            when (resultCode) {
-//                Activity.RESULT_OK -> {
-//                    val fileUri = data?.data!!
-//                    val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(myActivity.contentResolver, fileUri)
-//
-//                    binding.ivReceipt.setImageBitmap(bitmap)
-//
-//                    val path: String = getRealPathFromURI(fileUri)
-//                    val file: File = File(path)
-//                    uploadImage(file)
-//                }
-//
-//                ImagePicker.RESULT_ERROR -> {
-//                    Toast.makeText(myActivity, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-//                }
-//
-//                else -> {
-//                    Toast.makeText(myActivity, "Task Cancelled", Toast.LENGTH_SHORT).show()
-//                }
-//
-//            }
-//
-//        }
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    val fileUri = data?.data!!
+                    val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(myActivity.contentResolver, fileUri)
+
+                    binding.ivReceipt.setImageBitmap(bitmap)
+
+                    val path: String = getRealPathFromURI(fileUri)
+                    val file: File = File(path)
+                    uploadImage(file)
+                }
+
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(myActivity, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                }
+
+                else -> {
+                    Toast.makeText(myActivity, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+        }
 
     private fun getRealPathFromURI(contentURI: Uri): String {
         val result: String
@@ -277,13 +278,13 @@ class RequestWalletFragment : BaseFragment<FragmentRequestWalletBinding>(Fragmen
         binding.ivMenu.setOnClickListener { findNavController().navigate(R.id.action_requestWalletFragment_to_walletRequestListFragment2) }
 
         binding.rlImageUpload.setOnClickListener {
-//            ImagePicker.with(this)
-//                .compress(1024)         //Final image size will be less than 1 MB(Optional)
-//                .crop(1f, 1f)
-//                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
-//                .createIntent { intent ->
-//                    startForProfileImageResult.launch(intent)
-//                }
+            ImagePicker.with(this)
+                .compress(1024)         //Final image size will be less than 1 MB(Optional)
+                .crop(1f, 1f)
+                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .createIntent { intent ->
+                    startForProfileImageResult.launch(intent)
+                }
         }
 
 
