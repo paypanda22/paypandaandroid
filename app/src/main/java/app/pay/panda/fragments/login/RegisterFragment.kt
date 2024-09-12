@@ -204,9 +204,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (binding.edtSponsorMobile.text.toString().length == 10) {
-                    checkSponsorCode(binding.edtSponsorMobile.text.toString())
+               //     checkSponsorCode(binding.edtSponsorMobile.text.toString())
                 } else {
-                    sponsorverified = false
+                    sponsorverified = true
                 }
 
             }
@@ -256,7 +256,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         if (!sponsorverified) {
                             binding.edtSponsorMobile.error = "Enter a Valid Refer Id"
                         } else {
-                            sendOtp(binding.edtRegMobile.text.toString())
+
                         }
                     } else {
                         // edtSponsorMobile is not visible, just send the OTP
@@ -412,7 +412,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         })
     }
 
-    private fun checkSponsorCode(sCode: String) {
+   /* private fun checkSponsorCode(sCode: String) {
         UtilMethods.checkSponsorCode(requireContext(), sCode, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: CheckSponsorResponse =
@@ -434,7 +434,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             }
         })
 
-    }
+    }*/
 
     private fun checkMobile(mobile: String) {
         UtilMethods.chkMobile(requireContext(), mobile, object : MCallBackResponse {
@@ -457,6 +457,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         R.drawable.ic_check_green,
                         0
                     )
+                    sendOtp(binding.edtRegMobile.text.toString())
                 }
             }
 
@@ -548,7 +549,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                     ).show()
                     binding.edtEmail.text?.clear()
                 }else{
-                    sendOtp(binding.edtRegMobile.text.toString())
+                    //sendOtp(binding.edtRegMobile.text.toString())
                 }
 
             }

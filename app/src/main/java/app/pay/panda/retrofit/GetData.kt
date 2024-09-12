@@ -78,6 +78,9 @@ interface GetData {
    // @POST("api/verification/bankVerification")
     fun verifyBankAccount(@Body obj: Any): Call<JsonObject>
 
+    @POST("api/verification/bankVerification")
+    fun bankVerification(@Body obj: Any): Call<JsonObject>
+
     @Multipart
     @POST("api/cloudinary/addImage")
     fun uploadImage(@Part image: MultipartBody.Part): Call<JsonObject>

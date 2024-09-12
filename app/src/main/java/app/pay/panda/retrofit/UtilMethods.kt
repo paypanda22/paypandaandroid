@@ -877,6 +877,50 @@ object UtilMethods {
         }
     }
 
+    fun bankVerification(context: Context, obj: Any, callBackResponse: MCallBackResponse) {
+        if (isNetworkAvailable(context)) {
+            val progressBar = CustomProgressBar()
+            progressBar.showProgress(context)
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitFactory.getRetrofitInstance().create(GetData::class.java)
+                        .bankVerification(obj).execute()
+                    withContext(Dispatchers.Main) {
+                        progressBar.hideProgress()
+                        if (response.isSuccessful && response.body() != null) {
+                            val responseBody = response.body() as JsonObject
+                            if (responseBody.has("error")) {
+                                val status = responseBody.get("error").asBoolean
+                                if (status) {
+                                    val message = responseBody.get("message").asString
+                                    callBackResponse.fail(message)
+                                } else {
+                                    callBackResponse.success("strresponse", responseBody.toString())
+                                }
+                            } else {
+                                val message = responseBody.get("message").asString ?: "Unknown Error"
+                                callBackResponse.fail(message)
+                            }
+
+                        } else {
+                            progressBar.hideProgress()
+                            callBackResponse.fail("Request Failed.Response Body Null")
+                        }
+                    }
+                } catch (e: Exception) {
+                    progressBar.hideProgress()
+                    withContext(Dispatchers.Main) {
+                        e.printStackTrace()
+                        callBackResponse.fail("Request Failed.API ERROR")
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
     fun uploadImage(context: Context, file: File, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
             val progressBar = CustomProgressBar()

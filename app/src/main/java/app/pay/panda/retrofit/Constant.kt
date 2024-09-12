@@ -7,8 +7,8 @@ object Constant {
     const val MERCHANT_CODE="merchant_Code"
     const val FROM = "from"
     const val TPINSTATUS = "tpinstatus"
-   // const val base_url = "https://api.paypanda.in/"
-    const val base_url = "https://devapi.paypanda.in/"
+  // const val base_url = "https://api.paypanda.in/"
+  const val base_url = "https://devapi.paypanda.in/"
     //const val MainBase_URL = "https://devapi.paypandabnk.com/"
 
     const val MainBase_URL_2 = "https://cloud.yoopay.in/"
