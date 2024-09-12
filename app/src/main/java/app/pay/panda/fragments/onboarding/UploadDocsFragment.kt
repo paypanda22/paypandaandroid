@@ -26,6 +26,7 @@ import app.pay.panda.responsemodels.submitdocs.SubmitDocsResponse
 import app.pay.panda.responsemodels.uploadImage.UploadImageResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
 import java.io.File
 
@@ -41,89 +42,89 @@ class UploadDocsFragment : BaseFragment<FragmentUploadDocsBinding>(FragmentUploa
     private var bank_proof = ""
     private var shop_outside_photo = ""
     private var shop_internal_photo = ""
-//    private val startForProfileImageResult =
-//        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-//            val resultCode = result.resultCode
-//            val data = result.data
-//            when (resultCode) {
-//                Activity.RESULT_OK -> {
-//                    val fileUri = data?.data!!
-//                    val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(myActivity.contentResolver, fileUri)
-//
-//                    when (fileType) {
-//                        "AadhaarFront" -> {
-//                            binding.ivFront.setImageBitmap(bitmap)
-//
-//                            val path: String = getRealPathFromURI(fileUri)
-//                            val file: File = File(path)
-//                            uploadImage(file)
-//                        }
-//
-//                        "AadhaarBack" -> {
-//                            binding.ivAadhaarBack.setImageBitmap(bitmap)
-//
-//                            val path: String = getRealPathFromURI(fileUri)
-//                            val file: File = File(path)
-//                            uploadImage(file)
-//                        }
-//
-//                        "pan" -> {
-//                            binding.ivPanCard.setImageBitmap(bitmap)
-//
-//                            val path: String = getRealPathFromURI(fileUri)
-//                            val file: File = File(path)
-//                            uploadImage(file)
-//                        }
-//
-//                        "bankProof" -> {
-//                            binding.ivBankProof.setImageBitmap(bitmap)
-//
-//                            val path: String = getRealPathFromURI(fileUri)
-//                            val file: File = File(path)
-//                            uploadImage(file)
-//                        }
-//
-//                        "gst" -> {
-//                            binding.ivGst.setImageBitmap(bitmap)
-//
-//                            val path: String = getRealPathFromURI(fileUri)
-//                            val file: File = File(path)
-//                            uploadImage(file)
-//                        }
-//
-//                        "shopFront" -> {
-//                            binding.ivShopF.setImageBitmap(bitmap)
-//
-//                            val path: String = getRealPathFromURI(fileUri)
-//                            val file: File = File(path)
-//                            uploadImage(file)
-//                        }
-//
-//                        "shopInside" -> {
-//                            binding.ivShopI.setImageBitmap(bitmap)
-//
-//                            val path: String = getRealPathFromURI(fileUri)
-//                            val file: File = File(path)
-//                            uploadImage(file)
-//                        }
-//
-//                        else -> {
-//                            Toast.makeText(requireContext(), "Invalid Document Type Selected", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                }
-//
-//                ImagePicker.RESULT_ERROR -> {
-//                    Toast.makeText(myActivity, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-//                }
-//
-//                else -> {
-//                    Toast.makeText(myActivity, "Task Cancelled", Toast.LENGTH_SHORT).show()
-//                }
-//
-//            }
-//
-//        }
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    val fileUri = data?.data!!
+                    val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(myActivity.contentResolver, fileUri)
+
+                    when (fileType) {
+                        "AadhaarFront" -> {
+                            binding.ivFront.setImageBitmap(bitmap)
+
+                            val path: String = getRealPathFromURI(fileUri)
+                            val file: File = File(path)
+                            uploadImage(file)
+                        }
+
+                        "AadhaarBack" -> {
+                            binding.ivAadhaarBack.setImageBitmap(bitmap)
+
+                            val path: String = getRealPathFromURI(fileUri)
+                            val file: File = File(path)
+                            uploadImage(file)
+                        }
+
+                        "pan" -> {
+                            binding.ivPanCard.setImageBitmap(bitmap)
+
+                            val path: String = getRealPathFromURI(fileUri)
+                            val file: File = File(path)
+                            uploadImage(file)
+                        }
+
+                        "bankProof" -> {
+                            binding.ivBankProof.setImageBitmap(bitmap)
+
+                            val path: String = getRealPathFromURI(fileUri)
+                            val file: File = File(path)
+                            uploadImage(file)
+                        }
+
+                        "gst" -> {
+                            binding.ivGst.setImageBitmap(bitmap)
+
+                            val path: String = getRealPathFromURI(fileUri)
+                            val file: File = File(path)
+                            uploadImage(file)
+                        }
+
+                        "shopFront" -> {
+                            binding.ivShopF.setImageBitmap(bitmap)
+
+                            val path: String = getRealPathFromURI(fileUri)
+                            val file: File = File(path)
+                            uploadImage(file)
+                        }
+
+                        "shopInside" -> {
+                            binding.ivShopI.setImageBitmap(bitmap)
+
+                            val path: String = getRealPathFromURI(fileUri)
+                            val file: File = File(path)
+                            uploadImage(file)
+                        }
+
+                        else -> {
+                            Toast.makeText(requireContext(), "Invalid Document Type Selected", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(myActivity, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                }
+
+                else -> {
+                    Toast.makeText(myActivity, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+        }
 
     override fun init() {
         nullActivityCheck()
@@ -250,42 +251,42 @@ class UploadDocsFragment : BaseFragment<FragmentUploadDocsBinding>(FragmentUploa
 
     }
 
-//    private fun uploadImage(file: File) {
-//        myActivity.let {
-//            myActivity
-//            UtilMethods.uploadImage(myActivity, file, object : MCallBackResponse {
-//                override fun success(from: String, message: String) {
-//                    val response: UploadImageResponse = Gson().fromJson(message, UploadImageResponse::class.java)
-//                    Toast.makeText(myActivity, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show()
-//                    if (fileType == "AadhaarFront") {
-//                        adhaar_front_card = response.data?.url.toString()
-//                    } else if (fileType == "AadhaarBack") {
-//                        adhaar_back_card = response.data?.url.toString()
-//                    } else if (fileType == "pan") {
-//                        pan_card = response.data?.url.toString()
-//                    } else if (fileType == "bankProof") {
-//                        bank_proof = response.data?.url.toString()
-//                    } else if (fileType == "gst") {
-//                        gst = response.data?.url.toString()
-//                    } else if (fileType == "shopFront") {
-//                        shop_outside_photo = response.data?.url.toString()
-//                    } else if (fileType == "shopInside") {
-//                        shop_internal_photo = response.data?.url.toString()
-//                    } else {
-//                        Toast.makeText(requireContext(), "Invalid Document Type Selected", Toast.LENGTH_SHORT).show()
-//                    }
-//                    markActive()
-//
-//
-//                }
-//
-//                override fun fail(from: String) {
-//                    Toast.makeText(myActivity, "Unable to Upload Image", Toast.LENGTH_SHORT).show()
-//                }
-//            })
-//        }
-//
-//    }
+    private fun uploadImage(file: File) {
+        myActivity.let {
+            myActivity
+            UtilMethods.uploadImage(myActivity, file, object : MCallBackResponse {
+                override fun success(from: String, message: String) {
+                    val response: UploadImageResponse = Gson().fromJson(message, UploadImageResponse::class.java)
+                    Toast.makeText(myActivity, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show()
+                    if (fileType == "AadhaarFront") {
+                        adhaar_front_card = response.data?.url.toString()
+                    } else if (fileType == "AadhaarBack") {
+                        adhaar_back_card = response.data?.url.toString()
+                    } else if (fileType == "pan") {
+                        pan_card = response.data?.url.toString()
+                    } else if (fileType == "bankProof") {
+                        bank_proof = response.data?.url.toString()
+                    } else if (fileType == "gst") {
+                        gst = response.data?.url.toString()
+                    } else if (fileType == "shopFront") {
+                        shop_outside_photo = response.data?.url.toString()
+                    } else if (fileType == "shopInside") {
+                        shop_internal_photo = response.data?.url.toString()
+                    } else {
+                        Toast.makeText(requireContext(), "Invalid Document Type Selected", Toast.LENGTH_SHORT).show()
+                    }
+                    markActive()
+
+
+                }
+
+                override fun fail(from: String) {
+                    Toast.makeText(myActivity, "Unable to Upload Image", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+    }
 
     private fun markActive() {
         if (adhaar_front_card.isNotEmpty()) {
@@ -314,13 +315,13 @@ class UploadDocsFragment : BaseFragment<FragmentUploadDocsBinding>(FragmentUploa
     }
 
     private fun takeImage() {
-//        ImagePicker.with(this)
-//            .compress(1024)         //Final image size will be less than 1 MB(Optional)
-//            .crop(1f, 1f)
-//            .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
-//            .createIntent { intent ->
-//                startForProfileImageResult.launch(intent)
-//            }
+        ImagePicker.with(this)
+            .compress(1024)         //Final image size will be less than 1 MB(Optional)
+            .crop(1f, 1f)
+            .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+            .createIntent { intent ->
+                startForProfileImageResult.launch(intent)
+            }
     }
 
     private fun getRealPathFromURI(contentURI: Uri): String {

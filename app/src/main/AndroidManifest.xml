@@ -50,6 +50,10 @@
             android:name=".activity.NetworkDownline"
             android:exported="false" />
         <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            tools:replace="android:theme" />
+        <activity
             android:name=".mAtm.MyAtmActivity"
             android:exported="false"
             android:screenOrientation="portrait"

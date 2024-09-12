@@ -127,19 +127,19 @@ class MyAtmActivity : BaseActivity<ActivityMatmBinding>(), MATMOnFinishListener 
                         device_name = deviceName,
                         apiUserName = "paypandaapi",
                         user_mobile_number = binding.edtMobile.text.toString(),
-                        userName = "SIDDHARTH BEHERA",
+                        userName = "SIDDHARTHBEHERA",
                         clientRefID = response.data.clientRef_id.toString(),
-                        clientID = "42Zuw71Ok7e2TGAgHPKttM7PFGMspJLLy3ewq15dhgjtGM9l",
-                        clientSecret = "MDB9krmA8OqYdgjTKflkXXU7BTNAJgVDEWBmhWjQ8YBvAPNKNPLbxnJGSKcKiEV9",
+                        clientID = "31ce608004db0fec63e7f6232930bbee53b979b452e6dda5898e405df9d6ed4d018c119164bb2a3f903b725ed9950e61",
+                        clientSecret = "67d624dd646168c5c1c87256210591b09c5b90d3b38b74cb5f33f50290fc1310372d9b2b142285e4f17188e22b48d9d1d335848907839d3ea989c143ffd53779",
                         loginID = "paypandaapi",
                         skipReceipt = binding.chkSkipReceipt.isChecked,
                         themeColor = themeColor
                     )
                     val request = Gson().toJson(requestModel)
                     Log.e("DATA", "success: $request" )
-//                    val intent = Intent(this@MyAtmActivity, MatmActivity::class.java)
-//                    intent.putExtra("data", request)
-//                    startActivity(intent)
+                    val intent = Intent(this@MyAtmActivity, MatmActivity::class.java)
+                    intent.putExtra("data", request)
+                    startActivity(intent)
                 } else {
                     showToast(this@MyAtmActivity, "Unable to Start Transaction")
                 }
