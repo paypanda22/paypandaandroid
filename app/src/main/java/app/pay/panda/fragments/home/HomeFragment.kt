@@ -3,12 +3,18 @@ package app.pay.panda.fragments.home
 import DynamicServicesAdapter
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,15 +31,20 @@ import app.pay.panda.activity.DmtActivity
 import app.pay.panda.activity.IntroActivity
 import app.pay.panda.activity.RechargeActivity
 import app.pay.panda.databinding.FragmentHomeBinding
+import app.pay.panda.databinding.LytDmtOtoBinding
 import app.pay.panda.helperclasses.Category
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.MyGlide
 import app.pay.panda.helperclasses.ResetTPIN
+import app.pay.panda.helperclasses.ShowDialog
 import app.pay.panda.helperclasses.UserSession
+import app.pay.panda.helperclasses.Utils.Companion.showToast
 import app.pay.panda.interfaces.DynamicServicesClickListener
 import app.pay.panda.interfaces.MCallBackResponse
+import app.pay.panda.interfaces.MyClick
 import app.pay.panda.responsemodels.allservices.Data
 import app.pay.panda.responsemodels.distributerDashobord.DashboardResponse
+import app.pay.panda.responsemodels.dmtotp.DMTOtpResponse
 import app.pay.panda.responsemodels.serviceStatus.CheckServiceStatusResponse
 import app.pay.panda.responsemodels.userid.UserIDResponse
 import app.pay.panda.retrofit.Constant
@@ -254,15 +265,24 @@ var name=""
                 val response: CheckServiceStatusResponse = Gson().fromJson(message, CheckServiceStatusResponse::class.java)
                 if (!response.error) {
                     if (!response.data.is_buy) {
-                        startActivity(Intent(activity, ActivationPackages::class.java))
-                        activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+                        ShowDialog.bottomDialogSingleButton(myActivity, "Note",
+                            "Please Purchase Package", "pending", object : MyClick {
+                                override fun onClick() {
+                                    findNavController().popBackStack()
+                                }
+                            })
+                       // startActivity(Intent(activity, ActivationPackages::class.java))
+                      //  activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
                     } else if (!response.data.is_active) {
                         Toast.makeText(requireContext(), "This Service is Not Active For You", Toast.LENGTH_SHORT).show()
                     } else {
                         if (catId == "206") {
                             userSession.setData(Constant.MERCHANT_CODE, response.data.merchantCode)
                             sendToAeps(response, catId, title)
-                        } else {
+                        } else if(response.statusCode.equals("007")){
+                            openTransactionFilterDialog()
+
+                        }else{
                             sendToServiceScreen(response, catId)
                         }
 
@@ -277,7 +297,59 @@ var name=""
             }
         })
     }
+    private fun openTransactionFilterDialog() {
+        val filterDialog: Dialog = Dialog(myActivity)
+        val dBinding = LytDmtOtoBinding.inflate(myActivity.layoutInflater)
+        dBinding.root.background =
+            ContextCompat.getDrawable(myActivity, R.drawable.curved_background_with_shadow)
+        filterDialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        filterDialog.setContentView(dBinding.root)
+        filterDialog.window
+            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        filterDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        filterDialog.window?.attributes?.windowAnimations ?: R.style.DialogAnimationBottom
+        filterDialog.window?.setGravity(Gravity.BOTTOM)
+        dBinding.btnVerify.setOnClickListener{
+            if(dBinding.etOtp.text.toString().isNotEmpty()){
+                Toast.makeText(requireContext(), "Please Enter Otp...", Toast.LENGTH_SHORT).show()
+            }else{
+                getOnboardingOtpValidate(dBinding.etOtp.text.toString())
+            }
 
+        }
+
+        filterDialog.setCancelable(true)
+        filterDialog.show()
+    }
+    private fun getOnboardingOtpValidate(otp:String) {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+        UtilMethods.getOnboardingOtpValidate(requireContext(),userSession.getData(Constant.MOBILE).toString(),token, token,otp ,object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+              //  CommonClass.hideKeyBoard(myActivity, binding.edtCustomerNumber)
+                val response: DMTOtpResponse =
+                    Gson().fromJson(message, DMTOtpResponse::class.java)
+                if (!response.error) {
+                    ShowDialog.bottomDialogSingleButton(myActivity,
+                        "Congratulations!",
+                        "Bank3 OnBoarding Successful",
+                        "success",
+                        object : MyClick {
+                            override fun onClick() {
+                                findNavController().popBackStack()
+                            }
+                        })
+
+                }else{
+                    showToast(requireContext(), "Something went wrong")
+                }
+
+            }
+
+            override fun fail(from: String) {
+                showToast(requireContext(), from)
+            }
+        })
+    }
     private fun allServices(){
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         UtilMethods.allServices(myActivity, token, object : MCallBackResponse {
@@ -430,8 +502,8 @@ var name=""
     fun processServices(service:String,id:String) {
             when (id.trim()) {
                 "206"->{
-                    startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
-                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+                    startActivity(Intent(myActivity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
+                    myActivity.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
 //            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
 //            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
                     checkService("Aeps Cash Deposit", "206")
@@ -492,7 +564,7 @@ var name=""
                 "10" -> {
                     // Handle Mobile Postpaid
                     operatorList("Mobile Postpaid Billers", Category.getIdByCategoryName("Mobile Postpaid"))
-                    println("Processing: ${service}")
+                   // println("Processing: ${service}")
                 }
                 "207" -> {
                     // Handle Aeps Bank Withdraw
@@ -501,7 +573,7 @@ var name=""
 //            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
 //            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
                     checkService("Aeps Cash Deposit", "207")
-                    println("Processing: ${service}")
+                    //println("Processing: ${service}")
                 }
                 "208" -> {
                     startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
@@ -511,7 +583,7 @@ var name=""
                     checkService("Aeps Cash Deposit", "208")
                     // Handle Aeps Adhaar pay
 
-                    println("Processing: ${service}")
+                   // println("Processing: ${service}")
                 }
                 "35" -> {
                     // Handle CMS

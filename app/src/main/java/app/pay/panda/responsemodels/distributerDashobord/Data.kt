@@ -38,7 +38,7 @@ data class PaymentRequest(
 
 data class Wallet(
     val creditTotal: Double,
-    val debitTotal: Int
+    val debitTotal: Double
 )
 
 data class Service(

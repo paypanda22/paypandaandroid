@@ -39,7 +39,7 @@ class CreateCustomerFragment : BaseFragment<FragmentCreateCustomerBinding>(Fragm
         customerMobile = arguments?.getString("mobile").toString()
         type = arguments?.getString("type").toString()
         apiID = arguments?.getString("apiID").toString()
-        if (apiID == "eko") {
+        if (apiID == "66bca8b95727c7563ad6e315") {
             if (type == "verify") {
                 binding.lytOtp.visibility = View.VISIBLE
                 binding.lytCreate.visibility = View.GONE
@@ -94,7 +94,7 @@ class CreateCustomerFragment : BaseFragment<FragmentCreateCustomerBinding>(Fragm
                     override fun success(from: String, message: String) {
                         val response: CreateCustomerResponse = Gson().fromJson(message, CreateCustomerResponse::class.java)
                         if (!response.error) {
-                            if (apiID == "eko") {
+                            if (apiID == "66bca8b95727c7563ad6e315") {
                                 Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
                                 binding.lytCreate.visibility = View.GONE
                                 binding.lytOtp.visibility = View.VISIBLE
@@ -288,7 +288,7 @@ class CreateCustomerFragment : BaseFragment<FragmentCreateCustomerBinding>(Fragm
             binding.edtCustomerPincode.error = "Enter a Valid PinCode"
             return false
         } else {
-            if (apiID == "Paysprint") {
+            if (apiID == "66bca8ca5727c7563ad6e316") {
                 if (binding.edtOtpPs.text.toString().isEmpty()) {
                     binding.edtOtpPs.error = "Enter Otp Received On Your Mobile"
                     return false

@@ -381,7 +381,7 @@ class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate
 
     private fun getOnboardingOtpValidate(otp:String) {
         val token = userSession.getData(Constant.USER_TOKEN).toString()
-        UtilMethods.getOnboardingOtpValidate(requireContext(), binding.edtCustomerNumber.text.toString(), token, apiID,otp ,object : MCallBackResponse {
+        UtilMethods.getOnboardingOtpValidate(requireContext(), userSession.getData(Constant.MOBILE).toString(), token, apiID,otp ,object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 CommonClass.hideKeyBoard(myActivity, binding.edtCustomerNumber)
                 val response: DMTOtpResponse =

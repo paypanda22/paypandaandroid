@@ -254,7 +254,7 @@
                             android:layout_toEndOf="@+id/iv_rupee"
                             android:background="@null"
                             android:text="0"
-                            android:focusable="false"
+
                             android:textColor="@color/black"
                             android:textSize="@dimen/_30sdp"
                             style="@style/mostserrat_bold" />
