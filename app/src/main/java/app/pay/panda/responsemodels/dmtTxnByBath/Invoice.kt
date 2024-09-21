@@ -12,6 +12,7 @@ data class Invoice(
     val customer_mobile: String="",
     val customer_name: String="",
     val mobile_number: String="",
+    val tid: String="",
     val shop_name: Any? ="",
     val totalAmount: Int=0
 )

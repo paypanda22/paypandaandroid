@@ -31,6 +31,7 @@ import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.responsemodels.dmtTxnByBath.AllTran
 import app.pay.panda.responsemodels.dmtTxnByBath.BatchWiseTxnListResponse
+import app.pay.panda.responsemodels.dmtTxnByBath.Data
 import app.pay.panda.responsemodels.dmttxnlist.Tran
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
@@ -71,7 +72,7 @@ class SingleDmtTransaction : BaseBottomFragment<FragmentSingleDmtTransactionBind
                     binding.tvAmount.text=response.data.invoice[0].totalAmount.toString()
                    // binding.tvServiceCharge.text=response.data.invoice[0].charge.toString()
                     binding.senderMobNo.text=response.data.invoice[0].customer_mobile.toString()
-                    binding.tvTxnId.text="Batch No. : "+response.data.invoice[0].batchId.toString()
+                    binding.tvTxnId.text="Batch No. : "+response.data.invoice[0].allTrans[0].tid.toString()
                     binding.reqTime.text=response.data.invoice[0].createdAt.toString()
                     if (list.isNotEmpty()){
                         list.clear()

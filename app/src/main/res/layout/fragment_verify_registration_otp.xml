@@ -56,6 +56,7 @@
             android:gravity="center"/>
         <app.pay.panda.reusable.PinView
             android:id="@+id/edtOtpMobile"
+            android:inputType="numberPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -64,11 +65,10 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:focusableInTouchMode="true"
-            android:inputType="numberSigned"
             style="@style/mostserrat_bold"
             android:itemBackground="@drawable/box"
             android:textColor="@color/black"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_10sdp"
             android:textStyle="bold"
             app:itemCount="6"
 
@@ -96,7 +96,7 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:focusableInTouchMode="true"
-            android:inputType=""
+            android:inputType="numberPassword"
             style="@style/mostserrat_bold"
             android:itemBackground="@drawable/box"
             android:textColor="@color/black"

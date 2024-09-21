@@ -4,16 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-android:background="@color/dashboardToolbarBGColor"
-    android:padding="@dimen/_10sdp">
+    android:layout_margin="@dimen/_6sdp">
 
     <ImageView
         android:id="@+id/icon_image"
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         android:src="@drawable/open"
         android:background="@drawable/shape_service_icon"
-        android:padding="@dimen/_9sdp"
+        android:padding="@dimen/_12sdp"
         android:contentDescription="@string/description" />
 
     <TextView
@@ -24,8 +23,9 @@ android:background="@color/dashboardToolbarBGColor"
         android:textAllCaps="true"
         style="@style/mostserrat_bold"
         android:padding="@dimen/_1sdp"
+
         android:textColor="@color/overlay_dark_90"
-        android:textSize="@dimen/_8ssp"
+        android:textSize="@dimen/_7sdp"
         android:textStyle="bold" />
 
 

@@ -132,6 +132,7 @@ class VerifyIdentityFragment : BaseFragment<FragmentVerifyIdentityBinding>(Fragm
                 binding.btnPan.text = "NEXT"
                 binding.lytPanNumber.visibility = GONE
                 binding.tvBtnPan.visibility = VISIBLE
+                binding.tvBtnPan.text = binding.edtPanNumber.text.toString()
 
 
             }

@@ -38,7 +38,7 @@ class PayoutActivity : BaseActivity<ActivityPayoutBinding>() {
     }
 
     override fun handleBackPressCustom(): Boolean {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_navs) as NavHostFragment
+     /*   val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_navs) as NavHostFragment
         val navController = navHostFragment.navController
         val currentFragment=navController.currentDestination
         // val active=supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
@@ -59,7 +59,7 @@ class PayoutActivity : BaseActivity<ActivityPayoutBinding>() {
                 navController.popBackStack()
             }
 
-        }
+        }*/
         return true
     }
 

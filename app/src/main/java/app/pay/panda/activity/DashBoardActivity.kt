@@ -38,7 +38,7 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
 
     private fun getDashBoardData() {
         val token = userSession.getData(Constant.USER_TOKEN).toString()
-        UtilMethods.dashBoardData2(this@DashBoardActivity, token, object : MCallBackResponse {
+        UtilMethods.dashBoardData(this@DashBoardActivity, token, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: DashBoardData = Gson().fromJson(message, DashBoardData::class.java)
                 response.data?.let { userSession.setUserData(it) }

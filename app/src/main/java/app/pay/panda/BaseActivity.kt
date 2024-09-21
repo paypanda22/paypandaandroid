@@ -103,7 +103,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(), View.OnClic
     private fun getDashBoardData() {
         val userSession=UserSession(this@BaseActivity)
         val token = userSession.getData(Constant.USER_TOKEN).toString()
-        UtilMethods.dashBoardData2(this@BaseActivity, token, object : MCallBackResponse {
+        UtilMethods.dashBoardData(this@BaseActivity, token, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: DashBoardData = Gson().fromJson(message, DashBoardData::class.java)
                 response.data?.let { userSession.setUserData(it) }

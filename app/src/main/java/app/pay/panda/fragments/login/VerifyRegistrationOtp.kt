@@ -28,8 +28,10 @@ import app.pay.panda.interfaces.MyClick
 import app.pay.panda.interfaces.MyClickWithString
 import app.pay.panda.responsemodels.register.RegisterResponse
 import app.pay.panda.responsemodels.registerOtp.RegisterOtpResponse
+import app.pay.panda.responsemodels.resendtpin.TransactionPinResponse
 import app.pay.panda.responsemodels.verifyOtp.VerifyOtpResponse
 import app.pay.panda.responsemodels.verifyRegisterOtp.VerifyRegisterOtpResponse
+import app.pay.panda.retrofit.ApiMethods
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.gson.Gson
@@ -49,6 +51,7 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
     private var password=""
     private var refID=""
     private var isReferral=""
+    private var mobileVerified = "0"
     private lateinit var countDownTimer: CountDownTimer
     var timeLeftInMillis: Long = 60000L
     var isTimerRunning: Boolean = false
@@ -66,10 +69,14 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
         refID=arguments?.getString("refID") ?:""
         isReferral=arguments?.getString("isReferral") ?:""
         state=arguments?.getString("state") ?:""
+        mobileVerified=arguments?.getString("mobileVerified") ?:""
 
         binding.tvNumber.text="Sent to +91- $phone"
         binding.tvEmail.text="Sent to - $email"
         setTimer()
+        val result1=Bundle()
+        result1.putString("mobileVerified", "0")       // This sets the mobileVerified status to 1
+        parentFragmentManager.setFragmentResult("mobileVerifiedKey", result1)
 
     }
 
@@ -128,12 +135,10 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
             if (isTimerRunning) {
                showToast(requireContext(),"You can Resend OTP After One Minute")
             } else {
-                timeLeftInMillis = 60000
-                if (email.isNotEmpty() && phone.isNotEmpty()){
-                    resendOtp()
-                }else{
-                    showToast(requireContext()," Mobile Number is Not Valid.")
-                }
+               // timeLeftInMillis = 60000
+                   // resendOtp()
+                    resendSignupOTP()
+
 
             }
         }
@@ -189,15 +194,32 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
 //                    emailToken=response.data?.toString()
                   // mobileToken=response.data?.user.toString()
                       mobileToken=response.data.user.toString()
+                    mobileVerified="1"
 
-                    register()
+                  //  register()
                     cancelTimer()
+                    val result = Bundle()
+                    result.putString("mobileToken", mobileToken) // Make sure you're setting the right key
+
+                    val result1=Bundle()
+                    result1.putString("mobileVerified", "1")       // This sets the mobileVerified status to 1
+
+                    parentFragmentManager.setFragmentResult("mobileTokenKey", result)
+                    parentFragmentManager.setFragmentResult("mobileVerifiedKey", result1)
+                    findNavController().popBackStack()
                 } else {
+                    mobileVerified="0"
+                    val result1=Bundle()
+                    result1.putString("mobileVerified", "0")       // This sets the mobileVerified status to 1
+                    parentFragmentManager.setFragmentResult("mobileVerifiedKey", result1)
                     Toast.makeText(activity, "Unable to verify OTP", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun fail(from: String) {
+                val result1=Bundle()
+                result1.putString("mobileVerified", "0")       // This sets the mobileVerified status to 1
+                parentFragmentManager.setFragmentResult("mobileVerifiedKey", result1)
                 Toast.makeText(activity, from, Toast.LENGTH_SHORT).show()
             }
         })
@@ -205,9 +227,70 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
     }
 
 
-    private fun register() {
+    private fun resendOtp() {
+        val requestData= hashMapOf<String,Any?>()
+        requestData["emailId"]=email
+        requestData["mobileNo"]=phone
+      UtilMethods.getRegistrationOtp(requireContext(),requestData,object:MCallBackResponse{
+          override fun success(from: String, message: String) {
+              val response:RegisterOtpResponse=Gson().fromJson(message,RegisterOtpResponse::class.java)
+              if(!response.error){
+                  token= response.data.user.toString()
+                  showToast(requireContext(),response.message)
+                  setTimer()
+              }else{
+                  showToast(requireContext(),response.message)
+              }
+          }
+
+          override fun fail(from: String) {
+              showToast(requireContext(),from)
+          }
+      })
+    }
+
+    private fun resendSignupOTP() {
+     //   val token = userSession.getData(Constant.USER_TOKEN).toString()
         val requestData = hashMapOf<String, Any?>()
-              requestData["email"] = email
+        requestData["user_id"] = token
+        ApiMethods.resendSignupOTP(myActivity, token,requestData, object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: TransactionPinResponse = Gson().fromJson(
+                    message,
+                    TransactionPinResponse::class.java
+                )
+                if (response.error == false) {
+                    showToast(myActivity, "Otp Sand Successfully ")
+                } else {
+                    showToast(myActivity, response.message)
+                }
+            }
+
+            override fun fail(from: String) {
+                // showToast(myActivity,from)
+            }
+        })
+    }
+
+    override fun setData() {
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (isTimerRunning) {
+            cancelTimer()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        countDownTimer.start()
+    }
+
+  /*  private fun register() {
+        val requestData = hashMapOf<String, Any?>()
+        requestData["email"] = email
         requestData["mobile"] = mobileToken
         requestData["password"] = password
         requestData["user_type_id"] = userTypeId
@@ -257,44 +340,6 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
                     })
             }
         })
-    }
-
-    private fun resendOtp() {
-        val requestData= hashMapOf<String,Any?>()
-        requestData["emailId"]=email
-        requestData["mobileNo"]=phone
-      UtilMethods.getRegistrationOtp(requireContext(),requestData,object:MCallBackResponse{
-          override fun success(from: String, message: String) {
-              val response:RegisterOtpResponse=Gson().fromJson(message,RegisterOtpResponse::class.java)
-              if(!response.error){
-                  token= response.data.user.toString()
-                  showToast(requireContext(),response.message)
-                  setTimer()
-              }else{
-                  showToast(requireContext(),response.message)
-              }
-          }
-
-          override fun fail(from: String) {
-              showToast(requireContext(),from)
-          }
-      })
-    }
-
-    override fun setData() {
-
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (isTimerRunning) {
-            cancelTimer()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        countDownTimer.start()
-    }
+    }*/
 
 }

@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.R
+import app.pay.panda.interfaces.DownStreamClick
+import app.pay.panda.interfaces.DownStreamRetailerClick
 import app.pay.panda.responsemodels.downstreamRetailerResponse.Data
 
 class DownstreamRetailAdapter(
     private val activity: Activity,
-    private val downstramlistRetailer: MutableList<Data>
+    private val downstramlistRetailer: MutableList<Data>,
+  //  private val clickRListner: DownStreamRetailerClick
 ) : RecyclerView.Adapter<DownstreamRetailAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,6 +24,8 @@ class DownstreamRetailAdapter(
         val main_wallet: TextView = itemView.findViewById(R.id.main_wallet)
         val is_approved: TextView = itemView.findViewById(R.id.is_approved)
         val SrNo: TextView = itemView.findViewById(R.id.SrNo)
+     /*   val transfer: TextView = itemView.findViewById(R.id.transfer)
+        val Reversetransfer: TextView = itemView.findViewById(R.id.Reversetransfer)*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,5 +46,15 @@ class DownstreamRetailAdapter(
         holder.refer_id.text = "Refer ID:-" + data.refer_id
         holder.main_wallet.text = "Balance:- " + data.main_wallet
         holder.is_approved.text = "Approved:- " + data.is_approved
+
+
+      /*  holder.transfer.setOnClickListener {
+           clickRListner.onTransferMoneyClicked(holder, downstramlistRetailer, position)
+        }
+
+        holder.Reversetransfer.setOnClickListener {
+            clickRListner.onReverseMoneyClicked(holder, downstramlistRetailer, position)
+        }
+*/
     }
 }

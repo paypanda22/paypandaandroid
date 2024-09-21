@@ -109,8 +109,8 @@ class PayoutAccountList : BaseFragment<FragmentPayoutAccountListBinding>(Fragmen
             myActivity.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
         }
         binding.ivMenu.setOnClickListener {
-            findNavController().navigate(R.id.action_payoutAccountList_to_fragemntNetwork)
-           // findNavController().navigate(R.id.action_payoutAccountList_to_addPayoutAccount)
+           // findNavController().navigate(R.id.action_payoutAccountList_to_fragemntNetwork)
+            findNavController().navigate(R.id.action_payoutAccountList_to_addPayoutAccount)
         }
     }
 

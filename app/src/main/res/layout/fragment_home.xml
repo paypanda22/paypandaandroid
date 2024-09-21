@@ -343,6 +343,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
+                    android:visibility="gone"
                     android:layout_margin="@dimen/_3sdp"
                     android:background="@color/colorPrimary" />
 
@@ -387,9 +388,15 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_46ssp"
+                    android:src="@drawable/horizontal_logo"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:visibility="gone"
+                android:padding="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

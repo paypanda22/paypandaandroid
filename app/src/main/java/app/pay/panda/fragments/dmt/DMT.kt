@@ -32,6 +32,7 @@ import app.pay.panda.interfaces.BankListClickListner
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.MyClick
 import app.pay.panda.responsemodels.addRecipient.AddRecipientResponse
+import app.pay.panda.responsemodels.bankverification.BankVerifictionResponse
 import app.pay.panda.responsemodels.dmtBankList.DMTBankListResponse
 import app.pay.panda.responsemodels.dmtBankList.Data
 import app.pay.panda.responsemodels.dmtTransaction.DMTMakeTransactionResponse
@@ -47,11 +48,12 @@ class DMT(
     private val binding: FragmentDMTBinding,
     private val userSession: UserSession,
     private var apiID: String
+
 ) {
     fun updateApiID(newApiID: String) {
         this.apiID = newApiID
     }
-
+    private var isVerified: Boolean = false
     private var selectedChannel = 2
     private var bankID = ""
     private var bankList = ArrayList<Data>()
@@ -194,13 +196,13 @@ class DMT(
         requestData["bankAccount"] = recipient.account
         requestData["recipient_id"] = recipient.recipient_id
         requestData["user_id"] = token
-        UtilMethods.verifyBankAccount(activity, requestData, object : MCallBackResponse {
+        UtilMethods.bankVerification(activity, requestData, object : MCallBackResponse {
             @SuppressLint("SetTextI18n")
             override fun success(from: String, message: String) {
-                val response: VerifyBankResponse = Gson().fromJson(message, VerifyBankResponse::class.java)
+                val response: BankVerifictionResponse = Gson().fromJson(message, BankVerifictionResponse::class.java)
                 if (!response.error) {
                     Toast.makeText(activity, "Bank Verified Successfully", Toast.LENGTH_SHORT).show()
-                    dBinding.tvAcName.text = response.data.data.bankName.toString()
+                    dBinding.tvAcName.text = response.data.bank_account_name.toString()
                     dBinding.tvValidateBene.visibility = GONE
                     dBinding.tvValidateText.visibility = GONE
                     dBinding.tvStatus.text = "Verified"
@@ -314,14 +316,25 @@ class DMT(
         dBinding.tvPromtCharges.text = "You will be charged $verificationCharge/- for beneficiary validation"
 
         dBinding.edtBankName.setOnClickListener {
-            openBankListDialog(dBinding, dmtDialog)
+            if(apiID=="66bca8b95727c7563ad6e315"){
+                openBankListBankOneDialog(dBinding,dmtDialog)
+            }else{
+                openBankListDialog(dBinding, dmtDialog)
+            }
+
         }
         dBinding.edtAccountNumber.setOnTextChangedListener { charSequence, i, i2, i3 -> dBinding.llVerify.visibility = VISIBLE }
         dBinding.edtName.setOnTextChangedListener { charSequence, i, i2, i3 -> dBinding.llVerify.visibility = VISIBLE }
         dBinding.edtIfsc.setOnTextChangedListener { charSequence, i, i2, i3 -> dBinding.llVerify.visibility = VISIBLE }
         dBinding.edtBankName.setOnTextChangedListener { charSequence, i, i2, i3 -> dBinding.llVerify.visibility = VISIBLE }
 
-        dBinding.lytBankList.setEndIconOnClickListener { openBankListDialog(dBinding, dmtDialog) }
+        dBinding.lytBankList.setEndIconOnClickListener {
+            if (apiID == "66bca8b95727c7563ad6e315") {
+                openBankListBankOneDialog(dBinding,dmtDialog)
+            } else {
+                openBankListDialog(dBinding, dmtDialog)
+            }
+        }
 
 
         dBinding.btnAddBeneficiary.setOnClickListener {
@@ -358,14 +371,14 @@ class DMT(
         requestData["bankAccount"] = dBinding.edtAccountNumber.text.toString()
         requestData["recipient_id"] = ""
         requestData["user_id"] = token
-        UtilMethods.verifyBankAccount(activity, requestData, object : MCallBackResponse {
+        UtilMethods.bankVerification(activity, requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                val response: VerifyBankResponse = Gson().fromJson(message, VerifyBankResponse::class.java)
+                val response: BankVerifictionResponse = Gson().fromJson(message, BankVerifictionResponse::class.java)
 
-               // dBinding.edtName.setText(response.data.n)
+                dBinding.edtName.setText(response.data.bank_account_name)
                 dBinding.llVerify.visibility = GONE
-
-                dBinding.edtName.setText(response.data.data.bankName)
+                isVerified=true
+                //dBinding.edtName.setText(response.data.data.bankName)
 
                 Toast.makeText(activity, "Bank Verified Successfully", Toast.LENGTH_SHORT).show()
             }
@@ -386,6 +399,7 @@ class DMT(
         requestData["ifsc"] = dBinding.edtIfsc.text.toString()
         requestData["bank_code"] = ""
         requestData["bank_id"] = bankID
+        requestData["isVerified"] = isVerified
         requestData["api_id"] = apiID
         requestData["recipient_name"] = dBinding.edtName.text.toString()
         requestData["recipient_mobile"] = userSession.getData(Constant.MOBILE).toString()
@@ -444,7 +458,39 @@ class DMT(
     }
 
     private fun openBankListDialog(dBinding: LytDialogAddRecipientBinding, dmtDialog: Dialog) {
-        UtilMethods.dmtBankList(activity, object : MCallBackResponse {
+        UtilMethods.dmtBankList(activity,apiID,object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: DMTBankListResponse = Gson().fromJson(message, DMTBankListResponse::class.java)
+                if (response.data.isEmpty()) {
+                    ShowDialog.showDialog(activity, "Unable to Fetch bank List", from, "error", object : MyClick {
+                        override fun onClick() {
+                            dmtDialog.dismiss()
+                            navController.popBackStack()
+                        }
+                    })
+                } else {
+                    if (bankList.isNotEmpty()) {
+                        bankList.clear()
+                    }
+                    bankList.addAll(response.data)
+                    openBankDialog(dBinding)
+                }
+
+            }
+
+            override fun fail(from: String) {
+                ShowDialog.showDialog(activity, "Unable to Fetch bank List", from, "error", object : MyClick {
+                    override fun onClick() {
+                        dmtDialog.dismiss()
+                        navController.popBackStack()
+                    }
+                })
+            }
+        })
+    }
+
+    private fun openBankListBankOneDialog(dBinding: LytDialogAddRecipientBinding, dmtDialog: Dialog) {
+        UtilMethods.BankList(activity,object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: DMTBankListResponse = Gson().fromJson(message, DMTBankListResponse::class.java)
                 if (response.data.isEmpty()) {
@@ -526,7 +572,7 @@ class DMT(
             }
         })
 
-        bankListDialog.setCancelable(false)
+        bankListDialog.setCancelable(true)
         bankListDialog.show()
 
     }

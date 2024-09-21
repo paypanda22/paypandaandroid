@@ -33,6 +33,7 @@ import app.pay.panda.helperclasses.Utils.Companion.showToast
 import app.pay.panda.interfaces.BankListClickListner
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.MyClick
+import app.pay.panda.responsemodels.bankverification.BankVerifictionResponse
 import app.pay.panda.responsemodels.dmtBankList.DMTBankListResponse
 import app.pay.panda.responsemodels.dmtBankList.Data
 import app.pay.panda.responsemodels.verifyBankName.VerifyBankResponse
@@ -87,15 +88,18 @@ class AddPayoutAccount : BaseFragment<FragmentAddPayoutAccountBinding>(FragmentA
 //        return true
 //    }
     override fun addListeners() {
+        binding.ivBack.setOnClickListener{
+            findNavController().popBackStack()
+        }
         //showCustomDialog()
-        /*  val showDialog = DialogOK(requireContext())
+          val showDialog = DialogOK(requireContext())
           showDialog.showForceDialog(
               requireContext(),
               "Coming Soon","",
               lottieResId = R.raw.celebration,
               lottieWidth = 200,
               lottieHeight = 200
-          )*/
+          )
 
         binding.tvValidateBeneficiaryName.setOnClickListener {
             if (bankID.isBlank()) {
@@ -132,7 +136,7 @@ class AddPayoutAccount : BaseFragment<FragmentAddPayoutAccountBinding>(FragmentA
     }
 
     private fun addbank() {
-        UtilMethods.dmtBankList(requireContext(), object : MCallBackResponse {
+        UtilMethods.BankList(requireContext(), object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: DMTBankListResponse =
                     Gson().fromJson(message, DMTBankListResponse::class.java)
@@ -181,12 +185,12 @@ class AddPayoutAccount : BaseFragment<FragmentAddPayoutAccountBinding>(FragmentA
         requestData["remarks"] = "Payout Bank Validation"
         requestData["bankAccount"] = binding.edtAccountNumber.text.toString()
         requestData["user_id"] = token
-        UtilMethods.verifyBankAccount(requireContext(), requestData, object : MCallBackResponse {
+        UtilMethods.bankVerification(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                val response: VerifyBankResponse = Gson().fromJson(message, VerifyBankResponse::class.java)
+                val response: BankVerifictionResponse = Gson().fromJson(message, BankVerifictionResponse::class.java)
                 bankVerified = true
                 binding.tvValidateBeneficiaryName.visibility = GONE
-                // binding.edtName.setText(response.data.data.nameAtBank)
+                 binding.edtName.setText(response.data.bank_account_name)
                 Toast.makeText(requireContext(), "Bank Verified Successfully", Toast.LENGTH_SHORT).show()
             }
 

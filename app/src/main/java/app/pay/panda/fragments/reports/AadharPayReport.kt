@@ -27,6 +27,7 @@ import app.pay.panda.adapters.AadharPayAdapter
 import app.pay.panda.adapters.DmtTransactionListAdapter
 import app.pay.panda.databinding.FragmentAadharPayReportBinding
 import app.pay.panda.databinding.LytDmtFilterBinding
+import app.pay.panda.fragments.SingleAadhaarPayInvoice
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CommonClass
 import app.pay.panda.helperclasses.UserSession
@@ -37,6 +38,7 @@ import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.responsemodels.adharpayresponse.AadharPayResponse
 import app.pay.panda.responsemodels.adharpayresponse.Data
 import app.pay.panda.responsemodels.aepsenquiry.AepsEnquiryResponse
+import app.pay.panda.responsemodels.cmsinvoice.CMSInvoiceResponse
 import app.pay.panda.responsemodels.dmttxnlist.DmtTransactionListResponse
 import app.pay.panda.responsemodels.dmttxnlist.Tran
 import app.pay.panda.retrofit.Constant
@@ -104,7 +106,7 @@ class AadharPayReport : BaseFragment<FragmentAadharPayReportBinding>(FragmentAad
                                 }
 
                                 "2" -> {
-
+                                    openShareReceipt(model[pos]._id)
                                 }
 
                                 else -> {
@@ -156,6 +158,7 @@ class AadharPayReport : BaseFragment<FragmentAadharPayReportBinding>(FragmentAad
             }
         })
     }
+
     private fun openTransactionFilterDialog() {
         val filterDialog: Dialog = Dialog(myActivity)
         val dBinding = LytDmtFilterBinding.inflate(myActivity.layoutInflater)
@@ -235,5 +238,11 @@ class AadharPayReport : BaseFragment<FragmentAadharPayReportBinding>(FragmentAad
     override fun setData() {
 
     }
-
+    private fun openShareReceipt(id: String) {
+        val bottomSheet = SingleAadhaarPayInvoice()
+        val bundle = Bundle()
+        bundle.putString("id", id)
+        bottomSheet.arguments = bundle
+        bottomSheet.show(parentFragmentManager, bottomSheet.tag)
+    }
 }

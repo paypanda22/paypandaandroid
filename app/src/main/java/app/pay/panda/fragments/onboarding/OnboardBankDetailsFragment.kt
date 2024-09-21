@@ -62,7 +62,7 @@ class OnboardBankDetailsFragment : BaseFragment<FragmentOnboardBankDetailsBindin
 
 
         binding.atvBankName.setOnClickListener {
-            UtilMethods.dmtBankList(requireContext(),object:MCallBackResponse{
+            UtilMethods.BankList(requireContext(),object:MCallBackResponse{
                 override fun success(from: String, message: String) {
                     val response:DMTBankListResponse=Gson().fromJson(message,DMTBankListResponse::class.java)
                     if (response.data.isEmpty()){

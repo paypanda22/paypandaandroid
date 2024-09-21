@@ -1,7 +1,7 @@
 package app.pay.panda.interfaces
 
-import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.adapters.DownStreamAdapter
+import app.pay.panda.adapters.DownstreamRetailAdapter
 import app.pay.panda.responsemodels.downstreamresponse.Data
 
 
@@ -10,4 +10,5 @@ interface DownStreamClick {
     fun onTransferMoneyClicked(holder: DownStreamAdapter.ViewHolder, downstramlist: MutableList<Data>, position: Int)
     fun onReverseMoneyClicked(holder: DownStreamAdapter.ViewHolder, downstramlist: MutableList<Data>, position: Int)
     fun onViewReportClicked(holder: DownStreamAdapter.ViewHolder, downstramlist: MutableList<Data>, position: Int)
+
 }

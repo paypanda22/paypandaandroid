@@ -276,7 +276,7 @@ var name=""
                     } else if (!response.data.is_active) {
                         Toast.makeText(requireContext(), "This Service is Not Active For You", Toast.LENGTH_SHORT).show()
                     } else {
-                        if (catId == "206") {
+                        if (catId == "206"|| catId == "207" || catId == "208") {
                             userSession.setData(Constant.MERCHANT_CODE, response.data.merchantCode)
                             sendToAeps(response, catId, title)
                         } else if(response.statusCode.equals("007")){
@@ -350,33 +350,44 @@ var name=""
             }
         })
     }
-    private fun allServices(){
+    private fun allServices() {
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         UtilMethods.allServices(myActivity, token, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: app.pay.panda.responsemodels.allservices.Category =
                     Gson().fromJson(message, app.pay.panda.responsemodels.allservices.Category::class.java)
-                if (!response.error) {
 
-                        val adapter = DynamicServicesAdapter(myActivity, response.data,this@HomeFragment)
+                // First check for a valid response without an error
+                if (!response.error) {
+                    if (!response.data.isNullOrEmpty()) {
+                        // Show recycler view if data exists
+                        val adapter = DynamicServicesAdapter(myActivity, response.data, this@HomeFragment)
                         binding.recyclerView.adapter = adapter
-                        binding.recyclerView.layoutManager = GridLayoutManager(myActivity,4)
-                    binding.llNoData.visibility=View.GONE
-                    binding.recyclerView.visibility=View.VISIBLE
+                        binding.recyclerView.layoutManager = GridLayoutManager(myActivity, 4)
+                        binding.llNoData.visibility = View.GONE
+                        binding.recyclerView.visibility = View.VISIBLE
+                    } else {
+                        // If data is empty, show no data view
+                        binding.llNoData.visibility = View.VISIBLE
+                        binding.recyclerView.visibility = View.GONE
+                    }
                 } else {
+                    // Handle the case where there's an error in the response
                     Toast.makeText(myActivity, response.error.toString(), Toast.LENGTH_SHORT).show()
-                    binding.llNoData.visibility=View.VISIBLE
-                    binding.recyclerView.visibility=View.GONE
+                    binding.llNoData.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
                 }
             }
 
             override fun fail(from: String) {
+                // Handle the failure scenario
                 Toast.makeText(myActivity, from, Toast.LENGTH_SHORT).show()
-                binding.llNoData.visibility=View.VISIBLE
-                binding.recyclerView.visibility=View.GONE
+                binding.llNoData.visibility = View.VISIBLE
+                binding.recyclerView.visibility = View.GONE
             }
         })
     }
+
 
     private fun sendToServiceScreen(response: CheckServiceStatusResponse, catId: String) {
 
@@ -502,8 +513,8 @@ var name=""
     fun processServices(service:String,id:String) {
             when (id.trim()) {
                 "206"->{
-                    startActivity(Intent(myActivity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
-                    myActivity.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+                  /*  startActivity(Intent(myActivity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
+                    myActivity.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)*/
 //            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
 //            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
                     checkService("Aeps Cash Deposit", "206")
@@ -568,19 +579,19 @@ var name=""
                 }
                 "207" -> {
                     // Handle Aeps Bank Withdraw
-  startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
-                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+ /* startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
+                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)*/
 //            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
 //            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-                    checkService("Aeps Cash Deposit", "207")
+                    checkService("Aeps Bank Withdraw", "207")
                     //println("Processing: ${service}")
                 }
                 "208" -> {
-                    startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
-                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+               /*     startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
+                    activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)*/
 //            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
 //            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-                    checkService("Aeps Cash Deposit", "208")
+                    checkService("Aeps Adhaar pay", "208")
                     // Handle Aeps Adhaar pay
 
                    // println("Processing: ${service}")

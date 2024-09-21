@@ -31,9 +31,9 @@ data class Payout(
 )
 
 data class PaymentRequest(
-    val approved: Int,
-    val rejected: Int,
-    val pending: Int
+    val approved: Double ,
+    val rejected: Double ,
+    val pending: Double
 )
 
 data class Wallet(
@@ -69,7 +69,7 @@ data class AdhaarPay(
 
 data class CashWithdrew(
     val success: Int,
-    val pending: Int,
+    val pending: Double ,
     val failed: Int
 )
 

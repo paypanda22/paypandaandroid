@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import app.pay.panda.R
 
 import app.pay.panda.interfaces.RequetWalletClick
-import app.pay.panda.responsemodels.requestList.Request
+import app.pay.panda.responsemodels.walletrequestlistsuper.Request
+
 import com.google.android.material.card.MaterialCardView
 
 class RequestListAdapterDist (
@@ -38,7 +39,7 @@ class RequestListAdapterDist (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val request = list[position]
-        holder.tvRequestedTo.text = list[position].bank
+        holder.tvRequestedTo.text = list[position].requestTo.name
         /*  holder.tvRequestedTo.text=list[position].bank*/
         holder.tvAmount.text = list[position].amount.toString()
         holder.user_type.text = list[position].remark

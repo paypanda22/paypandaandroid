@@ -46,6 +46,8 @@ import app.pay.panda.responsemodels.dmtSettings.DmtApiType
 import app.pay.panda.responsemodels.dmtSettings.DmtSettingsResponse
 import app.pay.panda.responsemodels.dmtcustomer.GetCustomerInfoResponse
 import app.pay.panda.responsemodels.dmtotp.DMTOtpResponse
+import app.pay.panda.responsemodels.recepentupdatelist.RecepentUpdateListResponse
+import app.pay.panda.retrofit.ApiMethods
 import app.pay.panda.retrofit.CommonApiCall
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
@@ -60,6 +62,7 @@ class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate
 
     private var avlLimit = 0
     private var recipients = ArrayList<Data>()
+    private var recipientsupdate = ArrayList<app.pay.panda.responsemodels.recepentupdatelist.Data>()
     private lateinit var dmt: DMT
     private var apiID = ""
     override fun init() {
@@ -166,6 +169,15 @@ class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate
             dmt.openAddBeneficiaryAccount(customerMobile)
 
         }
+        binding.update.setOnClickListener{
+            if(customerMobile==""){
+
+            }else{
+                getBeneficiaryList()
+               // getUpdateBeneficiaryList()
+            }
+
+        }
     }
 
 
@@ -265,7 +277,52 @@ class DMTFragment : BaseFragment<FragmentDMTBinding>(FragmentDMTBinding::inflate
         binding.btnGetBeneficiary.visibility = GONE
         getBeneficiaryList()
     }
+/*fun getUpdateBeneficiaryList(){
+    val token = userSession.getData(Constant.USER_TOKEN).toString()
+    ApiMethods.recipientsListUpdate(requireContext(), token,customerMobile,  apiID, object : MCallBackResponse {
+        override fun success(from: String, message: String) {
+            val response: RecepentUpdateListResponse = Gson().fromJson(message, RecepentUpdateListResponse::class.java)
+            if (!response.error) {
 
+                if (recipientsupdate.isNotEmpty()) {
+                    recipientsupdate.clear()
+                }
+                recipientsupdate.addAll(response.data)
+                val recipientListAdapter = RecipientListAdapter(myActivity, recipients, this@DMTFragment,this@DMTFragment)
+                binding.rvBeneficiaryList.adapter = recipientListAdapter
+                binding.rvBeneficiaryList.layoutManager = LinearLayoutManager(myActivity)
+
+                binding.mcvBeneficiaryList.visibility = VISIBLE
+                binding.rvBeneficiaryList.visibility = VISIBLE
+                binding.lytNoBeneficiary.visibility = GONE
+
+            } else {
+
+
+
+                }
+        }
+
+        override fun fail(from: String) {
+            ShowDialog.bottomDialogTwoButton(myActivity,
+                "ERROR",
+                "Unable to fetch beneficiary list .Try With Different Mobile Number",
+                "error",
+                object : MyClick {
+                    override fun onClick() {
+                        binding.edtCustomerNumber.text?.clear()
+                    }
+                },
+                object : MyClick2 {
+                    override fun onCancel() {
+
+                    }
+                })
+        }
+    })
+
+
+}*/
     fun getBeneficiaryList() {
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         UtilMethods.getBeneficiaryList(requireContext(), customerMobile, token, apiID, object : MCallBackResponse {

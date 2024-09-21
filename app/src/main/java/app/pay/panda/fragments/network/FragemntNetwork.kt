@@ -40,6 +40,7 @@ import app.pay.panda.helperclasses.CommonClass
 
 import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.interfaces.DownStreamClick
+import app.pay.panda.interfaces.DownStreamRetailerClick
 import app.pay.panda.interfaces.MCallBackResponse
 import app.pay.panda.interfaces.UtilityTransactionClick
 import app.pay.panda.responsemodels.downstramdistributer.DonwStreamDistributerResponse
@@ -242,7 +243,34 @@ class FragemntNetwork : BaseFragment<FragmentFragemntNetworkBinding>(FragmentFra
                                 downstramlistDistributer.clear() // Clear existing data
                                 downstramlistDistributer.addAll(response.data) // Add new data
                                 // Set up the nested RecyclerView
-                                val adapter = DownStreamDistributerAdapter(myActivity, downstramlistDistributer)
+                                val clickListner = object : DownStreamRetailerClick {
+                                    override fun onTransferMoneyClicked(
+                                        holder: DownStreamDistributerAdapter.ViewHolder,
+                                        downstramlistDistributer: MutableList<app.pay.panda.responsemodels.downstramdistributer.Data>,
+                                        position: Int
+                                    ) {
+                                        val value = downstramlistDistributer[position]._id
+                                        val refer_id = downstramlistDistributer[position].refer_id
+                                        val balance = downstramlistDistributer[position].main_wallet
+                                        val transferMoneyDialogFragment = TransferMoneyDialogFragment.newInstance(value,refer_id,balance)
+                                        transferMoneyDialogFragment.show(childFragmentManager, "TransferMoneyDialogFragment")
+                                    }
+
+                                    override fun onReverseMoneyClicked(
+                                        holder: DownStreamDistributerAdapter.ViewHolder,
+                                        downstramlistDistributer: MutableList<app.pay.panda.responsemodels.downstramdistributer.Data>,
+                                        position: Int
+                                    ) {
+                                        val value = downstramlistDistributer[position]._id
+                                        val refer_id = downstramlistDistributer[position].refer_id
+                                        val balance = downstramlistDistributer[position].main_wallet
+                                        val reverseMoneyDialogFragment = ReverseMoneyDialogFragment.newInstance(value,refer_id,balance)
+                                        reverseMoneyDialogFragment.show(childFragmentManager, "ReverseMoneyDialogFragment")
+                                    }
+
+
+                                }
+                                val adapter = DownStreamDistributerAdapter(myActivity, downstramlistDistributer,clickListner)
                                binding.recydlerlist.adapter = adapter
                                 binding.recydlerlist.layoutManager = LinearLayoutManager(myActivity)
                                 binding.recydlerlist.visibility = View.VISIBLE

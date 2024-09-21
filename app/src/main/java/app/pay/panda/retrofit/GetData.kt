@@ -11,6 +11,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -49,6 +50,7 @@ interface GetData {
 
     @GET("api/auth/userValidate")
     fun dashBoardData(): Call<JsonObject>
+
 
     @POST("api/verification/pan/verifypanOtp")
     fun verifyPan(@Body obj: Any): Call<JsonObject>
@@ -89,7 +91,10 @@ interface GetData {
     fun submitDocs(@Body obj: Any): Call<JsonObject>
 
     @GET("api/dmt_bank/public/list")
-    fun dmtBankList(): Call<JsonObject>
+    fun dmtBankList( @Query("api_id") apiId: String): Call<JsonObject>
+
+    @GET("api/dmt_bank/public/bankList/all")
+    fun BankList():Call<JsonObject>
 
     @POST("api/verification/bankAccountSave")
     fun saveBankDetails(@Body obj: Any): Call<JsonObject>
@@ -148,7 +153,8 @@ interface GetData {
     @POST("api/auth/mb/login/check")
     fun passwordCheck(@Body obj: Any): Call<JsonObject>
 
-    @PUT("api/auth/mb/resetPassword")
+  /*  @PUT("api/auth/mb/resetPassword")*/
+    @PUT("api/auth/v1/resetPassword")
     fun forgetPassword(@Body obj: Any): Call<JsonObject>
 
     @GET("api/bank/public")
@@ -317,16 +323,19 @@ interface GetData {
     @POST("api/auth/fogotPassVerifyByEmail")
     fun forgetPasswordOtpEmail(@Body obj:Any):Call<JsonObject>
 
-    @POST("api/auth/forgotPassVerifyByMobile")
+   /* @POST("api/auth/forgotPassVerifyByMobile")*/
+      @POST("api/auth/fogotPassVerifyByMobile")
     fun forgetPasswordOtpMobile(@Body obj:Any):Call<JsonObject>
 
     @POST("api/auth/onboardingRequest")
     fun registrationRequest(@Body obj:Any):Call<JsonObject>
 
     @GET("api/auth/generateOtpForTpin")
+ /*   @GET("api/tpin/otpfortpin")*/
     fun generateOtpForTPin():Call<JsonObject>
 
     @POST("api/auth/varifyOtpForTpin")
+  /*  @POST("api/tpin/varifyOtpForTpin")*/
     fun verifyTPinOtp(@Body obj: Any):Call<JsonObject>
 
     @POST("api/auth/genNewTpin")
@@ -409,11 +418,14 @@ interface GetData {
     @POST("api/auth/mb/login/resendOtp")
     fun resendOTP(@Body obj: Any): Call<JsonObject>
 
+    @POST("api/auth/resentOtpForgotPass")
+    fun resendforgetOTP(@Body obj: Any): Call<JsonObject>
+
     @PUT("api/paymentrequesttouser/transfer")
     fun paymentRequestToUser(@Body obj: Any): Call<JsonObject>
 
-    //@POST("api/paymentRequestToUser/admin")
-    @POST("api/paymentRequestToUser/user/all")
+    @POST("api/paymentRequestToUser/admin")
+    //@POST("api/paymentRequestToUser/user/all")
     fun paymentRequestToAdmin(@Body obj: Any): Call<JsonObject>
 
 
@@ -421,8 +433,9 @@ interface GetData {
 
     @GET("api/auth/resendOtpForTpin")
     fun resendOtpForTPin(): Call<JsonObject>
-    @GET("api/auth/resendOtp")
-    fun resendOtpTPin(@Body obj: Any): Call<JsonObject>
+
+    @POST("api/auth/resendOtp")
+    fun resendSignupOTP(@Body obj: Any): Call<JsonObject>
 
 
     @GET("api/package/public/{id}")
@@ -480,6 +493,11 @@ interface GetData {
 
     @POST("api/adhaarPay/Public")
     fun aadharPayReport(@Body obj:Any): Call<JsonObject>
+
+@GET("api/adhaarPay/invoice/{id}")
+fun aadhaarPayInvoice(@Path("id") id: String):Call<JsonObject>
+
+
     @POST("api/aepswallet/public/filter")
     fun aepswalletReport(@Body obj:Any): Call<JsonObject>
 
@@ -537,5 +555,32 @@ interface GetData {
 
 
 
+    //tpin
+    @POST("api/tpin/addTpin")
+    fun addTpin(
+        @Body obj: Any,
+        @Header("rsaendata") rsaendata: String,
+    ): Call<JsonObject>
+
+    @PUT("api/tpin/changeTpin")
+    fun changeTpin(@Body obj:Any): Call<JsonObject>
+
+    @GET("api/tpin/checkTpin")
+    fun checkTpin(@Query("userId") userId: String?, @Query("tpin") tpin: String?, ): Call<JsonObject>
+
+    @GET("api/tpin/otpfortpin")
+    fun otpfortpin(@Query("userId") userId: String?, ): Call<JsonObject>
+
+    @GET("api/tpin/varifyOtpForTpin")
+    fun varifyOtpForTpin(@Query("userId") userId: String?, @Query("otp") otp: String?, ): Call<JsonObject>
+
+    @GET("api/tpin/resendotpfortpin")
+    fun resendotpfortpin(@Query("userId") userId: String?, ): Call<JsonObject>
+
+    @GET("api/tpin/isTpin")
+    fun isTpin(@Query("userId") userId: String?, ): Call<JsonObject>
+
+    @GET("api/eko/recipientsListUpdate")
+    fun recipientsListUpdate(@Query("mobileNo") mobileNo: String?,@Query("api_id") api_id: String? ): Call<JsonObject>
 
 }

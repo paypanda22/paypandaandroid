@@ -52,6 +52,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
     private lateinit var dmtTxnAdapter: DmtTransactionListAdapter
     private var customerMobile = ""
     private var accountNumber = ""
+    private var search = ""
     private var count = 25
     override fun init() {
         nullActivityCheck()
@@ -60,11 +61,11 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
         binding.rvDmtTransactions.visibility = GONE
         binding.llNoData.visibility = GONE
         binding.imageView.visibility = VISIBLE
-        getTransactionList(start_date, end_date, count);
+        getTransactionList(start_date, end_date, count,search);
 
     }
 
-    private fun getTransactionList(startDate: String, endDate: String, count: Int) {
+    private fun getTransactionList(startDate: String, endDate: String, count: Int,search:String) {
 
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         val requestData = hashMapOf<String, Any?>()
@@ -74,6 +75,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
         requestData["min_amt"] = 0
         requestData["max_amt"] = 0
         requestData["start_date"] = startDate
+        requestData["search"] = search
         requestData["end_date"] = endDate
 
         UtilMethods.dmtTransactionList(requireContext(), requestData, object : MCallBackResponse {
@@ -220,7 +222,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
         UtilMethods.dmtTxnEnquiry(requireContext(), model._id.toString(), token, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: DmtTxnEnqResponse = Gson().fromJson(message, DmtTxnEnqResponse::class.java)
-                getTransactionList(start_date, end_date, count)
+                getTransactionList(start_date, end_date, count,"")
                // getTransactionList(start_date, end_date, count);
                 if (!response.error) {
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
@@ -389,7 +391,7 @@ private fun openViewDetailDialog(model: Tran){
                     if (edtCustomerNumber.text.toString().isNotEmpty()) customerMobile = edtCustomerNumber.text.toString()
                     if (edtAccountNumber.text.toString().isNotEmpty()) accountNumber = edtAccountNumber.text.toString()
                 }
-                getTransactionList(start_date, end_date, count);
+                getTransactionList(start_date, end_date, count,dBinding.txnId.text.toString());
             }
             filterDialog.dismiss()
         }

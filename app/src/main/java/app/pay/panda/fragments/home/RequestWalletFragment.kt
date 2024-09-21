@@ -38,6 +38,7 @@ import app.pay.panda.retrofit.UtilMethods
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
 import java.io.File
+import java.time.LocalDate
 
 
 class RequestWalletFragment : BaseFragment<FragmentRequestWalletBinding>(FragmentRequestWalletBinding::inflate) {
@@ -120,7 +121,10 @@ class RequestWalletFragment : BaseFragment<FragmentRequestWalletBinding>(Fragmen
         CommonClass.getDashBoardData(requireActivity(), userSession)
         binding.tvCurrBalance.text = userSession.getData(Constant.MAIN_WALET).toString()
         getTransferToList()
-       paymentDate= CommonClass.showDatePickerDialog(myActivity, binding.edtPaymentDate).toString()
+        val currentDate = LocalDate.now().toString()  // Format will be "yyyy-MM-dd"
+        binding.edtPaymentDate.setText(currentDate)
+        paymentDate= binding.edtPaymentDate.setText(currentDate).toString()
+    //   paymentDate= CommonClass.showDatePickerDialog(myActivity, binding.edtPaymentDate).toString()
     }
 
     private fun getTransferToList() {

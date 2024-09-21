@@ -25,7 +25,7 @@ class DynamicServicesAdapter(
 ) :
     RecyclerView.Adapter<DynamicServicesAdapter.ViewHolder>() {
     // Map of service names to custom icons
-    private val serviceIcons = mapOf(
+  /*  private val serviceIcons = mapOf(
         "Aeps Cash Deposit" to R.drawable.money_currency,
         "Credit Card" to R.drawable.credit_card,
         "Electricity" to R.drawable.ic_electricity_new,
@@ -59,7 +59,7 @@ class DynamicServicesAdapter(
         "Aeps Adhaar Pay" to R.drawable.aadhaar_logo_svg,
 
         // Add more service names and corresponding icons
-    )
+    )*/
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val iconImage: ImageView = itemView.findViewById(R.id.icon_image)
         val iconText: TextView = itemView.findViewById(R.id.icon_text)
@@ -72,21 +72,21 @@ class DynamicServicesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val serviceName = iconItems[position].service_name.toString()
-        val iconUrl = iconItems[position].icon
+        val iconUrl = iconItems[position].icon.toString()
 
         // Check if there's a custom icon for this service name
-        val customIcon = serviceIcons[serviceName]
+      /*  val customIcon = serviceIcons[serviceName]
 
         if (customIcon != null) {
             // Set the custom icon based on the service name
             holder.iconImage.setImageResource(customIcon)
-        } else if (!iconUrl.isNullOrEmpty()) {
+        } else if (!iconUrl.isNullOrEmpty()) {*/
             // Load the icon using MyGlide if URL is available
             MyGlide.with(activity, Uri.parse(Constant.PIMAGE_URL + iconUrl), holder.iconImage)
-        } else {
+       /* } else {
             // Set a default icon if no URL or custom icon is found
             holder.iconImage.setImageResource(R.drawable.ic_no_txn)
-        }
+        }*/
 
         // Set the service name text
         holder.iconText.text = serviceName

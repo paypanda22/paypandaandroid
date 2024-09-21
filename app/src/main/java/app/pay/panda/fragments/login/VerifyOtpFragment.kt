@@ -45,6 +45,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
     private lateinit var entityType: String
     private lateinit var type: String
     private lateinit var password: String
+    private lateinit var Cpassword: String
     private lateinit var countDownTimer: CountDownTimer
     var timeLeftInMillis: Long = 60000L
     var isTimerRunning: Boolean = false
@@ -65,6 +66,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
         entityType = arguments?.getString("entityType").toString()
         type = arguments?.getString("type").toString()
         password = arguments?.getString("password").toString()
+        Cpassword = arguments?.getString("Cpassword").toString()
         refID = arguments?.getString("refID").toString()
         regEmail = arguments?.getString("regEmail") ?: ""
         user_type_id = arguments?.getString("user_type_id") ?: ""
@@ -155,7 +157,12 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
             } else {
                 timeLeftInMillis = 60000
                 setTimer()
-                resendOTP("phone",entity)
+                if(type=="login"){
+                    resendOTP("phone",entity)
+                }else{
+                    resendforgetOTP()
+                }
+
             }
         }
         binding.ivBack.setOnClickListener { findNavController().popBackStack() }
@@ -234,7 +241,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
         val requestData = hashMapOf<String, Any?>()
         requestData["user_id"] = refID
         requestData["password"] = password
-        requestData["repassword"] = password
+        requestData["repassword"] = Cpassword
         UtilMethods.forgetPassword(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: ForgetPasswordResponse = Gson().fromJson(message, ForgetPasswordResponse::class.java)
@@ -276,6 +283,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
                     val createSession = response.data?.let { userSession.createUserSession(it) }
                     if (createSession == true) {
                         userSession.setData(Constant.USER_TYPE_NAME,response.data.user_type_name.toString())
+                        userSession.setData(Constant.TPINSTATUS,response.data.Tpin_status.toString())
                         sendToMainScreen();
                     } else {
                         Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
@@ -352,6 +360,40 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
             }
         })
     }
+
+    private fun resendforgetOTP() {
+
+        val requestData = hashMapOf<String, Any?>()
+        requestData["user_id"] = refID
+
+
+        UtilMethods.resendforgetOTP(requireContext(), requestData, refID,object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: NewLoginResponse =
+                    Gson().fromJson(message, NewLoginResponse::class.java)
+                if (response.error == false) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Otp send successfully to your mobile number",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Unable to Send Otp to your mobile",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            }
+
+            override fun fail(from: String) {
+                showToast(requireContext(), from)
+            }
+        })
+    }
+
         override fun onPause() {
         super.onPause()
         if (isTimerRunning) {

@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -33,6 +34,7 @@ import app.pay.panda.fragments.RefundPolicyFragment
 import app.pay.panda.fragments.TermsAndConditions
 import app.pay.panda.helperclasses.ActivityExtensions
 import app.pay.panda.helperclasses.CustomProgressBar
+import app.pay.panda.helperclasses.GetKeyHash
 import app.pay.panda.helperclasses.ShowDialog
 import app.pay.panda.helperclasses.UserSession
 import app.pay.panda.helperclasses.Utils.Companion.showToast
@@ -42,6 +44,7 @@ import app.pay.panda.interfaces.MyClick2
 import app.pay.panda.interfaces.StateListClickListner
 import app.pay.panda.responsemodels.CheckSponsorCode.CheckSponsorResponse
 import app.pay.panda.responsemodels.chkmobile.CheckMobileResponse
+import app.pay.panda.responsemodels.register.RegisterResponse
 import app.pay.panda.responsemodels.registerOtp.RegisterOtpResponse
 import app.pay.panda.responsemodels.reqestreg.ReqRegistrationResponse
 import app.pay.panda.responsemodels.statelist.StateListResponse
@@ -64,8 +67,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private var refID = ""
     private var userId = ""
     private var selectedUserTypeId: String? = null
-
-    private var mobileVerified = false
+    private var mobileToken=""
+    private var mobileVerified = "0"
     private var sponsorverified = false
     private var mobile = ""
     private var isReferral = 1
@@ -82,6 +85,30 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         mobile = arguments?.getString("mobile") ?: ""
         if (mobile.isNotEmpty()) {
             binding.edtRegMobile.setText(mobile)
+            if (binding.edtRegMobile.text.toString().length == 10) {
+                if (mobileVerified=="0") {
+                    if (ActivityExtensions.isValidMobile(binding.edtRegMobile.text.toString())) {
+                        checkMobile("+91" + binding.edtRegMobile.text.toString())
+                    } else {
+                        binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                            R.drawable.ic_phone_base,
+                            0,
+                            R.drawable.ic_cancel_red,
+                            0
+                        )
+                    }
+                } else {
+
+                }
+            }else{
+                binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_phone_base,
+                    0,
+                    0,
+                    0
+                )
+
+            }
         }
         getUseType()
 
@@ -169,25 +196,31 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (binding.edtRegMobile.text.toString().length == 10) {
-                    if (ActivityExtensions.isValidMobile(binding.edtRegMobile.text.toString())) {
-                        checkMobile("+91" + binding.edtRegMobile.text.toString())
+
+
+                    if (binding.edtRegMobile.text.toString().length == 10) {
+                        if (mobileVerified=="0") {
+                        if (ActivityExtensions.isValidMobile(binding.edtRegMobile.text.toString())) {
+                            checkMobile("+91" + binding.edtRegMobile.text.toString())
+                        } else {
+                            binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                                R.drawable.ic_phone_base,
+                                0,
+                                R.drawable.ic_cancel_red,
+                                0
+                            )
+                        }
                     } else {
+
+                    }
+                }else{
                         binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
                             R.drawable.ic_phone_base,
                             0,
-                            R.drawable.ic_cancel_red,
+                            0,
                             0
                         )
-                    }
-                } else {
-                    binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
-                        R.drawable.ic_phone_base,
-                        0,
-                        0,
-                        0
-                    )
-                    mobileVerified = false
+
                 }
             }
 
@@ -197,14 +230,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         })
 
 
-           binding.edtSponsorMobile.addTextChangedListener(object : TextWatcher {
+          /* binding.edtSponsorMobile.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (binding.edtSponsorMobile.text.toString().length == 10) {
-               //     checkSponsorCode(binding.edtSponsorMobile.text.toString())
+                  //  checkSponsorCode(binding.edtSponsorMobile.text.toString())
                 } else {
                     sponsorverified = true
                 }
@@ -214,7 +247,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             override fun afterTextChanged(s: Editable?) {
 
             }
-        })
+        })*/
        /* binding.edtEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // You can leave this empty
@@ -253,14 +286,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 } else {
                     // Check if edtSponsorMobile is visible
                     if (binding.edtSponsorMobile.visibility == View.VISIBLE) {
-                        if (!sponsorverified) {
+                        if (binding.edtSponsorMobile.text.toString().equals("")) {
                             binding.edtSponsorMobile.error = "Enter a Valid Refer Id"
                         } else {
-
+                            register()
+                          //  sendOtp(binding.edtRegMobile.text.toString())
                         }
                     } else {
+                        register()
                         // edtSponsorMobile is not visible, just send the OTP
-                        checkEmail(binding.edtEmail.text.toString())
+                        //checkEmail(binding.edtEmail.text.toString())
 
                     }
                 }
@@ -368,6 +403,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         requestData["mobileNo"] = binding.edtRegMobile.text.toString()
         requestData["latitude"] = userSession.getData(Constant.M_LAT)
         requestData["longitude"] = userSession.getData(Constant.M_LONG)
+        requestData["state"] =binding.edtState.text.toString()
         ApiMethods.registrationRequest(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: ReqRegistrationResponse =
@@ -379,7 +415,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         "success",
                         object : MyClick {
                             override fun onClick() {
-                                findNavController().navigate(R.id.action_verifyRegistrationOtp_to_loginFragment)
+                                findNavController().navigate(R.id.loginFragment)
                             }
                         })
                 } else {
@@ -442,6 +478,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 val response: CheckMobileResponse =
                     Gson().fromJson(message, CheckMobileResponse::class.java)
                 if (response.data.isExist) {
+
                     ShowDialog.bottomDialogSingleButton(myActivity,
                         "Mobile is Already Registered",
                         "This mobile number is already registered with us. Kindly Login to your account",
@@ -452,11 +489,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         })
                 } else {
                     binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+
                         R.drawable.ic_phone_base,
                         0,
                         R.drawable.ic_check_green,
                         0
                     )
+                    mobileVerified = "1"
+
                     sendOtp(binding.edtRegMobile.text.toString())
                 }
             }
@@ -498,6 +538,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         bundle.putString("name", binding.edtName.text.toString())
                         bundle.putString("refID", binding.edtSponsorMobile.text.toString())
                         bundle.putString("state",stateID)
+                        bundle.putString("mobileVerified","0")
                         findNavController().navigate(
                             R.id.action_registerFragment_to_verifyRegistrationOtp,
                             bundle
@@ -661,4 +702,131 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             return view
         }
     }
+
+    private fun register() {
+        val requestData = hashMapOf<String, Any?>()
+        requestData["email"] = binding.edtEmail.text.toString()
+        requestData["mobile"] =mobileToken
+        requestData["password"] =  binding.edtRegMobile.text.toString()
+        requestData["user_type_id"] = selectedUserTypeId
+        requestData["name"] = binding.edtName.text.toString()
+        requestData["refer_id"] = binding.edtSponsorMobile.text.toString()
+        requestData["state"] = stateID
+        val getHash = GetKeyHash(myActivity)
+        val finalData = getHash.getHash(requestData)
+        UtilMethods.register(myActivity, finalData, object : MCallBackResponse {
+            override fun success(from: String, message: String) {
+                val response: RegisterResponse = Gson().fromJson(message, RegisterResponse::class.java)
+                if (response.error==false){
+                    ShowDialog.bottomDialogSingleButton(myActivity,
+                        "Account Created Successfully",
+                        "You account has been created successfully.Press OK to proceed to login screen",
+                        "success",
+                        object : MyClick {
+                            override fun onClick() {
+                                findNavController().navigate(R.id.loginFragment)
+                            }
+                        })
+                }else{
+                    response.message?.let {
+                        ShowDialog.bottomDialogSingleButton(myActivity,
+                            "Account Not Created",
+                            it,
+                            "error",
+                            object : MyClick {
+                                override fun onClick() {
+
+                                }
+                            })
+                    }
+                }
+
+            }
+
+            override fun fail(from: String) {
+                ShowDialog.bottomDialogSingleButton(myActivity,
+                    "Account Not Created",
+                    from,
+                    "error",
+                    object : MyClick {
+                        override fun onClick() {
+                            findNavController().popBackStack()
+                        }
+                    })
+            }
+        })
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Listen for mobileToken from parent fragment or activity
+        parentFragmentManager.setFragmentResultListener("mobileTokenKey", viewLifecycleOwner) { _, bundle ->
+             mobileToken = bundle.getString("mobileToken", "")
+
+            Log.d("RegisterFragment", "Received Mobile Token: $mobileToken")
+
+        }
+        parentFragmentManager.setFragmentResultListener("mobileVerifiedKey", viewLifecycleOwner) { _, bundle ->
+            mobileVerified = bundle.getString("mobileVerified", "0") // Default value is "0"
+
+            if (mobileVerified == "1") {
+                // Mobile number is verified, show green check icon
+                binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_phone_base,
+                    0,
+                    R.drawable.ic_check_green,
+                    0
+                )
+                Toast.makeText(requireContext(), "Mobile Verified!", Toast.LENGTH_SHORT).show()
+
+                // Attach TextWatcher to detect if the user edits the verified mobile number
+                binding.edtRegMobile.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        if (binding.edtRegMobile.text.toString().length == 10) {
+                            // If the user edits the number, reset mobileVerified to "0"
+                            if (mobileVerified == "1") {
+                                mobileVerified = "0"
+                                // Change the icon to red cancel to show it's not verified
+                                binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                                    R.drawable.ic_phone_base,
+                                    0,
+                                    R.drawable.ic_cancel_red,
+                                    0
+                                )
+                               // Toast.makeText(requireContext(), " verify again!", Toast.LENGTH_SHORT).show()
+
+                                // Trigger the OTP verification process again
+                                checkMobile("+91" + binding.edtRegMobile.text.toString())
+                            }
+                        } else {
+                            // Reset the right drawable if the number is not complete
+                            binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                                R.drawable.ic_phone_base,
+                                0,
+                                0,
+                                0
+                            )
+                        }
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {}
+                })
+            } else {
+                // Mobile number is not verified, show red cancel icon
+                Toast.makeText(requireContext(), "Mobile Not Verified!", Toast.LENGTH_SHORT).show()
+                binding.edtRegMobile.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_phone_base,
+                    0,
+                    R.drawable.ic_cancel_red,
+                    0
+                )
+            }
+
+    }
+    }
+
+
+
 }

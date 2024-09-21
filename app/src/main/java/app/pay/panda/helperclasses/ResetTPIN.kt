@@ -1,10 +1,13 @@
 package app.pay.panda.helperclasses
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.CountDownTimer
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
@@ -25,7 +28,10 @@ import com.google.gson.Gson
 class ResetTPIN(
     private val myActivity:Activity,
     private val userSession: UserSession) {
-
+    val tPinOtpDialogBinding = OtpDialogBinding.inflate(myActivity.layoutInflater)
+    private lateinit var countDownTimer: CountDownTimer
+    var timeLeftInMillis: Long = 60000L
+    var isTimerRunning: Boolean = false
     fun resetTPin() {
         val tPinStatus=userSession.getData(Constant.TPINSTATUS).toString()
         if (tPinStatus=="NP"){
@@ -37,6 +43,10 @@ class ResetTPIN(
             })
         }else if(tPinStatus=="OV"){
             openResetOtpDialog()
+        }else if (tPinStatus == "CP"){
+
+        }else{
+
         }
     }
 
@@ -47,6 +57,7 @@ class ResetTPIN(
                 val response:GenerateTPinOtpResponse=Gson().fromJson(message,GenerateTPinOtpResponse::class.java)
                 if(response.error==false){
                     openTPinOtpDialog()
+                    setTimer()
                 }else{
                     showToast(myActivity,response.message)
                 }
@@ -61,7 +72,7 @@ class ResetTPIN(
 
     private fun openTPinOtpDialog() {
         val tPinOtpDialog: Dialog = Dialog(myActivity)
-        val tPinOtpDialogBinding = OtpDialogBinding.inflate(myActivity.layoutInflater)
+       //  tPinOtpDialogBinding = OtpDialogBinding.inflate(myActivity.layoutInflater)
         tPinOtpDialogBinding.root.background =
             ContextCompat.getDrawable(myActivity, R.drawable.curved_background_with_shadow)
         tPinOtpDialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
@@ -77,7 +88,6 @@ class ResetTPIN(
         tPinOtpDialog.setCancelable(false)
         tPinOtpDialog.show()
 
-
         tPinOtpDialogBinding.btnSubmit.setOnClickListener {
             if (tPinOtpDialogBinding.edtOtpLogin.text.toString().length < 6) {
                 showToast(myActivity, "Enter Otp Received On Your Mobile")
@@ -86,7 +96,11 @@ class ResetTPIN(
             }
         }
         tPinOtpDialogBinding.tvResendOtp.setOnClickListener{
-            resendOtpTPin()
+            if (isTimerRunning) {
+                showToast(myActivity,"You can Resend OTP After One Minute")
+            } else {
+                resendOtpTPin()
+            }
         }    }
 
     private fun verifyTPinOtp(tPinOtpDialogBinding: OtpDialogBinding, tPinOtpDialog: Dialog) {
@@ -99,6 +113,7 @@ class ResetTPIN(
                 val response:GenerateTPinOtpResponse=Gson().fromJson(message,GenerateTPinOtpResponse::class.java)
                 if(response.error==false){
                     tPinOtpDialog.dismiss()
+                    userSession.setData(Constant.TPINSTATUS, "OV")
                     openResetOtpDialog()
                 }else{
                     showToast(myActivity,response.message)
@@ -116,7 +131,7 @@ class ResetTPIN(
         val token=userSession.getData(Constant.USER_TOKEN).toString()
         val requestData= hashMapOf<String,Any?>()
         requestData["user_id"]=token
-        ApiMethods.resendOtpTPin(myActivity,token,requestData,object:MCallBackResponse{
+        UtilMethods.resendOtpForTPin(myActivity,token,object:MCallBackResponse{
             override fun success(from: String, message: String) {
                 val response: TransactionPinResponse =Gson().fromJson(message,TransactionPinResponse::class.java)
                 if(response.error==false){
@@ -174,6 +189,7 @@ class ResetTPIN(
                 if (response.error==false){
                     showToast(myActivity,response.message)
                     createTPinDialog.dismiss()
+                    userSession.setData(Constant.TPINSTATUS, "CP")
                 }else{
                     showToast(myActivity,response.message)
                 }
@@ -185,4 +201,50 @@ class ResetTPIN(
         })
 
     }
+
+
+    fun setTimer() {
+        tPinOtpDialogBinding.tvTimer.visibility = View.VISIBLE
+        tPinOtpDialogBinding.tvResendOtp.setTextColor(
+            ContextCompat.getColor(
+                myActivity, R.color.bggrey_dark
+            )
+        )
+        countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeftInMillis = millisUntilFinished
+                updateTimer()
+            }
+
+            override fun onFinish() {
+                tPinOtpDialogBinding.tvResendOtp.isEnabled = true
+                tPinOtpDialogBinding.tvTimer.visibility = View.GONE
+                tPinOtpDialogBinding.tvResendOtp.setTextColor(
+                    ContextCompat.getColor(
+                        myActivity, R.color.colorPrimaryDark
+                    )
+                )
+                isTimerRunning = false
+            }
+        }
+        countDownTimer.start()
+        isTimerRunning = true
+    }
+
+    private fun cancelTimer() {
+        if (isTimerRunning) {
+            countDownTimer.cancel()
+        }
+
+    }
+
+    private fun updateTimer() {
+        val minutes = timeLeftInMillis / 1000 / 60
+        val seconds = timeLeftInMillis / 1000 % 60
+
+        @SuppressLint("DefaultLocale") val timeLeftFormatted =
+            String.format("%02d:%02d", minutes, seconds)
+        tPinOtpDialogBinding.tvTimer.text = timeLeftFormatted
+    }
+
 }

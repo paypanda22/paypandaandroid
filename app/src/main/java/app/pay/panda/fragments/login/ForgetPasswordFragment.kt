@@ -123,7 +123,7 @@ class ForgetPasswordFragment : BaseFragment<FragmentForgetPasswordBinding>(Fragm
                     if (!ActivityExtensions.isValidMobile(binding.edtRegMobile.text.toString())){
                         binding.edtRegMobile.error="Enter a Valid Mobile"
                     }else{
-                        progressBar.showProgress(requireContext())
+                      //  progressBar.showProgress(requireContext())
                         openOtpDialog("phone","+91"+binding.edtRegMobile.text.toString())
                     }
 
@@ -145,7 +145,7 @@ class ForgetPasswordFragment : BaseFragment<FragmentForgetPasswordBinding>(Fragm
             override fun success(from: String, message: String) {
                 val response: CheckMobileResponse = Gson().fromJson(message, CheckMobileResponse::class.java)
                 if (response.data.isExist) {
-                    openOtpDialog("email", binding.edtRegEmail.text.toString())
+                   // openOtpDialog("email", binding.edtRegEmail.text.toString())
                 } else {
                    showToast(requireContext(),response.message)
                 }
@@ -192,6 +192,7 @@ class ForgetPasswordFragment : BaseFragment<FragmentForgetPasswordBinding>(Fragm
                             bundle.putString("entityType", loginType)
                             bundle.putString("type", "forget_password")
                             bundle.putString("password", binding.edtPassword.text.toString())
+                            bundle.putString("Cpassword", binding.edtConfirmPassword.text.toString())
                             bundle.putString("refID", refID)
                             findNavController().navigate(R.id.action_forgetPasswordFragment_to_verifyOtpFragment, bundle)
                         } else {

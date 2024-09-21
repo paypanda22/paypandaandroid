@@ -55,6 +55,9 @@ class AdhaarVerificationFragment : BaseFragment<FragmentAdhaarVerificationBindin
                     if (ActivityExtensions.isValidAadhaar(binding.edtAdhaarNumber.text.toString())) {
                         binding.edtAdhaarNumber.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_green, 0)
                     }
+                }else{
+                    binding.edtAdhaarNumber.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+
                 }
             }
 

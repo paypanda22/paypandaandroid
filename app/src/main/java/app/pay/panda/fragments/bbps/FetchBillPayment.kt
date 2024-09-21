@@ -5,7 +5,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
 import android.text.InputType
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -35,6 +37,7 @@ import app.pay.panda.responsemodels.fetchBill.FetchBillResponse
 import app.pay.panda.responsemodels.getOperators.CustomerParam
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
+import app.pay.panda.reusable.Utills.setOnTextChangedListener
 import com.google.gson.Gson
 
 
@@ -47,6 +50,7 @@ class FetchBillPayment : BaseFragment<FragmentFetchBillPaymentBinding>(FragmentF
     private var paymentAmountExactness = ""
     private var fetchRequirement = ""
     private var catName = ""
+    private var catID = ""
     private lateinit var inputData: MutableList<app.pay.panda.helperclasses.CustomerParam>
     override fun init() {
         nullActivityCheck()
@@ -57,6 +61,7 @@ class FetchBillPayment : BaseFragment<FragmentFetchBillPaymentBinding>(FragmentF
         paymentAmountExactness = arguments?.getString("paymentAmountExactness").toString()
         fetchRequirement = arguments?.getString("fetchRequirement").toString()
         catName = arguments?.getString("catName").toString()
+        catID = arguments?.getString("catID").toString()
 
     }
 
@@ -145,6 +150,29 @@ class FetchBillPayment : BaseFragment<FragmentFetchBillPaymentBinding>(FragmentF
         bottomSheetDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         bottomSheetDialog.window?.attributes?.windowAnimations ?: R.style.DialogAnimationBottom
         bottomSheetDialog.window?.setGravity(Gravity.BOTTOM)
+
+        if (catID == "667e8a8aa0cc9372aaceb009") {
+            dBinding.finalAmount.apply {
+                isFocusable = true
+                isFocusableInTouchMode = true
+                isClickable = true
+                isEnabled = true
+                requestFocus()
+
+                addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        val text = s.toString().trim()
+                        // Disable the button if the text is empty or "0"
+                        dBinding.btnPay.isEnabled = text.isNotEmpty() && text != "0"
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {}
+                })
+            }
+        }
+
         dBinding.opName.text = name
         dBinding.tvBillAmount.text = response.data.billerResponse.amount.toString()
         dBinding.tvCustomerName.text = response.data.billerResponse.customerName

@@ -52,6 +52,7 @@ import app.pay.panda.responsemodels.requestList.Request
 import app.pay.panda.responsemodels.requestList.WalletRequestListResponse
 
 import app.pay.panda.responsemodels.transferTo.Data
+import app.pay.panda.responsemodels.walletrequestlistsuper.WalletRequestListSuperDist
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.gson.Gson
@@ -61,6 +62,7 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
     private lateinit var txnList: MutableList<Request>
+    private lateinit var txnListsuper: MutableList<app.pay.panda.responsemodels.walletrequestlistsuper.Request>
     var adminList: MutableList<app.pay.panda.responsemodels.Request> = mutableListOf()
     private var transferTo = ""
     private var count = 25
@@ -196,14 +198,14 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
             object : MCallBackResponse {
                 override fun success(from: String, message: String) {
                     progressBar.hideProgress()
-                    val response: WalletRequestListResponse = Gson().fromJson(message, WalletRequestListResponse::class.java)
+                    val response: WalletRequestListSuperDist = Gson().fromJson(message, WalletRequestListSuperDist::class.java)
 
                     if (!response.error) {
-                        txnList = mutableListOf()
-                        txnList.addAll(response.data.requestList)
+                        txnListsuper = mutableListOf()
+                        txnListsuper.addAll(response.data.requestList)
 
-                        if (txnList.isNotEmpty()) {
-                            val adapter = RequestListAdapterDist(myActivity, txnList)
+                        if (txnListsuper.isNotEmpty()) {
+                            val adapter = RequestListAdapterDist(myActivity, txnListsuper)
                             binding.rvWalletRequestList.adapter = adapter
                             binding.rvWalletRequestList.layoutManager = LinearLayoutManager(myActivity)
 

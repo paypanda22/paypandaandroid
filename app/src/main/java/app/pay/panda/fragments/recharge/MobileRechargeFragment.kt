@@ -14,6 +14,8 @@ import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -42,6 +44,7 @@ import app.pay.panda.interfaces.TelecomCircleClick
 import app.pay.panda.responsemodels.getNumberDetails.NumberDetailsResponse
 import app.pay.panda.responsemodels.rechargeOperator.Operator
 import app.pay.panda.responsemodels.rechargeOperator.RechargeOperatorResponse
+import app.pay.panda.responsemodels.rechargePlans.RechargePlansResponse
 import app.pay.panda.retrofit.Constant
 import app.pay.panda.retrofit.UtilMethods
 import com.google.gson.Gson
@@ -227,6 +230,8 @@ class MobileRechargeFragment : BaseFragment<FragmentMobileRechargeBinding>(Fragm
                         }
                         operatorList.addAll(response.data.operators)
                         openOperatorListDialog()
+                        val cleanedOperatorNames = response.data.operators.map { cleanOperatorName(it.name) }
+
 
                     }else{
                         showToast(requireContext(),"Unable to Fetch Operator List")
@@ -274,7 +279,8 @@ class MobileRechargeFragment : BaseFragment<FragmentMobileRechargeBinding>(Fragm
                 if (!response.error){
                     fetchNumberDetails=false
                     binding.edtCircleName.setText(response.data.Circle)
-                    binding.edtOperatorName.setText(response.data.Operator.substring(0,12))
+                    val cleanedOperatorName = cleanOperatorName(response.data.Operator)
+                    binding.edtOperatorName.setText(cleanedOperatorName)
                     circleID=response.data.CircleCode
                 }else{
 
@@ -288,6 +294,15 @@ class MobileRechargeFragment : BaseFragment<FragmentMobileRechargeBinding>(Fragm
         })
     }
 
+    private fun cleanOperatorName(operatorName: String): String {
+        return when {
+            operatorName.contains("Reliance Jio", ignoreCase = true) -> "Reliance Jio"
+            operatorName.contains("Airtel", ignoreCase = true) -> "Airtel"
+            operatorName.contains("BSNL", ignoreCase = true) -> "BSNL"
+            operatorName.contains("Vodafone", ignoreCase = true) -> "Vodafone"
+            else -> operatorName // Return as is if no cleaning is required
+        }
+    }
     @SuppressLint("SetTextI18n")
     private fun getCircleList() {
         circleList=TelecomCircle.getTelecomCircles()

@@ -6,8 +6,9 @@ object Constant {
 
     const val MERCHANT_CODE="merchant_Code"
     const val FROM = "from"
-    const val TPINSTATUS = "tpinstatus"
-  // const val base_url = "https://api.paypanda.in/"
+    const val TPINSTATUS = "Tpin_status"
+   //
+   // const val base_url = "https://api.paypanda.in/"
   const val base_url = "https://devapi.paypanda.in/"
     //const val MainBase_URL = "https://devapi.paypandabnk.com/"
 
@@ -64,6 +65,14 @@ object Constant {
     const val SPONSOR_MOBILE_VISIBLE = "sponsor_mobile_visible"
     const val REFERAL_VISIBLE = "referal_visible"
     const val USER_TYPE_NAME = "user_type_name"
+
     const val AES_KEY="d31f454d72ca36e9c645c7ef2b29face23c6413a558dbef00a18fc2a58e4f8db"
     const val AES_IV="6bdf806c2ead6f3983e2042418434426"
+
+ const val AES256CBC_KEY_TPIN = "03ab4a43059239fd13d75987d7dfafda51467e871b87bd3847f01474116d311c"
+  const val AES256CBC_IV_TPIN = "3529f86c41ab1bb8b8f6d788cbb3f6f9"
+
+  const val RSA256_PUBLICKEY = "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBBUuux5GAG/Fm9YoeGJeYr5qT6WFXga3/\npV935e83f01KK+1E/Av6myqwYsmqRG/FuCFeMyv+mlXGIKu5fO3+X18CAwEAAQ==\n-----END PUBLIC KEY-----\n"
+  const val RSA256_PRIVATEKEY  =
+    "-----BEGIN PRIVATE KEY-----\nMIIBVgIBADANBgkqhkiG9w0BAQEFAASCAUAwggE8AgEAAkEFS67HkYAb8Wb1ih4Y\nl5ivmpPpYVeBrf+lX3fl7zd/TUor7UT8C/qbKrBiyapEb8W4IV4zK/6aVcYgq7l8\n7f5fXwIDAQABAkECYINWbxgK8uOdKV7y+PD/OapU4m2t9tU+fMjLvAG0MZHt8y8N\nVwgmKSIKJhIJCJhi0yQ8OfktrXqR2WWPSB2KcQIhA4H1Vkwe1Yy+SxqYIV80kMIg\nleWhKjT0n9ulhPWR/sUpAiEBgn5BMwTzTYFJ2XQvanpLxm5NYKjm3ZtZbbDq6KfV\nSUcCIQGSBGHfcIqRGX0MagG+2wzYLLiPdwkrbj3Hm6IcQ4G5iQIgcUOay97Zho8r\nG0UHWEb6ye4tUvRso+kQ7ip4zTHSOaUCIQCPYrDcX7TBHjL8ymTorezbRm4AcT5l\nL2o97zb984pyGg==\n-----END PRIVATE KEY-----\n"
 }

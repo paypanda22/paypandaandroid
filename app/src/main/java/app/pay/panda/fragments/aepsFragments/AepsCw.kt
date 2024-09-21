@@ -76,11 +76,11 @@ class AepsCw<Context> : BaseFragment<FragmentAepsCwBinding>(FragmentAepsCwBindin
             if (fData.isNotEmpty()) {
                 scanFinger.validateFingerPrint(fData, object : OnClick {
                     override fun onButtonClick() {
-                        if (merchantAuthKey.isNotEmpty() && isMerchantAuthenticated) {
+                        //if (merchantAuthKey.isNotEmpty() && isMerchantAuthenticated) {
                             cashWithdrawal(fData)
-                        } else {
-                            merchantAuth(fData)
-                        }
+                     //   } else {
+                           // merchantAuth(fData)
+                      //  }
 
                     }
                 })
@@ -141,9 +141,9 @@ class AepsCw<Context> : BaseFragment<FragmentAepsCwBinding>(FragmentAepsCwBindin
             override fun fail(from: String) {
                 ShowDialog.bottomDialogSingleButton(myActivity, "Merchant Authentication Failed", from, "error", object : MyClick {
                     override fun onClick() {
-                        isMerchantAuthenticated = false
-                        merchantAuthKey = ""
-                        binding.rlMerchantAuth.visibility = VISIBLE
+                   //     isMerchantAuthenticated = false
+                       // merchantAuthKey = ""
+                      //  binding.rlMerchantAuth.visibility = VISIBLE
                         binding.rlmAuthSuccess.visibility = GONE
                     }
                 })
@@ -202,7 +202,7 @@ class AepsCw<Context> : BaseFragment<FragmentAepsCwBinding>(FragmentAepsCwBindin
         isMerchantAuthenticated = false
         merchantAuthKey = ""
 
-        binding.rlMerchantAuth.visibility = VISIBLE
+        //binding.rlMerchantAuth.visibility = VISIBLE
         binding.rlmAuthSuccess.visibility = GONE
     }
 
@@ -313,11 +313,10 @@ class AepsCw<Context> : BaseFragment<FragmentAepsCwBinding>(FragmentAepsCwBindin
         })
         binding.btnProceed.setOnClickListener {
             if (validate()) {
-                if (merchantAuthKey.isNotEmpty() && isMerchantAuthenticated) {
-                    scanFinger.yourDevicePackage(selectedPackage)
-                } else {
-                    showToast(requireContext(), "Complete Merchant Auth First")
-                }
+                //   if (merchantAuthKey.isNotEmpty() && isMerchantAuthenticated) {
+                scanFinger.yourDevicePackage(selectedPackage)
+            } else {
+                    showToast(requireContext(), "Please Validate Use")
 
             }
 

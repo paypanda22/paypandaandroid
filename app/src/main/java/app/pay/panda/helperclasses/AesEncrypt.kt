@@ -1,5 +1,5 @@
 package app.pay.panda.helperclasses
-import android.util.Base64
+
 import android.util.Log
 import app.pay.panda.retrofit.Constant
 import com.google.gson.Gson
@@ -8,10 +8,13 @@ import javax.crypto.spec.SecretKeySpec
 import javax.crypto.spec.IvParameterSpec
 
 object AesEncrypt {
+
+    // Encrypt object using AES with the given key and IV
     private fun encryptObject(obj: Any, key: String, iv: String): String? {
-        try {
-            val serializedObject = Gson().toJson(obj) // Assuming obj has a proper toJson method
-            Log.e("TAG", "encryptObject: => $serializedObject" )
+        return try {
+            val serializedObject = Gson().toJson(obj)
+            Log.e("TAG", "encryptObject: => $serializedObject")
+
             val keyBytes = hexStringToByteArray(key)
             val ivBytes = hexStringToByteArray(iv)
 
@@ -27,17 +30,20 @@ object AesEncrypt {
             val ivSpec = IvParameterSpec(ivBytes)
             val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec)
+
             val encryptedByteArray = cipher.doFinal(serializedObject.toByteArray(Charsets.UTF_8))
-            return Base64.encodeToString(encryptedByteArray, Base64.DEFAULT)
+            // Convert encrypted bytes to hex string
+            byteArrayToHexString(encryptedByteArray)
         } catch (e: Exception) {
+            Log.e("TAG", "Encryption error: ${e.message}")
             e.printStackTrace()
+            null
         }
-        return null
     }
 
-
+    // Decrypt object using AES with the given key and IV
     fun decryptObject(encryptedData: String, key: String, iv: String): Any? {
-        try {
+        return try {
             val keyBytes = hexStringToByteArray(key)
             val ivBytes = hexStringToByteArray(iv)
 
@@ -49,20 +55,25 @@ object AesEncrypt {
                 throw IllegalArgumentException("Invalid IV length (must be 16 characters in hex)")
             }
 
-            val decodedData = Base64.decode(encryptedData, Base64.DEFAULT)
+            val encryptedBytes = hexStringToByteArray(encryptedData)
             val keySpec = SecretKeySpec(keyBytes, "AES")
             val ivSpec = IvParameterSpec(ivBytes)
             val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
             cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec)
-            val decryptedByteArray = cipher.doFinal(decodedData)
+
+            val decryptedByteArray = cipher.doFinal(encryptedBytes)
             val decryptedString = String(decryptedByteArray, Charsets.UTF_8)
-            return Gson().fromJson(decryptedString, Any::class.java) // Assuming your object type is unknown
+
+            // Deserialize JSON back into an object
+            Gson().fromJson(decryptedString, Any::class.java)
         } catch (e: Exception) {
+            Log.e("TAG", "Decryption error: ${e.message}")
             e.printStackTrace()
+            null
         }
-        return null
     }
 
+    // Convert hex string to byte array
     private fun hexStringToByteArray(hexString: String): ByteArray {
         val len = hexString.length
         val data = ByteArray(len / 2)
@@ -72,14 +83,28 @@ object AesEncrypt {
         return data
     }
 
-    fun encodeObj(obj:Any):Any{
-        val dataStr= encryptObject(obj, Constant.AES_KEY,Constant.AES_IV)
-        val encodeObj= hashMapOf<String,Any?>()
-        encodeObj["encode"]=dataStr
+    // Convert byte array to hex string
+    private fun byteArrayToHexString(bytes: ByteArray): String {
+        val sb = StringBuilder()
+        for (b in bytes) {
+            sb.append(String.format("%02x", b))
+        }
+        return sb.toString()
+    }
+
+    // AES encryption for general objects
+    fun encodeObj(obj: Any): Any {
+        val dataStr = encryptObject(obj, Constant.AES_KEY, Constant.AES_IV)
+        val encodeObj = hashMapOf<String, Any?>()
+        encodeObj["encode"] = dataStr
         return encodeObj
     }
 
-
-
-
+    // AES encryption for TPIN
+    fun encodeaesObj(obj: Any): Any {
+        val dataStr = encryptObject(obj, Constant.AES256CBC_KEY_TPIN, Constant.AES256CBC_IV_TPIN)
+        val encodeObj = hashMapOf<String, Any?>()
+        encodeObj["enData"] = dataStr
+        return encodeObj
+    }
 }
