@@ -11,8 +11,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/_10sdp">
+      >
+
+        <RelativeLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimaryDark_light">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:contentDescription="@string/splash_logo"
+                android:src="@drawable/left"
+                app:tint="@color/white" />
+
+            <TextView
+                style="@style/mostserrat_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:text="@string/support_tickets"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+            <ImageView
+                android:id="@+id/report"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_20sdp"
+
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/back"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/transaction_history"
+                app:tint="@color/white" />
+
+        </RelativeLayout>
         <LinearLayout
+            android:padding="@dimen/_10sdp"
             android:id="@+id/llMainContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

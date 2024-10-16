@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/operatorListFragment2"
-        android:name="app.pay.panda.fragments.bbps.OperatorListFragment"
+        android:name="app.pay.paypanda.fragments.bbps.OperatorListFragment"
         android:label="fragment_operator_list"
         tools:layout="@layout/fragment_operator_list" >
         <action
@@ -16,12 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/bbpsStartFragment"
-        android:name="app.pay.panda.fragments.bbps.BbpsStartFragment"
+        android:name="app.pay.paypanda.fragments.bbps.BbpsStartFragment"
         android:label="fragment_bbps_start"
         tools:layout="@layout/fragment_bbps_start" />
     <fragment
         android:id="@+id/fetchBillPayment"
-        android:name="app.pay.panda.fragments.bbps.FetchBillPayment"
+        android:name="app.pay.paypanda.fragments.bbps.FetchBillPayment"
         android:label="fragment_fetch_bill_payment"
         tools:layout="@layout/fragment_fetch_bill_payment" />
 </navigation>

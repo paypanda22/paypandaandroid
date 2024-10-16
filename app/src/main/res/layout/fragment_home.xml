@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimaryDark_light"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.home.HomeFragment">
     <RelativeLayout
@@ -388,20 +388,40 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
-
                 <ImageView
+
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_46ssp"
+                    android:layout_height="@dimen/_30ssp"
                     android:src="@drawable/horizontal_logo"/>
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:src="@drawable/pay6"
+                    android:scaleType="centerCrop"/>
+                <ImageView
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_width="380dp"
+                    android:visibility="gone"
+                    android:id="@+id/youtubeImage"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:layout_height="108dp"
+                    android:scaleType="fitXY"
+               android:layout_marginLeft="@dimen/_10sdp"
+                    android:src="@drawable/image_new_splash_horizontal" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:visibility="gone"
+android:layout_margin="@dimen/_10sdp"
                 android:padding="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
                 <LinearLayout
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:id="@+id/llNoData"
+                    android:layout_margin="@dimen/_10sdp"
+
                     android:layout_width="match_parent"
                     android:layout_height="614dp"
                     android:layout_below="@+id/topPanel"
@@ -1668,7 +1688,7 @@
         </androidx.core.widget.NestedScrollView>
         <LinearLayout
             android:id="@+id/distributer_dashboard"
-            android:visibility="gone"
+         android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -2094,6 +2114,81 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/newtwork"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/network1"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/user_1_"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/networkname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Network"
+                            android:textColor="@color/black_promo"
+                            style="@style/mostserrat_bold"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <!--
+                                                <TextView
+                                                    android:id="@+id/transactionDate"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="07 May 2019"
+                                                    android:textSize="14sp"
+                                                    android:textColor="@android:color/darker_gray" />-->
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/open"
+
+                            android:textColor="@android:color/holo_green_dark" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
 
             </com.google.android.material.card.MaterialCardView>
 

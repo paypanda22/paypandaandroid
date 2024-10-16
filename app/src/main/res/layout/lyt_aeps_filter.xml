@@ -75,7 +75,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_46sdp"
+        android:layout_height="@dimen/_56sdp"
         style="@style/EditTextInput4">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtAadhaar"
@@ -84,6 +84,21 @@
             android:inputType="number"
             android:maxLength="12"
             android:hint="@string/enter_customer_aadhaar"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_46sdp"
+        style="@style/EditTextInput4">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_txnID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLength="20"
+            android:hint="Enter Txn Id"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>

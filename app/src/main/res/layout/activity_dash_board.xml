@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimaryDark_light"
         app:cnb_iconSize="@dimen/_20sdp"
         android:padding="@dimen/_5sdp"
         app:cnb_menuResource="@menu/bottom_menu"

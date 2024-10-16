@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimaryDark_light"
     tools:context=".fragments.home.AepsHomeFragment">
 
     <RelativeLayout
@@ -374,8 +374,9 @@
             android:orientation="horizontal"
             android:layout_below="@+id/rlcashBack"
             android:layout_marginTop="@dimen/_15sdp"
-            android:weightSum="3">
+            android:weightSum="2">
             <RelativeLayout
+                android:padding="@dimen/_3sdp"
                 android:id="@+id/rlToWallet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -403,6 +404,7 @@
                     android:textColor="@color/white"/>
             </RelativeLayout>
             <RelativeLayout
+                android:padding="@dimen/_3sdp"
                 android:id="@+id/rlTransferToBank"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -433,6 +435,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_12ssp"
+                 android:visibility="gone"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="@dimen/_2sdp"
                 android:paddingVertical="@dimen/_2sdp"

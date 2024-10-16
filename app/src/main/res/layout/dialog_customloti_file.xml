@@ -9,7 +9,7 @@
     android:background="@color/green_50"
     android:clipToOutline="true">
 
-  <!--  &lt;!&ndash; Lottie Animation Background &ndash;&gt;
+  <!--  Lottie Animation Background -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="316dp"
@@ -31,7 +31,7 @@
         android:textStyle="bold"
         android:backgroundTint="@color/water_blue_light"
         android:text="Notify Me"
-        android:textColor="@android:color/black" />-->
+        android:textColor="@android:color/black" />
 
 
 </FrameLayout>

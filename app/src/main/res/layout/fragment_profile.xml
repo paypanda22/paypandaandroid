@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimaryDark_light"
     tools:context=".fragments.home.ProfileFragment">
 
     <RelativeLayout
@@ -291,7 +291,7 @@
                     android:layout_height="@dimen/_35sdp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_addmoney"
-                    app:tint="@color/colorPrimary" />
+                    app:tint="@color/colorPrimaryDark_light" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -308,7 +308,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/in_main_wallet"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryDark_light"
                     android:textSize="@dimen/_8ssp" />
             </LinearLayout>
         </LinearLayout>
@@ -346,6 +346,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
@@ -380,7 +381,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:scaleType="centerCrop"
-                                    android:src="@drawable/user_male" />
+                                    android:src="@drawable/user_1_" />
 
                             </androidx.cardview.widget.CardView>
 
@@ -401,6 +402,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
+                        style="@style/mostserrat_bold"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textColor="@color/black" />
 
@@ -413,6 +415,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
+                        style="@style/mostserrat_bold"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="@color/black" />
 
@@ -465,7 +468,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -478,7 +481,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/ic_account"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -495,7 +498,7 @@
                                     android:text="@string/user_profile_view_edit"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -509,7 +512,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -535,7 +538,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -549,7 +552,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/bbps_color"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -566,7 +569,7 @@
                                     android:text="@string/utility_transaction_report"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/grey_80"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -580,7 +583,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -606,7 +609,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -619,7 +622,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/wallet_trf_"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -635,7 +638,7 @@
                                     android:background="?attr/selectableItemBackground"
                                     android:text="@string/wallet_transaction_report"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     style="@style/mostserrat_bold"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
@@ -650,7 +653,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -677,7 +680,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -748,7 +751,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -761,7 +764,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/ic_aeps_services"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -778,7 +781,7 @@
                                     android:text="@string/aeps_transactions_report"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -792,7 +795,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -819,7 +822,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -888,7 +891,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -901,7 +904,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/ic_bank_1_"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -918,7 +921,7 @@
                                     android:text="@string/dmt_transactions_report"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -932,7 +935,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -959,7 +962,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1028,7 +1031,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1041,7 +1044,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/payment_request"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1058,7 +1061,7 @@
                                     android:text="@string/wallet_requests_list"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1072,7 +1075,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -1098,7 +1101,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1111,7 +1114,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/content_management_system"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1128,7 +1131,7 @@
                                     android:text="@string/cms_transaction_report"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1142,7 +1145,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/black" />
 
                             </LinearLayout>
 
@@ -1168,7 +1171,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1181,7 +1184,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/ic_bank_1_"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1198,7 +1201,7 @@
                                     android:text="@string/company_bank_accounts"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1212,7 +1215,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -1238,7 +1241,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1251,7 +1254,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/wallet_trf_"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1268,7 +1271,7 @@
                                     android:text="Network"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1282,7 +1285,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -1306,7 +1309,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1319,7 +1322,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/wallet_trf_"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1336,7 +1339,7 @@
                                     android:text="Earning Report"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1350,7 +1353,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -1375,7 +1378,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1388,7 +1391,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/support"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1405,7 +1408,7 @@
                                     android:text="@string/help_amp_support"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1419,7 +1422,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -1444,7 +1447,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1457,7 +1460,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/ic_electricity_new"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1474,7 +1477,7 @@
                                     android:text="Packages"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1488,7 +1491,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -1513,7 +1516,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1526,7 +1529,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/aadhaar_logo_svg"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1543,7 +1546,7 @@
                                     android:text="Aadhar Pay Report"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1557,7 +1560,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -1583,7 +1586,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1596,7 +1599,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/aeps_new"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1613,7 +1616,7 @@
                                     android:text="Aeps Wallet Report"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1627,7 +1630,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -1653,7 +1656,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1666,7 +1669,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/aeps_new"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1683,7 +1686,7 @@
                                     android:text="Aeps Payout Report"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1697,7 +1700,7 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
@@ -1722,7 +1725,7 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
@@ -1735,7 +1738,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
                                             app:srcCompat="@drawable/transaction_history"
-                                            app:tint="@color/black" />
+                                            app:tint="@color/white" />
 
                                     </RelativeLayout>
 
@@ -1752,7 +1755,7 @@
                                     android:text="Package History Report"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:textColor="@color/black_promo"
+                                    android:textColor="@color/colorPrimaryDark_light"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
@@ -1766,25 +1769,28 @@
                                     android:layout_height="match_parent"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     app:srcCompat="@drawable/ic_chevron"
-                                    app:tint="@color/grey_40" />
+                                    app:tint="@color/colorPrimaryDark_light" />
 
                             </LinearLayout>
 
                         </com.google.android.material.card.MaterialCardView>
                         <!-- Logout -->
+
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnLogout"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:layout_marginHorizontal="@dimen/spacing_xxlarge"
-                            android:layout_marginTop="@dimen/spacing_middle"
                             android:layout_marginBottom="@dimen/spacing_large"
-                            android:background="@drawable/button_radius_selector_green"
+                            android:background="@drawable/gradient_rect_bg_rounded"
                             android:elevation="@dimen/_5sdp"
                             android:text="LOGOUT"
                             android:textAllCaps="false"
                             android:textColor="@color/white" />
+
+
+
                     </LinearLayout>
 
                 </LinearLayout>

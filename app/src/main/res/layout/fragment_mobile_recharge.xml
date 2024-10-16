@@ -11,7 +11,7 @@
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimaryDark_light">
 
         <ImageView
             android:id="@+id/ivBack"
@@ -58,6 +58,7 @@
 
             <TextView
                 android:id="@+id/m_title"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -166,6 +167,7 @@
 
             <TextView
                 android:id="@+id/o_title"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -221,6 +223,7 @@
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:backgroundTint="@android:color/transparent"
                     android:id="@+id/sp_opt"/>
 
 
@@ -261,6 +264,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:visibility="gone"
                 android:layout_marginBottom="@dimen/_10sdp"
                 style="@style/mostserrat_bold"
                 android:text="Select Telecom Circle"
@@ -312,6 +316,7 @@
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:backgroundTint="@android:color/transparent"
                     android:id="@+id/spCircle"/>
 
 
@@ -354,6 +359,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:text="@string/amount"
+                android:visibility="gone"
                 style="@style/mostserrat_bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_10ssp"
@@ -374,8 +380,8 @@
 
                     <ImageView
                         android:id="@+id/rupee_t"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:src="@drawable/ic_rupee"
                         app:tint="@color/colorPrimaryDark" />

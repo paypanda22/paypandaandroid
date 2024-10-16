@@ -92,12 +92,12 @@
                     android:id="@+id/edtAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/enter_amount"
+                    android:hint="Enter 100-1,00,000"
                     android:drawableStart="@drawable/ic_rupee"
                     android:drawablePadding="@dimen/_10sdp"
                     android:textSize="@dimen/_15ssp"
                     android:inputType="number"
-                    android:maxLength="5"
+                    android:maxLength="6"
                     style="@style/mostserrat_bold"
                     android:textColorHint="@color/bggrey"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -136,6 +136,7 @@
                         android:textSize="@dimen/_12ssp"/>
                     <RadioButton
                         android:id="@+id/rbRTGS"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="RTGS"
@@ -154,7 +155,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"/>
 
-            <app.pay.panda.reusable.PinView
+            <app.pay.paypanda.reusable.PinView
                 android:id="@+id/edtOtpMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

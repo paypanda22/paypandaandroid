@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
+ android:id="@+id/route"
     android:layout_margin="@dimen/_6sdp">
 
     <ImageView
@@ -18,14 +19,15 @@
     <TextView
         android:id="@+id/icon_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:textAllCaps="true"
+
         style="@style/mostserrat_bold"
         android:padding="@dimen/_1sdp"
 
         android:textColor="@color/overlay_dark_90"
-        android:textSize="@dimen/_7sdp"
+        android:textSize="@dimen/_8sdp"
         android:textStyle="bold" />
 
 

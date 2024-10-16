@@ -2,55 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.supportTicket.SupportTicketHost">
-    <RelativeLayout
-        android:id="@+id/topBar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimaryDark">
 
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:contentDescription="@string/splash_logo"
-            android:src="@drawable/left"
-            app:tint="@color/white" />
-
-        <TextView
-            style="@style/mostserrat_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-            android:text="@string/support_tickets"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_14ssp" />
-
-        <ImageView
-            android:id="@+id/ivMenu"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/back"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:src="@drawable/filter_funnel"
-            app:tint="@color/white" />
-
-    </RelativeLayout>
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabTextAppearance="@style/MyTabInactive"
+            android:visibility="gone"
             app:tabSelectedTextAppearance="@style/MyTabActive"
-            android:layout_below="@+id/topBar"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabIndicatorHeight="@dimen/_5sdp"
             />

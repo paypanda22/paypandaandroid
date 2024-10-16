@@ -298,7 +298,7 @@
                     style="@style/mostserrat_bold"
                     android:textColor="@color/colorPrimaryDark"
                     android:gravity="center"/>
-                <app.pay.panda.reusable.PinView
+                <app.pay.paypanda.reusable.PinView
                     android:id="@+id/edtOtpLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

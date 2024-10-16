@@ -143,6 +143,52 @@
             app:layout_constraintTop_toBottomOf="@id/tvIfsc"
             android:layout_marginTop="@dimen/_5sdp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mobile"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvType"
+            android:layout_marginTop="@dimen/_5sdp" />
+
+        <TextView
+            android:id="@+id/tvMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvType"
+            android:layout_marginTop="@dimen/_5sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/dlt"
+            android:layout_height="wrap_content"
+            android:text="DELETE"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/white"
+            android:padding="@dimen/_6sdp"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMobile"
+            android:layout_marginTop="@dimen/_5sdp" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            style="@style/mostserrat_bold"
+            android:padding="@dimen/_6sdp"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMobile"
+            android:layout_marginTop="@dimen/_5sdp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -10,6 +10,11 @@
             android:layout_height="match_parent"
             >
             <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:src="@drawable/horizontal_logo" />
+            <ImageView
                 android:id="@+id/ivCancel"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
@@ -20,7 +25,7 @@
                 android:id="@+id/webView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ivCancel"/>
+                android:layout_below="@+id/logo"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnOk"
                 android:layout_width="match_parent"

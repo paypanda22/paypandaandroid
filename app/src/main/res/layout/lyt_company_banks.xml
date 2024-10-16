@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:strokeWidth="1dp"
+    app:cardCornerRadius="@dimen/_10sdp"
     app:cardUseCompatPadding="true"
     app:strokeColor="@color/colorPrimaryDark"
-    app:cardElevation="@dimen/_2sdp">
+    app:cardElevation="@dimen/_5sdp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,8 +15,8 @@
         android:padding="@dimen/_5sdp">
         <ImageView
             android:id="@+id/ivBankLogo"
-            android:layout_width="@dimen/_55sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_margin="@dimen/_5sdp"
             android:layout_centerVertical="true"
             android:src="@drawable/bank_color"/>
@@ -126,7 +127,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Remark"
+                    android:text="Remark : "
+                    android:id="@+id/txt_Remark"
                     android:textSize="@dimen/_10ssp"
                     style="@style/mostserrat_bold"
                     android:textColor="@color/black"
@@ -137,7 +139,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:layout_toEndOf="@+id/txt_Remark"
                     android:textSize="@dimen/_10ssp"
+                    android:gravity="end"
                     style="@style/mostserrat_bold"
                     android:textColor="@color/black"
                     android:layout_alignParentEnd="true"/>

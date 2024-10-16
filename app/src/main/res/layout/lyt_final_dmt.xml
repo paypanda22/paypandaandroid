@@ -167,28 +167,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/bank_name"
-                style="@style/mostserrat_bold"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold" />
+
+            <TextView android:id="@+id/tvBankLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/bank_name"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvBankName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text=""
-                android:maxLength="25"
-                style="@style/mostserrat_bold"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold"
-                tools:ignore="RelativeOverlap" />
+                android:layout_toEndOf="@id/tvBankLabel"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text=""
+            android:maxLength="25"
+            style="@style/mostserrat_bold"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
         </RelativeLayout>
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -400,7 +403,7 @@
                android:textSize="@dimen/_12sdp"
                android:textAllCaps="true"
                style="@style/mostserrat_bold" />
-           <app.pay.panda.reusable.PinView
+           <app.pay.paypanda.reusable.PinView
                android:id="@+id/edtTPin"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"

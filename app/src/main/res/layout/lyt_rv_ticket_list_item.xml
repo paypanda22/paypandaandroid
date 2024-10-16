@@ -157,9 +157,33 @@
             android:id="@+id/lytReply"
            style="@style/EditTextInput5"
             app:endIconMode="custom"
-            android:visibility="gone"
+           android:visibility="gone"
             android:layout_margin="@dimen/_10sdp"
             app:endIconDrawable="@drawable/ic_send">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="5dp">
+
+                <!-- Button to open file chooser -->
+                <Button
+                    android:id="@+id/btnChooseFile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose File" />
+
+                <!-- Display selected file name -->
+                <TextView
+                    android:id="@+id/txtFileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:paddingStart="16dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtReplyMessage"
                 android:layout_width="match_parent"

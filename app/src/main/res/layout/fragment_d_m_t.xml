@@ -12,7 +12,7 @@
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimaryDark_light">
 
         <ImageView
             android:id="@+id/ivBack"
@@ -63,18 +63,36 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/EditTextInput3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rvDmtApiType"
-                android:layout_marginTop="@dimen/_10sdp">
+                android:layout_marginTop="@dimen/_10sdp"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusTopStart="@dimen/_8sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_8sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_8sdp"
+                app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
+                app:boxStrokeColor="@color/green_600"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/green_600"
+                app:helperText="10-digit number required"
+                app:helperTextTextColor="@color/grey_60">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtCustomerNumber"
-                    style="@style/mostserrat_bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_customer_number"
                     android:inputType="number"
                     android:maxLength="10"
-                    android:textColorHint="@color/bggrey2" />
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_60"
+                    android:textSize="@dimen/_14ssp"
+                    android:padding="@dimen/_10sdp"
+                    android:backgroundTint="@color/green_600"
+                    style="@style/mostserrat_bold" />
             </com.google.android.material.textfield.TextInputLayout>
+
         </RelativeLayout>
 
         <com.google.android.material.card.MaterialCardView

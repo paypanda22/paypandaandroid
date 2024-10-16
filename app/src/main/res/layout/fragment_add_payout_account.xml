@@ -8,7 +8,7 @@
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimaryDark_light">
 
         <ImageView
             android:id="@+id/ivBack"
@@ -79,10 +79,27 @@
                     android:id="@+id/edtAccountNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:hint="Enter Account Number"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInput2"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtcfmAccountNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:importantForAccessibility="no"
+                    android:longClickable="false"
+                    android:textIsSelectable="false"
+                    android:hint="Enter Confirm Account Number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/lytBankList"
@@ -118,6 +135,44 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+                <!-- Label for Bank Proof -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bank Proof: "
+                    style="@style/mostserrat_bold"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:textSize="16sp"
+                 android:textColor="@color/bggrey_dark" />
+
+
+
+            <!-- Layout for the Choose File button and the selected file name -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+                <!-- Button to open file chooser -->
+                <Button
+                    android:id="@+id/btnChooseFile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose File" />
+
+                <!-- Display selected file name -->
+                <TextView
+                    android:id="@+id/txtFileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:paddingStart="16dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/tvValidateBeneficiaryName"
@@ -132,6 +187,7 @@
                 android:layout_gravity="end"/>
             <TextView
                 android:id="@+id/tvPromtCharges"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/you_will_be_charged_3_for_beneficiary_validation"
@@ -141,9 +197,42 @@
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+
+                <!-- First Note -->
+
+                <!-- Second Note -->
+                <TextView
+                    style="@style/mostserrat_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:text="Note: Account Verification Charges Rupees Will Be Debited."
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Note: You can add maximum 5 bank accounts!."
+                    android:textColor="@color/colorPrimaryDark"
+                    style="@style/mostserrat_bold"
+                    android:textSize="14sp"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAddBeneficiary"
                 android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/submitt_btn_dialog"
                 android:text="Add Beneficiary"

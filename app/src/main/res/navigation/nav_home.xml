@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="app.pay.panda.fragments.home.HomeFragment"
+        android:name="app.pay.paypanda.fragments.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -27,18 +27,18 @@
     </fragment>
     <fragment
         android:id="@+id/aepsHomeFragment"
-        android:name="app.pay.panda.fragments.home.AepsHomeFragment"
+        android:name="app.pay.paypanda.fragments.home.AepsHomeFragment"
         android:label="fragment_aeps_home"
         tools:layout="@layout/fragment_aeps_home" />
 
     <fragment
         android:id="@+id/cashBackFragment"
-        android:name="app.pay.panda.fragments.home.CashBackFragment"
+        android:name="app.pay.paypanda.fragments.home.CashBackFragment"
         android:label="fragment_cash_back"
         tools:layout="@layout/fragment_cash_back" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="app.pay.panda.fragments.home.ProfileFragment"
+        android:name="app.pay.paypanda.fragments.home.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -184,12 +184,12 @@
         app:popExitAnim="@anim/slide_out_right"/>
     <fragment
         android:id="@+id/operatorListFragment"
-        android:name="app.pay.panda.fragments.bbps.OperatorListFragment"
+        android:name="app.pay.paypanda.fragments.bbps.OperatorListFragment"
         android:label="fragment_operator_list"
         tools:layout="@layout/fragment_operator_list" />
     <fragment
         android:id="@+id/requestWalletFragment"
-        android:name="app.pay.panda.fragments.home.RequestWalletFragment"
+        android:name="app.pay.paypanda.fragments.home.RequestWalletFragment"
         android:label="fragment_request_wallet"
         tools:layout="@layout/fragment_request_wallet" >
         <action
@@ -208,12 +208,12 @@
         app:popExitAnim="@anim/slide_out_right"/>
     <fragment
         android:id="@+id/walletTransactionReport"
-        android:name="app.pay.panda.fragments.reports.WalletTransactionReport"
+        android:name="app.pay.paypanda.fragments.reports.WalletTransactionReport"
         android:label="fragment_wallet_transaction_report"
         tools:layout="@layout/fragment_wallet_transaction_report" />
     <fragment
         android:id="@+id/walletRequestListFragment2"
-        android:name="app.pay.panda.fragments.reports.WalletRequestListFragment"
+        android:name="app.pay.paypanda.fragments.reports.WalletRequestListFragment"
         android:label="fragment_wallet_request_list"
         tools:layout="@layout/fragment_wallet_request_list" />
     <action android:id="@+id/action_global_walletRequestListFragment2"
@@ -224,27 +224,28 @@
         app:popExitAnim="@anim/slide_out_right"/>
     <fragment
         android:id="@+id/companyBankAccountList"
-        android:name="app.pay.panda.fragments.reports.CompanyBankAccountList"
+        android:name="app.pay.paypanda.fragments.reports.CompanyBankAccountList"
         android:label="fragment_company_bank_account_list"
         tools:layout="@layout/fragment_company_bank_account_list" />
+
     <fragment
         android:id="@+id/dmtTransactionFragment"
-        android:name="app.pay.panda.fragments.dmt.DmtTransactionFragment"
+        android:name="app.pay.paypanda.fragments.dmt.DmtTransactionFragment"
         android:label="fragment_dmt_transaction"
         tools:layout="@layout/fragment_dmt_transaction" />
     <fragment
         android:id="@+id/profileEditFragment"
-        android:name="app.pay.panda.fragments.home.ProfileEditFragment"
+        android:name="app.pay.paypanda.fragments.home.ProfileEditFragment"
         android:label="fragment_profile_edit"
         tools:layout="@layout/fragment_profile_edit" />
     <fragment
         android:id="@+id/certificate"
-        android:name="app.pay.panda.fragments.CertificateFragment"
+        android:name="app.pay.paypanda.fragments.CertificateFragment"
         android:label="fragment_certificate"
         tools:layout="@layout/fragment_certificate" />
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="app.pay.panda.fragments.home.NotificationsFragment"
+        android:name="app.pay.paypanda.fragments.home.NotificationsFragment"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
     <action android:id="@+id/action_global_notificationsFragment"
@@ -256,60 +257,65 @@
 
     <fragment
         android:id="@+id/supportTicketHost"
-        android:name="app.pay.panda.fragments.supportTicket.SupportTicketHost"
+        android:name="app.pay.paypanda.fragments.supportTicket.SupportTicketHost"
         android:label="fragment_support_ticket_host"
         tools:layout="@layout/fragment_support_ticket_host" />
     <fragment
         android:id="@+id/supportTicketHistory"
-        android:name="app.pay.panda.fragments.supportTicket.TicketHistoryFragment"
+        android:name="app.pay.paypanda.fragments.supportTicket.TicketHistoryFragment"
         android:label="fragment_ticket_history"
         tools:layout="@layout/fragment_ticket_history" />
+    <fragment
+        android:id="@+id/SupportTicketListing"
+        android:name="app.pay.paypanda.fragments.supportTicket.SupportTicketListing"
+        android:label="fragment_support_ticket_listing"
+        tools:layout="@layout/fragment_support_ticket_listing" />
 
     <fragment
         android:id="@+id/utilityTransactions"
-        android:name="app.pay.panda.fragments.reports.UtilityTransactions"
+        android:name="app.pay.paypanda.fragments.reports.UtilityTransactions"
         android:label="fragment_utility_transactions"
         tools:layout="@layout/fragment_utility_transactions" />
     <fragment
         android:id="@+id/FragmentNetwork"
-        android:name="app.pay.panda.fragments.network.FragemntNetwork"
+        android:name="app.pay.paypanda.fragments.network.FragemntNetwork"
         android:label="fragment_fragment_network"
         tools:layout="@layout/fragment_fragemnt_network" />
     <fragment
         android:id="@+id/FragmentEarningRepoat"
-        android:name="app.pay.panda.fragments.earningreport.FragmentEarnningReport"
+        android:name="app.pay.paypanda.fragments.earningreport.FragmentEarnningReport"
         android:label="fragment_earning_report"
         tools:layout="@layout/fragment_earnning_report" />
     <fragment
         android:id="@+id/CMSTransactionReport"
-        android:name="app.pay.panda.fragments.reports.CMSTransactionReport"
+        android:name="app.pay.paypanda.fragments.reports.CMSTransactionReport"
         android:label="@string/fragment_aeps_action"
         tools:layout="@layout/fragment_aeps_transaction_list" />
     <fragment
         android:id="@+id/AepsTransactionList"
-        android:name="app.pay.panda.fragments.aepsFragments.AepsTransactionList"
+        android:name="app.pay.paypanda.fragments.aepsFragments.AepsTransactionList"
         android:label="fragment_c_m_s_transaction_report"
         tools:layout="@layout/fragment_c_m_s_transaction_report" />
     <fragment
         android:id="@+id/AadharPayReport"
-        android:name="app.pay.panda.fragments.reports.AadharPayReport"
+        android:name="app.pay.paypanda.fragments.reports.AadharPayReport"
         android:label="fragment_aadhar_pay_report"
         tools:layout="@layout/fragment_aadhar_pay_report" />
 
     <fragment
         android:id="@+id/AepsWalletReport"
-        android:name="app.pay.panda.fragments.reports.AepsWalletReport"
+        android:name="app.pay.paypanda.fragments.reports.AepsWalletReport"
         android:label="fragment_aeps_wallet_report"
         tools:layout="@layout/fragment_aeps_wallet_report" />
 
     <fragment
         android:id="@+id/PackageHistoryReport"
-        android:name="app.pay.panda.fragments.reports.PackageHistoryReport"
+        android:name="app.pay.paypanda.fragments.reports.PackageHistoryReport"
         android:label="fragment_package_history_report"
         tools:layout="@layout/fragment_package_history_report" />
     <fragment
         android:id="@+id/AepsPayoutReport"
-        android:name="app.pay.panda.fragments.reports.AepsPayoutReport"
+        android:name="app.pay.paypanda.fragments.reports.AepsPayoutReport"
         android:label="fragment_aeps_payout_report"
         tools:layout="@layout/fragment_aeps_payout_report" />
 

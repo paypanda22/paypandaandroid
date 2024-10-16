@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onboardingStatusFragment"
-        android:name="app.pay.panda.fragments.onboarding.OnboardingStatusFragment"
+        android:name="app.pay.paypanda.fragments.onboarding.OnboardingStatusFragment"
         android:label="fragment_onboarding_status"
         tools:layout="@layout/fragment_onboarding_status" >
         <action
@@ -62,22 +62,22 @@
     </fragment>
     <fragment
         android:id="@+id/businessDetailsFragment"
-        android:name="app.pay.panda.fragments.onboarding.BusinessDetailsFragment"
+        android:name="app.pay.paypanda.fragments.onboarding.BusinessDetailsFragment"
         android:label="fragment_business_details"
         tools:layout="@layout/fragment_business_details" />
     <fragment
         android:id="@+id/onboardBankDetailsFragment"
-        android:name="app.pay.panda.fragments.onboarding.OnboardBankDetailsFragment"
+        android:name="app.pay.paypanda.fragments.onboarding.OnboardBankDetailsFragment"
         android:label="fragment_onboard_bank_details"
         tools:layout="@layout/fragment_onboard_bank_details" />
     <fragment
         android:id="@+id/personalDetailsFragment"
-        android:name="app.pay.panda.fragments.onboarding.PersonalDetailsFragment"
+        android:name="app.pay.paypanda.fragments.onboarding.PersonalDetailsFragment"
         android:label="fragment_personal_details"
         tools:layout="@layout/fragment_personal_details" />
     <fragment
         android:id="@+id/verifyIdentityFragment"
-        android:name="app.pay.panda.fragments.onboarding.VerifyIdentityFragment"
+        android:name="app.pay.paypanda.fragments.onboarding.VerifyIdentityFragment"
         android:label="fragment_verify_identity"
         tools:layout="@layout/fragment_verify_identity" >
         <action
@@ -90,22 +90,22 @@
     </fragment>
     <fragment
         android:id="@+id/videoKycFragment"
-        android:name="app.pay.panda.fragments.onboarding.VideoKycFragment"
+        android:name="app.pay.paypanda.fragments.onboarding.VideoKycFragment"
         android:label="fragment_video_kyc"
         tools:layout="@layout/fragment_video_kyc" />
     <fragment
         android:id="@+id/uploadDocsFragment"
-        android:name="app.pay.panda.fragments.onboarding.UploadDocsFragment"
+        android:name="app.pay.paypanda.fragments.onboarding.UploadDocsFragment"
         android:label="fragment_upload_docs"
         tools:layout="@layout/fragment_upload_docs" />
     <fragment
         android:id="@+id/pendingApprovalFragment"
-        android:name="app.pay.panda.fragments.onboarding.PendingApprovalFragment"
+        android:name="app.pay.paypanda.fragments.onboarding.PendingApprovalFragment"
         android:label="fragment_pending_approval"
         tools:layout="@layout/fragment_pending_approval" />
     <fragment
         android:id="@+id/adhaarVerificationFragment"
-        android:name="app.pay.panda.fragments.onboarding.AdhaarVerificationFragment"
+        android:name="app.pay.paypanda.fragments.onboarding.AdhaarVerificationFragment"
         android:label="AdhaarVerificationFragment" />
 
     <action

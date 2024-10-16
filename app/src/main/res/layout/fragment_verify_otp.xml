@@ -52,7 +52,7 @@
             android:text=""
             android:textSize="@dimen/_12ssp"
             android:gravity="center"/>
-        <app.pay.panda.reusable.PinView
+        <app.pay.paypanda.reusable.PinView
             android:id="@+id/edtOtpLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,13 +109,13 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_20sdp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/submitt_btn"
+        android:background="@drawable/new_update_btn_back"
         android:drawableTint="@color/white"
         android:paddingHorizontal="@dimen/_20sdp"
         android:text="Submit"
         style="@style/mostserrat_bold"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="@dimen/_12ssp"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintButtonSize"/>
 
