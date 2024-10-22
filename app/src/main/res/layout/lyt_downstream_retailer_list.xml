@@ -72,11 +72,13 @@
 
         <TextView
             android:id="@+id/is_approved"
+            android:layout_marginLeft="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="is_approved"
+            android:layout_toEndOf="@id/NAme"
             android:layout_marginRight="@dimen/_5sdp"
             android:textColor="@android:color/black"
             android:textSize="14sp" />

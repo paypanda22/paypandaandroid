@@ -3,7 +3,7 @@
     <solid android:color="#00FFFFFF"/> <!-- Transparent background -->
     <stroke
         android:width="2dp"
-        android:color="@color/bggrey_dark"
+        android:color="@color/articleLoaderBGColor"
     android:dashWidth="10dp"
     android:dashGap="10dp"/>
     <corners android:radius="@dimen/_5sdp"/>

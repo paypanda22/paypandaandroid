@@ -14,7 +14,8 @@
         android:padding="@dimen/_8sdp">
 
         <RelativeLayout
-            android:background="@color/transparent"
+          android:background="@drawable/button_radius_selector_green"
+   android:padding="@dimen/_6sdp"
             android:id="@+id/bill_fetch_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -25,11 +26,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_5dp"
                 android:gravity="left"
                 style="@style/mostserrat_bold"
                 android:text="Transaction ID"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold" />
 
@@ -40,10 +41,10 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/sub_title"
                 android:layout_marginLeft="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/dimen_5dp"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryDark_light"
                 android:textSize="@dimen/_14ssp"/>
 
 
@@ -402,6 +403,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnProceed"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"

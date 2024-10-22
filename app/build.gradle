@@ -7,15 +7,15 @@ plugins {
 }
 
 android {
-    namespace 'app.pay.paypanda'
+    namespace 'app.pay.pandapro'
     compileSdk 34
 
     defaultConfig {
-        applicationId "app.pay.paypanda"
+        applicationId "app.pay.pandapro"
         minSdk 26
         targetSdk 34
-        versionCode 6
-        versionName "1.6"
+        versionCode 7
+        versionName "1.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

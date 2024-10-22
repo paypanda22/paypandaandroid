@@ -52,7 +52,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_15ssp" />
 
-        <TextView
+     <!--   <TextView
             android:id="@+id/tv"
             style="@style/mostserrat_bold"
             android:layout_width="match_parent"
@@ -63,13 +63,13 @@
             android:gravity="start"
             android:text="@string/bank_accounts"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_12ssp" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBankList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv"
+            android:layout_below="@+id/tvCompanyName"
             android:layout_marginVertical="@dimen/_10sdp" />
     </RelativeLayout>
     <LinearLayout

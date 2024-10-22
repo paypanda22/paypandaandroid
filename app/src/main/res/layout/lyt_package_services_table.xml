@@ -1,187 +1,227 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/transparent"
-    android:padding="@dimen/_8sdp">
+    >
 
+    <!-- Title / Name -->
     <TextView
         android:id="@+id/name"
+        style="@style/mostserrat_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:textSize="@dimen/_10ssp"
-        style="@style/mostserrat_bold"
+        android:padding="@dimen/_5sdp"
+        android:fontFamily="sans-serif-thin"
         android:textColor="@color/blue_900"
-        android:textStyle="bold"
-       />
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/bggrey_dark"
-        android:layout_marginVertical="@dimen/_5sdp"/>
-    <LinearLayout
+    <!-- Separator -->
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="@color/bggrey_dark"-->
+<!--        android:layout_marginVertical="@dimen/_5sdp"/>-->
+
+    <!-- Content Rows (Left and Right Sections) -->
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_3sdp"
-        android:paddingStart="@dimen/_2sdp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal"
-        tools:ignore="RtlSymmetry">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Start Amt : "
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@android:color/black" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/StartAmt"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
-                    android:textSize="@dimen/_10ssp"
-                    android:layout_height="wrap_content"
-                    android:text="" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Charge : "
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@android:color/black" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/Charge"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="@dimen/_10ssp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Retailer Commission : "
-                    android:textSize="@dimen/_10ssp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/Retailer_Commission"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0.358"
-                    android:textSize="@dimen/_10ssp"/>
-            </LinearLayout>
-        </LinearLayout>
+        app:cardCornerRadius="@dimen/_5sdp"
+android:layout_marginBottom="@dimen/_5sdp"
+        app:strokeColor="@color/bggrey_dark"
+        app:strokeWidth="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:layout_marginLeft="@dimen/_3sdp"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:paddingLeft="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:orientation="horizontal"
+            tools:ignore="RtlSymmetry">
+
+            <!-- Left Section -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="start"
-                android:layout_marginTop="3dp">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingEnd="8dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="wrap_content"
+                <!-- Start Amt -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="End Amt : "
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@android:color/black" />
+                    android:layout_marginTop="4dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/EndAmt"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
-                    android:textSize="@dimen/_10ssp"
+                    <androidx.appcompat.widget.AppCompatTextView
+                   style="@style/mostserrat_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start Amt : "
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold"   android:fontFamily="sans-serif-thin"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/StartAmt"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp"  android:fontFamily="sans-serif-thin" />
+                </LinearLayout>
+
+                <!-- Charge -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:layout_marginTop="4dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Charge : "
+                        style="@style/mostserrat_bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold"   android:fontFamily="sans-serif-thin"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Charge"
+                        android:textColor="@color/black"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp"   android:fontFamily="sans-serif-thin"/>
+                </LinearLayout>
+
+                <!-- Retailer Commission -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Retail Commission : "
+                        style="@style/mostserrat_bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold"   android:fontFamily="sans-serif-thin"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Retailer_Commission"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.358"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp"   android:fontFamily="sans-serif-thin"/>
+                </LinearLayout>
             </LinearLayout>
+
+            <!-- Right Section -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="start">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="8dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="wrap_content"
+                <!-- End Amt -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="charge Type : "
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@android:color/black" />
+                    android:layout_marginTop="4dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/ChargeType"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="@dimen/_10ssp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start">
+                    <androidx.appcompat.widget.AppCompatTextView
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Type : "
-                    android:textSize="@dimen/_10ssp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="End Amt : "
+                        style="@style/mostserrat_bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold"   android:fontFamily="sans-serif-thin"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/CommissionType"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/EndAmt"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp"   android:fontFamily="sans-serif-thin"/>
+                </LinearLayout>
+
+                <!-- Charge Type -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="@dimen/_10ssp"/>
+                    android:layout_marginTop="4dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Charge Type : "
+                        style="@style/mostserrat_bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold"   android:fontFamily="sans-serif-thin"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/ChargeType"
+                        android:textColor="@color/black"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp"   android:fontFamily="sans-serif-thin"/>
+                </LinearLayout>
+
+                <!-- Type -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/mostserrat_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Type : "
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold"   android:fontFamily="sans-serif-thin"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/CommissionType"
+                        android:textColor="@color/black"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp"  android:fontFamily="sans-serif-thin" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
-    <View
+    <!-- Separator -->
+ <!--   <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="1dp"
         android:background="@color/bggrey_dark"
-        android:layout_marginVertical="@dimen/_2sdp"/>
+        android:layout_marginVertical="@dimen/_2sdp"/>-->
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

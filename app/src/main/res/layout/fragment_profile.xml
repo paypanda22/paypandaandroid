@@ -453,6 +453,7 @@
                             android:id="@+id/card1"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
+                            android:background="@color/green_50"
                             android:layout_marginBottom="@dimen/spacing_large"
                             app:cardBackgroundColor="@color/bggrey"
                             app:cardCornerRadius="@dimen/_10sdp">
@@ -460,7 +461,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rectangle_stroke_small_radius_grey"
+                                android:background="@color/green_50"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:paddingStart="@dimen/spacing_middle"
@@ -521,6 +522,7 @@
                         <!-- Row 2 -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card2"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -528,6 +530,7 @@
                             app:cardCornerRadius="@dimen/_10sdp">
 
                             <LinearLayout
+
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/rectangle_stroke_small_radius_grey"
@@ -592,6 +595,7 @@
                         <!-- Row 3 -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card3"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -733,6 +737,7 @@
                         <!-- Row 5 -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card5"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -874,6 +879,7 @@
                         <!-- Row 7 -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card7"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -1014,6 +1020,7 @@
                         <!-- Row 9 -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card9"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -1084,6 +1091,7 @@
                         <!-- Row 10 -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card10"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -1154,6 +1162,7 @@
                         <!-- Row 11 -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card11"
+                            android:background="@color/green_50"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -1161,9 +1170,10 @@
                             app:cardCornerRadius="@dimen/_10sdp">
 
                             <LinearLayout
+
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rectangle_stroke_small_radius_grey"
+                                android:background="@color/green_50"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:paddingStart="@dimen/spacing_middle"
@@ -1224,6 +1234,7 @@
                         <!--Row 12-->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card13"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -1233,7 +1244,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rectangle_stroke_small_radius_grey"
+                                android:background="@color/green_50"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:paddingStart="@dimen/spacing_middle"
@@ -1292,6 +1303,7 @@
                         </com.google.android.material.card.MaterialCardView>
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/earningreport"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -1361,6 +1373,7 @@
                         <!-- Row 13 -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card12"
+                            android:background="@color/green_50"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -1370,7 +1383,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rectangle_stroke_small_radius_grey"
+                                android:background="@color/green_50"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:paddingStart="@dimen/spacing_middle"
@@ -1430,6 +1443,7 @@
                         <!-- Row 14 -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/packages"
+                            android:background="@color/green_50"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -1439,7 +1453,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rectangle_stroke_small_radius_grey"
+                                android:background="@color/green_50"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:paddingStart="@dimen/spacing_middle"
@@ -1499,6 +1513,7 @@
 <!--adharpay-->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/adharpay"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -1543,7 +1558,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="?attr/selectableItemBackground"
-                                    android:text="Aadhar Pay Report"
+                                    android:text="Aadhaar Pay Report"
                                     style="@style/mostserrat_bold"
                                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                                     android:textColor="@color/colorPrimaryDark_light"
@@ -1569,6 +1584,7 @@
                         <!--aeps Wallet Report-->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/aepsWalletReport"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -1640,6 +1656,7 @@
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/aepsPayoutReport"
                             android:layout_width="match_parent"
+                            android:visibility="gone"
                             android:layout_height="50dp"
                             android:layout_marginBottom="@dimen/spacing_large"
                             app:cardBackgroundColor="@color/bggrey"
@@ -1710,6 +1727,7 @@
                             android:id="@+id/PackageHistoryReport"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
+                            android:background="@color/green_50"
                             android:layout_marginBottom="@dimen/spacing_large"
                             app:cardBackgroundColor="@color/bggrey"
                             app:cardCornerRadius="@dimen/_10sdp">
@@ -1717,7 +1735,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rectangle_stroke_small_radius_grey"
+                                android:background="@color/green_50"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:paddingStart="@dimen/spacing_middle"

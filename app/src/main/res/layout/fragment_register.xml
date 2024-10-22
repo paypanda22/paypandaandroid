@@ -4,11 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".fragments.login.RegisterFragment">
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_90sdp"
-        android:background="@drawable/top_background" />
+    <ImageView android:layout_width="match_parent"
+    android:layout_height="@dimen/_90sdp"
+    android:src="@drawable/top_background"
+    android:scaleType="centerCrop" />
+
+    <!-- <View
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/_90sdp"
+         android:background="@drawable/top_background" />-->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="serif"
                 android:gravity="start"
                 android:justificationMode="inter_word"
                 android:text="@string/to_use_our_services"
@@ -197,6 +204,23 @@
                     android:maxLength="10" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInputPass"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/password"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="Enter Your Password"
+                    android:inputType="number"
+                    android:maxLength="10" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <RelativeLayout
                 android:id="@+id/referal"
@@ -221,14 +245,14 @@
                     android:textColor="@color/blue_900"/>
 
             </RelativeLayout>
-            <TextView
-                android:id="@+id/tvSponsorName"
+          <!--  <TextView
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/mostserrat_bold"
                 android:gravity="end"
-                android:visibility="gone"
-                android:textColor="@color/green" />
+                 android:text="Password:-"
+                android:textColor="@color/green" />-->
             <RelativeLayout
                 android:id="@+id/rlBottom"
                 android:layout_width="match_parent"

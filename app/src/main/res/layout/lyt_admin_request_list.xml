@@ -5,7 +5,9 @@
     android:id="@+id/mcvRequestItem"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardUseCompatPadding="true"
-    app:cardCornerRadius="@dimen/_5sdp">
+    app:strokeColor="@color/bggrey2"
+    app:strokeWidth="@dimen/_1sdp"
+    app:cardCornerRadius="@dimen/_16sdp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

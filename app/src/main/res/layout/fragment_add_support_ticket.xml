@@ -129,6 +129,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtMessage"
+                    android:gravity="start"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_your_message"
@@ -148,7 +149,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginBottom="@dimen/_15sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -156,7 +157,7 @@
                 <RelativeLayout
                     android:id="@+id/rlImage1"
                     android:layout_width="@dimen/_65sdp"
-                    android:layout_height="@dimen/_75sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_marginEnd="@dimen/_3sdp"
                     android:background="@drawable/dotted_background"
                     android:gravity="center">
@@ -184,7 +185,7 @@
                 <RelativeLayout
                     android:id="@+id/rlImage2"
                     android:layout_width="@dimen/_65sdp"
-                    android:layout_height="@dimen/_75sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_marginHorizontal="@dimen/_3sdp"
                     android:background="@drawable/dotted_background"
                     android:gravity="center">
@@ -211,7 +212,7 @@
                 <RelativeLayout
                     android:id="@+id/rlImage3"
                     android:layout_width="@dimen/_65sdp"
-                    android:layout_height="@dimen/_75sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_marginHorizontal="@dimen/_3sdp"
                     android:background="@drawable/dotted_background"
                     android:gravity="center">
@@ -238,7 +239,7 @@
                 <RelativeLayout
                     android:id="@+id/rlImage4"
                     android:layout_width="@dimen/_65sdp"
-                    android:layout_height="@dimen/_75sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_marginHorizontal="@dimen/_3sdp"
                     android:background="@drawable/dotted_background"
                     android:gravity="center">
@@ -269,18 +270,19 @@
                 style="@style/mostserrat_bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/submitt_btn"
+                android:background="@drawable/gradient_rect_bg_rounded"
                 android:text="@string/submit"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp" />
         </LinearLayout>
 
-        <pl.droidsonroids.gif.GifImageView
+      <!--  <pl.droidsonroids.gif.GifImageView
             android:id="@+id/imageView"
             android:layout_width="@dimen/_75sdp"
+            android:visibility="gone"
             android:layout_height="@dimen/_75sdp"
             android:layout_gravity="center"
-            android:src="@drawable/loading_anim" />
+            android:src="@drawable/loading_anim" />-->
         <LinearLayout
             android:id="@+id/llNoData"
             android:layout_width="match_parent"

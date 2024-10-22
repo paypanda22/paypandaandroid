@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.pay.paypanda.fragments.FragmentNewProfile"
+    tools:context="app.pay.pandapro.fragments.FragmentNewProfile"
     android:background="@color/white"
     android:padding="@dimen/_6sdp">
 

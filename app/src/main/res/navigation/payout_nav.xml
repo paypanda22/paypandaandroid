@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/payoutAccountList"
-        android:name="app.pay.paypanda.fragments.payout.PayoutAccountList"
+        android:name="app.pay.pandapro.fragments.payout.PayoutAccountList"
         android:label="PayoutAccountList">
         <!-- Define the action to navigate to AddPayoutAccount -->
         <action
@@ -20,12 +20,12 @@
 
     <fragment
         android:id="@+id/addPayoutAccount"
-        android:name="app.pay.paypanda.fragments.payout.AddPayoutAccount"
+        android:name="app.pay.pandapro.fragments.payout.AddPayoutAccount"
         android:label="fragment_add_payout_account"
         tools:layout="@layout/fragment_add_payout_account" />
     <fragment
         android:id="@+id/fragemntNetwork"
-        android:name="app.pay.paypanda.fragments.network.FragemntNetwork"
+        android:name="app.pay.pandapro.fragments.network.FragemntNetwork"
         android:label="fragment_fragemnt_network"
         tools:layout="@layout/fragment_fragemnt_network" />
 </navigation>

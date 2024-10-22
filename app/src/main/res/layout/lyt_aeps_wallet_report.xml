@@ -172,6 +172,7 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:visibility="gone"
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -193,6 +194,7 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:visibility="gone"
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -231,13 +233,13 @@
                             style="@style/TextAppearance.AppCompat.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="approve : "
+                            android:text="Order Id : "
                             android:textStyle="bold"
                             android:textSize="@dimen/_9ssp"
                             android:textColor="@android:color/black" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/txstatus"
+                            android:id="@+id/OrderID"
                             style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="wrap_content"
                             android:textSize="@dimen/_9ssp"
@@ -268,6 +270,7 @@
                             android:textSize="@dimen/_9ssp" />
                     </LinearLayout>
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start">

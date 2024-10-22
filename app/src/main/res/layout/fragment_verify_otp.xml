@@ -45,6 +45,13 @@
             style="@style/mostserrat_bold"
             android:textSize="@dimen/_17ssp"
             android:gravity="center"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="200dp"
+            android:visibility="gone"
+            android:src="@drawable/otpimage"/>
         <TextView
             android:id="@+id/tv_number"
             android:layout_width="match_parent"
@@ -52,7 +59,7 @@
             android:text=""
             android:textSize="@dimen/_12ssp"
             android:gravity="center"/>
-        <app.pay.paypanda.reusable.PinView
+        <app.pay.pandapro.reusable.PinView
             android:id="@+id/edtOtpLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

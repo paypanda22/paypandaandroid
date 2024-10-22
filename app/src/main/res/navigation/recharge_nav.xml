@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/rechargeHostFragment"
-        android:name="app.pay.paypanda.fragments.recharge.RechargeHostFragment"
+        android:name="app.pay.pandapro.fragments.recharge.RechargeHostFragment"
         android:label="fragment_recharge_host"
         tools:layout="@layout/fragment_recharge_host" />
     <fragment
         android:id="@+id/mobileRechargeFragment"
-        android:name="app.pay.paypanda.fragments.recharge.MobileRechargeFragment"
+        android:name="app.pay.pandapro.fragments.recharge.MobileRechargeFragment"
         android:label="fragment_mobile_recharge"
         tools:layout="@layout/fragment_mobile_recharge" >
         <action
@@ -24,17 +24,17 @@
     </fragment>
     <fragment
         android:id="@+id/dthRechargeFragment"
-        android:name="app.pay.paypanda.fragments.recharge.DthRechargeFragment"
+        android:name="app.pay.pandapro.fragments.recharge.DthRechargeFragment"
         android:label="fragment_dth_recharge"
         tools:layout="@layout/fragment_dth_recharge" />
     <fragment
         android:id="@+id/fetchPlansFragment"
-        android:name="app.pay.paypanda.fragments.recharge.FetchPlansFragment"
+        android:name="app.pay.pandapro.fragments.recharge.FetchPlansFragment"
         android:label="fragment_fetch_plans"
         tools:layout="@layout/fragment_fetch_plans" />
     <fragment
         android:id="@+id/ROfferFragment"
-        android:name="app.pay.paypanda.fragments.aepsFragments.AepsCashDeposit"
+        android:name="app.pay.pandapro.fragments.aepsFragments.AepsCashDeposit"
         android:label="fragment_r_offer"
         tools:layout="@layout/fragment_r_offer" />
 </navigation>

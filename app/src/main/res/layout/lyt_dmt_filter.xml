@@ -94,13 +94,16 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txn_idlyt"
-            style="@style/EditTextInput4">
+            style="@style/EditTextInput4"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txn_id"
                 android:layout_width="match_parent"
-                android:maxLines="1"
                 android:layout_height="wrap_content"
-                android:hint="Filter by Txn Id"/>
+                android:hint="Filter by Txn Id /Mob No. /Ac No."
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/orderID"
@@ -117,16 +120,24 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/referIdtv"
             android:visibility="gone"
-            style="@style/EditTextInput4">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Service Operator">
+
             <Spinner
                 android:id="@+id/spinnerServiceOperator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:padding="@dimen/_10sdp"
                 android:background="@drawable/spinner_background"
+
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -144,13 +155,15 @@
 
 
         <TextView
+
+            style="@style/mostserrat_bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/select_number_of_transactions"
-            android:textSize="@dimen/_12ssp"
-            android:layout_marginVertical="@dimen/_5sdp"
-            style="@style/mostserrat_bold"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/_12ssp" />
+
         <RadioGroup
             android:id="@+id/rgCount"
             android:layout_width="match_parent"

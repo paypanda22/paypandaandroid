@@ -13,8 +13,17 @@
         android:orientation="vertical"
         android:padding="@dimen/_8sdp">
 
+        <ImageView
+            android:id="@+id/btnProceed"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+         android:layout_gravity="end"
+            android:src="@drawable/cancel" />
+
         <RelativeLayout
-            android:background="@color/transparent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/new_update_btn_back"
+            android:padding="@dimen/_5sdp"
             android:id="@+id/bill_fetch_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -25,11 +34,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_5dp"
                 android:gravity="left"
                 style="@style/mostserrat_bold"
                 android:text="Transaction ID"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold" />
 
@@ -41,7 +50,7 @@
                 android:layout_toEndOf="@+id/sub_title"
                 android:layout_marginLeft="@dimen/_8sdp"
                 style="@style/mostserrat_bold"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:gravity="left"
                 android:text=""
                 android:textColor="@color/colorPrimary"
@@ -385,34 +394,17 @@
 
             <TextView
                 android:id="@+id/Status"
-                android:layout_width="wrap_content"
+                style="@style/mostserrat_bold"
+                android:padding="@dimen/_5sdp"
+                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text=""
+                android:text="status"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
 
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnProceed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_weight="1"
-                android:background="@drawable/submitt_btn_small_green"
-                android:text="CLOSE"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-        </LinearLayout>
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

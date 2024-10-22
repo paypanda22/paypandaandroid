@@ -26,7 +26,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:gravity="center">
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/billerId"
@@ -44,13 +43,13 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvStatus"
                     style="@style/mostserrat_bold"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/_110sdp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="Failed"
                     android:textSize="@dimen/_10ssp"
                     android:paddingTop="@dimen/_3sdp"
+                    android:padding="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_3sdp"
                     android:textAllCaps="true"
                     android:textStyle="bold"
@@ -74,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_5sdp">
+              >
 
 
                 <LinearLayout
@@ -125,8 +124,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/bggrey_dark"
-                android:layout_marginVertical="@dimen/_5sdp"/>
+                android:background="@color/bggrey_dark" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,6 +161,11 @@
                             android:layout_height="wrap_content"
                             android:text="" />
                     </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/bggrey_dark"
+                        android:layout_marginTop="@dimen/_2sdp"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -184,22 +187,53 @@
                             android:text=""
                             android:textSize="@dimen/_9ssp" />
                     </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/bggrey_dark"
+                        android:layout_marginTop="@dimen/_2sdp"/>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
+                        android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/TextAppearance.AppCompat.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Commission : "
+                            android:text="St.Update At : "
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_10ssp"
+                            android:textColor="@android:color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/status_update_time"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="@dimen/_9ssp" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/bggrey_dark"
+                        android:layout_marginTop="@dimen/_2sdp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                       >
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Aadhaar No : "
                             android:textSize="@dimen/_10ssp"
                             android:textStyle="bold"
                             android:textColor="@android:color/black" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/charges"
+                            android:id="@+id/AadharNo"
                             style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

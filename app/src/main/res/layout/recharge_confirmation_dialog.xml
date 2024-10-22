@@ -180,7 +180,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp" />
 
-                <app.pay.paypanda.reusable.PinView
+                <app.pay.pandapro.reusable.PinView
                     android:id="@+id/edtOtpLogin"
                     style="@style/mostserrat_bold"
                     android:layout_width="wrap_content"

@@ -208,8 +208,9 @@
     <string name="_91_0000000000">+91_000000000</string>
     <string name="_91">+91</string>
     <string name="register">Register</string>
-    <string name="to_use_our_services">To use our services, please enter your basic details.Enter your aadhaar linked mobile number</string>
-    <string name="to_recover_your_lost_password">To recover your lost password enter your registered mobile/email with us. We will verify your mobile/email by sending OTP.</string>
+    <string name="to_use_our_services"> Please enter Your personal Detail along with your Aadhaar and PAN Linked Mobile Number.
+</string>
+    <string name="to_recover_your_lost_password">Reset Your Password with Pancard and mobile number. by sending OTP.</string>
     <string name="enter_registered_mobile">Enter Registered Mobile</string>
     <string name="enter_new_password">Enter New Password</string>
     <string name="re_enter_new_password">Re-Enter New Password</string>

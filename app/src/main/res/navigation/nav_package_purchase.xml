@@ -7,14 +7,14 @@
 
     <fragment
         android:id="@+id/packageListFragment"
-        android:name="app.pay.paypanda.fragments.buyPackage.PackageListFragment"
+        android:name="app.pay.pandapro.fragments.buyPackage.PackageListFragment"
         android:label="fragment_package_list"
         tools:layout="@layout/fragment_package_list" />
 
 
     <fragment
         android:id="@+id/packagedetail"
-        android:name="app.pay.paypanda.fragments.buyPackage.FragmentPackageDetail"
+        android:name="app.pay.pandapro.fragments.buyPackage.FragmentPackageDetail"
         android:label="fragment_package_list"
         tools:layout="@layout/fragment_package_detail" >
     </fragment>

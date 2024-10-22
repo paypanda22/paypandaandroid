@@ -48,6 +48,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+<!--
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/idBtnLogin"
@@ -63,6 +64,7 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/signup1" />
+-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnViaMobile"
@@ -103,16 +105,16 @@
 
     <LinearLayout
         android:id="@+id/llForm"
+        android:layout_marginTop="@dimen/_70sdp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idBtnLogin">
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/lytMobile"
@@ -122,6 +124,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtMobile"
                 style="@style/mostserrat_bold"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_phone_base"
@@ -129,7 +132,9 @@
                 android:hint="@string/enter_mobile_number"
                 android:inputType="number"
                 android:maxLength="10"
-                android:textSize="@dimen/_12ssp" />
+
+                android:textSize="@dimen/_12ssp"
+                android:autofillHints="phoneNumber" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -165,6 +170,7 @@
                 android:drawablePadding="2dp"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword"
+                android:autofillHints="password"
                 android:textSize="@dimen/_12ssp" />
         </com.google.android.material.textfield.TextInputLayout>
 
