@@ -10,148 +10,215 @@
     android:background="@color/white">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:cardElevation="@dimen/_4sdp">
+        android:layout_margin="8dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        android:background="@android:color/white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/card_border"
-            android:padding="@dimen/_8sdp">
+            android:padding="16dp">
 
+            <!-- User Image -->
+            <ImageView
+                android:id="@+id/userImageView"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/user_1_" />
+
+            <!-- Serial Number -->
+            <TextView
+                android:id="@+id/SrNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/userImageView"
+                android:text="1"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Name -->
             <TextView
                 android:id="@+id/NAme"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_9sdp"
-                android:shadowDx="2"
-                style="@style/mostserrat_bold"
-                android:shadowDy="2"
+                android:layout_toEndOf="@id/SrNo"
+                android:layout_marginStart="8dp"
+                android:text="NARESH TANWAR"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-                android:shadowRadius="3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+            <!-- Report Icon -->
             <ImageView
                 android:id="@+id/report"
-                style="@style/mostserrat_bold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="332dp"
-                android:layout_marginTop="60dp"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="3"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="8dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/view"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_11sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:contentDescription="Report Image"
+                android:scaleType="fitCenter" />
 
-            <Button
-                android:id="@+id/transfer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:backgroundTint="@color/grey_10"
-                android:background="@drawable/hover"
-                style="@style/mostserrat_extra_bold"
-                android:text="Transfer"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"
-                app:layout_constraintEnd_toStartOf="@+id/Reversetransfer"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/Reversetransfer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/hover"
-                android:text="Reverse"
-                android:backgroundTint="@color/grey_10"
-                style="@style/mostserrat_extra_bold"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
+            <!-- Reference ID -->
             <TextView
                 android:id="@+id/refer_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/NAme"
+                android:layout_toEndOf="@id/userImageView"
+                android:layout_marginTop="4dp"
                 android:text="R006605"
-                style="@style/mostserrat_bold"
                 android:textColor="@color/blue_900"
-                android:textSize="@dimen/_8sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/NAme"
-                app:layout_constraintBottom_toTopOf="@id/retailer" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/retailer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ASM"
-                android:gravity="center"
-                android:shadowDx="2"
-                style="@style/mostserrat_bold"
-                android:shadowDy="2"
-                android:shadowRadius="3"
-                android:drawableEnd="@drawable/arrow_below"
-                android:textColor="@color/blue_900"
-                android:textSize="@dimen/_8sdp"
-                app:layout_constraintBottom_toTopOf="@+id/main_wallet"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/refer_id" />
-
+            <!-- Main Wallet Balance -->
             <TextView
                 android:id="@+id/main_wallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="₹ 230.75"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_9sdp"
-                android:textStyle="bold"
-                style="@style/mostserrat_extra_bold"
-                app:layout_constraintEnd_toStartOf="@+id/is_approved"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/retailer"
-                app:layout_constraintHorizontal_chainStyle="packed" />
+                android:layout_below="@id/refer_id"
+                android:layout_toEndOf="@id/userImageView"
+                android:layout_marginTop="4dp"
+                android:text="Balance"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
+            <!-- User Type -->
+            <TextView
+                android:id="@+id/usertype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_wallet"
+                android:layout_toEndOf="@id/userImageView"
+                android:layout_marginTop="4dp"
+                android:text="User Type"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_alignParentEnd="true"
+                android:gravity="start"
+                android:layout_below="@+id/usertype"
+                android:layout_toEndOf="@id/userImageView"
+                android:text="email"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+            <!-- View TextView -->
+            <TextView
+                android:id="@+id/retailer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View"
+                android:paddingLeft="@dimen/_4sdp"
+                android:paddingRight="@dimen/_4sdp"
+                android:gravity="center"
+                android:shadowDx="2"
+                android:layout_marginLeft="@dimen/_39sdp"
+                style="@style/mostserrat_bold"
+                android:shadowDy="2"
+                android:background="@drawable/bg_btn_grey"
+                android:shadowRadius="3"
+                android:drawableEnd="@drawable/arrow_below"
+                android:textColor="@color/blue_900"
+                android:textSize="@dimen/_8sdp"
+                android:layout_below="@id/email"
+                android:layout_marginTop="8dp" />
+
+            <!-- Approval Status -->
             <TextView
                 android:id="@+id/is_approved"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+
+                android:layout_alignParentEnd="true"
+                android:gravity="end"
+                android:layout_toEndOf="@+id/NAme"
                 android:text="Approved"
-                style="@style/mostserrat_bold"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_9sdp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/main_wallet" />
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-            <!-- <TextView
-                 android:id="@+id/retailer"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginStart="16dp"
-                 android:text="Approved"
-                 android:textColor="@color/black"
-                 android:textSize="@dimen/_10sdp"
-                 android:textStyle="bold"
-                 app:layout_constraintBottom_toBottomOf="parent"
-                 app:layout_constraintStart_toEndOf="@+id/main_wallet" />-->
+            <TextView
+                android:id="@+id/Mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_alignParentEnd="true"
+                android:gravity="end"
+                android:layout_below="@+id/is_approved"
+                android:text="Mobile"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/retailer"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/transfer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Transfer"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp" />
+
+                <Button
+                    android:id="@+id/Reversetransfer"
+                    android:layout_width="0dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Reverse"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp" />
+
+                <Button
+                    android:id="@+id/walletreport"
+                    android:layout_width="0dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/mostserrat_bold"
+                    android:backgroundTint="@color/grey_10"
+                    android:text="Wallet Report"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp" />
+            </LinearLayout>
+
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+
 
 
 

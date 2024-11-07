@@ -7,10 +7,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
@@ -46,10 +49,12 @@ class AadharPayReport : BaseFragment<FragmentAadharPayReportBinding>(FragmentAad
     private var accountNumber = ""
     private lateinit var aadharPayAdapter: AadharPayAdapter
     private var txnList = ArrayList<Data>()
+    private var  selectdStatus:String = ""
+    var Types = listOf<String>()
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
-        aadharPayReport(start_date, end_date, count,"","")
+        aadharPayReport(start_date, end_date, count,"","",selectdStatus)
     }
 
     override fun addListeners() {
@@ -63,7 +68,7 @@ class AadharPayReport : BaseFragment<FragmentAadharPayReportBinding>(FragmentAad
             myActivity = activity as FragmentActivity
         }
     }
-    private fun aadharPayReport(startDate: String, endDate: String, count: Int,txnID:String,AadharNo:String) {
+    private fun aadharPayReport(startDate: String, endDate: String, count: Int,txnID:String,AadharNo:String,status:String) {
 
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         val requestData = hashMapOf<String, Any?>()
@@ -72,6 +77,7 @@ class AadharPayReport : BaseFragment<FragmentAadharPayReportBinding>(FragmentAad
         requestData["customer_mobile"] = ""
         requestData["count"] = count
         requestData["page"] = 0
+        requestData["status"] = status
         requestData["txn_id"] = txnID
         requestData["start_date"] = startDate
         requestData["end_date"] = endDate
@@ -168,7 +174,28 @@ class AadharPayReport : BaseFragment<FragmentAadharPayReportBinding>(FragmentAad
         val todayDate = CommonClass.getLiveTime("yyyy-MM-dd")
         dBinding.edtFromDate.setText(todayDate)
         dBinding.edtToDate.setText(todayDate)
+        dBinding.status1.visibility= VISIBLE
+        Types = listOf("All", "Pending", "Success", "Failed", "Refunded")
+        val TypeValues = listOf("", "1", "2", "3", "4") // Corresponding values for each type
 
+        val adapterType = ArrayAdapter(myActivity, android.R.layout.simple_spinner_item, Types)
+        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        dBinding.status.adapter = adapterType
+
+        dBinding.status.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                // Get the selected label and value based on position
+                val selectedLabel = Types[position]
+                val selectedValue = TypeValues[position]
+
+                // Use selectedValue as needed, for example:
+                selectdStatus = selectedValue
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Handle no selection if necessary
+            }
+        }
         dBinding.edtFromDate.setOnClickListener { CommonClass.showDatePickerDialog(myActivity, dBinding.edtFromDate) }
         dBinding.edtToDate.setOnClickListener {
             if (dBinding.edtFromDate.text.toString().isEmpty()) {
@@ -177,6 +204,7 @@ class AadharPayReport : BaseFragment<FragmentAadharPayReportBinding>(FragmentAad
                 CommonClass.showDatePickerDialog(myActivity, dBinding.edtToDate)
             }
         }
+
         dBinding.rgCount.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rb25 -> {
@@ -217,7 +245,7 @@ class AadharPayReport : BaseFragment<FragmentAadharPayReportBinding>(FragmentAad
                     if (edtCustomerNumber.text.toString().isNotEmpty()) customerMobile = edtCustomerNumber.text.toString()
                     if (edtAccountNumber.text.toString().isNotEmpty()) accountNumber = edtAccountNumber.text.toString()
                 }
-                aadharPayReport(start_date, end_date, count,  dBinding.txnId.text.toString(),dBinding.edtCustomerNumber.text.toString());
+                aadharPayReport(start_date, end_date, count,  dBinding.txnId.text.toString(),dBinding.edtCustomerNumber.text.toString(),selectdStatus);
             }
             filterDialog.dismiss()
         }

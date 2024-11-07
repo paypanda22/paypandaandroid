@@ -118,7 +118,10 @@ class DashBoardActivity : BaseActivity<ActivityDashBoardBinding>() {
         val navController = navHostFragment.navController
         val currentFragment=navController.currentDestination
         //val currentFragment=navHostFragment.childFragmentManager.fragments[0]
-        if (currentFragment!!.id == R.id.homeFragment) {
+            if (currentFragment?.id == R.id.homeFragment ||
+                currentFragment?.id == R.id.cashBackFragment ||
+                currentFragment?.id == R.id.profileFragment ||
+                currentFragment?.id == R.id.aepsHomeFragment) {
             val builder = AlertDialog.Builder(this@DashBoardActivity)
             builder.setMessage("Are You Sure You Want to Exit?")
                 .setTitle("Exit !")

@@ -36,7 +36,7 @@ class CreateCustomerFragment : BaseFragment<FragmentCreateCustomerBinding>(Fragm
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
-        customerMobile = arguments?.getString("mobile").toString()
+        customerMobile = arguments?.getString("mobile").toString()?:" "
         type = arguments?.getString("type").toString()
         apiID = arguments?.getString("apiID").toString()
         if (apiID == "66bca8b95727c7563ad6e315") {
@@ -179,13 +179,13 @@ class CreateCustomerFragment : BaseFragment<FragmentCreateCustomerBinding>(Fragm
     private fun checkPinCode() {
         UtilMethods.getPinCodeData(requireContext(),binding.edtCustomerPincode.text.toString(),object:MCallBackResponse{
             override fun success(from: String, message: String) {
-                val response:PinCodeResponse=Gson().fromJson(message,PinCodeResponse::class.java)
+                val response: PinCodeResponse =Gson().fromJson(message,PinCodeResponse::class.java)
                 if (!response.error){
-                    binding.edtCustomerCity.setText(response.data.district_name.lowercase())
+                    binding.edtCustomerCity.setText(response.data.city.lowercase())
                     binding.edtCustomerCity.error=null
-                    binding.edtCustomerState.setText(response.data.state_name.lowercase())
+                    binding.edtCustomerState.setText(response.data.state.lowercase())
                     binding.edtCustomerState.error=null
-                    binding.edtCustomerArea.setText(response.data.division_name.lowercase())
+                    binding.edtCustomerArea.setText(response.data.sub_distance.lowercase())
                     binding.edtCustomerArea.error=null
                 }else{
                     Toast.makeText(requireContext(),"PinCode Data Not Found",Toast.LENGTH_SHORT).show()

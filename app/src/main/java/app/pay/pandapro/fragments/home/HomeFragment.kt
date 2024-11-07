@@ -7,6 +7,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
@@ -48,7 +51,6 @@ import app.pay.pandapro.helperclasses.Utils.Companion.showToast
 import app.pay.pandapro.interfaces.DynamicServicesClickListener
 import app.pay.pandapro.interfaces.MCallBackResponse
 import app.pay.pandapro.interfaces.MyClick
-import app.pay.pandapro.responsemodels.aepsbank4.Bank4OnboardingResponse
 import app.pay.pandapro.responsemodels.allservices.Data
 import app.pay.pandapro.responsemodels.count.NotificationCountResponse
 import app.pay.pandapro.responsemodels.distributerDashobord.DashboardResponse
@@ -58,6 +60,7 @@ import app.pay.pandapro.responsemodels.serviceStatus.CheckServiceStatusResponse
 import app.pay.pandapro.responsemodels.userid.UserIDResponse
 import app.pay.pandapro.retrofit.Constant
 import app.pay.pandapro.retrofit.UtilMethods
+import app.pay.pandapro.sqlitehelper.CategoryDatabaseHelper
 
 
 import com.google.gson.Gson
@@ -88,18 +91,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             binding.retailerDashboard.visibility = View.VISIBLE
             binding.distributerDashboard.visibility = View.GONE
         }
-        distributerDashboard("3-8-2024")
+        val todayDate = CommonClass.getLiveTime("dd-MM-YYYY")
+        distributerDashboard(todayDate)
         val name = userSession.getData(Constant.NAME)
         binding.tvCongratulations.text =
             "Congratulations! Dear $name, now you have become our partner with PayPanda."
         binding.tvCongratulations.isSelected = true // Enable marquee
         getUserDetail()
         allServices()
-
-
-
-      //  checkServiceaeps("206")
         summarynotification()
+
+
     }
 
     private fun nullActivityCheck() {
@@ -113,7 +115,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     override fun onResume() {
         super.onResume()
         binding.tvCongratulations.isSelected = true // Ensure marquee is active
-
 
     }
 
@@ -143,118 +144,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
             }
         }
-
-
-        /*binding.llCashDeposit.setOnClickListener {
-
-            startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
-            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-//            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
-//            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-            checkService("Aeps Cash Deposit", "206")
-        }
-        binding.llDmt.setOnClickListener {
-            startActivity(Intent(activity, DmtActivity::class.java))
-            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-        }
-
-        binding.llEmi.setOnClickListener {
-            operatorList("EMI Payment Billers", Category.getIdByCategoryName("Loan"))
-        }
-        binding.llInsurance.setOnClickListener {
-            operatorList("Insurance Billers", Category.getIdByCategoryName("Insurance"))
-        }
-        binding.llWaterTax.setOnClickListener {
-            operatorList("Water Tax Payment", Category.getIdByCategoryName("Water"))
-        }
-        binding.llAepsLayout.setOnClickListener {
-            checkService("AEPS", "206")
-        }
-        binding.llBroadband.setOnClickListener {
-            operatorList("Broadband Billers", "166")
-        }
-        binding.llElectricity.setOnClickListener {
-            operatorList("Electricity Billers", Category.getIdByCategoryName("Electricity"))
-        }
-        binding.llLandline.setOnClickListener {
-            operatorList("Landline Bill Payment", Category.getIdByCategoryName("Landline"))
-        }
-        binding.llPipedGas.setOnClickListener {
-            operatorList("Pipped Gas Billers", Category.getIdByCategoryName("Gas"))
-        }
-        binding.llBroadband.setOnClickListener {
-            operatorList("Broadband Bill Payment", Category.getIdByCategoryName("Broadband"))
-        }
-        binding.llEducation.setOnClickListener {
-            operatorList("Education Fees Billers", Category.getIdByCategoryName("Education"))
-        }
-        binding.llPrepaid.setOnClickListener {
-            startActivity(Intent(activity, RechargeActivity::class.java).putExtra("dest", "mobile"))
-            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-        }
-
-        binding.llDthRecharge.setOnClickListener {
-            startActivity(Intent(activity, RechargeActivity::class.java).putExtra("dest", "dth"))
-            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-        }
-        binding.llFastag.setOnClickListener {
-            operatorList("FasTag Recharge Billers", Category.getIdByCategoryName("Fastag"))
-        }
-        binding.llLpgBooking.setOnClickListener {
-            operatorList("LPG Booking Billers", Category.getIdByCategoryName("LPG Gas"))
-        }
-        binding.llRentPayment.setOnClickListener {
-            operatorList("Rent Payments", Category.getIdByCategoryName("Rental"))
-        }
-
-        binding.llCreditCardBill.setOnClickListener {
-            operatorList("Credit Card Billers", Category.getIdByCategoryName("Credit Card"))
-        }
-        binding.llPostPaid.setOnClickListener {
-            operatorList("Mobile Postpaid Billers", Category.getIdByCategoryName("Mobile Postpaid"))
-        }
-        binding.llGooglePlay.setOnClickListener {
-            operatorList("Metro Card Recharge", Category.getIdByCategoryName("Metro Recharge"))
-        }
-        binding.llMunicipalTax.setOnClickListener {
-            operatorList("Municipal Tax Payment", Category.getIdByCategoryName("Municipal Taxes"))
-        }
-        binding.llRd.setOnClickListener {
-            operatorList("Recurring Deposit Payment", Category.getIdByCategoryName("Recurring Deposit"))
-        }
-        binding.llMunicinalServices.setOnClickListener {
-            operatorList("Municipal Services", Category.getIdByCategoryName("Municipal Services"))
-        }
-        binding.llHealthInsurance.setOnClickListener {
-            operatorList("Health Insurance Billers", Category.getIdByCategoryName("Health Insurance"))
-        }
-
-        binding.llLic.setOnClickListener {
-            operatorList("Life Insurance Corporation", Category.getIdByCategoryName("LIC"))
-        }
-        binding.llDonation.setOnClickListener {
-            operatorList("Donation Billers", Category.getIdByCategoryName("Donation"))
-        }
-        binding.llSubscription.setOnClickListener {
-            operatorList("Monthly Subscriptions", Category.getIdByCategoryName("Subscription"))
-        }
-        binding.llClubs.setOnClickListener {
-            operatorList("Clubs and Associations", Category.getIdByCategoryName("Clubs and Associations"))
-        }
-        binding.llCms.setOnClickListener {
-            startActivity(Intent(activity, AirtelCmsActivity::class.java))
-            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-        }
-        binding.lytQrCollection.setOnClickListener {
-            startActivity(Intent(activity, QrCollectionActivity::class.java))
-            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-        }
-
-        binding.microAtmLyt.setOnClickListener {
-            startActivity(Intent(activity, MyAtmActivity::class.java))
-            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-        }
-*/
 
 
         binding.llAddMoney.setOnClickListener { findNavController().navigate(R.id.action_global_requestWalletFragment) }
@@ -288,38 +177,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
 
     }
-    private fun checkServiceaeps(catId: String) {
+
+
+
+    private fun checkService(title: String, catId: String) {
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         UtilMethods.isServiceAvailable(requireContext(), catId, token, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: CheckServiceStatusResponse =
                     Gson().fromJson(message, CheckServiceStatusResponse::class.java)
                 if (!response.error) {
-                    if (response.data.isInstantpayOnBoarded!=null) {
-
-                    }
-                }
-            }
-                override fun fail(from: String) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Unable To Fetch Services Status",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
-        }
-
-
-                        private fun checkService(title: String, catId: String) {
-        val token = userSession.getData(Constant.USER_TOKEN).toString()
-        UtilMethods.isServiceAvailable(requireContext(), catId, token, object : MCallBackResponse {
-            override fun success(from: String, message: String) {
-                val response: CheckServiceStatusResponse =
-                    Gson().fromJson(message, CheckServiceStatusResponse::class.java)
-                if (!response.error) {
-                    val isInstantpayOnBoarded = response.data.isInstantpayOnBoarded
-
+                    userSession.setBoolData(Constant.AEPS_ONBOARD_INSTENT,response.data.Aeps4.is_onboarding).toString()
+                    userSession.setBoolData(Constant.AEPS_ONBOARD,response.data.Aeps2.is_onboarding).toString()
+                    //val isInstantpayOnBoarded = response.data.Aeps4
+                    val aeps2 = response.data.Aeps2
+                    val aeps4 = response.data.Aeps4
                     if (!response.data.is_buy) {
                         ShowDialog.bottomDialogSingleButton(myActivity, "Note",
                             "Please Purchase Package", "pending", object : MyClick {
@@ -335,15 +207,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                             "This Service is Not Active For You",
                             Toast.LENGTH_SHORT
                         ).show()
-                    }else if(isInstantpayOnBoarded != null){
-                        if (isInstantpayOnBoarded) {
-                            userSession.setData(Constant.MERCHANT_CODE, response.data.merchantCode)
-                            sendToAepsinstentPay(response, catId, title)
-                        } else {
-                            bank4Onboarding()
-                        }
-                    } else if (!response.data.bank2 && !response.data.bank3) {
-                            openSelectBankDialog()
                     } else {
                         if (catId == "206" || catId == "207" || catId == "208") {
                             userSession.setData(Constant.MERCHANT_CODE, response.data.merchantCode)
@@ -354,7 +217,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         }else
                          {
                             ShowDialog.bottomDialogSingleButton(myActivity, "Message",
-                                response.message.toString(), "", object : MyClick {
+                             "something went wrong", "", object : MyClick {
                                     override fun onClick() {
 
                                     }
@@ -364,7 +227,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
                     }
                 } else {
-                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "something went wrong", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -457,6 +320,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         startActivity(Intent(myActivity, DashBoardActivity::class.java))
         myActivity.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
     }
+
 
 
 
@@ -568,48 +432,68 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun allServices() {
-        val token = userSession.getData(Constant.USER_TOKEN).toString()
-        UtilMethods.allServices(myActivity, token, object : MCallBackResponse {
-            override fun success(from: String, message: String) {
-                val response: app.pay.pandapro.responsemodels.allservices.Category =
-                    Gson().fromJson(
-                        message,
-                        app.pay.pandapro.responsemodels.allservices.Category::class.java
-                    )
+        val dbHelper = CategoryDatabaseHelper(myActivity)
+        val categoryData = dbHelper.getAllCategories() // Fetch data from SQLite
 
-                // First check for a valid response without an error
-                if (!response.error) {
-                    if (!response.data.isNullOrEmpty()) {
-                        // Show recycler view if data exists
-                        val adapter =
-                            DynamicServicesAdapter(myActivity, response.data, this@HomeFragment)
-                        binding.recyclerView.adapter = adapter
-                        binding.recyclerView.layoutManager = GridLayoutManager(myActivity, 4)
-                        binding.llNoData.visibility = View.GONE
-                        binding.recyclerView.visibility = View.VISIBLE
+        if (categoryData.isNotEmpty()) {
+            // If data exists in SQLite, load it into the RecyclerView
+            loadDataInRecyclerView(categoryData)
+        } else {
+            val token = userSession.getData(Constant.USER_TOKEN).toString()
+            UtilMethods.allServices(myActivity, token, object : MCallBackResponse {
+                override fun success(from: String, message: String) {
+                    val response: app.pay.pandapro.responsemodels.allservices.Category =
+                        Gson().fromJson(
+                            message,
+                            app.pay.pandapro.responsemodels.allservices.Category::class.java
+                        )
+
+                    // First check for a valid response without an error
+                    if (!response.error) {
+                        if (!response.data.isNullOrEmpty()) {
+                            dbHelper.insertCategory(response.data)
+
+                            // Load data into RecyclerView
+                            loadDataInRecyclerView(response.data)
+
+                            // Show recycler view if data exists
+                            val adapter =
+                                DynamicServicesAdapter(myActivity, response.data, this@HomeFragment)
+                            binding.recyclerView.adapter = adapter
+                            binding.recyclerView.layoutManager = GridLayoutManager(myActivity, 4)
+                            binding.llNoData.visibility = View.GONE
+                            binding.recyclerView.visibility = View.VISIBLE
+                        } else {
+                            // If data is empty, show no data view
+                            binding.llNoData.visibility = View.VISIBLE
+                            binding.recyclerView.visibility = View.GONE
+                        }
                     } else {
-                        // If data is empty, show no data view
+                        // Handle the case where there's an error in the response
+                        Toast.makeText(myActivity, response.error.toString(), Toast.LENGTH_SHORT)
+                            .show()
                         binding.llNoData.visibility = View.VISIBLE
                         binding.recyclerView.visibility = View.GONE
                     }
-                } else {
-                    // Handle the case where there's an error in the response
-                    Toast.makeText(myActivity, response.error.toString(), Toast.LENGTH_SHORT).show()
+                }
+
+                override fun fail(from: String) {
+                    // Handle the failure scenario
+                    Toast.makeText(myActivity, from, Toast.LENGTH_SHORT).show()
                     binding.llNoData.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
                 }
-            }
-
-            override fun fail(from: String) {
-                // Handle the failure scenario
-                Toast.makeText(myActivity, from, Toast.LENGTH_SHORT).show()
-                binding.llNoData.visibility = View.VISIBLE
-                binding.recyclerView.visibility = View.GONE
-            }
-        })
+            })
+        }
     }
 
-
+    private fun loadDataInRecyclerView(dataList: List<app.pay.pandapro.responsemodels.allservices.Data>) {
+        val adapter = DynamicServicesAdapter(myActivity, dataList, this@HomeFragment)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = GridLayoutManager(myActivity, 4)
+        binding.llNoData.visibility = View.GONE
+        binding.recyclerView.visibility = View.VISIBLE
+    }
     private fun sendToServiceScreen(response: CheckServiceStatusResponse, catId: String) {
 
     }
@@ -619,38 +503,53 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         catId: String,
         serviceName: String
     ) {
-        if (!response.data.isOnBoarded) {
+
+        if (!response.data.Aeps2.is_onboarding) {
             startActivity(
-                Intent(activity, AepsOnBoardingActivity::class.java).putExtra(
-                    "status",
-                    "1"
-                )
+                Intent(activity, AepsOnBoardingActivity::class.java).apply {
+                    putExtra("status", "1")
+                    putExtra("title", serviceName)  // Sending catId along with the intent
+                    putExtra("catId", catId)  // Sending catId along with the intent
+                }
             )
+
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-        } else if (!response.data.authRegistered) {
+        } else if (!response.data.Aeps2.authRegistered) {
             startActivity(
-                Intent(activity, AepsOnBoardingActivity::class.java).putExtra(
-                    "status",
-                    "2"
-                )
+                Intent(activity, AepsOnBoardingActivity::class.java).apply {
+                    putExtra("status", "2")
+                    putExtra("title", serviceName)  // Sending catId along with the intent
+                    putExtra("catId", catId)  // Sending catId along with the intent
+                }
             )
+
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-        } else if (!response.data.dailyAuth) {
+        }else if (!response.data.Aeps2.bankActiveStatus.Bank2 && !response.data.Aeps2.bankActiveStatus.Bank3) {
+                openSelectBankDialog()
+
+
+            } else if (!response.data.Aeps2.dailyAuth) {
             startActivity(
-                Intent(activity, AepsOnBoardingActivity::class.java).putExtra(
-                    "status",
-                    "3"
-                )
+                Intent(activity, AepsOnBoardingActivity::class.java).apply {
+                    putExtra("status", "3")
+                    putExtra("title", serviceName)  // Sending catId along with the intent
+                    putExtra("catId", catId)  // Sending catId along with the intent
+                }
             )
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
         } else {
-            if (response.data.bank2 || response.data.bank3) {
+            if (response.data.Aeps2.bankActiveStatus.Bank2 || response.data.Aeps2.bankActiveStatus.Bank3) {
                 if (serviceName == "Aeps Cash Deposit") {
                     startActivity(
                         Intent(
                             activity,
                             CashDepositActivity::class.java
-                        ).putExtra("status", "4")
+                        ).apply {
+                            putExtra("status", "4")
+                            putExtra("title", serviceName)  // Sending catId along with the intent
+                            putExtra("catId", catId)  // Sending catId along with the intent
+                        }
+
                     )
                     activity?.overridePendingTransition(
                         R.anim.enter_from_left,
@@ -658,10 +557,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     )
                 } else {
                     startActivity(
-                        Intent(activity, AepsAllActions::class.java).putExtra(
-                            "status",
-                            "4"
-                        ).putExtra("serviceName", serviceName)
+                        Intent(activity, AepsAllActions::class.java).apply {
+                            putExtra("status", "4")
+                            putExtra("title", serviceName)  // Sending catId along with the intent
+                            putExtra("catId", catId)  // Sending catId along with the intent
+                        }
                     )
                     activity?.overridePendingTransition(
                         R.anim.enter_from_left,
@@ -687,7 +587,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         catId: String,
         serviceName: String
     ) {
-        if (!response.data.authRegistered) {
+        if (!response.data.Aeps4.authRegistered) {
             startActivity(
                 Intent(activity, AepsOnBoardingActivity::class.java).putExtra(
                     "status",
@@ -695,7 +595,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 )
             )
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
-        } else if (!response.data.dailyAuth) {
+        } else if (!response.data.Aeps4.dailyAuth) {
             startActivity(
                 Intent(activity, AepsOnBoardingActivity::class.java).putExtra(
                     "status",
@@ -704,7 +604,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             )
             activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
         } else {
-            if (response.data.bank2 || response.data.bank3) {
+            if (response.data.Aeps2.bankActiveStatus.Bank2 || response.data.Aeps2.bankActiveStatus.Bank3) {
                 if (serviceName == "Aeps Cash Deposit") {
                     startActivity(
                         Intent(
@@ -829,7 +729,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     Gson().fromJson(message, UserIDResponse::class.java)
                 if (!response.error) {
                     userSession.setData(Constant.ID, response.data?._id.toString())
-
+                        userSession.setData(Constant.LOCK_AMT,response.data.locking_amt.toString())
 
                 } else {
                     Toast.makeText(requireContext(), "Unable to Load Bank List", Toast.LENGTH_SHORT)
@@ -857,10 +757,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     fun processServices(service: String, id: String) {
         when (id.trim()) {
             "206" -> {
-                /*  startActivity(Intent(myActivity, AepsOnBoardingActivity::class.java).putExtra("status","1"))
-                    myActivity.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)*/
-//            startActivity(Intent(activity, CashDepositActivity::class.java).putExtra("status", "4"))
-//            activity?.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
+
                 checkService("Aeps Cash Deposit", "206")
             }
 
@@ -1055,11 +952,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
             "26"->{
             //Loan
-            operatorList("NCMC Recharge", Category.getIdByCategoryName("Health Insurance"))
+            operatorList("Health Insurance", Category.getIdByCategoryName("Health Insurance"))
         }
 
             else -> {
-                showComingSoonPopup()
+               // showComingSoonPopup()
                 // Handle default case
                 /*  operatorList("LPG Booking Billers", Category.getIdByCategoryName("LPG Gas"))
                     println("Processing: ${service} ")*/
@@ -1086,32 +983,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         dialog.show()
     }
 
-    private fun bank4Onboarding() {
-        val token = userSession.getData(Constant.USER_TOKEN).toString()
-        UtilMethods.bank4Onboarding(requireContext(), token, object : MCallBackResponse {
-            override fun success(from: String, message: String) {
-                val response: Bank4OnboardingResponse =
-                    Gson().fromJson(message, Bank4OnboardingResponse::class.java)
-                if (!response.error) {
-                 if(response.statusCode=="007"){
-                     openTransactionFilterDialog()
-                 }else{
-                     Toast.makeText(requireContext(), response.message.toString(), Toast.LENGTH_SHORT)
-                         .show()
-                 }
 
 
-                } else {
-                    Toast.makeText(requireContext(), response.message.toString(), Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
 
-            override fun fail(from: String) {
-                Toast.makeText(requireContext(), from.toString(), Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
-    }
 }
 

@@ -26,6 +26,8 @@ class ScanFinger(
 
         // Toast.makeText(activity, "DevicePackageName is "+devicename, Toast.LENGTH_SHORT).show();
         getPid(pidOption, devicename)
+
+
     }
 
     private fun getPid(pidOption: String, devicename: String) {
@@ -36,34 +38,6 @@ class ScanFinger(
         launcher.launch(i)
     }
 
-    fun validateFingerPrint(fData: String,click:OnClick) {
-        UtilMethods.checkFData(activity,fData,object:MCallBackResponse{
-            override fun success(from: String, message: String) {
-                val response:CheckFingerPrintResponse=Gson().fromJson(message,CheckFingerPrintResponse::class.java)
-                if (response.error){
-                    ShowDialog.bottomDialogSingleButton(activity,"Finger Scan Failed",response.message,"finger",object :MyClick{
-                        override fun onClick() {
-
-                        }
-                    })
-                }else{
-                   ShowDialog.scanResult(activity,response.data.qScore.toInt(),object:MyClick{
-                       override fun onClick() {
-                           click.onButtonClick()
-                       }
-                   })
-                }
-            }
-
-            override fun fail(from: String) {
-                ShowDialog.bottomDialogSingleButton(activity,"Finger Scan Failed",from,"finger",object :MyClick{
-                    override fun onClick() {
-
-                    }
-                })
-            }
-        })
-    }
 
 
 }

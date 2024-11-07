@@ -7,10 +7,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
@@ -31,6 +34,7 @@ import app.pay.pandapro.interfaces.AepsTxnClick
 import app.pay.pandapro.interfaces.MCallBackResponse
 import app.pay.pandapro.responsemodels.aepsTxnList.AepsTransactionsResponse
 import app.pay.pandapro.responsemodels.aepsTxnList.Data
+import app.pay.pandapro.responsemodels.aepscashwithdrawinvoice.CashWithdrawInvoiceResponse
 import app.pay.pandapro.responsemodels.aepsenquiry.AepsEnquiryResponse
 import app.pay.pandapro.retrofit.Constant
 import app.pay.pandapro.retrofit.UtilMethods
@@ -43,13 +47,15 @@ class AepsTransactionList : BaseFragment<FragmentAepsTransactionListBinding>(Fra
     private lateinit var txnList:MutableList<Data>
 private lateinit var  txnAdapter:AepsTxnAdapter
     private var txnCount=25
+    private var  selectdStatus:String = ""
+     var Types = listOf<String>()
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
-        getAepsTransactions("","","","","",txnCount)
+        getAepsTransactions("","","","","",txnCount,selectdStatus)
     }
 
-    private fun getAepsTransactions(from:String,to:String,mobile:String,aadhaarNo:String,txnId:String,count:Int) {
+    private fun getAepsTransactions(from:String,to:String,mobile:String,aadhaarNo:String,txnId:String,count:Int,status:String) {
         binding.llMainContent.visibility= GONE
         binding.rlNoData.visibility= GONE
         binding.imageView.visibility= VISIBLE
@@ -60,6 +66,7 @@ private lateinit var  txnAdapter:AepsTxnAdapter
         requestData["start_date"]=from
         requestData["end_date"]=to
         requestData["page"]=0
+        requestData["status"]=status
         requestData["count"]=count
         requestData["customer_mobile"]=mobile
         requestData["adhaar_no"]=aadhaarNo
@@ -125,6 +132,29 @@ private lateinit var  txnAdapter:AepsTxnAdapter
         val todayDate = CommonClass.getLiveTime("yyyy-MM-dd")
         dBinding.edtFromDate.setText(todayDate)
         dBinding.edtToDate.setText(todayDate)
+
+        dBinding.status1.visibility= VISIBLE
+        Types = listOf("All", "Pending", "Success", "Failed", "Refunded")
+        val TypeValues = listOf("", "1", "2", "3", "4") // Corresponding values for each type
+
+        val adapterType = ArrayAdapter(myActivity, android.R.layout.simple_spinner_item, Types)
+        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        dBinding.status.adapter = adapterType
+
+        dBinding.status.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                // Get the selected label and value based on position
+                val selectedLabel = Types[position]
+                val selectedValue = TypeValues[position]
+
+                // Use selectedValue as needed, for example:
+                selectdStatus = selectedValue
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Handle no selection if necessary
+            }
+        }
         dBinding.edtFromDate.setOnClickListener { CommonClass.showDatePickerDialog(myActivity,dBinding.edtFromDate) }
         dBinding.edtToDate.setOnClickListener {
             if (dBinding.edtFromDate.text.toString().isEmpty()){
@@ -164,7 +194,7 @@ private lateinit var  txnAdapter:AepsTxnAdapter
             }else if (aadhaar.isNotEmpty() && !ActivityExtensions.isValidAadhaar(aadhaar)){
                 dBinding.edtAadhaar.error="Enter a Valid aadhaar"
             }else{
-                getAepsTransactions(from,to,mobile,aadhaar,dBinding.edtTxnID.text.toString(),txnCount)
+                getAepsTransactions(from,to,mobile,aadhaar,dBinding.edtTxnID.text.toString(),txnCount,selectdStatus)
                 filterDialog.dismiss()
             }
         }
@@ -182,13 +212,8 @@ private lateinit var  txnAdapter:AepsTxnAdapter
         val receipt=SingleAepsTransaction()
         val bundle=Bundle()
         bundle.apply {
-            putString("date",model[pos].createdAt.toString())
-            putString("bankRrn",model[pos].bank_rrn.toString())
-            putString("bankName",model[pos].bank_name.toString())
-            putString("balAmount",model[pos].bal_amount.toString())
-            putString("aadharNumber",model[pos].last_adhar.toString())
-            putString("amount",model[pos].amount.toString())
-            putString("txnId",model[pos].txn_id)
+            putString("id",model[pos]._id.toString())
+
 
         }
         receipt.arguments=bundle
@@ -196,7 +221,8 @@ private lateinit var  txnAdapter:AepsTxnAdapter
     }
 
     override fun onItemClickInvoice(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int) {
-        openViewDetailDialog(model[pos])
+       openViewDetailDialog(model[pos])
+
     }
 
     override fun onItemClickEnquery(holder: RecyclerView.ViewHolder, model: List<Data>, pos: Int,type:String) {
@@ -268,6 +294,9 @@ private lateinit var  txnAdapter:AepsTxnAdapter
             }
         })
     }
+
+
+
 
     private fun openViewDetailDialog(model: Data){
         val openDialog: Dialog=Dialog(myActivity)

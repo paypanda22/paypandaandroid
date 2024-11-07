@@ -15,4 +15,24 @@
         android:id="@+id/member"
         android:title="Fund Request by Member"
         android:icon="@drawable/ic_home_2_" />
+    <item
+        android:id="@+id/ZSM"
+        android:title="Fund Request To ZSM"
+        android:icon="@drawable/ic_home_2_" />
+    <item
+        android:id="@+id/ASM"
+        android:title="Fund Request To ASM"
+        android:icon="@drawable/ic_home_2_" />
+    <item
+        android:id="@+id/ASMZSM"
+        android:title="Fund Request To ZSM/ASM"
+        android:icon="@drawable/ic_home_2_" />
+    <item
+        android:id="@+id/ASMZSMSD"
+        android:title="Fund Request To ZSM/ASM/SD"
+        android:icon="@drawable/ic_home_2_" />
+    <item
+        android:id="@+id/ASMZSMSDDS"
+        android:title="Fund Request To ZSM/ASM/SD/DS"
+        android:icon="@drawable/ic_home_2_" />
 </menu>

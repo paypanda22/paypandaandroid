@@ -50,7 +50,7 @@ class WalletTxnAdapter(
         holder.txn_id.text=list[position].txn_id.toString()
         holder.txnType.text = list[position].trans_type.toString() ?: ""
         holder.mode.text=list[position].type.toString() ?:""
-        holder.ordeid.text=list[position].order_id.toString() ?:""
+        holder.ordeid.text = list[position].order_id?.takeIf { it.isNotEmpty() } ?: ""
      //   holder.Refunded.text=list[position].is_refunded.toString()
         if (list[position].type=="credit"){
             holder.amount.text="+"+list[position].amount.toString()

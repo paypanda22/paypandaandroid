@@ -78,20 +78,21 @@ class SingleUtilityTransaction : BaseBottomFragment<FragmentSingleUtilityTransac
                     binding.ConsumerNo.text=response.data.ca_num
                     binding.name1.text=response.data.user_id.name
                     binding.shopnam.text=response.data.user_id.shop_name
+                    binding.reqTime.text=response.data.createdAt
 
-                    val zonedDateTime = ZonedDateTime.parse(response.data.createdAt)
+                   /* val zonedDateTime = ZonedDateTime.parse(response.data.createdAt)
 
                     // Format it to a simpler form, like dd-MM-yyyy
                     val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
                     val formattedDate = zonedDateTime.format(formatter)
-                    binding.reqTime.text=formattedDate.toString()
+                    binding.reqTime.text=formattedDate.toString()*/
                 } else {
                     Toast.makeText(requireContext(), "Unable to fetch Txn Details", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "Unable to fetch Txn", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(requireContext(), "Unable to fetch Txn", Toast.LENGTH_SHORT).show()
             }
         })
     }

@@ -15,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
@@ -50,13 +51,17 @@ class ReverseMoneyDialogFragment : DialogFragment() {
         private const val ARG_VALUE = "value"
         private const val ARG_REFER_ID = "refer_id"
         private const val ARG_BALANCE = "balance"
+        private const val MOBILE = "mobile"
+        private const val NAME = "name"
 
-        fun newInstance(value: String,id:String,balance:String): ReverseMoneyDialogFragment {
+        fun newInstance(value: String,id:String,balance:String,mobile:String,name:String): ReverseMoneyDialogFragment {
             val fragment = ReverseMoneyDialogFragment()
             val args = Bundle()
             args.putString(ARG_VALUE, value)
             args.putString(ARG_REFER_ID, id)
             args.putString(ARG_BALANCE, balance)
+            args.putString(MOBILE, mobile)
+            args.putString(NAME, name)
             fragment.arguments = args
             return fragment
         }
@@ -74,38 +79,76 @@ class ReverseMoneyDialogFragment : DialogFragment() {
 
         userSession = UserSession(requireContext())
         val tvBalance = view.findViewById<TextView>(R.id.tvBalance)
+        val mobileMo = view.findViewById<TextView>(R.id.mobile)
         val edtTPin = view.findViewById<EditText>(R.id.edtTPin)
+        val llTPin = view.findViewById<LinearLayout>(R.id.llTPin)
         val fund = view.findViewById<EditText>(R.id.fund)
         val btnTransfer = view.findViewById<Button>(R.id.btnTransfer)
         val refer_id = view.findViewById<TextView>(R.id.refer_id)
          otp = view.findViewById<EditText>(R.id.otp)
-        verifyOTP = view.findViewById<TextView>(R.id.verifyOTP)
+        verifyOTP = view.findViewById<AppCompatButton>(R.id.verifyOTP)
         linVerifyotp = view.findViewById<LinearLayout>(R.id.linVerifyotp)
         tvResendOtp = view.findViewById<TextView>(R.id.tvResendOtp)
         tvTimer = view.findViewById<TextView>(R.id.tvTimer)
         relativeResend = view.findViewById<RelativeLayout>(R.id.relativeResend)
-
+        val NAme = view.findViewById<TextView>(R.id.NAme)
         // Set the balance text (you can pass this value as an argument)
         val balance = arguments?.getString(ARG_BALANCE)
         val referId = arguments?.getString(ARG_REFER_ID)
         val value = arguments?.getString(ARG_VALUE)
-        tvBalance.text = "Balance:-$balance"
-        refer_id.text = "Refer ID:-$referId"
+        val  mobile = arguments?.getString(MOBILE)
+        val  name = arguments?.getString(NAME)
+        tvBalance.text = "Available Balance:-  $balance"
+        refer_id.text = "Refer ID:-  $referId"
+        mobileMo.text = "Mob:-  $mobile"
+        NAme.text = "Name:-  $name"
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         fund.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                edtTPin.visibility = View.GONE
+                llTPin.visibility = View.GONE
 
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 while (count == 2)
-                    edtTPin.visibility = View.GONE
+                    llTPin.visibility = View.GONE
 
             }
 
             override fun afterTextChanged(s: Editable?) {
-                edtTPin.visibility = View.VISIBLE
+                llTPin.visibility = View.VISIBLE
+                val input = s.toString().toIntOrNull() ?: 0  // Convert input to integer or use 0 if empty
+
+                when {
+                    input < 100 -> {
+                        fund.error = "Minimum value is 100"
+                    }
+                    input > 1000000 -> {
+                        fund.error = "Maximum value is 100000"
+                    }
+                    else -> {
+                        fund.error = null  // Clear any error if within range
+                    }
+                }
+            }
+        })
+
+        edtTPin.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                otp.visibility=View.GONE
+                verifyOTP.visibility=View.GONE
+                linVerifyotp.visibility=View.GONE
+                relativeResend.visibility=View.GONE
+
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
 
             }
         })
@@ -113,9 +156,15 @@ class ReverseMoneyDialogFragment : DialogFragment() {
 
         // Handle button click
         btnTransfer.setOnClickListener {
-            if (TextUtils.isEmpty(edtTPin.text)) {
-                Toast.makeText(requireContext(), "Please Enter Tpin", Toast.LENGTH_SHORT).show()
-            }  else {
+            val  amount=fund.text.toString()
+            if(amount == null || amount < 100.toString()) {
+                fund.error = "Minimum amount is 100"
+                Toast.makeText(activity, "Please enter at least 100", Toast.LENGTH_SHORT).show()
+            } else if(fund.text.toString().isEmpty()){
+                Toast.makeText(activity, "Please Enter Amount", Toast.LENGTH_SHORT).show()
+            }else if(edtTPin.text.toString().isEmpty()){
+                Toast.makeText(activity, "Please Enter TPin", Toast.LENGTH_SHORT).show()
+            }   else {
                 moneyTreansfer(
                     requireActivity(),
                     token,
@@ -129,9 +178,17 @@ class ReverseMoneyDialogFragment : DialogFragment() {
             }
         }
         verifyOTP.setOnClickListener{
-             if(TextUtils.isEmpty(otp.text.toString())){
-            Toast.makeText(requireContext(), "Please Verify OTP First", Toast.LENGTH_SHORT).show()
-            }else {
+            val  amount=fund.text.toString()
+            if(amount == null || amount < 100.toString()) {
+                fund.error = "Minimum amount is 100"
+                Toast.makeText(activity, "Please enter at least 100", Toast.LENGTH_SHORT).show()
+            } else if(otp.text.toString().isEmpty()){
+                Toast.makeText(activity, "Please Enter OTP", Toast.LENGTH_SHORT).show()
+            }else if(fund.text.toString().isEmpty()){
+                Toast.makeText(activity, "Please Enter Amount", Toast.LENGTH_SHORT).show()
+            }else if(edtTPin.text.toString().isEmpty()){
+                Toast.makeText(activity, "Please Enter TPin", Toast.LENGTH_SHORT).show()
+            }  else{
                  otpVarify(
                      requireActivity(),
                      token,
@@ -149,7 +206,20 @@ class ReverseMoneyDialogFragment : DialogFragment() {
           } else {
               timeLeftInMillis = 60000
               setTimer()
-              fundReverseResendOtp(fund.text.toString())
+              val  amount=fund.text.toString()
+              if(amount == null || amount < 100.toString()) {
+                  fund.error = "Minimum amount is 100"
+                  Toast.makeText(activity, "Please enter at least 100", Toast.LENGTH_SHORT).show()
+              } else if(otp.text.toString().isEmpty()){
+                  Toast.makeText(activity, "Please Enter OTP", Toast.LENGTH_SHORT).show()
+              }else if(fund.text.toString().isEmpty()){
+                  Toast.makeText(activity, "Please Enter Amount", Toast.LENGTH_SHORT).show()
+              }else if(edtTPin.text.toString().isEmpty()){
+                  Toast.makeText(activity, "Please Enter TPin", Toast.LENGTH_SHORT).show()
+              }  else{
+                  fundReverseResendOtp(fund.text.toString())
+              }
+
 
           }
       }

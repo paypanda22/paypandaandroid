@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
@@ -22,6 +23,7 @@ import app.pay.pandapro.activity.AepsOnBoardingActivity
 import app.pay.pandapro.activity.DashBoardActivity
 import app.pay.pandapro.activity.IntroActivity
 import app.pay.pandapro.adapters.ScannerListAdapter
+import app.pay.pandapro.commonclass.ServiceChecker
 import app.pay.pandapro.databinding.DialogScannerDevicesBinding
 import app.pay.pandapro.databinding.FragmentAepsAuthRegBinding
 import app.pay.pandapro.helperclasses.CommonClass
@@ -39,6 +41,11 @@ import com.google.gson.Gson
 
 class AepsAuthenticationReg :
     BaseFragment<FragmentAepsAuthRegBinding>(FragmentAepsAuthRegBinding::inflate) {
+    private var serviceChecker: ServiceChecker? = null
+    private var selectedAepsType: String = ""
+    var catId=""
+    var title=""
+    var bank="aeps2"
 
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
@@ -51,7 +58,7 @@ class AepsAuthenticationReg :
             val data = result.data
             if (resultCode == Activity.RESULT_OK && data != null) {
                 fData = data.getStringExtra("PID_DATA").toString()
-                if (fData.isNotEmpty()) {
+                if (!fData.isNullOrEmpty()) {
                     authRegister(fData)
                 } else {
                     Toast.makeText(
@@ -79,13 +86,18 @@ class AepsAuthenticationReg :
         requestData["longitude"] = userSession.getData(Constant.M_LONG).toString()
         requestData["data"] = data
         requestData["user_id"] = token
+        requestData["bank"] = bank
         UtilMethods.aepsAuthRegister(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response:DailyAuthResponse=Gson().fromJson(message,DailyAuthResponse::class.java)
                 if (!response.error){
                     ShowDialog.bottomDialogSingleButton(myActivity,"SUCCESS",response.message,"success",object: MyClick {
                         override fun onClick() {
-                            startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","3"))
+                            startActivity(Intent(activity, AepsOnBoardingActivity::class.java).apply {
+                                putExtra("status", "3")
+                                putExtra("title", title)  // Sending catId along with the intent
+                                putExtra("catId", catId)  // Sending catId along with the intent
+                            })
                             myActivity.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
                             myActivity.finish()
                         }
@@ -94,7 +106,11 @@ class AepsAuthenticationReg :
                     if (response.message=="Bank2 Already register"){
                         ShowDialog.bottomDialogSingleButton(myActivity,"SUCCESS",response.message,"success",object: MyClick {
                             override fun onClick() {
-                                startActivity(Intent(activity, AepsOnBoardingActivity::class.java).putExtra("status","3"))
+                                startActivity(Intent(activity, AepsOnBoardingActivity::class.java).apply {
+                                    putExtra("status", "3")
+                                    putExtra("title", title)  // Sending catId along with the intent
+                                    putExtra("catId", catId)  // Sending catId along with the intent
+                                })
                                 myActivity.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
                                 myActivity.finish()
                             }
@@ -125,6 +141,30 @@ class AepsAuthenticationReg :
         userSession = UserSession(requireContext())
         scanFinger=ScanFinger(myActivity,userSession,startForScannerResult)
 
+        catId = arguments?.getString("catId").toString()
+        title = arguments?.getString("title").toString()
+        selectedAepsType = arguments?.getString("selectedAepsType").toString()
+        when (selectedAepsType) {
+            "Aeps 2" -> binding.radioGroupAepsType.check(R.id.aeps2)
+            "Aeps 4" -> binding.radioGroupAepsType.check(R.id.aeps4)
+        }
+        serviceChecker = ServiceChecker(requireContext(), userSession, requireActivity())
+
+        if(userSession.getBoolData(Constant.AEPS_ONBOARD)==true){
+            binding.aeps2Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcheck))
+        }else {
+            binding.aeps2Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcross))
+        }
+        if(userSession.getBoolData(Constant.AEPS_ONBOARD_INSTENT)==true){
+            binding.aeps4Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcheck))
+        }else{
+            binding.aeps4Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcross))
+        }
+        if(selectedAepsType== "Aeps 4"){
+            bank="aeps4"
+        }else {
+            bank="aeps2"
+        }
     }
 
     private fun nullActivityCheck() {
@@ -161,7 +201,22 @@ class AepsAuthenticationReg :
                     dialog.dismiss()
                 }.show()
         }
+        binding.radioGroupAepsType.setOnCheckedChangeListener { group, checkedId ->
+            // Check which radio button was clicked
+            when (checkedId) {
+                R.id.aeps2 -> {
+                    selectedAepsType = "Aeps 2"
+                    // Aeps 2 is selected
+                    serviceChecker?.checkService(title, catId,selectedAepsType)
+                }
 
+                R.id.aeps4 -> {
+                    selectedAepsType = "Aeps 4"
+                    // Aeps 4 is selected
+                    serviceChecker?.checkService(title, catId,selectedAepsType)
+                }
+            }
+        }
     }
 
     private fun openDeviceDialog() {
@@ -206,5 +261,7 @@ class AepsAuthenticationReg :
         if (userSession.getData(Constant.SCANNER_PACKAGE) != null) {
             selectedPackage = userSession.getData(Constant.SCANNER_PACKAGE).toString()
         }
+
+
     }
 }

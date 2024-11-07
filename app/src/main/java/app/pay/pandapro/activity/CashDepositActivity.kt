@@ -29,14 +29,32 @@ class CashDepositActivity : BaseActivity<ActivityCashDepositBinding>() {
     private val aepsTxn = AepsTransactionList()
     private val container = R.id.fragmentContainer
     private var status = 0
-
+    var catId=""
+    var title=""
+    var bank="aeps2"
+    private var selectedAepsType: String = ""
     override fun getViewBinding(): ActivityCashDepositBinding = ActivityCashDepositBinding.inflate(layoutInflater)
 
     override fun init(savedInstanceState: Bundle?) {
         userSession = UserSession(this@CashDepositActivity)
         status = intent.getStringExtra("status").toString().toInt()
+        title = intent.getStringExtra("title").toString()
+        catId = intent.getStringExtra("catId").toString()
+        selectedAepsType = intent.getStringExtra("selectedAepsType").toString()
 
-        loadFragment(status)
+
+
+
+
+
+        if(selectedAepsType== "Aeps 4"){
+            bank="aeps4"
+            binding.llCd.visibility=View.GONE
+        }else {
+            bank="aeps2"
+        }
+
+        loadFragment(status,catId,title,selectedAepsType)
         makeActive()
     }
 
@@ -69,10 +87,16 @@ class CashDepositActivity : BaseActivity<ActivityCashDepositBinding>() {
            markInActive(binding.iv5, binding.tv5, binding.mcv5)
        }
     }
-    private fun loadFragment(status: Int) {
+    private fun loadFragment(status: Int,catId:String,title:String,selectedAepsType:String) {
         when (status) {
             5 -> {
                 active = aepsBe
+                val bundle = Bundle()
+
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                aepsBe.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, aepsBe).commit()
                 markActive(binding.iv1, binding.tv1, binding.mcv1)
                 markInActive(binding.iv3, binding.tv3, binding.mcv3)
@@ -82,6 +106,12 @@ class CashDepositActivity : BaseActivity<ActivityCashDepositBinding>() {
 
             6 -> {
                 active = aepsMs
+                val bundle = Bundle()
+
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                aepsMs.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, aepsMs).commit()
                 markInActive(binding.iv1, binding.tv1, binding.mcv1)
                 markActive(binding.iv3, binding.tv3, binding.mcv3)
@@ -91,6 +121,12 @@ class CashDepositActivity : BaseActivity<ActivityCashDepositBinding>() {
 
             4 -> {
                 active = cashDeposit
+                val bundle = Bundle()
+
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                cashDeposit.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, cashDeposit).commit()
                 markInActive(binding.iv1, binding.tv1, binding.mcv1)
                 markInActive(binding.iv3, binding.tv3, binding.mcv3)
@@ -100,6 +136,12 @@ class CashDepositActivity : BaseActivity<ActivityCashDepositBinding>() {
 
             8 -> {
                 active = aepsTxn
+                val bundle = Bundle()
+
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                aepsTxn.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, aepsTxn).commit()
                 markInActive(binding.iv1, binding.tv1, binding.mcv1)
                 markInActive(binding.iv3, binding.tv3, binding.mcv3)
@@ -109,6 +151,12 @@ class CashDepositActivity : BaseActivity<ActivityCashDepositBinding>() {
 
             else -> {
                 active = aepsBe
+                val bundle = Bundle()
+
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                aepsBe.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, aepsBe).commit()
                 markActive(binding.iv1, binding.tv1, binding.mcv1)
                 markInActive(binding.iv3, binding.tv3, binding.mcv3)
@@ -131,10 +179,10 @@ class CashDepositActivity : BaseActivity<ActivityCashDepositBinding>() {
                     dialog.dismiss()
                 }.show()
         }
-        binding.llBe.setOnClickListener { loadFragment(5) }
-        binding.llMs.setOnClickListener { loadFragment(6) }
-        binding.llCd.setOnClickListener { loadFragment(4) }
-        binding.llTxn.setOnClickListener { loadFragment(8) }
+        binding.llBe.setOnClickListener { loadFragment(5,catId,title,selectedAepsType) }
+        binding.llMs.setOnClickListener { loadFragment(6,catId,title,selectedAepsType) }
+        binding.llCd.setOnClickListener { loadFragment(4,catId,title,selectedAepsType) }
+        binding.llTxn.setOnClickListener { loadFragment(8,catId,title,selectedAepsType) }
     }
 
     override fun setData() {

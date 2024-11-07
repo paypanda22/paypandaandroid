@@ -22,9 +22,7 @@ import app.pay.pandapro.R
 import app.pay.pandapro.activity.IntroActivity
 import app.pay.pandapro.adapters.AsmAdapter
 import app.pay.pandapro.adapters.AsmDownStreamAdapter
-import app.pay.pandapro.adapters.DownStreamAdapter
-import app.pay.pandapro.adapters.DownStreamDistributerAdapter
-import app.pay.pandapro.adapters.DownstreamRetailAdapter
+
 import app.pay.pandapro.adapters.ZsmDownStreamAdapter
 import app.pay.pandapro.databinding.FragmentZSMNetworkBinding
 import app.pay.pandapro.databinding.LytNetworkFilterBinding
@@ -113,7 +111,9 @@ class ZSMNetwork : BaseFragment<FragmentZSMNetworkBinding>(FragmentZSMNetworkBin
                                     val value = downstramlist[position]._id
                                     val refer_id = downstramlist[position].refer_id
                                     val balance = downstramlist[position].main_wallet
-                                    val transferMoneyDialogFragment = TransferMoneyDialogFragment.newInstance(value,refer_id,balance)
+                                    val mobile = downstramlist[position].mobile
+                                    val name = downstramlist[position].name
+                                    val transferMoneyDialogFragment = TransferMoneyDialogFragment.newInstance(value,refer_id,balance,mobile,name)
                                     transferMoneyDialogFragment.show(childFragmentManager, "TransferMoneyDialogFragment")
                                 }
 
@@ -123,7 +123,9 @@ class ZSMNetwork : BaseFragment<FragmentZSMNetworkBinding>(FragmentZSMNetworkBin
                                     val value = downstramlist[position]._id
                                     val refer_id = downstramlist[position].refer_id
                                     val balance = downstramlist[position].main_wallet
-                                    val reverseMoneyDialogFragment = ReverseMoneyDialogFragment.newInstance(value,refer_id,balance)
+                                    val mobile = downstramlist[position].mobile
+                                    val name = downstramlist[position].name
+                                    val reverseMoneyDialogFragment = ReverseMoneyDialogFragment.newInstance(value,refer_id,balance,mobile,name)
                                     reverseMoneyDialogFragment.show(childFragmentManager, "ReverseMoneyDialogFragment")
 
                                 }
@@ -136,6 +138,16 @@ class ZSMNetwork : BaseFragment<FragmentZSMNetworkBinding>(FragmentZSMNetworkBin
                                     val value = downstramlist[position]._id
                                     val viewReportDialogFragment = ViewReportDialogFragment.newInstance(value)
                                     viewReportDialogFragment.show(childFragmentManager, "ViewReportDialogFragment")
+                                }
+
+                                override fun onViewWalletReportClicked(
+                                    holder: ZsmDownStreamAdapter.ViewHolder,
+                                    downstramlist: MutableList<app.pay.pandapro.responsemodels.zsmresponse.Data>,
+                                    position: Int
+                                ) {
+                                    val bundle = Bundle()
+                                    bundle.putString("value",downstramlist[position]._id)
+                                    findNavController().navigate(R.id.WalletReportdownStarem,bundle)
                                 }
 
                             }
@@ -211,7 +223,9 @@ class ZSMNetwork : BaseFragment<FragmentZSMNetworkBinding>(FragmentZSMNetworkBin
                                         val value = downstramlistRetailer[position]._id
                                         val refer_id = downstramlistRetailer[position].refer_id
                                         val balance = downstramlistRetailer[position].main_wallet
-                                        val transferMoneyDialogFragment = TransferMoneyDialogFragment.newInstance(value,refer_id,balance)
+                                        val mobile = downstramlistRetailer[position].mobile
+                                        val name = downstramlistRetailer[position].name
+                                        val transferMoneyDialogFragment = TransferMoneyDialogFragment.newInstance(value,refer_id,balance,mobile,name)
                                         transferMoneyDialogFragment.show(childFragmentManager, "TransferMoneyDialogFragment")
                                     }
 
@@ -223,7 +237,9 @@ class ZSMNetwork : BaseFragment<FragmentZSMNetworkBinding>(FragmentZSMNetworkBin
                                         val value = downstramlistRetailer[position]._id
                                         val refer_id = downstramlistRetailer[position].refer_id
                                         val balance = downstramlistRetailer[position].main_wallet
-                                        val reverseMoneyDialogFragment = ReverseMoneyDialogFragment.newInstance(value,refer_id,balance)
+                                        val mobile = downstramlistRetailer[position].mobile
+                                        val name = downstramlistRetailer[position].name
+                                        val reverseMoneyDialogFragment = ReverseMoneyDialogFragment.newInstance(value,refer_id,balance,mobile,name)
                                         reverseMoneyDialogFragment.show(childFragmentManager, "ReverseMoneyDialogFragment")
                                     }
 
@@ -232,7 +248,19 @@ class ZSMNetwork : BaseFragment<FragmentZSMNetworkBinding>(FragmentZSMNetworkBin
                                         downstramlistRetailer: MutableList<app.pay.pandapro.responsemodels.asmresponse.Data>,
                                         position: Int
                                     ) {
+                                        val value = downstramlist[position]._id
+                                        val viewReportDialogFragment = ViewReportDialogFragment.newInstance(value)
+                                        viewReportDialogFragment.show(childFragmentManager, "ViewReportDialogFragment")
+                                    }
 
+                                    override fun onViewWalletReportClicked(
+                                        holder: AsmDownStreamAdapter.ViewHolder,
+                                        downstramlistRetailer: MutableList<app.pay.pandapro.responsemodels.asmresponse.Data>,
+                                        position: Int
+                                    ) {
+                                        val bundle = Bundle()
+                                        bundle.putString("value",downstramlist[position]._id)
+                                        findNavController().navigate(R.id.WalletReportdownStarem,bundle)
                                     }
 
                                 }
@@ -318,7 +346,9 @@ class ZSMNetwork : BaseFragment<FragmentZSMNetworkBinding>(FragmentZSMNetworkBin
                                         val value = downstramlistDistributer[position]._id
                                         val refer_id = downstramlistDistributer[position].refer_id
                                         val balance = downstramlistDistributer[position].main_wallet
-                                        val transferMoneyDialogFragment = TransferMoneyDialogFragment.newInstance(value,refer_id,balance)
+                                        val mobile = downstramlistDistributer[position].mobile
+                                        val name = downstramlistDistributer[position].name
+                                        val transferMoneyDialogFragment = TransferMoneyDialogFragment.newInstance(value,refer_id,balance,mobile,name)
                                         transferMoneyDialogFragment.show(childFragmentManager, "TransferMoneyDialogFragment")
                                     }
 
@@ -330,7 +360,9 @@ class ZSMNetwork : BaseFragment<FragmentZSMNetworkBinding>(FragmentZSMNetworkBin
                                         val value = downstramlistDistributer[position]._id
                                         val refer_id = downstramlistDistributer[position].refer_id
                                         val balance = downstramlistDistributer[position].main_wallet
-                                        val reverseMoneyDialogFragment = ReverseMoneyDialogFragment.newInstance(value,refer_id,balance)
+                                        val mobile = downstramlistDistributer[position].mobile
+                                        val name = downstramlistDistributer[position].name
+                                        val reverseMoneyDialogFragment = ReverseMoneyDialogFragment.newInstance(value,refer_id,balance,mobile,name)
                                         reverseMoneyDialogFragment.show(childFragmentManager, "ReverseMoneyDialogFragment")
                                     }
 
@@ -339,7 +371,20 @@ class ZSMNetwork : BaseFragment<FragmentZSMNetworkBinding>(FragmentZSMNetworkBin
                                         downstramlistDistributer: MutableList<app.pay.pandapro.responsemodels.asmresponse.Data>,
                                         position: Int
                                     ) {
+                                        val value = downstramlistDistributer[position]._id
+                                        val viewReportDialogFragment = ViewReportDialogFragment.newInstance(value)
+                                        viewReportDialogFragment.show(childFragmentManager, "ViewReportDialogFragment")
 
+                                    }
+
+                                    override fun onViewWalletReportClicked(
+                                        holder: AsmAdapter.ViewHolder,
+                                        downstramlistDistributer: MutableList<app.pay.pandapro.responsemodels.asmresponse.Data>,
+                                        position: Int
+                                    ) {
+                                        val bundle = Bundle()
+                                        bundle.putString("value",downstramlistDistributer[position]._id)
+                                        findNavController().navigate(R.id.WalletReportdownStarem,bundle)
                                     }
 
 

@@ -1,6 +1,7 @@
 package app.pay.pandapro.retrofit
 
-import app.pay.pandapro.retrofit.Constant.MainBase_URL_2
+import app.pay.pandapro.retrofit.Constant.Image_Base_URL
+
 import app.pay.pandapro.retrofit.Constant.base_url
 import okhttp3.ConnectionPool
 import okhttp3.Dns
@@ -38,28 +39,6 @@ object RetrofitFactory {
             .build()
     }
 
-    fun getRetrofitYooPayInstance(): Retrofit {
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-        val client = OkHttpClient.Builder()
-            .addInterceptor { chain ->
-                val newRequest = chain.request().newBuilder()
-                    .build()
-                chain.proceed(newRequest)
-            }
-            .addInterceptor(loggingInterceptor)
-            .readTimeout(160, TimeUnit.SECONDS)
-            .writeTimeout(160, TimeUnit.SECONDS)
-            .connectTimeout(160, TimeUnit.SECONDS)
-            .build()
-        return Retrofit.Builder()
-            .baseUrl(MainBase_URL_2)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
-    }
 
     fun getRetrofitInstanceWithToken(token :String): Retrofit {
         val loggingInterceptor = HttpLoggingInterceptor().apply {

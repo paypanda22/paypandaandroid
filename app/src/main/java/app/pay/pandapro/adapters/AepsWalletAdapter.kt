@@ -27,7 +27,7 @@ class AepsWalletAdapter(
         val tvAccountNumber: AppCompatTextView =itemView.findViewById(R.id.tvAccountNumber)
         val tvAmount: AppCompatTextView =itemView.findViewById(R.id.tvAmount)
         val txnID: AppCompatTextView =itemView.findViewById(R.id.txnID)
-        val utr: AppCompatTextView =itemView.findViewById(R.id.utr)
+        val type: AppCompatTextView =itemView.findViewById(R.id.type)
         val charges: AppCompatTextView =itemView.findViewById(R.id.charges)
         val commission: AppCompatTextView =itemView.findViewById(R.id.commission)
         val customer: AppCompatTextView =itemView.findViewById(R.id.customer)
@@ -59,9 +59,9 @@ class AepsWalletAdapter(
         holder.tvAccountNumber.text=list[position].message.toString()
         holder.tvAmount.text=list[position].amount.toString()
         holder.txnID.text=list[position].txn_id.toString()
-        holder.utr.text=list[position].type.toString()
+        holder.type.text=list[position].type.toString()
         holder.charges.text=list[position].is_by_admin.toString()
-        holder.OrderID.text=list[position].order_id.toString()
+        holder.OrderID.text = list[position].order_id?.toString() ?: ""
 
         holder.date.text=list[position].createdAt.toString()
        /* holder.viewdata.setOnClickListener{

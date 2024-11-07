@@ -57,7 +57,7 @@
                         android:layout_width="@dimen/_45sdp"
                         android:layout_height="@dimen/_45sdp"
                         android:layout_alignParentEnd="true"
-                        android:src="@drawable/pp_app_icon" />
+                        android:src="@drawable/app_icon" />
                 </RelativeLayout>
                 <TextView
                     android:id="@+id/txn_id"

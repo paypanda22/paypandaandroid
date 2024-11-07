@@ -31,25 +31,43 @@ class AepsAllActions : BaseActivity<FragmentAepsAllActionsBinding>() {
     private val container = R.id.fragmentContainer
     private var status = 0
     private var serviceName = ""
-
+    var catId=""
+    var title=""
+    var bank="aeps2"
+    private var selectedAepsType: String = ""
+    private val bundle = Bundle()
     override fun getViewBinding(): FragmentAepsAllActionsBinding = FragmentAepsAllActionsBinding.inflate(layoutInflater)
 
     override fun init(savedInstanceState: Bundle?) {
         userSession = UserSession(this@AepsAllActions)
         status = intent.getStringExtra("status").toString().toInt()
-        serviceName = intent.getStringExtra("serviceName").toString()
+        title = intent.getStringExtra("title").toString()
+        catId = intent.getStringExtra("catId").toString()
+        selectedAepsType = intent.getStringExtra("selectedAepsType").toString()
 
-        loadFragment(status)
+
+
+
+        loadFragment(status,catId,title,selectedAepsType)
         makeActive()
-   if(serviceName == "Aeps Cash Deposit"){
+   if(title == "Aeps Cash Deposit"){
        binding.llAp.visibility=View.GONE
-   }else if(serviceName == "Aeps Adhaar pay"){
+
+   }else if(title == "Aeps Adhaar pay"){
        binding.llCw.visibility=View.GONE
-   }else if(serviceName == "Aeps Bank Withdraw"){
+
+   }else if(title == "Aeps Bank Withdraw"){
        binding.llAp.visibility=View.GONE
+
    }else{
 
    }
+        if(selectedAepsType== "Aeps 4"){
+            bank="aeps4"
+            binding.llAp.visibility=View.GONE
+        }else {
+            bank="aeps2"
+        }
     }
 
     fun makeActive() {
@@ -106,11 +124,23 @@ class AepsAllActions : BaseActivity<FragmentAepsAllActionsBinding>() {
             }
         }
     }
-
-    private fun loadFragment(status: Int) {
+ /*   private fun passArguments(fragment: Fragment, title: String, catId: String, selectedAepsType: String) {
+        val bundle = Bundle()
+        bundle.putString("title", title)
+        bundle.putString("catId", catId)
+        bundle.putString("selectedAepsType", selectedAepsType)
+        fragment.arguments = bundle
+    }*/
+    private fun loadFragment(status: Int,catId:String,title:String,selectedAepsType:String) {
         when (status) {
             4 -> {
                 active = aepsBe
+                val bundle = Bundle()
+
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                aepsBe.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, aepsBe).commit()
                 markActive(binding.iv1, binding.tv1, binding.mcv1)
                 markInActive(binding.iv2, binding.tv2, binding.mcv2)
@@ -121,6 +151,12 @@ class AepsAllActions : BaseActivity<FragmentAepsAllActionsBinding>() {
 
             5 -> {
                 active = aepsCw
+                val bundle = Bundle()
+                bundle.putString("status", status.toString())
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                aepsCw.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, aepsCw).commit()
                 markInActive(binding.iv1, binding.tv1, binding.mcv1)
                 markActive(binding.iv2, binding.tv2, binding.mcv2)
@@ -131,6 +167,12 @@ class AepsAllActions : BaseActivity<FragmentAepsAllActionsBinding>() {
 
             6 -> {
                 active = aepsMs
+                val bundle = Bundle()
+                bundle.putString("status", status.toString())
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                aepsMs.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, aepsMs).commit()
                 markInActive(binding.iv1, binding.tv1, binding.mcv1)
                 markInActive(binding.iv2, binding.tv2, binding.mcv2)
@@ -141,6 +183,12 @@ class AepsAllActions : BaseActivity<FragmentAepsAllActionsBinding>() {
 
             7 -> {
                 active = aadhaarPay
+                val bundle = Bundle()
+                bundle.putString("status", status.toString())
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                aadhaarPay.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, aadhaarPay).commit()
                 markInActive(binding.iv1, binding.tv1, binding.mcv1)
                 markInActive(binding.iv2, binding.tv2, binding.mcv2)
@@ -151,6 +199,12 @@ class AepsAllActions : BaseActivity<FragmentAepsAllActionsBinding>() {
 
             8 -> {
                 active = aepsTxn
+                val bundle = Bundle()
+                bundle.putString("status", status.toString())
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                aepsTxn.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, aepsTxn).commit()
                 markInActive(binding.iv1, binding.tv1, binding.mcv1)
                 markInActive(binding.iv2, binding.tv2, binding.mcv2)
@@ -161,6 +215,12 @@ class AepsAllActions : BaseActivity<FragmentAepsAllActionsBinding>() {
 
             else -> {
                 active = aepsBe
+                val bundle = Bundle()
+                bundle.putString("status", status.toString())
+                bundle.putString("catId", catId.toString())
+                bundle.putString("title", title.toString())
+                bundle.putString("selectedAepsType", selectedAepsType.toString())
+                aepsBe.arguments=bundle
                 supportFragmentManager.beginTransaction().replace(container, aepsBe).commit()
                 markActive(binding.iv1, binding.tv1, binding.mcv1)
                 markInActive(binding.iv2, binding.tv2, binding.mcv2)
@@ -185,11 +245,11 @@ class AepsAllActions : BaseActivity<FragmentAepsAllActionsBinding>() {
                     dialog.dismiss()
                 }.show()
         }
-        binding.llBe.setOnClickListener { loadFragment(4) }
-        binding.llCw.setOnClickListener { loadFragment(5) }
-        binding.llMs.setOnClickListener { loadFragment(6) }
-        binding.llAp.setOnClickListener { loadFragment(7) }
-        binding.llTxn.setOnClickListener { loadFragment(8) }
+        binding.llBe.setOnClickListener { loadFragment(4,catId,title,selectedAepsType) }
+        binding.llCw.setOnClickListener { loadFragment(5,catId,title,selectedAepsType) }
+        binding.llMs.setOnClickListener { loadFragment(6,catId,title,selectedAepsType) }
+        binding.llAp.setOnClickListener { loadFragment(7,catId,title,selectedAepsType) }
+        binding.llTxn.setOnClickListener { loadFragment(8,catId,title,selectedAepsType) }
     }
 
     override fun setData() {

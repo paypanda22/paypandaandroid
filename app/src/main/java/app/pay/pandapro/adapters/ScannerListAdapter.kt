@@ -33,7 +33,7 @@ class ScannerListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        MyGlide.with(activity, Uri.parse(Constant.Image_Base_URL+list[position].getImageURL()),holder.ivImage)
+        MyGlide.with(activity, Uri.parse(Constant.PIMAGE_URL+list[position].getImageURL()),holder.ivImage)
         holder.tvName.text=list[position].getDeviceName()
         holder.itemView.setOnClickListener {
             click.onItemClicked(holder,list,position)

@@ -59,8 +59,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-
-                    android:background="@drawable/edit_bold_background"
                     android:textAllCaps="true"
 
                     style="@style/mostserrat_bold"
@@ -75,7 +73,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Remark"
+                    android:text="Remark :"
                     style="@style/mostserrat_bold"
                     android:layout_alignParentStart="true"
                     android:textSize="@dimen/_10ssp"
@@ -99,7 +97,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="authority remark: "
+                    android:text="Authority remark : "
                     style="@style/mostserrat_bold"
                     android:id="@+id/athremark"
                     android:layout_alignParentStart="true"
@@ -120,18 +118,43 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:visibility="gone"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="User Name"
+                    android:text="Amount : "
+                    style="@style/mostserrat_bold"
+                    android:id="@+id/tvAmount1"
+                    android:layout_alignParentStart="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/_50sdp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:gravity="end"
+                    android:layout_toEndOf="@+id/tvAmount1"
+                    android:textAllCaps="true"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Type"
                     style="@style/mostserrat_bold"
                     android:layout_alignParentStart="true"
                     android:textSize="@dimen/_10ssp"
                     android:textColor="@color/black"/>
                 <TextView
-                    android:id="@+id/User_Name"
+                    android:id="@+id/User_Type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
@@ -141,11 +164,53 @@
                     android:textSize="@dimen/_10ssp"
                     android:textColor="@color/black"/>
             </RelativeLayout>
-
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentStart="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/user_Mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="true"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Request Date"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentStart="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/Request_Date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="true"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+            </RelativeLayout>
         </LinearLayout>
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/tvAmount"
             style="@style/mostserrat_bold"
             android:layout_width="233dp"
@@ -155,7 +220,7 @@
             android:gravity="center|center_vertical"
             android:text="0000"
             android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp" />
+            android:textSize="@dimen/_13ssp" />-->
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

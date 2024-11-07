@@ -103,6 +103,22 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:id="@+id/status1"
+        android:visibility="gone"
+    android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="@dimen/_36sdp">
+        <Spinner
+
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp"
+            android:background="@drawable/spinner_background" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

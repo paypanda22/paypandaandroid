@@ -118,7 +118,7 @@
                 android:minWidth="@dimen/_12sdp"
                 android:padding="@dimen/_2sdp"
                 android:text="0"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_7sdp"
                 android:visibility="visible" />
         </RelativeLayout>

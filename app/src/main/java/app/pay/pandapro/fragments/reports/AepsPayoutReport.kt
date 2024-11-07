@@ -7,10 +7,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
@@ -47,10 +50,12 @@ class AepsPayoutReport : BaseFragment<FragmentAepsPayoutReportBinding>(FragmentA
     private var accountNumber = ""
     private lateinit var aepsPayoutAdapter: AepsPayoutAdapter
     private var txnList = ArrayList<Data>()
+    private var  selectdStatus:String = ""
+    var Types = listOf<String>()
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
-        payoutReport(start_date, end_date, count, "","")
+        payoutReport(start_date, end_date, count, "",selectdStatus)
     }
 
     override fun addListeners() {
@@ -61,12 +66,12 @@ class AepsPayoutReport : BaseFragment<FragmentAepsPayoutReportBinding>(FragmentA
     override fun setData() {
 
     }
-    private fun payoutReport(startDate: String, endDate: String, count: Int,txnID:String,AadharNo:String) {
+    private fun payoutReport(startDate: String, endDate: String, count: Int,txnID:String,ststus:String) {
 
         val token = userSession.getData(Constant.USER_TOKEN).toString()
 
 
-        UtilMethods.payoutReport(requireContext(), start_date,endDate,txnID,"0",count.toString(),token, object :
+        UtilMethods.payoutReport(requireContext(), startDate,endDate,txnID,"0",count.toString(),ststus,token, object :
             MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: AepsPayoutResponse = Gson().fromJson(message, AepsPayoutResponse::class.java)
@@ -148,12 +153,36 @@ class AepsPayoutReport : BaseFragment<FragmentAepsPayoutReportBinding>(FragmentA
         filterDialog.window?.setGravity(Gravity.BOTTOM)
         dBinding.edtCustomerNumber.hint = null // Clear any existing hint
         dBinding.edtCustomerNumber.hint = "Filter by Aadhaar no" // Set dynamic hint
+        dBinding.txnId.hint = "Filter by Txn Id" // Set dynamic hint
         dBinding.edtAccountNumber1.visibility= GONE
+
         dBinding.aadharTv.visibility= GONE
         val todayDate = CommonClass.getLiveTime("yyyy-MM-dd")
         dBinding.edtFromDate.setText(todayDate)
         dBinding.edtToDate.setText(todayDate)
+        /*dBinding.status1.visibility= VISIBLE
+        dBinding.status.visibility= VISIBLE*/
+        Types = listOf("All", "Pending", "Success", "Failed", "Refunded")
+        val TypeValues = listOf("", "1", "2", "3", "4") // Corresponding values for each type
 
+        val adapterType = ArrayAdapter(myActivity, android.R.layout.simple_spinner_item, Types)
+        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        dBinding.status.adapter = adapterType
+
+        dBinding.status.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                // Get the selected label and value based on position
+                val selectedLabel = Types[position]
+                val selectedValue = TypeValues[position]
+
+                // Use selectedValue as needed, for example:
+                selectdStatus = selectedValue
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Handle no selection if necessary
+            }
+        }
         dBinding.edtFromDate.setOnClickListener { CommonClass.showDatePickerDialog(myActivity, dBinding.edtFromDate) }
         dBinding.edtToDate.setOnClickListener {
             if (dBinding.edtFromDate.text.toString().isEmpty()) {
@@ -201,7 +230,7 @@ class AepsPayoutReport : BaseFragment<FragmentAepsPayoutReportBinding>(FragmentA
                     if (edtCustomerNumber.text.toString().isNotEmpty()) customerMobile = edtCustomerNumber.text.toString()
                     if (edtAccountNumber.text.toString().isNotEmpty()) accountNumber = edtAccountNumber.text.toString()
                 }
-                payoutReport(start_date, end_date, count,  dBinding.txnId.text.toString(),dBinding.edtCustomerNumber.text.toString());
+                payoutReport(start_date, end_date, count,  dBinding.txnId.text.toString(),selectdStatus);
             }
             filterDialog.dismiss()
         }

@@ -1,8 +1,11 @@
 package app.pay.pandapro.responsemodels.pincode
 
+
+import androidx.annotation.Keep
+
+@Keep
 data class PinCodeResponse(
-    val `data`: Data=Data(),
-    val error: Boolean=true,
-    val errorCode: Int=0,
-    val message: String=""
+    val `data`: Data = Data(),
+    val error: Boolean = false,
+    val statusCode: Int = 0
 )

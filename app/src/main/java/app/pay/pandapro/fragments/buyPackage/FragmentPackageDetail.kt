@@ -103,12 +103,11 @@ class FragmentPackageDetail : BaseFragment<FragmentPackageDetailBinding>(Fragmen
                                 // Show/hide views based on data
                                 binding.llNoData.visibility = GONE
                                 binding.rvPackageList.visibility = VISIBLE
-                                binding.imageView.visibility = GONE
+
                             } else {
                                 // Handle case where txnDetailList is empty
                                 binding.llNoData.visibility = VISIBLE
                                 binding.rvPackageList.visibility = GONE
-                                binding.imageView.visibility = GONE
                                 binding.comDetail.visibility = GONE
                             }
 
@@ -164,7 +163,6 @@ progressBar.hideProgress()
                         txnDetailList.clear()
                     }
 
-                    binding.imageView.visibility = View.GONE
 
                     // Check if BBPSWiseServices is not null or empty
                     val bbpsWiseServicesList = response.data.BBPSWiseServices
@@ -202,7 +200,7 @@ progressBar.hideProgress()
                     binding.comDetail.visibility = View.GONE
                     binding.llNoData.visibility = View.VISIBLE
                     binding.rvPackageList.visibility = View.GONE
-                    binding.imageView.visibility = View.GONE
+
                 }
             }
 
@@ -241,7 +239,6 @@ progressBar.hideProgress()
                     binding.imageView1.visibility = GONE
                     } else {
                         binding.llNoData1.visibility = GONE
-                        binding.imageView.visibility = GONE
                         binding.rvPackageserviceList.visibility = GONE
                     }
                 }

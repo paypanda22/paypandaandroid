@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import app.pay.pandapro.adapters.AepsTxnAdapter
+import app.pay.pandapro.adapters.RequestListAdminAdapter
 
 import app.pay.pandapro.databinding.FragmentPaymentRequestDialogBinding
 import app.pay.pandapro.helperclasses.UserSession
@@ -29,7 +31,7 @@ class PaymentRequestDialogFragment : DialogFragment() {
     private var mobile: String? = ""
     private var userType: String? = ""
     private var remark: String? = ""
-
+   // private lateinit var  adminAdapter: RequestListAdminAdapter
     private var _binding: FragmentPaymentRequestDialogBinding? = null
     private val binding get() = _binding!!
 
@@ -109,8 +111,9 @@ class PaymentRequestDialogFragment : DialogFragment() {
                 try {
                     val response: PaymentrequesttouserResponse = Gson().fromJson(message, PaymentrequesttouserResponse::class.java)
                     if (!response.error) {
-                        Toast.makeText(requireContext(), "Success: ${response.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), response.message.toString(), Toast.LENGTH_SHORT).show()
                         dismiss()
+                           //adminAdapter.notifyDataSetChanged()
                     } else {
                         Toast.makeText(requireContext(), "Error: ${response.message}", Toast.LENGTH_SHORT).show()
                     }

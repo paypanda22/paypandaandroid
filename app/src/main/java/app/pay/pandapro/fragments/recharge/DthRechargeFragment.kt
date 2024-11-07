@@ -136,7 +136,7 @@ class DthRechargeFragment : BaseFragment<FragmentDthRechargeBinding>(FragmentDth
             myActivity.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
         }
 
-        binding.edtOperatorName.setOnClickListener { getOperatorList() }
+        binding.operatorLyt.setOnClickListener { getOperatorList() }
 
        // binding.ivChangeOperator.setOnClickListener { getOperatorList() }
 
@@ -301,9 +301,9 @@ class DthRechargeFragment : BaseFragment<FragmentDthRechargeBinding>(FragmentDth
         binding.edtOperatorName.setText(selectedOperator.name)
         operatorID = selectedOperator._id
         // Set the operator logo
-        val operatorImage = getOperatorImage(operatorID)
-        binding.ivOperatorImage.setImageDrawable(operatorImage)
-        setOperatorLogo()
+     //   val operatorImage = getOperatorImage(operatorID)
+      //  binding.ivOperatorImage.setImageDrawable(operatorImage)
+       // setOperatorLogo()
         // Dismiss the dialog
         alertDialog.dismiss()
     }
@@ -317,7 +317,7 @@ class DthRechargeFragment : BaseFragment<FragmentDthRechargeBinding>(FragmentDth
             "66680198061904fed64223b4" -> R.drawable.dish_tv  // DishTV drawable
             else -> R.drawable.bsnl  // Default image
         }
-        binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity, operatorImage))
+       // binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity, operatorImage))
     }
 
     private fun getOperatorImage(operatorID: String): Drawable? {

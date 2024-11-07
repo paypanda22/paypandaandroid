@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">PayPanda</string>
+    <string name="app_name">PayPanda Retail</string>
     <string name="requested_permission">Requested Permission</string>
     <string name="camera_permission">Camera Permission</string>
     <string name="location_permission">Location Permission</string>
@@ -210,7 +210,7 @@
     <string name="register">Register</string>
     <string name="to_use_our_services"> Please enter Your personal Detail along with your Aadhaar and PAN Linked Mobile Number.
 </string>
-    <string name="to_recover_your_lost_password">Reset Your Password with Pancard and mobile number. by sending OTP.</string>
+    <string name="to_recover_your_lost_password">Reset Your Password with Pancard and mobile number.</string>
     <string name="enter_registered_mobile">Enter Registered Mobile</string>
     <string name="enter_new_password">Enter New Password</string>
     <string name="re_enter_new_password">Re-Enter New Password</string>

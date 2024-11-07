@@ -3,7 +3,6 @@ package app.pay.pandapro.fragments.login
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
@@ -22,6 +21,7 @@ import app.pay.pandapro.helperclasses.UserSession
 import app.pay.pandapro.activity.IntroActivity
 import app.pay.pandapro.databinding.FragmentVerifyOtpBinding
 import app.pay.pandapro.helperclasses.CommonClass
+import app.pay.pandapro.helperclasses.CustomProgressBar
 import app.pay.pandapro.helperclasses.GetKeyHash
 import app.pay.pandapro.helperclasses.ShowDialog
 import app.pay.pandapro.helperclasses.Utils.Companion.showToast
@@ -31,7 +31,8 @@ import app.pay.pandapro.interfaces.OnBackPressedListner
 import app.pay.pandapro.responsemodels.forgetpassword.ForgetPasswordResponse
 import app.pay.pandapro.responsemodels.login.LoginResponse
 import app.pay.pandapro.responsemodels.newForgetPasswordVerify.ForgetPasswordVerifyResponse
-import app.pay.pandapro.responsemodels.newlogin.NewLoginResponse
+import app.pay.pandapro.responsemodels.register.RegisterResponse
+import app.pay.pandapro.responsemodels.verifyOtp.VerifyOtpResponse
 import app.pay.pandapro.retrofit.ApiMethods
 import app.pay.pandapro.retrofit.Constant
 import app.pay.pandapro.retrofit.UtilMethods
@@ -43,7 +44,6 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
     private lateinit var entityType: String
     private lateinit var type: String
     private lateinit var password: String
-    private lateinit var Cpassword: String
     private lateinit var countDownTimer: CountDownTimer
     var timeLeftInMillis: Long = 60000L
     var isTimerRunning: Boolean = false
@@ -54,31 +54,27 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
     private var name = ""
     private var refer_id = ""
     private var userId = ""
-    private var mobileToken=""
-    private var mobileVerified = "0"
+    val progressBar = CustomProgressBar()
+
     @SuppressLint("SetTextI18n")
     override fun init() {
+
         nullActivityCheck()
         userSession = UserSession(requireContext())
-
+        progressBar.showProgress(myActivity)
         entity = arguments?.getString("entity").toString()
         entityType = arguments?.getString("entityType").toString()
         type = arguments?.getString("type").toString()
         password = arguments?.getString("password").toString()
-        Cpassword = arguments?.getString("Cpassword").toString()
         refID = arguments?.getString("refID").toString()
         regEmail = arguments?.getString("regEmail") ?: ""
         user_type_id = arguments?.getString("user_type_id") ?: ""
         name = arguments?.getString("name") ?: ""
         refer_id = arguments?.getString("refer_id") ?: ""
-        mobileVerified=arguments?.getString("mobileVerified") ?:""
+
         binding.tvNumber.text = if (entityType == "phone") "Sent to +91- $entity" else "Sent to - $entity"
         setTimer()
 
-
-        val result1=Bundle()
-        result1.putString("mobileVerified", "0")       // This sets the mobileVerified status to 1
-        parentFragmentManager.setFragmentResult("mobileVerifiedKey", result1)
     }
 
 
@@ -91,6 +87,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
     }
 
     fun setTimer() {
+        progressBar?.hideProgress()
         binding.tvTimer.visibility = View.VISIBLE
         binding.tvResendOtp.setTextColor(
             ContextCompat.getColor(
@@ -160,12 +157,6 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
             } else {
                 timeLeftInMillis = 60000
                 setTimer()
-                if(type=="login"){
-                    resendOTP("phone",entity)
-                }else{
-                    resendforgetOTP()
-                }
-
             }
         }
         binding.ivBack.setOnClickListener { findNavController().popBackStack() }
@@ -177,11 +168,8 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
                 if (type=="login"){
                     login()
                 }else{
-                    if (entityType=="phone"){
+
                         verifyMobileOtp()
-                    }else{
-                       // verifyEmailOtp()
-                    }
                 }
 
             }
@@ -199,7 +187,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
                 val response: ForgetPasswordVerifyResponse = Gson().fromJson(message, ForgetPasswordVerifyResponse::class.java)
                 if (!response.error){
                     if (response.data.user.isNotEmpty()) {
-                       // forgetPassword()
+                        forgetPassword()
                     } else {
                         showToast(activity, response.message)
                     }
@@ -214,8 +202,8 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
         })
     }
 
-
     private fun verifyMobileOtp() {
+        progressBar?.hideProgress()
         val requestData = hashMapOf<String, Any?>()
         requestData["user_id"] = refID
         requestData["otp"] = binding.edtOtpLogin.text.toString()
@@ -224,32 +212,11 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
                 val response: ForgetPasswordVerifyResponse = Gson().fromJson(message, ForgetPasswordVerifyResponse::class.java)
                 if (!response.error){
                     if (response.data.user.isNotEmpty()) {
-                        mobileToken=response.data.user
-                        mobileVerified="1"
-
-                        cancelTimer()
-                        val result = Bundle()
-                        result.putString("mobileToken", mobileToken) // Make sure you're setting the right key
-
-                        val result1= Bundle()
-                        result1.putString("mobileVerified", "1")       // This sets the mobileVerified status to 1
-
-                        parentFragmentManager.setFragmentResult("mobileTokenKey", result)
-                        parentFragmentManager.setFragmentResult("mobileVerifiedKey", result1)
-                        findNavController().popBackStack()
-                     // forgetPassword()
+                        forgetPassword()
                     } else {
-                        mobileVerified="0"
-                        val result1=Bundle()
-                        result1.putString("mobileVerified", "0")       // This sets the mobileVerified status to 1
-                        parentFragmentManager.setFragmentResult("mobileVerifiedKey", result1)
-                        Toast.makeText(activity, "Unable to verify OTP", Toast.LENGTH_SHORT).show()
+                        showToast(activity, response.message)
                     }
                 }else{
-                    mobileVerified="0"
-                    val result1=Bundle()
-                    result1.putString("mobileVerified", "0")       // This sets the mobileVerified status to 1
-                    parentFragmentManager.setFragmentResult("mobileVerifiedKey", result1)
                     showToast(activity, response.message)
                 }
 
@@ -261,11 +228,12 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
         })
     }
 
-    /*private fun forgetPassword() {
+    private fun forgetPassword() {
+        progressBar?.hideProgress()
         val requestData = hashMapOf<String, Any?>()
         requestData["user_id"] = refID
         requestData["password"] = password
-        requestData["repassword"] = Cpassword
+        requestData["repassword"] = password
         UtilMethods.forgetPassword(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: ForgetPasswordResponse = Gson().fromJson(message, ForgetPasswordResponse::class.java)
@@ -290,9 +258,10 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
                 Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
             }
         })
-    }*/
+    }
 
     private fun login() {
+        progressBar?.hideProgress()
         if (entityType == "phone") entity = "+91$entity"
         val requestData = hashMapOf<String, Any?>()
         requestData["user_id"] = refID
@@ -306,8 +275,6 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
                 if (response.error==false){
                     val createSession = response.data?.let { userSession.createUserSession(it) }
                     if (createSession == true) {
-                        userSession.setData(Constant.USER_TYPE_NAME,response.data.user_type_name.toString())
-                        userSession.setData(Constant.TPINSTATUS,response.data.Tpin_status.toString())
                         sendToMainScreen();
                     } else {
                         Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
@@ -347,78 +314,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
         }
     }
 
-
-    private fun resendOTP(loginType: String, entity: String) {
-
-        val requestData = hashMapOf<String, Any?>()
-        requestData["user_id"] = refID
-        requestData["entity"] = entity
-        requestData["password"] = password
-        requestData["deviceId"] = CommonClass.getDeviceId(myActivity)
-
-        val getHash = GetKeyHash(myActivity)
-        val finalData = getHash.getHash(requestData)
-        UtilMethods.resendOTP(requireContext(), finalData, refID,object : MCallBackResponse {
-            override fun success(from: String, message: String) {
-                val response: NewLoginResponse =
-                    Gson().fromJson(message, NewLoginResponse::class.java)
-                if (response.error == false) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Otp send successfully to your mobile number",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Unable to Send Otp to your mobile",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                }
-
-            }
-
-            override fun fail(from: String) {
-                showToast(requireContext(), from)
-            }
-        })
-    }
-
-    private fun resendforgetOTP() {
-
-        val requestData = hashMapOf<String, Any?>()
-        requestData["user_id"] = refID
-
-
-        UtilMethods.resendforgetOTP(requireContext(), requestData, refID,object : MCallBackResponse {
-            override fun success(from: String, message: String) {
-                val response: NewLoginResponse =
-                    Gson().fromJson(message, NewLoginResponse::class.java)
-                if (response.error == false) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Otp send successfully to your mobile number",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Unable to Send Otp to your mobile",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-            }
-
-            override fun fail(from: String) {
-                showToast(requireContext(), from)
-            }
-        })
-    }
-
-        override fun onPause() {
+    override fun onPause() {
         super.onPause()
         if (isTimerRunning) {
             cancelTimer()
@@ -427,7 +323,7 @@ class VerifyOtpFragment : BaseFragment<FragmentVerifyOtpBinding>(FragmentVerifyO
 
     override fun onResume() {
         super.onResume()
-        countDownTimer.start()
+//        countDownTimer.start()
     }
 
 

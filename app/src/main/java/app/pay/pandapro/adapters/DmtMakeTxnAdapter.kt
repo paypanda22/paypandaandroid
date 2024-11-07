@@ -35,11 +35,16 @@ class DmtMakeTxnAdapter(
         holder.tvAmount.text=list[position].amount.toString()
         holder.tvUtr.text=list[position].utr ?: ""
         when (list[position].response) {
-            0 -> {
+
+            1 -> {
+                holder.tvStatus.text="PENDING"
+                holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.pending))
+            }
+            2->{
                 holder.tvStatus.text="SUCCESS"
                 holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.green_700))
             }
-            1 -> {
+            3->{
                 holder.tvStatus.text="FAILED"
                 holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.red))
             }

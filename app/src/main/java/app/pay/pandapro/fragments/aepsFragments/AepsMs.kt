@@ -24,6 +24,7 @@ import app.pay.pandapro.R
 import app.pay.pandapro.activity.IntroActivity
 import app.pay.pandapro.adapters.AepsBanksAdapter
 import app.pay.pandapro.adapters.ScannerListAdapter
+import app.pay.pandapro.commonclass.ServiceChecker
 import app.pay.pandapro.databinding.DialogBankListBinding
 import app.pay.pandapro.databinding.DialogScannerDevicesBinding
 import app.pay.pandapro.databinding.FragmentAepsMsBinding
@@ -49,6 +50,11 @@ import com.google.gson.Gson
 
 
 class AepsMs : BaseFragment<FragmentAepsMsBinding>(FragmentAepsMsBinding::inflate) {
+    private var serviceChecker: ServiceChecker? = null
+    private var selectedAepsType: String = ""
+    var catId=""
+    var title=""
+    var bank="aeps2"
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
 
@@ -63,12 +69,13 @@ class AepsMs : BaseFragment<FragmentAepsMsBinding>(FragmentAepsMsBinding::inflat
         val data = result.data
         if (resultCode == Activity.RESULT_OK && data != null) {
             fData = data.getStringExtra("PID_DATA").toString()
-            if (fData.isNotEmpty()) {
-                scanFinger.validateFingerPrint(fData, object : OnClick {
+            if (!fData.isNullOrEmpty()) {
+                miniStatement(fData)
+               /* scanFinger.validateFingerPrint(fData, object : OnClick {
                     override fun onButtonClick() {
-                        miniStatement(fData)
+
                     }
-                })
+                })*/
 
             } else {
                 Toast.makeText(requireContext(), "No FingerPrint Data Found", Toast.LENGTH_SHORT).show()
@@ -93,11 +100,13 @@ class AepsMs : BaseFragment<FragmentAepsMsBinding>(FragmentAepsMsBinding::inflat
         requestData["adhaarnumber"] = aadhaarNumber
         requestData["data"] = data
         requestData["user_id"] = token
+        requestData["bank"] = bank
         UtilMethods.aepsMiniStatement(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: AepsMsResponse = Gson().fromJson(message, AepsMsResponse::class.java)
                 if (!response.error) {
                     if (response.data.ministatement.isNotEmpty()) {
+                        resetFragment()
                         ShowDialog.aepsMiniStmt(myActivity,response.data,response.message,object:MyClick{
                             override fun onClick() {
                                 resetFragment()
@@ -133,6 +142,31 @@ class AepsMs : BaseFragment<FragmentAepsMsBinding>(FragmentAepsMsBinding::inflat
         nullActivityCheck()
         userSession = UserSession(requireContext())
         scanFinger = ScanFinger(myActivity, userSession, startForScannerResult)
+
+        catId = arguments?.getString("catId").toString()
+        title = arguments?.getString("title").toString()
+        selectedAepsType = arguments?.getString("selectedAepsType").toString()
+        when (selectedAepsType) {
+            "Aeps 2" -> binding.radioGroupAepsType.check(R.id.aeps2)
+            "Aeps 4" -> binding.radioGroupAepsType.check(R.id.aeps4)
+        }
+        serviceChecker = ServiceChecker(requireContext(), userSession, requireActivity())
+
+        if(userSession.getBoolData(Constant.AEPS_ONBOARD)==true){
+            binding.aeps2Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcheck))
+        }else {
+            binding.aeps2Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcross))
+        }
+        if(userSession.getBoolData(Constant.AEPS_ONBOARD_INSTENT)==true){
+            binding.aeps4Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcheck))
+        }else{
+            binding.aeps4Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcross))
+        }
+        if(selectedAepsType== "Aeps 4"){
+            bank="aeps4"
+        }else {
+            bank="aeps2"
+        }
     }
 
     private fun nullActivityCheck() {
@@ -220,8 +254,27 @@ class AepsMs : BaseFragment<FragmentAepsMsBinding>(FragmentAepsMsBinding::inflat
         binding.btnProceed.setOnClickListener {
             if (validate()) {
                 scanFinger.yourDevicePackage(selectedPackage)
+            }else {
+                Toast.makeText(myActivity, "Please Validate User", Toast.LENGTH_SHORT).show()
+
             }
 
+        }
+        binding.radioGroupAepsType.setOnCheckedChangeListener { group, checkedId ->
+            // Check which radio button was clicked
+            when (checkedId) {
+                R.id.aeps2 -> {
+                    selectedAepsType = "Aeps 2"
+                    // Aeps 2 is selected
+                    serviceChecker?.checkService(title, catId,selectedAepsType)
+                }
+
+                R.id.aeps4 -> {
+                    selectedAepsType = "Aeps 4"
+                    // Aeps 4 is selected
+                    serviceChecker?.checkService(title, catId,selectedAepsType)
+                }
+            }
         }
     }
 
@@ -236,8 +289,7 @@ class AepsMs : BaseFragment<FragmentAepsMsBinding>(FragmentAepsMsBinding::inflat
             Toast.makeText(requireContext(), "Select Bank Name First", Toast.LENGTH_SHORT).show()
             return false
         } else if (selectedPackage.isEmpty()) {
-            Toast.makeText(requireContext(), "Select FingerPrint Device Model", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(requireContext(), "Select FingerPrint Device Model", Toast.LENGTH_SHORT).show()
             return false
         } else if (binding.edtCustomerAadhaar.text.toString()
                 .isEmpty() || aadhaarNumber.isEmpty()
@@ -351,7 +403,7 @@ class AepsMs : BaseFragment<FragmentAepsMsBinding>(FragmentAepsMsBinding::inflat
                 userSession.setData(Constant.SCANNER_PACKAGE, model[pos].getPackageName())
                 userSession.setData(Constant.SCANNER_IMAGE, model[pos].getImageURL())
                 binding.tvScannerName.text = model[pos].getDeviceName()
-                MyGlide.with(requireContext(), Uri.parse(Constant.Image_Base_URL+model[pos].getImageURL()),binding.ivScannerImage)
+                MyGlide.with(requireContext(), Uri.parse(Constant.PIMAGE_URL+model[pos].getImageURL()),binding.ivScannerImage)
                 binding.rlScanner.visibility= View.GONE
                 binding.rlDeviceSelected.visibility= View.VISIBLE
                 selectedPackage = model[pos].getPackageName()
@@ -371,13 +423,14 @@ class AepsMs : BaseFragment<FragmentAepsMsBinding>(FragmentAepsMsBinding::inflat
     override fun setData() {
         if (userSession.getData(Constant.DEVICE_NAME) != null) {
             binding.tvScannerName.text = userSession.getData(Constant.DEVICE_NAME)
-            MyGlide.with(requireContext(), Uri.parse(Constant.Image_Base_URL+userSession.getData(Constant.SCANNER_IMAGE).toString()),binding.ivScannerImage)
+            MyGlide.with(requireContext(), Uri.parse(Constant.PIMAGE_URL+userSession.getData(Constant.SCANNER_IMAGE).toString()),binding.ivScannerImage)
             binding.rlScanner.visibility= View.GONE
             binding.rlDeviceSelected.visibility= View.VISIBLE
         }
         if (userSession.getData(Constant.SCANNER_PACKAGE) != null) {
             selectedPackage = userSession.getData(Constant.SCANNER_PACKAGE).toString()
         }
+
     }
     private fun resetFragment() {
         binding.edtCustomerAadhaar.text?.clear()
@@ -386,4 +439,5 @@ class AepsMs : BaseFragment<FragmentAepsMsBinding>(FragmentAepsMsBinding::inflat
         bankIin = ""
         aadhaarNumber = ""
     }
+
 }

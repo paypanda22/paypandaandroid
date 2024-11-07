@@ -135,7 +135,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     Toast.makeText(requireContext(), "Enter a Valid Mobile No.", Toast.LENGTH_SHORT).show()
                 } else if (binding.edtPassword.text.toString().isEmpty()) {
                     binding.edtPassword.error = "Enter Password"
-                 /*   binding.edtPassword.setPaddingRelative(0, 0, 48.dpToPx(), 0)*/
+                   binding.edtPassword.setPaddingRelative(0, 0, 48.dpToPx(), 0)
                 }else if(!binding.tv1.isChecked) {
                     Toast.makeText(requireContext(), "Please Apply Terms and Conditions", Toast.LENGTH_SHORT).show()
                 }else {

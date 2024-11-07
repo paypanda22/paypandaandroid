@@ -75,7 +75,6 @@
                 app:boxStrokeColor="@color/green_600"
                 app:boxStrokeWidthFocused="2dp"
                 app:hintTextColor="@color/green_600"
-                app:helperText="10-digit number required"
                 app:helperTextTextColor="@color/grey_60">
 
                 <com.google.android.material.textfield.TextInputEditText

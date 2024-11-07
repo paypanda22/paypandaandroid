@@ -24,7 +24,9 @@ class RequestListAdapterDist (
         val tvStatus: TextView =itemView.findViewById(R.id.tvStatus)
         val tvAmount: TextView =itemView.findViewById(R.id.tvAmount)
         val user_type: TextView =itemView.findViewById(R.id.user_type)
-        val User_Name: TextView =itemView.findViewById(R.id.User_Name)
+        val User_Type: TextView =itemView.findViewById(R.id.User_Type)
+        val user_Mobile: TextView =itemView.findViewById(R.id.user_Mobile)
+        val Request_Date: TextView =itemView.findViewById(R.id.Request_Date)
         val authority_remark: TextView =itemView.findViewById(R.id.authority_remark)
 
     }
@@ -49,7 +51,9 @@ class RequestListAdapterDist (
         holder.tvAmount.text = list[position].amount.toString()
         holder.user_type.text = list[position].remark
         holder.tvStatus.text = list[position].status
-        holder.User_Name.text = list[position].user_id
+        holder.User_Type.text = list[position].requestTo.user_type_id.user_type
+        holder.user_Mobile.text = list[position].requestTo.mobile
+        holder.Request_Date.text = list[position].createdAt
         holder.authority_remark.text = list[position].authority_remark ?: ""
         if (list[position].status == "Approved") {
           /*  holder.mcvRequestItem.setCardBackgroundColor(

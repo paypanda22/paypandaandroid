@@ -38,7 +38,7 @@
         android:id="@+id/horizontalBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
+        android:gravity="center"
         android:orientation="horizontal"
         android:layout_below="@+id/topBar">
         <LinearLayout

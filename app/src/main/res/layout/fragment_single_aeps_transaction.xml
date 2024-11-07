@@ -156,12 +156,12 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_centerVertical="true"
-                       android:text="@string/bank_ref_no"
+                       android:text="Transaction Type"
                        android:layout_alignParentStart="true"
                        android:textSize="@dimen/_12ssp"
                        android:textColor="@color/bggrey_dark" />
                    <TextView
-                       android:id="@+id/tvBankRrn"
+                       android:id="@+id/transType"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_centerVertical="true"

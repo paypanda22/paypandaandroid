@@ -15,10 +15,12 @@
         android:padding="@dimen/_10sdp">
 
         <TextView
+            android:id="@+id/name1"
+            style="@style/mostserrat_bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name_"
-            style="@style/mostserrat_bold"
             android:textColor="@color/black"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,12 +28,17 @@
 
         <TextView
             android:id="@+id/tvAcName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="@dimen/_10ssp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text=""
+            android:layout_alignParentEnd="true"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_weight="4"
+            app:layout_constraintStart_toEndOf="@id/name1"
+            app:layout_constraintBottom_toTopOf="@+id/tvBankName"
+            app:layout_constraintWidth_percent="0.75"/>
 
         <TextView
             android:layout_width="wrap_content"

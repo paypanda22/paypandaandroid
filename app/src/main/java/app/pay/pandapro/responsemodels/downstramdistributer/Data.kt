@@ -9,6 +9,8 @@ data class Data(
     val is_approved: Boolean = false,
     val main_wallet: String = "",
     val name: String = "",
+    val mobile: String = "",
+    val email: String = "",
     val refer_id: String = "",
     val sponsor: List<Any> = listOf()
 )

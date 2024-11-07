@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp">
             <TextView
+                android:id="@+id/tvOpName1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Operator Name"
@@ -66,9 +67,11 @@
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tvOpName"
+                android:layout_toEndOf="@+id/tvOpName1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
+                android:gravity="end"
                 style="@style/mostserrat_bold"
                 android:textSize="@dimen/_12ssp"
                 android:layout_alignParentEnd="true"

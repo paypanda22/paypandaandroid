@@ -48,11 +48,11 @@ class AadharPayAdapter (
     override fun onBindViewHolder(holder: ViewHolder,@SuppressLint("RecyclerView") position: Int) {
         holder.txnID.text=list[position].txn_id
         holder.aadhar_no.text=list[position].aadhar_no.toString()
-       holder.nationalbankidentification.text=list[position].distributor_mobile.toString()
+       holder.nationalbankidentification.text=list[position].customer_mobile.toString()
         holder.date.text=list[position].createdAt
         holder.tvAmount.text=list[position].amount.toString()
         holder.bank_name.text=list[position].bank_name.toString()
-        holder.AadharNo.text=list[position].nationalbankidentification.toString()
+        holder.AadharNo.text=list[position].last_adhar.toString()
         holder.status_update_time.text=list[position].status_update_time.toString()
         when(list[position].response){
             "2"->{
@@ -80,7 +80,7 @@ class AadharPayAdapter (
                 holder.tvStatus.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.btn_grey))
                 holder.tvStatus.text="REFUNDED"
                 holder.tvStatus.setTextColor(ContextCompat.getColor(activity,R.color.black))
-                holder.ivShare.visibility= VISIBLE
+                holder.ivShare.visibility= GONE
                 holder.refresh.visibility= GONE
             }
         }

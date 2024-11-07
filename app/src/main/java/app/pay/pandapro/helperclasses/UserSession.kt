@@ -78,6 +78,7 @@ class UserSession(private val context: Context) {
             putString(Constant.PROFILE_PIC,data.profile)
             putString(Constant.USER_TOKEN,data.user)
             putString(Constant.MAIN_WALET,data.main_wallet.toString())
+            putString(Constant.LOCK_AMT,data.locking_amt)
             data.adhaarVerified?.let { putBoolean(Constant.ADHAAR_VERIFIED, it) }
             data.panVerified?.let { putBoolean(Constant.PAN_VERIFIED, it) }
             data.isIdentity_verified?.let { putBoolean(Constant.IDENTITY_VERIFIED, it) }
@@ -89,6 +90,7 @@ class UserSession(private val context: Context) {
             data.is_kycVid?.let { putBoolean(Constant.ISVIDEO, it) }
             data.is_personalDetails?.let { putBoolean(Constant.ISPERSONALDETAILS, it) }
             data.is_self_declare?.let { putBoolean(Constant.ISSELFDECLARE, it) }
+            putString(Constant.USER_TYPE_NAME,data.user_type_name.toString())
             putString(Constant.MOBILE,data.mobile)
             putString(Constant.EMAIL,data.email)
             putString(Constant.TPINSTATUS,data.Tpin_status)
@@ -139,6 +141,8 @@ class UserSession(private val context: Context) {
             putString(Constant.BUSINESS_NAME,data.business_name.toString())
            // putString(Constant.USERTYPE,data.user_type_id?.user_type.toString())
             putString(Constant.USER_TYPE_ID,data.user_type_id?._id.toString())
+
+           // data.user_type_id?.user_type?.let { setData(Constant.USER_TYPE_NAME,it) }
 
             val loginStepList= listOf(
                 data.isIdentity_verified,

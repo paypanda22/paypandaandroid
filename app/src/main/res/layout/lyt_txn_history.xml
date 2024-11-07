@@ -425,7 +425,7 @@
                 android:layout_marginVertical="@dimen/_5sdp"
                 android:gravity="center"
                 android:letterSpacing="0.25"
-                android:text="Powered By YOOPAY"
+                android:text="Powered By PayPanda"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold" />
         </LinearLayout>

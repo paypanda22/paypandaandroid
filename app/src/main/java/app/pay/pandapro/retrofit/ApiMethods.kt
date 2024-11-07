@@ -16,24 +16,24 @@ object ApiMethods {
 
     fun newForgetPasswordMobile(context: Context, obj: Any, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
-            val progressBar = CustomProgressBar()
-            progressBar.showProgress(context)
+       /*     val progressBar = CustomProgressBar()
+            progressBar.showProgress(context)*/
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val response = RetrofitFactory.getRetrofitInstance().create(GetData::class.java)
                         .newForgetPasswordMobile(obj).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
-                            progressBar.hideProgress()
+                          //  progressBar.hideProgress()
                             val responseBody = response.body() as JsonObject
                             callBackResponse.success("strresponse", responseBody.toString())
                         } else {
-                            progressBar.hideProgress()
+                          //  progressBar.hideProgress()
                             callBackResponse.fail("Request Failed.Response Body Null")
                         }
                     }
                 } catch (e: Exception) {
-                    progressBar.hideProgress()
+                  //  progressBar.hideProgress()
                     withContext(Dispatchers.Main) {
                         e.printStackTrace()
                         callBackResponse.fail("Request Failed.API ERROR")
@@ -48,24 +48,24 @@ object ApiMethods {
 
     fun newForgetPasswordEmail(context: Context, obj: Any, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
-            val progressBar = CustomProgressBar()
-            progressBar.showProgress(context)
+          /*  val progressBar = CustomProgressBar()
+            progressBar.showProgress(context)*/
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val response = RetrofitFactory.getRetrofitInstance().create(GetData::class.java)
                         .newForgetPasswordEmail(obj).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
-                            progressBar.hideProgress()
+                          //  progressBar.hideProgress()
                             val responseBody = response.body() as JsonObject
                             callBackResponse.success("strresponse", responseBody.toString())
                         } else {
-                            progressBar.hideProgress()
+                           // progressBar.hideProgress()
                             callBackResponse.fail("Request Failed.Response Body Null")
                         }
                     }
                 } catch (e: Exception) {
-                    progressBar.hideProgress()
+                   // progressBar.hideProgress()
                     withContext(Dispatchers.Main) {
                         e.printStackTrace()
                         callBackResponse.fail("Request Failed.API ERROR")
@@ -79,24 +79,24 @@ object ApiMethods {
 
     fun forgetPasswordOtpEmail(context: Context, obj: Any, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
-            val progressBar = CustomProgressBar()
-            progressBar.showProgress(context)
+        /*    val progressBar = CustomProgressBar()
+            progressBar.showProgress(context)*/
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val response = RetrofitFactory.getRetrofitInstance().create(GetData::class.java)
                         .forgetPasswordOtpEmail(obj).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
-                            progressBar.hideProgress()
+                           // progressBar.hideProgress()
                             val responseBody = response.body() as JsonObject
                             callBackResponse.success("strresponse", responseBody.toString())
                         } else {
-                            progressBar.hideProgress()
+                          //  progressBar.hideProgress()
                             callBackResponse.fail("Request Failed.Response Body Null")
                         }
                     }
                 } catch (e: Exception) {
-                    progressBar.hideProgress()
+                  //  progressBar.hideProgress()
                     withContext(Dispatchers.Main) {
                         e.printStackTrace()
                         callBackResponse.fail("Request Failed.API ERROR")
@@ -110,24 +110,24 @@ object ApiMethods {
 
     fun forgetPasswordOtpMobile(context: Context, obj: Any, callBackResponse: MCallBackResponse) {
         if (isNetworkAvailable(context)) {
-            val progressBar = CustomProgressBar()
-            progressBar.showProgress(context)
+         /*   val progressBar = CustomProgressBar()
+            progressBar.showProgress(context)*/
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val response = RetrofitFactory.getRetrofitInstance().create(GetData::class.java)
                         .forgetPasswordOtpMobile(obj).execute()
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
-                            progressBar.hideProgress()
+                           // progressBar.hideProgress()
                             val responseBody = response.body() as JsonObject
                             callBackResponse.success("strresponse", responseBody.toString())
                         } else {
-                            progressBar.hideProgress()
+                          //  progressBar.hideProgress()
                             callBackResponse.fail("Request Failed.Response Body Null")
                         }
                     }
                 } catch (e: Exception) {
-                    progressBar.hideProgress()
+                   // progressBar.hideProgress()
                     withContext(Dispatchers.Main) {
                         e.printStackTrace()
                         callBackResponse.fail("Request Failed.API ERROR")

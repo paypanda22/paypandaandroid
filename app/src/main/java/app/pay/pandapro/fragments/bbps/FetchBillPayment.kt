@@ -207,6 +207,11 @@ class FetchBillPayment : BaseFragment<FragmentFetchBillPaymentBinding>(FragmentF
                         ShowDialog.bbpsSuccess(myActivity, billPayResponse.data, response.message, object : MyClick {
                             override fun onClick() {
                                 bottomSheetDialog.dismiss()
+                                binding.edtAd1.text?.clear()
+                                binding.edtAd2.text?.clear()
+                                binding.edtAd3.text?.clear()
+                                binding.edtAd4.text?.clear()
+                                binding.edtAd5.text?.clear()
                             }
                         })
                     } else {

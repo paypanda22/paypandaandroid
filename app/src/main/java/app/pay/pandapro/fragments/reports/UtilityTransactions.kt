@@ -383,6 +383,7 @@ dBinding.edtBillers.setOnClickListener{
         bundle.putString("id", id)
         bottomSheet.arguments = bundle
         bottomSheet.show(parentFragmentManager, bottomSheet.tag)
+
     }
     private fun bbpsEnquiry(id:String) {
         val token = userSession.getData(Constant.USER_TOKEN).toString()
