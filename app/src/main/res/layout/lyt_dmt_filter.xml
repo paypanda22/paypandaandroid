@@ -105,6 +105,35 @@
                 android:hint="Filter by Txn Id /Mob No. /Ac No."
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/aepstxn"
+            style="@style/EditTextInput4"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtaepstxn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Filter by Txn Id"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:id="@+id/status1"
+            android:visibility="gone"
+            android:layout_height="@dimen/_36sdp">
+            <Spinner
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@drawable/spinner_background" />
+        </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/orderID"
             android:visibility="gone"
@@ -140,16 +169,17 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:visibility="gone"
             android:id="@+id/typeOperator1"
-            android:layout_height="@dimen/_36sdp"
-            style="@style/EditTextInput4">
+            android:layout_height="@dimen/_36sdp">
             <Spinner
 
                 android:id="@+id/typeOperator"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_36sdp"
                 android:background="@drawable/spinner_background" />
         </com.google.android.material.textfield.TextInputLayout>
 

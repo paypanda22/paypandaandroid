@@ -26,6 +26,7 @@ import app.pay.pandapro.R
 import app.pay.pandapro.activity.IntroActivity
 import app.pay.pandapro.adapters.AepsBanksAdapter
 import app.pay.pandapro.adapters.ScannerListAdapter
+import app.pay.pandapro.commonclass.ServiceChecker
 import app.pay.pandapro.databinding.DialogBankListBinding
 import app.pay.pandapro.databinding.DialogScannerDevicesBinding
 import app.pay.pandapro.databinding.FragmentAadhaarPayBinding
@@ -51,6 +52,11 @@ import com.google.gson.Gson
 
 
 class AadhaarPay : BaseFragment<FragmentAadhaarPayBinding>(FragmentAadhaarPayBinding::inflate) {
+    private var serviceChecker: ServiceChecker? = null
+    private var selectedAepsType: String = ""
+    var catId=""
+    var title=""
+    var bank="aeps2"
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
 
@@ -65,12 +71,13 @@ class AadhaarPay : BaseFragment<FragmentAadhaarPayBinding>(FragmentAadhaarPayBin
         val data = result.data
         if (resultCode == Activity.RESULT_OK && data != null) {
             fData = data.getStringExtra("PID_DATA").toString()
-            if (fData.isNotEmpty()) {
-                scanFinger.validateFingerPrint(fData, object : OnClick {
+            if (!fData.isNullOrEmpty()) {
+                cwWithAadhaarPay(fData)
+               /* scanFinger.validateFingerPrint(fData, object : OnClick {
                     override fun onButtonClick() {
-                       cwWithAadhaarPay(fData)
+
                     }
-                })
+                })*/
 
             } else {
                 Toast.makeText(requireContext(), "No FingerPrint Data Found", Toast.LENGTH_SHORT).show()
@@ -96,6 +103,7 @@ class AadhaarPay : BaseFragment<FragmentAadhaarPayBinding>(FragmentAadhaarPayBin
         requestData["mobilenumber"]=binding.edtCustomerMobile.text.toString()
         requestData["adhaarnumber"]=aadhaarNumber
         requestData["amount"]=binding.edtAmount.text.toString()
+        requestData["bank"]=bank
 
         UtilMethods.aepsAadhaarPay(requireContext(),requestData,object:MCallBackResponse{
             override fun success(from: String, message: String) {
@@ -139,6 +147,32 @@ class AadhaarPay : BaseFragment<FragmentAadhaarPayBinding>(FragmentAadhaarPayBin
         nullActivityCheck()
         userSession = UserSession(requireContext())
         scanFinger= ScanFinger(myActivity,userSession,startForScannerResult)
+
+        catId = arguments?.getString("catId").toString()
+        title = arguments?.getString("title").toString()
+        selectedAepsType = arguments?.getString("selectedAepsType").toString()
+        when (selectedAepsType) {
+            "Aeps 2" -> binding.radioGroupAepsType.check(R.id.aeps2)
+            "Aeps 4" -> binding.radioGroupAepsType.check(R.id.aeps4)
+        }
+        serviceChecker = ServiceChecker(requireContext(), userSession, requireActivity())
+
+        if(userSession.getBoolData(Constant.AEPS_ONBOARD)==true){
+            binding.aeps2Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcheck))
+        }else {
+            binding.aeps2Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcross))
+        }
+    if(userSession.getBoolData(Constant.AEPS_ONBOARD_INSTENT)==true){
+        binding.aeps4Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcheck))
+    }else{
+        binding.aeps4Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcross))
+    }
+
+        if(selectedAepsType== "Aeps 4"){
+            bank="aeps4"
+        }else {
+            bank="aeps2"
+             }
     }
 
     private fun nullActivityCheck() {
@@ -223,7 +257,28 @@ class AadhaarPay : BaseFragment<FragmentAadhaarPayBinding>(FragmentAadhaarPayBin
             if (validate()) {
                 scanFinger.yourDevicePackage(selectedPackage)
             }
+            else {
+                Toast.makeText(myActivity, "Please Validate User", Toast.LENGTH_SHORT).show()
 
+            }
+
+        }
+
+        binding.radioGroupAepsType.setOnCheckedChangeListener { group, checkedId ->
+            // Check which radio button was clicked
+            when (checkedId) {
+                R.id.aeps2 -> {
+                    selectedAepsType = "Aeps 2"
+                    // Aeps 2 is selected
+                    serviceChecker?.checkService(title, catId,selectedAepsType)
+                }
+
+                R.id.aeps4 -> {
+                    selectedAepsType = "Aeps 4"
+                    // Aeps 4 is selected
+                    serviceChecker?.checkService(title, catId,selectedAepsType)
+                }
+            }
         }
     }
 
@@ -252,7 +307,7 @@ class AadhaarPay : BaseFragment<FragmentAadhaarPayBinding>(FragmentAadhaarPayBin
             return false
         } else {
             val amt = binding.edtAmount.text.toString().toInt()
-            return if (amt < 100 || amt > 1000) {
+            return if (amt < 100 || amt > 10000) {
                 binding.edtAmount.error = "Enter a Valid Amount"
                 Toast.makeText(requireContext(), "Amount Should be between 100 and 10000", Toast.LENGTH_SHORT).show()
                 false
@@ -368,7 +423,7 @@ class AadhaarPay : BaseFragment<FragmentAadhaarPayBinding>(FragmentAadhaarPayBin
                 userSession.setData(Constant.SCANNER_PACKAGE, model[pos].getPackageName())
                 userSession.setData(Constant.SCANNER_IMAGE, model[pos].getImageURL())
                 binding.tvScannerName.text = model[pos].getDeviceName()
-                MyGlide.with(requireContext(), Uri.parse(Constant.Image_Base_URL+model[pos].getImageURL()),binding.ivScannerImage)
+                MyGlide.with(requireContext(), Uri.parse(Constant.PIMAGE_URL+model[pos].getImageURL()),binding.ivScannerImage)
                 binding.rlScanner.visibility=GONE
                 binding.rlDeviceSelected.visibility= VISIBLE
                 selectedPackage = model[pos].getPackageName()
@@ -387,13 +442,14 @@ class AadhaarPay : BaseFragment<FragmentAadhaarPayBinding>(FragmentAadhaarPayBin
     override fun setData() {
         if (userSession.getData(Constant.DEVICE_NAME) != null) {
             binding.tvScannerName.text = userSession.getData(Constant.DEVICE_NAME)
-            MyGlide.with(requireContext(), Uri.parse(Constant.Image_Base_URL+userSession.getData(Constant.SCANNER_IMAGE).toString()),binding.ivScannerImage)
+            MyGlide.with(requireContext(), Uri.parse(Constant.PIMAGE_URL+userSession.getData(Constant.SCANNER_IMAGE).toString()),binding.ivScannerImage)
             binding.rlScanner.visibility= GONE
             binding.rlDeviceSelected.visibility= VISIBLE
         }
         if (userSession.getData(Constant.SCANNER_PACKAGE) != null) {
             selectedPackage = userSession.getData(Constant.SCANNER_PACKAGE).toString()
         }
+
     }
 
 }

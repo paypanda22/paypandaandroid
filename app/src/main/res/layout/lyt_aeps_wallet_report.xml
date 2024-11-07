@@ -172,20 +172,20 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:visibility="gone"
+
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/TextAppearance.AppCompat.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="UTR : "
+                            android:text="Type : "
                             android:textStyle="bold"
                             android:textSize="@dimen/_9ssp"
                             android:textColor="@android:color/black" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/utr"
+                            android:id="@+id/type"
                             style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

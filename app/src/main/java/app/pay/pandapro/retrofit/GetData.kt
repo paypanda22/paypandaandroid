@@ -12,6 +12,7 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -506,7 +507,8 @@ fun aadhaarPayInvoice(@Path("id") id: String):Call<JsonObject>
                       @Query("end_date") end_date: String,
                       @Query("txn_id") txn_id: String,
                       @Query("page") page: String,
-                      @Query("count") count: String): Call<JsonObject>
+                      @Query("count") count: String,
+                      @Query("ststus") ststus: String): Call<JsonObject>
     @GET("api/payout/invoice/{id}")
     fun aepsPayoutInvoice(@Path("id") id: String): Call<JsonObject>
     @GET("api/payout/trans/enquiry/{id}")
@@ -547,13 +549,14 @@ fun aadhaarPayInvoice(@Path("id") id: String):Call<JsonObject>
 
 
     //YooPayAPIs
-    @POST("api/general/check/{pincode}")
+    @GET("api/pin/pinCode/{pincode}")
     fun getPinCodeData(@Path("pincode") pincode: String): Call<JsonObject>
 
-    @FormUrlEncoded
-    @POST("api/general/xml")
-    fun checkFData(@Field("xmlData") fData: String): Call<JsonObject>
-
+   // @FormUrlEncoded
+   // @POST("api/general/xml")
+    @Headers("Content-Type: application/xml") // Specify that you're sending XML data
+    @POST("rd/capture") // The endpoint for the POST request
+    fun checkFData(@Body xmlData: String): Call<JsonObject>
 
 
     //tpin
@@ -590,11 +593,16 @@ fun aadhaarPayInvoice(@Path("id") id: String):Call<JsonObject>
     @POST("api/user/fundReverseResendOtp")
     fun fundReverseResendOtp(@Body obj: Any, ): Call<JsonObject>
 
-    @POST(" api/aeps/merchantOnBoarding")
+    @POST("api/aeps/merchantOnBoarding")
     fun merchantOnBoarding(@Body obj: Any, ): Call<JsonObject>
 
     @GET("api/payout/account/enquiry/{id}")
     fun payoutenquiry(@Path("id") id: String): Call<JsonObject>
 
+    @POST("api/mainwallet/public/filter/all/users")
+    fun mainwallet(@Body obj: Any, ): Call<JsonObject>
+
+    @GET("api/aepstxn/{id}")
+    fun aepstxn(@Path("id") id: String): Call<JsonObject>
 
 }

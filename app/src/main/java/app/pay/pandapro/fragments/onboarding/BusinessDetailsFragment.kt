@@ -156,9 +156,9 @@ class BusinessDetailsFragment : BaseFragment<FragmentBusinessDetailsBinding>(Fra
         UtilMethods.getPinCodeData(requireContext(), pincode, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: PinCodeResponse = Gson().fromJson(message, PinCodeResponse::class.java)
-                binding.edtCity.setText(response.data.district_name)
-                binding.edtState.setText(response.data.state_name)
-                binding.edtArea.setText(response.data.office_name)
+                binding.edtCity.setText(response.data.city)
+                binding.edtState.setText(response.data.state)
+                binding.edtArea.setText(response.data.sub_distance)
             }
 
             override fun fail(from: String) {

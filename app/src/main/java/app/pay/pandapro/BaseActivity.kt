@@ -34,7 +34,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(), View.OnClic
         super.onCreate(savedInstanceState)
 
         // Apply fullscreen To All Activities
-        ActivityExtensions.fullscreen(this)
+        //ActivityExtensions.fullscreen(this)
 
         // Checking permissions
         try {
@@ -129,7 +129,11 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(), View.OnClic
         super.onDestroy()
         _binding = null // To avoid memory leaks
     }
-
+    override fun onResume() {
+        super.onResume()
+        // Call getDashBoardData whenever the activity resumes
+        getDashBoardData()
+    }
 
 }
 

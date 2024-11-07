@@ -94,7 +94,8 @@ class AepsPayoutAdapter(
                 holder.refresh.visibility = VISIBLE
             }
 
-            else -> {
+
+            1 -> {
                 holder.rlStatus.setBackgroundDrawable(
                     ContextCompat.getDrawable(
                         activity,
@@ -105,6 +106,18 @@ class AepsPayoutAdapter(
                 holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.black))
                 holder.ivShare.visibility = GONE
                 holder.refresh.visibility = VISIBLE
+            }
+            4->{
+                holder.rlStatus.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
+                        activity,
+                        R.color.grey_4
+                    )
+                )
+                holder.tvStatus.text = "REFUNDED"
+                holder.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.black))
+                holder.ivShare.visibility = GONE
+                holder.refresh.visibility = GONE
             }
         }
         holder.ivShare.setOnClickListener {

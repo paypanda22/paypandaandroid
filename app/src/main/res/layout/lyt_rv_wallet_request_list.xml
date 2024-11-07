@@ -145,7 +145,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="remarkByComany"
+                    android:text="Remark By Comany"
                     android:id="@+id/remarkByComanytest"
                     style="@style/mostserrat_bold"
                     android:layout_alignParentStart="true"
@@ -156,6 +156,7 @@
                     android:layout_toEndOf="@id/remarkByComanytest"
                     android:id="@+id/remarkByComany"
                     style="@style/mostserrat_bold"
+                    android:gravity="end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -164,9 +165,35 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10ssp" />
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amount"
+                    android:id="@+id/tvAmount1"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentStart="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_toEndOf="@id/tvAmount1"
+                    android:id="@+id/tvAmount"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text=""
+                    android:gravity="end"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+            </RelativeLayout>
         </LinearLayout>
 
-        <TextView
+      <!--  <TextView
             android:id="@+id/tvAmount"
             style="@style/mostserrat_bold"
             android:gravity="center"
@@ -176,7 +203,7 @@
             android:text="0000"
             android:layout_weight="2"
             android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp" />
+            android:textSize="@dimen/_13ssp" />-->
 
        <!-- <TextView
             android:id="@+id/tvStatus"

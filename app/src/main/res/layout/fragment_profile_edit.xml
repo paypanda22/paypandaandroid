@@ -104,7 +104,7 @@
                         android:layout_width="wrap_content"
                         style="@style/mostserrat_bold"
                         android:layout_height="wrap_content"
-                        android:text="Jyoti Vishwakarma"
+                        android:text=""
                         android:textColor="#FBFBFB"
                         android:textStyle="bold"
                         android:textSize="21sp"/>

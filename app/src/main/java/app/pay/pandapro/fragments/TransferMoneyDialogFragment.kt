@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import app.pay.pandapro.R
+import app.pay.pandapro.fragments.ReverseMoneyDialogFragment
+import app.pay.pandapro.fragments.ReverseMoneyDialogFragment.Companion
 import app.pay.pandapro.helperclasses.ShowDialog.Companion.bottomDialogSingleButton
 import app.pay.pandapro.helperclasses.UserSession
 import app.pay.pandapro.helperclasses.Utils.Companion.showToast
@@ -26,19 +29,24 @@ class TransferMoneyDialogFragment : DialogFragment() {
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
     private lateinit var viewlist: MutableList<app.pay.pandapro.responsemodels.moneytransfer.Data>
-
+    private var walletAmt = "0"
+    private var lock_amt = "0"
 
     companion object {
         private const val ARG_VALUE = "value"
         private const val ARG_REFER_ID = "refer_id"
         private const val ARG_BALANCE = "balance"
+        private const val MOBILE = "mobile"
+        private const val NAME = "name"
 
-        fun newInstance(value: String,id:String,balance:String): TransferMoneyDialogFragment {
+        fun newInstance(value: String,id:String,balance:String,mobile:String,name:String): TransferMoneyDialogFragment {
             val fragment = TransferMoneyDialogFragment()
             val args = Bundle()
             args.putString(ARG_VALUE, value)
             args.putString(ARG_REFER_ID, id)
             args.putString(ARG_BALANCE, balance)
+            args.putString(MOBILE, mobile)
+            args.putString(NAME, name)
             fragment.arguments = args
             return fragment
         }
@@ -53,39 +61,71 @@ class TransferMoneyDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userSession = UserSession(requireContext())
+        walletAmt= userSession.getData(Constant.MAIN_WALET).toString()
+        lock_amt= userSession.getData(Constant.LOCK_AMT).toString()
         val tvBalance = view.findViewById<TextView>(R.id.tvBalance)
+        val mobileMo = view.findViewById<TextView>(R.id.mobile)
         val edtTPin = view.findViewById<EditText>(R.id.edtTPin)
+        val llTPin = view.findViewById<LinearLayout>(R.id.llTPin)
         val fund = view.findViewById<EditText>(R.id.fund)
         val btnTransfer = view.findViewById<Button>(R.id.btnTransfer)
         val refer_id = view.findViewById<TextView>(R.id.refer_id)
+        val NAme = view.findViewById<TextView>(R.id.NAme)
 
         // Set the balance text (you can pass this value as an argument)
         val balance = arguments?.getString(ARG_BALANCE)
         val referId = arguments?.getString(ARG_REFER_ID)
         val value = arguments?.getString(ARG_VALUE)
-        tvBalance.text = "Balance:-$balance"
-        refer_id.text = "Refer ID:-$referId"
+        val  mobile = arguments?.getString(MOBILE)
+        val  name = arguments?.getString(NAME)
 
+        refer_id.text = "Refer ID:-  $referId"
+        mobileMo.text = "Mob:-  $mobile"
+        NAme.text = "Name:-  $name"
+        val walletAmtDouble = walletAmt.toDoubleOrNull() ?: 0.0
+        val lockingDouble = lock_amt.toDoubleOrNull() ?: 0.0
+        val available_bal = walletAmtDouble - lockingDouble
+
+        tvBalance.text = "Available Balance:-  $available_bal"
         fund.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                edtTPin.visibility = View.GONE
+                llTPin.visibility = View.GONE
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 while (count == 2)
-                    edtTPin.visibility = View.GONE
+                    llTPin.visibility = View.GONE
             }
 
             override fun afterTextChanged(s: Editable?) {
-                edtTPin.visibility = View.VISIBLE
+                llTPin.visibility = View.VISIBLE
+                val input = s.toString().toIntOrNull() ?: 0  // Convert input to integer or use 0 if empty
+
+                when {
+                    input < 100 -> {
+                        fund.error = "Minimum value is 100"
+                    }
+                    input > 1000000 -> {
+                        fund.error = "Maximum value is 100000"
+                    }
+                    else -> {
+                        fund.error = null  // Clear any error if within range
+                    }
+                }
             }
         })
 
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         // Handle button click
         btnTransfer.setOnClickListener {
-            if (TextUtils.isEmpty(edtTPin.text)) {
-                Toast.makeText(requireContext(), "Please Enter Tpin", Toast.LENGTH_SHORT)
+            val  amount=fund.text.toString()
+            if(amount == null || amount < 100.toString()) {
+                fund.error = "Minimum amount is 100"
+                Toast.makeText(activity, "Please enter at least 100", Toast.LENGTH_SHORT).show()
+            } else if(fund.text.toString().isEmpty()){
+                Toast.makeText(activity, "Please Enter Amount", Toast.LENGTH_SHORT).show()
+            }else if(edtTPin.text.toString().isEmpty()){
+                Toast.makeText(activity, "Please Enter TPin", Toast.LENGTH_SHORT).show()
             } else {
                 moneyTreansfer(
                     requireActivity(),

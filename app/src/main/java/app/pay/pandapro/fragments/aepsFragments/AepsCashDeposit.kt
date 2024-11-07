@@ -24,6 +24,7 @@ import app.pay.pandapro.R
 import app.pay.pandapro.activity.IntroActivity
 import app.pay.pandapro.adapters.CdBanksAdapter
 import app.pay.pandapro.adapters.ScannerListAdapter
+import app.pay.pandapro.commonclass.ServiceChecker
 import app.pay.pandapro.databinding.DialogBankListBinding
 import app.pay.pandapro.databinding.DialogScannerDevicesBinding
 import app.pay.pandapro.databinding.FragmentROfferBinding
@@ -35,6 +36,7 @@ import app.pay.pandapro.helperclasses.ScanFinger
 import app.pay.pandapro.helperclasses.ShowDialog
 import app.pay.pandapro.helperclasses.UserSession
 import app.pay.pandapro.helperclasses.Utils
+import app.pay.pandapro.helperclasses.Utils.Companion.showToast
 import app.pay.pandapro.interfaces.CdBankClick
 import app.pay.pandapro.interfaces.MCallBackResponse
 import app.pay.pandapro.interfaces.MyClick
@@ -51,7 +53,11 @@ import com.google.gson.Gson
 class AepsCashDeposit : BaseFragment<FragmentROfferBinding>(FragmentROfferBinding::inflate) {
     private lateinit var userSession: UserSession
     private lateinit var myActivity:FragmentActivity
-
+    private var serviceChecker: ServiceChecker? = null
+    private var selectedAepsType: String = ""
+    var catId=""
+    var title=""
+    var bank="aeps2"
     private var selectedPackage = ""
     private var fData=""
     private var bankIin = ""
@@ -63,12 +69,13 @@ class AepsCashDeposit : BaseFragment<FragmentROfferBinding>(FragmentROfferBindin
         val data = result.data
         if (resultCode == Activity.RESULT_OK && data != null) {
             fData = data.getStringExtra("PID_DATA").toString()
-            if (fData.isNotEmpty()) {
-                scanFinger.validateFingerPrint(fData, object : OnClick {
+            if (!fData.isNullOrEmpty()) {
+                cashDeposit(fData)
+               /* scanFinger.validateFingerPrint(fData, object : OnClick {
                     override fun onButtonClick() {
-                        cashDeposit(fData)
+
                     }
-                })
+                })*/
 
             } else {
                 Toast.makeText(requireContext(), "No FingerPrint Data Found", Toast.LENGTH_SHORT).show()
@@ -95,6 +102,7 @@ class AepsCashDeposit : BaseFragment<FragmentROfferBinding>(FragmentROfferBindin
         requestData["adhaarnumber"]=aadhaarNumber
         requestData["transactionType"]="M"
         requestData["amount"]=binding.edtAmount.text.toString().toInt()
+        requestData["bank"]=bank
 
         UtilMethods.aepsCashDeposit(requireContext(),requestData,object:MCallBackResponse{
             override fun success(from: String, message: String) {
@@ -143,6 +151,35 @@ resetFragment()
         nullActivityCheck()
         userSession= UserSession(requireContext())
         scanFinger= ScanFinger(myActivity,userSession,startForScannerResult)
+
+        catId = arguments?.getString("catId").toString()
+        title = arguments?.getString("title").toString()
+        selectedAepsType = arguments?.getString("selectedAepsType").toString()
+        when (selectedAepsType) {
+            "Aeps 2" -> binding.radioGroupAepsType.check(R.id.aeps2)
+            "Aeps 4" -> binding.radioGroupAepsType.check(R.id.aeps4)
+        }
+
+
+        serviceChecker = ServiceChecker(requireContext(), userSession, requireActivity())
+
+        if(userSession.getBoolData(Constant.AEPS_ONBOARD)==true){
+            binding.aeps2Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcheck))
+        }else {
+            binding.aeps2Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcross))
+        }
+        if(userSession.getBoolData(Constant.AEPS_ONBOARD_INSTENT)==true){
+            binding.aeps4Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcheck))
+        }else{
+            binding.aeps4Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcross))
+        }
+
+        if(selectedAepsType== "Aeps 4"){
+            bank="aeps4"
+
+        }else {
+            bank="aeps2"
+        }
     }
 
     private fun nullActivityCheck() {
@@ -227,8 +264,29 @@ resetFragment()
             if (validate()) {
                 scanFinger.yourDevicePackage(selectedPackage)
 
+            }else {
+                  Toast.makeText(myActivity, "Please Validate User", Toast.LENGTH_SHORT).show()
+
             }
 
+        }
+
+            binding.radioGroupAepsType.setOnCheckedChangeListener { group, checkedId ->
+                // Check which radio button was clicked
+                when (checkedId) {
+                    R.id.aeps2 -> {
+                        selectedAepsType = "Aeps 2"
+                        // Aeps 2 is selected
+                        serviceChecker?.checkService(title, catId, selectedAepsType)
+                    }
+
+                    R.id.aeps4 -> {
+                        selectedAepsType = "Aeps 4"
+                        // Aeps 4 is selected
+                        serviceChecker?.checkService(title, catId, selectedAepsType)
+                    }
+
+            }
         }
     }
     private fun getBankList() {
@@ -368,7 +426,7 @@ resetFragment()
                 userSession.setData(Constant.SCANNER_PACKAGE, model[pos].getPackageName())
                 userSession.setData(Constant.SCANNER_IMAGE, model[pos].getImageURL())
                 binding.tvScannerName.text = model[pos].getDeviceName()
-                MyGlide.with(requireContext(), Uri.parse(Constant.Image_Base_URL+model[pos].getImageURL()),binding.ivScannerImage)
+                MyGlide.with(requireContext(), Uri.parse(Constant.PIMAGE_URL+model[pos].getImageURL()),binding.ivScannerImage)
                 binding.rlScanner.visibility= View.GONE
                 binding.rlDeviceSelected.visibility= View.VISIBLE
                 selectedPackage = model[pos].getPackageName()
@@ -386,7 +444,7 @@ resetFragment()
     override fun setData() {
         if (userSession.getData(Constant.DEVICE_NAME) != null) {
             binding.tvScannerName.text = userSession.getData(Constant.DEVICE_NAME)
-            MyGlide.with(requireContext(), Uri.parse(Constant.Image_Base_URL+userSession.getData(Constant.SCANNER_IMAGE).toString()),binding.ivScannerImage)
+            MyGlide.with(requireContext(), Uri.parse(Constant.PIMAGE_URL+userSession.getData(Constant.SCANNER_IMAGE).toString()),binding.ivScannerImage)
             binding.rlScanner.visibility= View.GONE
             binding.rlDeviceSelected.visibility= View.VISIBLE
         }

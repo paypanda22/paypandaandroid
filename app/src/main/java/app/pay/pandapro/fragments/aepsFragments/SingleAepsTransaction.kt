@@ -16,7 +16,11 @@ import app.pay.pandapro.BaseBottomFragment
 import app.pay.pandapro.activity.IntroActivity
 import app.pay.pandapro.databinding.FragmentSingleAepsTransactionBinding
 import app.pay.pandapro.helperclasses.UserSession
+import app.pay.pandapro.interfaces.MCallBackResponse
+import app.pay.pandapro.responsemodels.aepscashwithdrawinvoice.CashWithdrawInvoiceResponse
 import app.pay.pandapro.retrofit.Constant
+import app.pay.pandapro.retrofit.UtilMethods
+import com.google.gson.Gson
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -24,34 +28,43 @@ import java.io.IOException
 class SingleAepsTransaction : BaseBottomFragment<FragmentSingleAepsTransactionBinding>(FragmentSingleAepsTransactionBinding::inflate) {
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
-    private var date=""
-    private var bankRrn=""
-    private var bankName=""
-    private var balAmount=""
-    private var aadharNumber=""
-    private var amount=""
-    private var txnId=""
+    private var id=""
+
+    private lateinit var cashwithdrawinvoicelist: MutableList<app.pay.pandapro.responsemodels.aepscashwithdrawinvoice.Data>
     @SuppressLint("SetTextI18n")
     override fun init() {
         nullActivityCheck()
-        userSession=UserSession(requireContext())
-        date=arguments?.getString("date").toString()
-        bankRrn=arguments?.getString("bankRrn").toString()
-        bankName=arguments?.getString("bankName").toString()
-        balAmount=arguments?.getString("balAmount").toString()
-        aadharNumber=arguments?.getString("aadharNumber").toString()
-        amount=arguments?.getString("amount").toString()
-        txnId=arguments?.getString("txnId").toString()
-        binding.tvDate.text=date
-        binding.tvAadhaarNumber.text= "xxxx-xxxx-$aadharNumber"
-        binding.tvBankName.text=bankName
-        binding.tvBalanceAmount.text=balAmount
-        binding.tvTxnAmount.text=amount
-        binding.tvBankRrn.text=bankRrn
-        binding.tvTxnId.text=txnId
+        userSession = UserSession(requireContext())
+        id = arguments?.getString("id").toString()
+        aepstxn(id)
+    }
 
+    private fun aepstxn(id:String) {
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+        UtilMethods.aepstxn(requireContext(), id, token, object : MCallBackResponse {
+            @SuppressLint("SetTextI18n")
+            override fun success(from: String, message: String) {
+                val response: CashWithdrawInvoiceResponse = Gson().fromJson(message, CashWithdrawInvoiceResponse::class.java)
+                if (!response.error) {
+                    cashwithdrawinvoicelist = mutableListOf()
+                    cashwithdrawinvoicelist.add(response.data)
+                    binding.tvTxnId.text=response.data.txn_id
+                    binding.tvDate.text=response.data.createdAt
+                    binding.tvAadhaarNumber.text= response.data.adhaar_number
+                    binding.tvBankName.text=response.data.bank_name
+                    binding.tvBalanceAmount.text=response.data.amount.toString()
+                    binding.tvTxnAmount.text=response.data.totalAmount.toString()
+                    binding.transType.text=response.data.type.toString()
+                    binding.tvCspName.text=response.data.shop_name
+                } else {
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                }
+            }
 
-
+            override fun fail(from: String) {
+                Toast.makeText(requireContext(), from, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun nullActivityCheck() {
@@ -109,7 +122,6 @@ class SingleAepsTransaction : BaseBottomFragment<FragmentSingleAepsTransactionBi
     }
 
     override fun setData() {
-        binding.tvCspName.text=userSession.getData(Constant.NAME).toString()
 
     }
 

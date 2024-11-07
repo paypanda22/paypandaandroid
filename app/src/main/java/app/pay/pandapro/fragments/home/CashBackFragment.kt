@@ -45,6 +45,7 @@ class CashBackFragment : BaseFragment<FragmentCashBackBinding>(FragmentCashBackB
         if (userType.equals("Retailer")) {
             binding.earningreport.visibility=View.GONE
             binding.card13.visibility=View.GONE
+            binding.llAepsWallet.visibility=View.VISIBLE
         }
 
     }
@@ -58,13 +59,12 @@ class CashBackFragment : BaseFragment<FragmentCashBackBinding>(FragmentCashBackB
     }
 
     override fun addListeners() {
-        binding.rlNotifications.setOnClickListener { findNavController().navigate(R.id.action_global_notificationsFragment) }
         binding.llAllBalance.setOnClickListener {
-            CommonClass.getDashBoardData(requireActivity(),userSession)
-            binding.currBal.text=userSession.getData(Constant.MAIN_WALET).toString()
-            binding.mainWallet.text=userSession.getData(Constant.MAIN_WALET).toString()
-            binding.aepsWallet.text=userSession.getData(Constant.AEPS_WALLET) ?:"0.00"
-            binding.cashBackWallet.text=userSession.getData(Constant.CASHBACK_WALLET) ?: "0.00"
+            CommonClass.getDashBoardData(requireActivity(), userSession)
+            binding.currBal.text = userSession.getData(Constant.MAIN_WALET).toString()
+            binding.mainWallet.text = userSession.getData(Constant.MAIN_WALET).toString()
+            binding.aepsWallet.text = userSession.getData(Constant.AEPS_WALLET) ?: "0.00"
+            binding.cashBackWallet.text = userSession.getData(Constant.CASHBACK_WALLET) ?: "0.00"
         }
         binding.rlBalance.setOnClickListener {
             if (binding.walletDetails.visibility == View.GONE) {
@@ -80,7 +80,12 @@ class CashBackFragment : BaseFragment<FragmentCashBackBinding>(FragmentCashBackB
 
             }
         }
+
         binding.llAddMoney.setOnClickListener { findNavController().navigate(R.id.action_global_requestWalletFragment) }
+        binding.rlNotifications.setOnClickListener { findNavController().navigate(R.id.action_global_notificationsFragment) }
+
+
+
 
 //        binding.card1.setOnClickListener {
 //            findNavController().navigate(R.id.action_fragment_cash_back_to_profileEditFragment)

@@ -21,6 +21,7 @@ data class Data(
     val is_personalDetails: Boolean? = false,
     val is_self_declare: Boolean? = false,
     val main_wallet: String? = "",
+    val locking_amt: String? = "",
     val mobile: String? = "",
     val name: String? = "",
     val panVerified: Boolean? = false,

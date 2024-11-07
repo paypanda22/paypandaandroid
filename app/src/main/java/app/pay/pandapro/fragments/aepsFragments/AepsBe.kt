@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
@@ -27,6 +28,7 @@ import app.pay.pandapro.activity.CashDepositActivity
 import app.pay.pandapro.activity.IntroActivity
 import app.pay.pandapro.adapters.AepsBanksAdapter
 import app.pay.pandapro.adapters.ScannerListAdapter
+import app.pay.pandapro.commonclass.ServiceChecker
 import app.pay.pandapro.databinding.DialogBankListBinding
 import app.pay.pandapro.databinding.DialogScannerDevicesBinding
 import app.pay.pandapro.databinding.FragmentAepsBeBinding
@@ -54,6 +56,7 @@ import com.google.gson.Gson
 
 
 class AepsBe : BaseFragment<FragmentAepsBeBinding>(FragmentAepsBeBinding::inflate), FragmentAListener {
+
     private lateinit var userSession: UserSession
     private lateinit var myActivity: FragmentActivity
     private var selectedPackage = ""
@@ -63,18 +66,25 @@ class AepsBe : BaseFragment<FragmentAepsBeBinding>(FragmentAepsBeBinding::inflat
     private var isCashDeposit=false
     private lateinit var scanFinger: ScanFinger
     private lateinit var bankList: MutableList<Data>
-    private val startForScannerResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+    private var serviceChecker: ServiceChecker? = null
+    private var selectedAepsType: String = ""
+    private lateinit var startForScannerResult: ActivityResultLauncher<Intent>
+    var catId=""
+    var title=""
+    var bank="aeps2"
+   /* private val startForScannerResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
         val resultCode = result.resultCode
         val data = result.data
         if (resultCode == Activity.RESULT_OK && data != null) {
             fData = data.getStringExtra("PID_DATA").toString()
-            if (fData.isNotEmpty()) {
-                scanFinger.validateFingerPrint(fData, object : OnClick {
+            if (!fData.isNullOrEmpty()) {
+                balanceEnquiry(fData)
+               *//* scanFinger.validateFingerPrint(fData, object : OnClick {
                     override fun onButtonClick() {
-                        balanceEnquiry(fData)
+
                     }
                 })
-
+*//*
             } else {
                 Toast.makeText(requireContext(), "No FingerPrint Data Found", Toast.LENGTH_SHORT).show()
             }
@@ -82,6 +92,20 @@ class AepsBe : BaseFragment<FragmentAepsBeBinding>(FragmentAepsBeBinding::inflat
             Toast.makeText(requireContext(), "Unable to Capture FingerPrint Data", Toast.LENGTH_SHORT).show()
         }
 
+    }*/
+    private fun handleScannerResult(result: ActivityResult) {
+        val resultCode = result.resultCode
+        val data = result.data
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            val fData = data.getStringExtra("PID_DATA").toString()
+            if (fData.isNotEmpty()) {
+                balanceEnquiry(fData)
+            } else {
+                Toast.makeText(requireContext(), "No FingerPrint Data Found", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(requireContext(), "Unable to Capture FingerPrint Data", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
@@ -99,6 +123,7 @@ class AepsBe : BaseFragment<FragmentAepsBeBinding>(FragmentAepsBeBinding::inflat
         requestData["user_id"] = token
         requestData["is_iris"] = "NO"
         requestData["data"] = data
+        requestData["bank"] = bank
 
         UtilMethods.aepsBalanceEnquiry(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
@@ -106,7 +131,8 @@ class AepsBe : BaseFragment<FragmentAepsBeBinding>(FragmentAepsBeBinding::inflat
                 if (!response.error) {
                     ShowDialog.aepsBalanceEnq(myActivity, response.data, response.message,isCashDeposit, object : MyClick {
                         override fun onClick() {
-                            startCwFragment()
+                            resetFragment()
+                           // startCwFragment()
                         }
                     }, object : MyClick2 {
                         override fun onCancel() {
@@ -152,8 +178,37 @@ class AepsBe : BaseFragment<FragmentAepsBeBinding>(FragmentAepsBeBinding::inflat
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
+        startForScannerResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            handleScannerResult(result)
+        }
         scanFinger = ScanFinger(myActivity, userSession, startForScannerResult)
-    }
+        catId = arguments?.getString("catId").toString()
+        title = arguments?.getString("title").toString()
+        selectedAepsType = arguments?.getString("selectedAepsType").toString()
+        when (selectedAepsType) {
+            "Aeps 2" -> binding.radioGroupAepsType.check(R.id.aeps2)
+            "Aeps 4" -> binding.radioGroupAepsType.check(R.id.aeps4)
+        }
+
+
+        serviceChecker = ServiceChecker(requireContext(), userSession, requireActivity())
+
+        if(userSession.getBoolData(Constant.AEPS_ONBOARD)==true){
+            binding.aeps2Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcheck))
+        }else {
+            binding.aeps2Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcross))
+        }
+        if(userSession.getBoolData(Constant.AEPS_ONBOARD_INSTENT)==true){
+            binding.aeps4Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcheck))
+        }else{
+            binding.aeps4Onboad.setImageDrawable( ContextCompat.getDrawable(myActivity,R.drawable.iconcross))
+        }
+        if(selectedAepsType== "Aeps 4"){
+            bank="aeps4"
+        }else {
+            bank="aeps2"
+        }
+        }
 
     private fun nullActivityCheck() {
         if (activity != null) {
@@ -266,9 +321,27 @@ class AepsBe : BaseFragment<FragmentAepsBeBinding>(FragmentAepsBeBinding::inflat
         binding.btnProceed.setOnClickListener {
             if (validate()) {
                 scanFinger.yourDevicePackage(selectedPackage)
+            }else {
+                Toast.makeText(myActivity, "Please Validate User", Toast.LENGTH_SHORT).show()
+
             }
         }
+        binding.radioGroupAepsType.setOnCheckedChangeListener { group, checkedId ->
+            // Check which radio button was clicked
+            when (checkedId) {
+                R.id.aeps2 -> {
+                    selectedAepsType = "Aeps 2"
+                    // Aeps 2 is selected
+                    serviceChecker?.checkService(title, catId,selectedAepsType)
+                }
 
+                R.id.aeps4 -> {
+                    selectedAepsType = "Aeps 4"
+                    // Aeps 4 is selected
+                    serviceChecker?.checkService(title, catId,selectedAepsType)
+                }
+            }
+        }
     }
 
 
@@ -371,7 +444,7 @@ class AepsBe : BaseFragment<FragmentAepsBeBinding>(FragmentAepsBeBinding::inflat
                 userSession.setData(Constant.SCANNER_PACKAGE, model[pos].getPackageName())
                 userSession.setData(Constant.SCANNER_IMAGE, model[pos].getImageURL())
                 binding.tvScannerName.text = model[pos].getDeviceName()
-                MyGlide.with(requireContext(), Uri.parse(Constant.Image_Base_URL+model[pos].getImageURL()),binding.ivScannerImage)
+                MyGlide.with(requireContext(), Uri.parse(Constant.PIMAGE_URL+model[pos].getImageURL()),binding.ivScannerImage)
                 binding.rlScanner.visibility= View.GONE
                 binding.rlDeviceSelected.visibility= View.VISIBLE
                 selectedPackage = model[pos].getPackageName()
@@ -390,13 +463,14 @@ class AepsBe : BaseFragment<FragmentAepsBeBinding>(FragmentAepsBeBinding::inflat
     override fun setData() {
         if (userSession.getData(Constant.DEVICE_NAME) != null) {
             binding.tvScannerName.text = userSession.getData(Constant.DEVICE_NAME)
-            MyGlide.with(requireContext(), Uri.parse(Constant.Image_Base_URL+userSession.getData(Constant.SCANNER_IMAGE).toString()),binding.ivScannerImage)
+            MyGlide.with(requireContext(), Uri.parse(Constant.PIMAGE_URL+userSession.getData(Constant.SCANNER_IMAGE).toString()),binding.ivScannerImage)
             binding.rlScanner.visibility= View.GONE
             binding.rlDeviceSelected.visibility= View.VISIBLE
         }
         if (userSession.getData(Constant.SCANNER_PACKAGE) != null) {
             selectedPackage = userSession.getData(Constant.SCANNER_PACKAGE).toString()
         }
+
 
     }
 

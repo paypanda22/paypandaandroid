@@ -27,8 +27,10 @@ import com.google.gson.Gson
 
 class AepsWalletActions(
     private val myActivity: Activity,
-    private val userSession: UserSession
+    private val userSession: UserSession,
+
 ) {
+    private var amt: Int? = 0
     private var transferMode = "PA"
     fun openTransferToWalletDialog(type: String, beneID: String? = null,bankifsc: String? = null,bankaccountname: String? = null,bankname: String? = null,bankaccountnumber: String? = null,mobilenumber: String? = null,) {
         val toWalletDialog: Dialog = Dialog(myActivity)
@@ -83,46 +85,45 @@ class AepsWalletActions(
 
 
         dBinding.btnSubmit.setOnClickListener {
-            val amt = dBinding.edtAmount.text.toString().toInt()
+            amt = dBinding.edtAmount.text.toString().toIntOrNull()  // Update amt with valid input
             val token = userSession.getData(Constant.USER_TOKEN).toString()
+
             if (dBinding.edtOtpMobile.text.toString().length < 4) {
                 showToast(myActivity, "Enter Your Transaction PIN")
-            } else if (dBinding.edtAmount.text.toString().isEmpty()) {
-                dBinding.edtAmount.error = "Enter Amount to Transfer"
-            } else if (amt < 100 || amt > 100000) {
-                dBinding.edtAmount.error = "Minimum Amount Should be hundred"
-                }else {
-                if (amt > balance) {
-                    dBinding.edtAmount.error = "Insufficient Balance"
+            } else if (amt == null) {  // Check if amt is null
+                dBinding.edtAmount.error = "Enter a valid Amount to Transfer"
+            } else if (amt!! < 100 || amt!! > 100000) {
+                dBinding.edtAmount.error = "Amount should be between 100 and 100000"
+            } else if (amt!! > balance) {
+                dBinding.edtAmount.error = "Insufficient Balance"
+            } else {
+                if (type == "wallet") {
+                    processTransfer(dBinding, toWalletDialog)
                 } else {
-                    if (type == "wallet") {
-                        processTransfer(dBinding, toWalletDialog)
+                    if (beneID != null) {
+                        val requestData = hashMapOf<String, Any?>(
+                            "user_id" to token,
+                            "amount" to amt.toString(),
+                            "transId" to beneID,
+                            "tpin" to dBinding.edtOtpMobile.text.toString(),
+                            "paymentMode" to transferMode,
+                            "account_holder_name" to bankaccountname,
+                            "account_number" to bankaccountnumber,
+                            "bank_name" to bankname,
+                            "ifsc_code" to bankifsc,
+                            "mobile_number" to mobilenumber
+                        )
+
+                        val encodedData = AesEncryptOld.encodeObj(requestData)
+                        processBankTransfer(encodedData, toWalletDialog)
                     } else {
-                        if (beneID != null) {
-                            val requestData = hashMapOf<String, Any?>()
-                            requestData["user_id"] =  token
-                            requestData["amount"] = dBinding.edtAmount.text.toString()
-                            requestData["transId"] = beneID
-                            requestData["tpin"] = dBinding.edtOtpMobile.text.toString()
-                            requestData["paymentMode"] = transferMode
-                            requestData["account_holder_name"] = bankaccountname
-                            requestData["account_number"] = bankaccountnumber
-                            requestData["bank_name"] = bankname
-                            requestData["ifsc_code"] = bankifsc
-                            requestData["mobile_number"] = mobilenumber
-
-                            val encodedData = AesEncryptOld.encodeObj(requestData)
-                            processBankTransfer(encodedData, toWalletDialog)
-                        } else {
-                            showToast(myActivity, "No Beneficiary ID Provided")
-                        }
+                        showToast(myActivity, "No Beneficiary ID Provided")
                     }
-
                 }
-
             }
         }
     }
+
 
     private fun processBankTransfer(obj: Any, toWalletDialog: Dialog) {
         val token = userSession.getData(Constant.USER_TOKEN).toString()

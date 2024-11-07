@@ -157,7 +157,7 @@
             android:id="@+id/lytReply"
            style="@style/EditTextInput5"
             app:endIconMode="custom"
-           android:visibility="gone"
+
             android:layout_margin="@dimen/_10sdp"
             app:endIconDrawable="@drawable/ic_send">
             <LinearLayout
@@ -171,6 +171,7 @@
                 <Button
                     android:id="@+id/btnChooseFile"
                     android:layout_width="wrap_content"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:text="Choose File" />
 

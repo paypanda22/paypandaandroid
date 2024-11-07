@@ -55,7 +55,7 @@
                     android:layout_width="@dimen/_45sdp"
                     android:layout_height="@dimen/_45sdp"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/pp_app_icon" />
+                    android:src="@drawable/app_icon" />
             </RelativeLayout>
             <TextView
                 android:id="@+id/txn_id"
@@ -481,51 +481,62 @@
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_gravity="end"
-                android:gravity="end"
-                android:layout_height="wrap_content"
-                 android:id="@+id/btn">
 
-                <TextView
-                    android:id="@+id/tvShare"
-                    style="@style/mostserrat_bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:background="@drawable/btn_success"
-                    android:drawablePadding="10dp"
-                    android:gravity="end"
-                    android:paddingHorizontal="@dimen/_15sdp"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:text="@string/share"
-                    android:textColor="@color/white"
-                    app:drawableEndCompat="@drawable/share"
-                    app:drawableTint="@color/white" />
-
-                <TextView
-                    android:visibility="gone"
-                    android:id="@+id/tvDownload"
-                    style="@style/mostserrat_bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/_10sdp"
-                  android:layout_marginLeft="@dimen/_140sdp"
-                    android:background="@drawable/btn_success"
-                    android:drawablePadding="10dp"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="@dimen/_15sdp"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:text="@string/download"
-                    android:textColor="@color/white"
-                    app:drawableEndCompat="@drawable/download"
-                    app:drawableTint="@color/white" />
-            </RelativeLayout>
         </LinearLayout>
 
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_below="@+id/mainContent"
+        android:layout_width="wrap_content"
+        android:gravity="end"
+        android:layout_marginRight="@dimen/_17sdp"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn">
+
+            <TextView
+                android:id="@+id/tvShare"
+                style="@style/mostserrat_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/btn_success"
+                android:drawablePadding="10dp"
+                android:gravity="end"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:text="@string/share"
+                android:textColor="@color/white"
+                app:drawableEndCompat="@drawable/share"
+                app:drawableTint="@color/white" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvDownload"
+                style="@style/mostserrat_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_140sdp"
+                android:background="@drawable/btn_success"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:text="@string/download"
+                android:textColor="@color/white"
+                app:drawableEndCompat="@drawable/download"
+                app:drawableTint="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

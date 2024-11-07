@@ -374,17 +374,27 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
                 "Retailer" -> {
                     Log.d("Menu", "Setting Retailer menu visibility")
                     popup.menu.findItem(R.id.Company)?.isVisible = true
-                    popup.menu.findItem(R.id.Super_Distributer)?.isVisible = true
+                    popup.menu.findItem(R.id.Super_Distributer)?.isVisible = false
                     popup.menu.findItem(R.id.Distributer)?.isVisible = false
                     popup.menu.findItem(R.id.member)?.isVisible = false
+                    popup.menu.findItem(R.id.ZSM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSMSD)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSMSDDS)?.isVisible = true
                 }
 
                 "Distributor" -> {
                     Log.d("Menu", "Setting Distributor menu visibility")
                     popup.menu.findItem(R.id.Company)?.isVisible = true
-                    popup.menu.findItem(R.id.Super_Distributer)?.isVisible = true
+                    popup.menu.findItem(R.id.Super_Distributer)?.isVisible = false
                     popup.menu.findItem(R.id.member)?.isVisible = true
                     popup.menu.findItem(R.id.Distributer)?.isVisible = false
+                    popup.menu.findItem(R.id.ZSM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSMSD)?.isVisible = true
+                    popup.menu.findItem(R.id.ASMZSMSDDS)?.isVisible = false
                 }
 
                 "Super Distributor" -> {
@@ -393,12 +403,35 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
                     popup.menu.findItem(R.id.Super_Distributer)?.isVisible = false
                     popup.menu.findItem(R.id.member)?.isVisible = true
                     popup.menu.findItem(R.id.Distributer)?.isVisible = false
+                    popup.menu.findItem(R.id.ZSM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSM)?.isVisible = true
+                    popup.menu.findItem(R.id.ASMZSMSD)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSMSDDS)?.isVisible = false
                 }
                 "zsm"->{
-
+                    Log.d("Menu", "Setting Super Distributor menu visibility")
+                    popup.menu.findItem(R.id.Company)?.isVisible = true
+                    popup.menu.findItem(R.id.Super_Distributer)?.isVisible = false
+                    popup.menu.findItem(R.id.member)?.isVisible = true
+                    popup.menu.findItem(R.id.Distributer)?.isVisible = false
+                    popup.menu.findItem(R.id.ZSM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSMSD)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSMSDDS)?.isVisible = false
                 }
                 "asm"->{
-
+                    Log.d("Menu", "Setting Distributor menu visibility")
+                    popup.menu.findItem(R.id.Company)?.isVisible = true
+                    popup.menu.findItem(R.id.Super_Distributer)?.isVisible = false
+                    popup.menu.findItem(R.id.member)?.isVisible = true
+                    popup.menu.findItem(R.id.Distributer)?.isVisible = false
+                    popup.menu.findItem(R.id.ZSM)?.isVisible = true
+                    popup.menu.findItem(R.id.ASM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSM)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSMSD)?.isVisible = false
+                    popup.menu.findItem(R.id.ASMZSMSDDS)?.isVisible = false
                 }
 
                 else -> {
@@ -409,7 +442,7 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
             // Customize menu item appearance
             for (i in 0 until popup.menu.size()) {
                 val menuItem = popup.menu.getItem(i)
-                val spannableTitle = SpannableString(menuItem.title)
+                val spannableTitle = SpannableString(menuItem.toString())
                 spannableTitle.setSpan(
                     ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.grey_60)),
                     0,
@@ -423,7 +456,7 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
                     0
                 )
                 val typeface =
-                    ResourcesCompat.getFont(requireContext(), R.font.mostserrat_extra_bold)
+                    ResourcesCompat.getFont(requireContext(), R.font.mostserrat_bold)
                 if (typeface != null) {
                     spannableTitle.setSpan(
                         CustomTypefaceSpan("", typeface),
@@ -458,7 +491,26 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
                         paymentRequestToAdmin(start_date,end_date,selectedItem,count)
                         true
                     }
-
+                    R.id.ZSM ->{
+                        walletRequestListDist(start_date,end_date,selectedItem,count)
+                        true
+                    }
+                    R.id.ASM ->{
+                        paymentRequestToAdmin(start_date,end_date,selectedItem,count)
+                        true
+                    }
+                    R.id.ASMZSM->{
+                        walletRequestListDist(start_date,end_date,selectedItem,count)
+                        true
+                    }
+                    R.id.ASMZSMSD->{
+                        walletRequestListDist(start_date,end_date,selectedItem,count)
+                        true
+                    }
+                    R.id.ASMZSMSDDS->{
+                        walletRequestListDist(start_date,end_date,selectedItem,count)
+                        true
+                    }
                     else -> false
                 }
             }
@@ -595,6 +647,14 @@ class WalletRequestListFragment : BaseFragment<FragmentWalletRequestListBinding>
                     R.id.member -> {
                         // Perform filtering for "Fund Request by Member"
                         paymentRequestToAdmin(start_date, end_date, selectedItem, count)
+                    }
+                    R.id.ASMZSM->{
+                        walletRequestListDist(start_date, end_date, selectedItem, count)
+                    }
+                    R.id.ASMZSMSD->{
+                        walletRequestListDist(start_date, end_date, selectedItem, count)
+                    }R.id.ASMZSMSDDS->{
+                    walletRequestListDist(start_date, end_date, selectedItem, count)
                     }
                     else -> {
                         // Handle default case if needed

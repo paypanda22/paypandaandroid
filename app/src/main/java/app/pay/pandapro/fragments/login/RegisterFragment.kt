@@ -641,13 +641,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                     autoCompleteTextView.setAdapter(adapter)
 
                 } else {
-                    Toast.makeText(requireContext(), "Unable to Load Bank List", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), response.error.toString(), Toast.LENGTH_SHORT)
                         .show()
                 }
             }
 
             override fun fail(from: String) {
-                Toast.makeText(requireContext(), "Unable to Load Bank List", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), from.toString(), Toast.LENGTH_SHORT)
                     .show()
             }
         })

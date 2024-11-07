@@ -146,9 +146,11 @@ class AepsWalletReport : BaseFragment<FragmentAepsWalletReportBinding>(FragmentA
         filterDialog.window?.setGravity(Gravity.BOTTOM)
         dBinding.edtCustomerNumber.hint = null // Clear any existing hint
         dBinding.edtCustomerNumber.hint = "Filter by Aadhaar no" // Set dynamic hint
+        dBinding.status1.visibility= GONE
         dBinding.edtAccountNumber1.visibility= GONE
         dBinding.aadharTv.visibility= GONE
         dBinding.orderID.visibility= VISIBLE
+        dBinding.aepstxn.visibility= VISIBLE
         val todayDate = CommonClass.getLiveTime("yyyy-MM-dd")
         dBinding.edtFromDate.setText(todayDate)
         dBinding.edtToDate.setText(todayDate)
@@ -220,7 +222,7 @@ class AepsWalletReport : BaseFragment<FragmentAepsWalletReportBinding>(FragmentA
                     if (edtCustomerNumber.text.toString().isNotEmpty()) customerMobile = edtCustomerNumber.text.toString()
                     if (edtAccountNumber.text.toString().isNotEmpty()) accountNumber = edtAccountNumber.text.toString()
                 }
-                aepswalletReport(start_date, end_date, count,  dBinding.txnId.text.toString(),dBinding.orderIdtv.text.toString(),selectedItem);
+                aepswalletReport(start_date, end_date, count,  dBinding.edtaepstxn.text.toString(),dBinding.orderIdtv.text.toString(),selectedItem);
             }
             filterDialog.dismiss()
         }

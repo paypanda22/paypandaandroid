@@ -252,13 +252,14 @@
             android:gravity="center"
             style="@style/mostserrat_bold"/>
     </LinearLayout>
-    <pl.droidsonroids.gif.GifImageView
+   <!-- <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imageView"
+        android:visibility="gone"
         android:layout_width="@dimen/_75sdp"
         android:layout_height="@dimen/_75sdp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:src="@drawable/loading_anim" />
+        android:src="@drawable/loading_anim" />-->
 
 </LinearLayout>
 </LinearLayout>

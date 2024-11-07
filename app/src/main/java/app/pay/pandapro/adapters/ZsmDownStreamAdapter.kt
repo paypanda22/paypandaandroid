@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.pay.pandapro.R
 import app.pay.pandapro.adapters.DownStreamAdapter.ViewHolder
 import app.pay.pandapro.interfaces.DownStreamClick
+import app.pay.pandapro.interfaces.RetailerClick
 import app.pay.pandapro.interfaces.ZSMDownStreamClick
 import app.pay.pandapro.responsemodels.downstreamresponse.Data
 
@@ -35,10 +36,15 @@ class ZsmDownStreamAdapter (
         val is_approved: TextView = itemView.findViewById(R.id.is_approved)
         val transfer: TextView = itemView.findViewById(R.id.transfer)
         val Reversetransfer: TextView = itemView.findViewById(R.id.Reversetransfer)
+        val email: TextView = itemView.findViewById(R.id.email)
+        val mobile: TextView = itemView.findViewById(R.id.Mobile)
+        val walletreport: TextView = itemView.findViewById(R.id.walletreport)
+        val usertype: TextView = itemView.findViewById(R.id.usertype)
         val retailer: TextView = itemView.findViewById(R.id.retailer)
         val report: ImageView = itemView.findViewById(R.id.report)
-        val card_top: CardView = itemView.findViewById(R.id.card_top)
+       // val card_top: CardView = itemView.findViewById(R.id.card_top)
         val recyclerRetailer: RecyclerView = itemView.findViewById(R.id.recyclerRetailer)
+
     }
 
     override fun onCreateViewHolder(
@@ -64,7 +70,14 @@ class ZsmDownStreamAdapter (
         holder.NAme.text = data.name
         holder.refer_id.text = "Refer ID: ${data.refer_id}"
         holder.main_wallet.text = "Balance: ${data.main_wallet}"
-        holder.is_approved.text = "Approved: ${data.is_approved}"
+        holder.email.text = "Email: ${data.email}"
+        holder.mobile.text = " ${data.mobile}"
+        if(data.is_approved==true){
+            holder.is_approved.text = "Status:- Approved"
+        }else{
+            holder.is_approved.text = "Status:- Pending"
+        }
+        holder.usertype.text = "User Type: ${data.user_type}"
         // Set up the retailer click listener
         holder.retailer.setOnClickListener {
             if (expandedPositions[position]) {
@@ -100,12 +113,57 @@ class ZsmDownStreamAdapter (
         holder.report.setOnClickListener {
             downStreamClick.onViewReportClicked(holder, downstramlist, position)
         }
+        holder.walletreport.setOnClickListener{
+            downStreamClick.onViewWalletReportClicked(holder, downstramlist, position)
+        }
 
         // Check if retailer data is available
         val retailerData = retailerDataMap[position]
         if (retailerData != null && expandedPositions[position]) {
             holder.recyclerRetailer.layoutManager = LinearLayoutManager(activity)
-            val adapter = DownstreamRetailAdapter(activity, retailerData.toMutableList())
+            val adapter = DownstreamRetailAdapter(activity, retailerData.toMutableList(),object : RetailerClick{
+                override fun onItemClicked(
+                    holder: DownstreamRetailAdapter.ViewHolder,
+                    downstramlistRetailer: MutableList<app.pay.pandapro.responsemodels.downstreamRetailerResponse.Data>,
+                    position: Int,
+                    callback: (List<app.pay.pandapro.responsemodels.downstreamRetailerResponse.Data>) -> Unit
+                ) {
+
+                }
+
+                override fun onTransferMoneyClicked(
+                    holder: DownstreamRetailAdapter.ViewHolder,
+                    downstramlistRetailer: MutableList<app.pay.pandapro.responsemodels.downstreamRetailerResponse.Data>,
+                    position: Int
+                ) {
+
+                }
+
+                override fun onReverseMoneyClicked(
+                    holder: DownstreamRetailAdapter.ViewHolder,
+                    downstramlistRetailer: MutableList<app.pay.pandapro.responsemodels.downstreamRetailerResponse.Data>,
+                    position: Int
+                ) {
+
+                }
+
+                override fun onViewReportClicked(
+                    holder: DownstreamRetailAdapter.ViewHolder,
+                    downstramlistRetailer: MutableList<app.pay.pandapro.responsemodels.downstreamRetailerResponse.Data>,
+                    position: Int
+                ) {
+
+                }
+
+                override fun onViewWalletReportClicked(
+                    holder: DownstreamRetailAdapter.ViewHolder,
+                    downstramlistRetailer: MutableList<app.pay.pandapro.responsemodels.downstreamRetailerResponse.Data>,
+                    position: Int
+                ) {
+
+                }
+
+            })
             holder.recyclerRetailer.adapter = adapter
             holder.recyclerRetailer.visibility = View.VISIBLE
         } else {

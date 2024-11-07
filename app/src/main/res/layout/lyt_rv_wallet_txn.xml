@@ -52,7 +52,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tvTxnMessage"
+                        android:id="@+id/txn_id"
                         style="@style/pTextnormal"
                         android:ellipsize="end"
                         android:maxLength="40"
@@ -174,7 +174,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Txn Id : "
+                        android:text="Date : "
                         style="@style/mostserrat_bold"
                         android:textColor="@color/blue_900"
                         android:textSize="@dimen/_8ssp"
@@ -182,7 +182,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txn_id"
+                        android:id="@+id/tvTxnMessage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -204,10 +204,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="Type : "
                         style="@style/mostserrat_bold"
-
                         android:textColor="@color/blue_900"
                         android:textSize="@dimen/_8ssp"
                         android:textAllCaps="true"

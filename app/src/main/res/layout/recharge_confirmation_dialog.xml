@@ -90,7 +90,7 @@
                         android:layout_marginStart="@dimen/_3sdp"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:layout_marginBottom="@dimen/_3sdp"
-                        android:src="@drawable/airtel" />
+                        android:src="@drawable/mobile_recharge" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

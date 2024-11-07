@@ -22,7 +22,7 @@ class RequestListAdapter(
         val tvAmount:TextView=itemView.findViewById(R.id.tvAmount)
         val Method:TextView=itemView.findViewById(R.id.Method)
         val Remark:TextView=itemView.findViewById(R.id.Remark)
-        val remarkByComanytest:TextView=itemView.findViewById(R.id.remarkByComanytest)
+        val remarkByComany:TextView=itemView.findViewById(R.id.remarkByComany)
         val Date:TextView=itemView.findViewById(R.id.Date)
 
     }
@@ -43,7 +43,7 @@ class RequestListAdapter(
         holder.Method.text=list[position].method
         holder.Remark.text=list[position].remark
         holder.Date.text=list[position].createdAt
-        holder.remarkByComanytest.text=list[position].remarkByAdmin
+        holder.remarkByComany.text=list[position].remarkByAdmin
 
         if (list[position].status=="Approved"){
             /*holder.mcvRequestItem.setCardBackgroundColor(

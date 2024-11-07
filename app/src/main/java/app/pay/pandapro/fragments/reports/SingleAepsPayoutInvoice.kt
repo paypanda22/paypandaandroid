@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.widget.NestedScrollView
@@ -72,6 +73,7 @@ class SingleAepsPayoutInvoice : BaseBottomFragment<FragmentSingleAepsPayoutInvoi
                     binding.txnId.text=response.data.txn_id
                     binding.tvTxnAmount.text=response.data.amount.toString()
                     binding.tvUtr.text=response.data.utr.toString()
+                    binding.PaymentMode.text=response.data.paymentMode.toString()
                 } else {
                     Toast.makeText(requireContext(),response.message, Toast.LENGTH_SHORT).show()
                 }
@@ -116,7 +118,7 @@ class SingleAepsPayoutInvoice : BaseBottomFragment<FragmentSingleAepsPayoutInvoi
         return FileProvider.getUriForFile(context, "${context.packageName}.provider", file)
     }
 
-    private fun captureRelativeLayout(layout: NestedScrollView): Bitmap {
+    private fun captureRelativeLayout(layout: LinearLayout): Bitmap {
         val bitmap = Bitmap.createBitmap(layout.width, layout.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         layout.draw(canvas)

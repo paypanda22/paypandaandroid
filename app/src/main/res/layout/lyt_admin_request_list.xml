@@ -162,10 +162,35 @@
                     android:textSize="@dimen/_10ssp"
                     android:textColor="@color/black"/>
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
 
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amount"
+                    android:id="@+id/tvAmount1"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentStart="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_toEndOf="@id/tvAmount1"
+                    android:gravity="end"
+                    android:textAllCaps="true"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+            </RelativeLayout>
 
         </LinearLayout>
-        <TextView
+     <!--   <TextView
             android:id="@+id/tvAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -175,7 +200,7 @@
             android:layout_gravity="center_vertical"
             android:textSize="@dimen/_13ssp"
             android:gravity="center|center_vertical"
-            android:layout_weight="2"/>
+            android:layout_weight="2"/>-->
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

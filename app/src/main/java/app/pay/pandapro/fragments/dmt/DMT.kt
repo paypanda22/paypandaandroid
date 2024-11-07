@@ -96,7 +96,7 @@ class DMT(
                     dBinding.btnPay.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.bg_btn_grey))
                 }else{
                     dBinding.btnPay.isEnabled=true
-                    dBinding.btnPay.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.gradient_rect_bg))
+                    dBinding.btnPay.setBackgroundDrawable(ContextCompat.getDrawable(activity,R.drawable.gradient_rect_bg_rounded))
                 }
             }
         }
@@ -106,6 +106,7 @@ class DMT(
             dBinding.tvStatus.text = "Verified"
             dBinding.ivStatus.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_check_green))
             dBinding.tvStatus.setTextColor(ContextCompat.getColor(activity, R.color.green_700))
+
         } else {
             dBinding.tvValidateBene.visibility = VISIBLE
             dBinding.tvValidateText.visibility = VISIBLE
@@ -179,8 +180,11 @@ class DMT(
 
 
         }
-
+        dmtDialog.setOnDismissListener {
+            fragment.getBeneficiaryList()
+        }
         dmtDialog.setCancelable(true)
+
         dmtDialog.show()
 
 
@@ -318,6 +322,8 @@ class DMT(
         dBinding.edtBankName.setOnClickListener {
             if(apiID=="66bca8b95727c7563ad6e315"){
                 openBankListBankOneDialog(dBinding,dmtDialog)
+            }else if(apiID=="670e593e324d380f3be4fdb3"){
+                openBankListBankOneDialog(dBinding,dmtDialog)
             }else{
                 openBankListDialog(dBinding, dmtDialog)
             }
@@ -331,7 +337,9 @@ class DMT(
         dBinding.lytBankList.setEndIconOnClickListener {
             if (apiID == "66bca8b95727c7563ad6e315") {
                 openBankListBankOneDialog(dBinding,dmtDialog)
-            } else {
+            } else if(apiID=="670e593e324d380f3be4fdb3"){
+                openBankListBankOneDialog(dBinding,dmtDialog)
+            }else {
                 openBankListDialog(dBinding, dmtDialog)
             }
         }

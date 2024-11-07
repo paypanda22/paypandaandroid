@@ -10,5 +10,6 @@ interface AsmClick {
     fun onTransferMoneyClicked(holder: AsmAdapter.ViewHolder, downstramlistDistributer: MutableList<app.pay.pandapro.responsemodels.asmresponse.Data>, position: Int)
     fun onReverseMoneyClicked(holder: AsmAdapter.ViewHolder, downstramlistDistributer: MutableList<app.pay.pandapro.responsemodels.asmresponse.Data>, position: Int)
     fun onViewReportClicked(holder: AsmAdapter.ViewHolder, downstramlistDistributer: MutableList<app.pay.pandapro.responsemodels.asmresponse.Data>, position: Int)
+    fun onViewWalletReportClicked(holder: AsmAdapter.ViewHolder, downstramlistDistributer: MutableList<app.pay.pandapro.responsemodels.asmresponse.Data>, position: Int)
 
 }

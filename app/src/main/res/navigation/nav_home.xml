@@ -323,5 +323,10 @@
         android:name="app.pay.pandapro.fragments.reports.AepsPayoutReport"
         android:label="fragment_aeps_payout_report"
         tools:layout="@layout/fragment_aeps_payout_report" />
+    <fragment
+        android:id="@+id/WalletReportdownStarem"
+        android:name="app.pay.pandapro.fragments.reports.MainWalletDownSatremReport"
+        android:label="fragment_main_wallet_down_satrem_report"
+        tools:layout="@layout/fragment_main_wallet_down_satrem_report" />
 
 </navigation>

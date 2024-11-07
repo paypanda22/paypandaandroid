@@ -29,9 +29,74 @@
             style="@style/mostserrat_bold"/>
     </RelativeLayout>
     <LinearLayout
+        android:id="@+id/checkaeps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
         android:layout_below="@+id/topBar"
+        android:orientation="vertical">
+
+        <!-- Centered TextView -->
+        <TextView
+            android:id="@+id/selectBankText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Aeps Type"
+            style="@style/mostserrat_bold"
+            android:textSize="16sp"
+            android:textColor="@color/blue_900"
+            android:layout_gravity="center" />
+
+        <!-- Horizontal Linear Layout for Radio Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <RadioGroup
+                android:id="@+id/radioGroupAepsType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <RadioButton
+                    android:checked="true"
+                    android:id="@+id/aeps2"
+                    android:textSize="@dimen/_12sdp"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AEPS 2" />
+
+                <ImageView
+                    android:id="@+id/aeps2Onboad"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_54sdp"
+                    android:padding="@dimen/_8sdp"
+                    android:src="@drawable/iconcheck"
+                    android:text="onboarder" />
+                <RadioButton
+                    android:textSize="@dimen/_12sdp"
+                    style="@style/mostserrat_bold"
+                    android:id="@+id/aeps4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AEPS 4" />
+
+                <ImageView
+                    android:id="@+id/aeps4Onboad"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:padding="@dimen/_8sdp"
+                    android:src="@drawable/iconcheck"
+                    android:text="onboarder" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkaeps"
         android:orientation="vertical">
        <RelativeLayout
            android:layout_width="match_parent"

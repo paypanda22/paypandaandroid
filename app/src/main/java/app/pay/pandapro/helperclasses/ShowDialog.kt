@@ -363,7 +363,7 @@ class ShowDialog(private val context: Context) {
             bottomSheetDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             bottomSheetDialog.window?.attributes?.windowAnimations ?: R.style.DialogAnimationBottom
             bottomSheetDialog.window?.setGravity(Gravity.BOTTOM)
-            dBinding.tvAccountBalance.text = model.balanceamount
+            dBinding.tvAccountBalance.text = model.balanceamount.toString()
             dBinding.tvBankName.text = model.bank_name
             dBinding.tvBankRrn.text = model.bank_rrn
             dBinding.tvAadhar.text = "xxxx-xxxx-" + model.lastAadhar
@@ -416,6 +416,7 @@ class ShowDialog(private val context: Context) {
             dBinding.btnYes.setOnClickListener {
                 click.onClick()
                 bottomSheetDialog.dismiss()
+
             }
 
 
@@ -440,7 +441,7 @@ class ShowDialog(private val context: Context) {
             dBinding.tvDesc.text = message
             dBinding.tvAmount.text = model.amount
             dBinding.tvCustomerName.text = model.name
-            dBinding.tvAdhaarNumber.text = "xxxx-xxxx-${model.last_aadhar}"
+            dBinding.tvAdhaarNumber.text = "xxxx-xxxx-"+model.last_aadhar.toString()
 
             bottomSheetDialog.setCancelable(false)
             bottomSheetDialog.show()
@@ -757,13 +758,13 @@ class ShowDialog(private val context: Context) {
                                         .show()
 
                                 } else {
-                                    Toast.makeText(activity, "Unable to Load Bank List", Toast.LENGTH_SHORT)
+                                    Toast.makeText(activity, response.message, Toast.LENGTH_SHORT)
                                         .show()
                                 }
                             }
 
                             override fun fail(from: String) {
-                                Toast.makeText(activity, "Unable to Load Bank List", Toast.LENGTH_SHORT)
+                                Toast.makeText(activity, from.toString(), Toast.LENGTH_SHORT)
                                     .show()
                             }
                         })

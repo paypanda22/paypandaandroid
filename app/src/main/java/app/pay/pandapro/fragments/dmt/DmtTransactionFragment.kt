@@ -7,10 +7,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
@@ -52,6 +55,8 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
     private var accountNumber = ""
     private var search = ""
     private var count = 25
+    private var  selectdStatus:String = ""
+    var Types = listOf<String>()
     override fun init() {
         nullActivityCheck()
         userSession = UserSession(requireContext())
@@ -59,11 +64,11 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
         binding.rvDmtTransactions.visibility = GONE
         binding.llNoData.visibility = GONE
         binding.imageView.visibility = VISIBLE
-        getTransactionList(start_date, end_date, count,search);
+        getTransactionList(start_date, end_date, count,search,selectdStatus);
 
     }
 
-    private fun getTransactionList(startDate: String, endDate: String, count: Int,search:String) {
+    private fun getTransactionList(startDate: String, endDate: String, count: Int,search:String,status:String) {
 
         val token = userSession.getData(Constant.USER_TOKEN).toString()
         val requestData = hashMapOf<String, Any?>()
@@ -71,6 +76,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
         requestData["count"] = count
         requestData["page"] = 0
         requestData["min_amt"] = 0
+        requestData["status"] = status
         requestData["max_amt"] = 0
         requestData["start_date"] = startDate
         requestData["search"] = search
@@ -78,43 +84,51 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
 
         UtilMethods.dmtTransactionList(requireContext(), requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
-                val response: DmtTransactionListResponse = Gson().fromJson(message, DmtTransactionListResponse::class.java)
+                val response: DmtTransactionListResponse =
+                    Gson().fromJson(message, DmtTransactionListResponse::class.java)
+
                 if (!response.error) {
-                    if (txnList.isNotEmpty()) {
-                        txnList.clear()
-                    }
-                    txnList.addAll(response.data.trans)
-                    val clickListner = object : DmtTxnClickListener {
-                        override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<Tran>, pos: Int, type: Int) {
-                            when (type) {
-                                1 -> {
-                                    refreshTransactionStatus(model[pos])
-                                }
+                    // Check if trans data exists and is not empty
+                    if (response.data.trans.isNullOrEmpty()) {
+                        // No transactions found; show 'No Data' view
+                        binding.rvDmtTransactions.visibility = GONE
+                        binding.llNoData.visibility = VISIBLE
+                        binding.imageView.visibility = GONE
+                    } else {
+                        // Transactions found; clear and add data to the list
+                        if (txnList.isNotEmpty()) {
+                            txnList.clear()
+                        }
+                        txnList.addAll(response.data.trans)
 
-                                2 -> {
-                                    openOtpDialog(model[pos])
-                                }
-                                4->{
-
-                                    openViewDetailDialog(model[pos])
-                                }
-
-                                else -> {
-                                    openShareReceipt(model[pos].batchId.toString())
+                        // Set up the adapter and show the RecyclerView
+                        val clickListener = object : DmtTxnClickListener {
+                            override fun onItemClicked(
+                                holder: RecyclerView.ViewHolder,
+                                model: List<Tran>,
+                                pos: Int,
+                                type: Int
+                            ) {
+                                when (type) {
+                                    1 -> refreshTransactionStatus(model[pos])
+                                    2 -> openOtpDialog(model[pos])
+                                    4 -> openViewDetailDialog(model[pos])
+                                    else -> openShareReceipt(model[pos].batchId.toString())
                                 }
                             }
                         }
+                        dmtTxnAdapter =
+                            DmtTransactionListAdapter(myActivity, txnList, clickListener)
+                        binding.rvDmtTransactions.adapter = dmtTxnAdapter
+                        binding.rvDmtTransactions.layoutManager = LinearLayoutManager(myActivity)
+
+                        // Show the RecyclerView and hide 'No Data' layout
+                        binding.rvDmtTransactions.visibility = VISIBLE
+                        binding.llNoData.visibility = GONE
+                        binding.imageView.visibility = GONE
                     }
-                    dmtTxnAdapter = DmtTransactionListAdapter(myActivity, txnList, clickListner)
-                    binding.rvDmtTransactions.adapter = dmtTxnAdapter
-                    binding.rvDmtTransactions.layoutManager = LinearLayoutManager(myActivity)
-
-                    binding.rvDmtTransactions.visibility = VISIBLE
-                    binding.llNoData.visibility = GONE
-                    binding.imageView.visibility = GONE
-
-
                 } else {
+                    // Error in response; show 'No Data' view
                     binding.rvDmtTransactions.visibility = GONE
                     binding.llNoData.visibility = VISIBLE
                     binding.imageView.visibility = GONE
@@ -122,6 +136,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
             }
 
             override fun fail(from: String) {
+                // Failure in API call; show 'No Data' view
                 binding.rvDmtTransactions.visibility = GONE
                 binding.llNoData.visibility = VISIBLE
                 binding.imageView.visibility = GONE
@@ -130,7 +145,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
     }
 
 
-    private fun openShareReceipt(batchId: String) {
+        private fun openShareReceipt(batchId: String) {
         val bottomSheet = SingleDmtTransaction()
         val bundle = Bundle()
         bundle.putString("batchId", batchId)
@@ -220,7 +235,7 @@ class DmtTransactionFragment : BaseFragment<FragmentDmtTransactionBinding>(Fragm
         UtilMethods.dmtTxnEnquiry(requireContext(), model._id.toString(), token, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: DmtTxnEnqResponse = Gson().fromJson(message, DmtTxnEnqResponse::class.java)
-                getTransactionList(start_date, end_date, count,"")
+                getTransactionList(start_date, end_date, count,search,selectdStatus)
                // getTransactionList(start_date, end_date, count);
                 if (!response.error) {
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
@@ -267,13 +282,13 @@ private fun openViewDetailDialog(model: Tran){
     binding.BeneficiaryName.text=model.beneficiary_name.toString()
     binding.AccountNo.text=model.account_number.toString()
 
-    val zonedDateTime = ZonedDateTime.parse(model.updatedAt)
+    /*val zonedDateTime = ZonedDateTime.parse(model.createdAt)
 
     // Format it to a simpler form, like dd-MM-yyyy
     val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
-    val formattedDate = zonedDateTime.format(formatter)
+    val formattedDate = zonedDateTime.format(formatter)*/
 
-    binding.TransactionDate.text=formattedDate.toString()
+    binding.TransactionDate.text=model.createdAt.toString()
     binding.BankName.text=model.bank_name.toString()
     binding.IFSCCode.text=model.ifsc_code.toString()
     binding.RemitterMobileNo.text=model.customer_mobile.toString()
@@ -292,47 +307,27 @@ private fun openViewDetailDialog(model: Tran){
        binding.TDS.text=model.TDS.toString()
    }*/
     if (model.response == 1.toString()) {
-        when (model.tx_status.toString()) {
-            "0" -> {
-                binding.Status.text = "SUCCESS"
-                binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_success)
-            }
-            "1" -> {
-                binding.Status.text = "FAILED"
-                binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_failed)
-            }
-            "2" -> {
-                binding.Status.text = "In PROCESS"
-                binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_pending)
-            }
-            "3" -> {
-                binding.Status.text = "Initiate Refund"
-                binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_grey)
-            }
-            "4" -> {
-                binding.Status.text = "Refunded"
-                binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_grey)
-            }
-            "5" -> {
-                binding.Status.text = "In PROCESS"
-                binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
-                binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_pending)
-            }
-        }
+        binding.Status.text = "In PROCESS"
+        binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
+        binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_pending)
     } else if (model.response == 2.toString()) {
         binding.Status.text = "SUCCESS"
-
+        binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
+        binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_success)
 
 
     }else if(model.response == 3.toString()){
         binding.Status.text = "FAILED"
-    }else{
-        binding.Status.text = "Pending"
+        binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
+        binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_failed)
+    }else if(model.response == 4.toString()){
+        binding.Status.text = "Refunded"
+        binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
+        binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_grey)
+    } else{
+        binding.Status.text = "In PROCESS"
+        binding.Status.setTextColor(ContextCompat.getColor(myActivity, R.color.white))
+        binding.Status.background=ContextCompat.getDrawable(myActivity, R.drawable.btn_pending)
     }
     binding.UTRNoRRNNo.text=model.utr.toString()
 
@@ -361,7 +356,28 @@ private fun openViewDetailDialog(model: Tran){
         dBinding.edtToDate.setText(todayDate)
            dBinding.aadharTv.visibility= GONE
            dBinding.edtAccountNumber1.visibility= GONE
+        dBinding.status1.visibility= VISIBLE
+        Types = listOf("All", "Pending", "Success", "Failed", "Refunded")
+        val TypeValues = listOf("", "1", "2", "3", "4") // Corresponding values for each type
 
+        val adapterType = ArrayAdapter(myActivity, android.R.layout.simple_spinner_item, Types)
+        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        dBinding.status.adapter = adapterType
+
+        dBinding.status.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                // Get the selected label and value based on position
+                val selectedLabel = Types[position]
+                val selectedValue = TypeValues[position]
+
+                // Use selectedValue as needed, for example:
+                selectdStatus = selectedValue
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Handle no selection if necessary
+            }
+        }
         dBinding.edtFromDate.setOnClickListener { CommonClass.showDatePickerDialog(myActivity, dBinding.edtFromDate) }
         dBinding.edtToDate.setOnClickListener {
             if (dBinding.edtFromDate.text.toString().isEmpty()) {
@@ -410,7 +426,7 @@ private fun openViewDetailDialog(model: Tran){
                     if (edtCustomerNumber.text.toString().isNotEmpty()) customerMobile = edtCustomerNumber.text.toString()
                     if (edtAccountNumber.text.toString().isNotEmpty()) accountNumber = edtAccountNumber.text.toString()
                 }
-                getTransactionList(start_date, end_date, count,dBinding.txnId.text.toString());
+                getTransactionList(start_date, end_date, count,dBinding.txnId.text.toString(),selectdStatus);
             }
             filterDialog.dismiss()
         }

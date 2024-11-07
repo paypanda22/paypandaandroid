@@ -9,6 +9,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.pandapro.R
 import app.pay.pandapro.interfaces.RecipientListClickListner
@@ -50,16 +51,24 @@ class RecipientListAdapter(
             holder.itemView.setOnClickListener{clickListner.onRecipientItemClick(holder,list,position)}
             holder.ivDelete.setOnClickListener {
                 val builder = AlertDialog.Builder(activity)
-                builder.setMessage("Do you want to delete this Recipient ?")
-                    .setTitle("Delete Recipient !")
+                builder.setMessage("Do you want to delete this Recipient?")
+                    .setTitle("Delete Recipient!")
+                    .setIcon(R.drawable.ic_cancel_red) // Replace with your desired icon resource
                     .setNegativeButton("NO") { dialog, which ->
-                        null
+
                     }
                     .setPositiveButton("DELETE") { dialog, which ->
-                        deleteRecipient.onDeleteIconClicked(holder,list,position)
-                    }.show()
+                        deleteRecipient.onDeleteIconClicked(holder, list, position)
 
-            }
+                    }
+
+                val alertDialog = builder.create()
+                alertDialog.show()
+
+// Access and customize the buttons
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(ContextCompat.getColor(activity, R.color.red_700)) // Positive button background
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setBackgroundColor(ContextCompat.getColor(activity, R.color.grey_4)) // Negative button background
+               }
 
         }catch(e:Exception){
             e.printStackTrace()

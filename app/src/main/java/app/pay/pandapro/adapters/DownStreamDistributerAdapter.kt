@@ -5,6 +5,8 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.pay.pandapro.R
@@ -24,6 +26,10 @@ class DownStreamDistributerAdapter(
         val SrNo: TextView = itemView.findViewById(R.id.SrNo)
         val transfer: TextView = itemView.findViewById(R.id.transfer)
         val Reversetransfer: TextView = itemView.findViewById(R.id.Reversetransfer)
+        val email: TextView = itemView.findViewById(R.id.email)
+        val mobile: TextView = itemView.findViewById(R.id.Mobile)
+        val report: ImageView = itemView.findViewById(R.id.report)
+        val walletreport: Button = itemView.findViewById(R.id.walletreport)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,7 +50,8 @@ class DownStreamDistributerAdapter(
         holder.refer_id.text = "Refer ID:-" + data.refer_id
         holder.main_wallet.text = "Balance:- " + data.main_wallet
         holder.is_approved.text = "Approved:- " + data.is_approved
-
+        holder.email.text = "Email: ${data.email}"
+        holder.mobile.text = " ${data.mobile}"
         holder.transfer.setOnClickListener {
             downStreamClick.onTransferMoneyClicked(holder, downstramlistRetailer, position)
         }
@@ -52,6 +59,11 @@ class DownStreamDistributerAdapter(
         holder.Reversetransfer.setOnClickListener {
             downStreamClick.onReverseMoneyClicked(holder, downstramlistRetailer, position)
         }
-
+        holder.walletreport.setOnClickListener{
+            downStreamClick.onViewWalletReportClicked(holder, downstramlistRetailer, position)
+        }
+holder.report.setOnClickListener{
+    downStreamClick.onViewReportClicked(holder, downstramlistRetailer, position)
+}
     }
 }

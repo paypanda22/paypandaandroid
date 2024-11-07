@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
-        android:name="app.pay.pandapro.fragments.login.ForgetPasswordFragment"
+        android:name="app.pay.panda.fragments.login.ForgetPasswordFragment"
         android:label="fragment_forget_password"
         tools:layout="@layout/fragment_forget_password" >
         <action

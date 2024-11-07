@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
 
     tools:context=".fragments.login.RegisterFragment">
-    <ImageView android:layout_width="match_parent"
+    <!--<ImageView android:layout_width="match_parent"
     android:layout_height="@dimen/_90sdp"
     android:src="@drawable/top_background"
-    android:scaleType="centerCrop" />
+    android:scaleType="centerCrop" />-->
 
     <!-- <View
          android:layout_width="match_parent"

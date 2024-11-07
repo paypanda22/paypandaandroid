@@ -22,5 +22,6 @@ data class Data(
     val user_id: String = "",
     val response: String = "",
     val status_update_time: String ?= null,
-    val distributor_mobile: String ?= null
+    val distributor_mobile: String ?= null,
+    val customer_mobile: String ?= null
 )

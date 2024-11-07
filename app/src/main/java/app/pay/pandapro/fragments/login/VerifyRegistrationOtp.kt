@@ -121,11 +121,11 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
     override fun addListeners() {
         binding.tvResendOtp.setOnClickListener {
             if (isTimerRunning) {
-               showToast(requireContext(),"You can Resend OTP After One Minute")
+                showToast(requireContext(),"You can Resend OTP After One Minute")
             } else {
-               // timeLeftInMillis = 60000
-                   // resendOtp()
-                    resendSignupOTP()
+                // timeLeftInMillis = 60000
+                // resendOtp()
+                resendSignupOTP()
 
 
             }
@@ -137,28 +137,28 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
             }/*else if (binding.edtOtpEmail.length()<=6){
                 showToast(requireContext(),"Enter OTP Received On Email")
             }*/else{
-             //   verifyOtp()
-            validateMobileOtp()
-         //  }
-        }
+                //   verifyOtp()
+                validateMobileOtp()
+                //  }
+            }
 
-    }
         }
+    }
 
     private fun verifyOtp() {
         val requestData= hashMapOf<String,Any?>()
         requestData["user_id"]=token
-      requestData["email_otp"]=binding.edtOtpEmail.text.toString()
+        requestData["email_otp"]=binding.edtOtpEmail.text.toString()
         requestData["mobile_otp"]=binding.edtOtpMobile.text.toString()
 
         UtilMethods.verifyRegisterOtp(requireContext(),requestData,object:MCallBackResponse{
             override fun success(from: String, message: String) {
-               val response:VerifyRegisterOtpResponse=Gson().fromJson(message,VerifyRegisterOtpResponse::class.java)
+                val response:VerifyRegisterOtpResponse=Gson().fromJson(message,VerifyRegisterOtpResponse::class.java)
                 if (response.error==false){
                     emailToken=response.data?.email.toString()
                     mobileToken=response.data?.mobile.toString()
                     cancelTimer()
-                   // register()
+                    // register()
                 }else{
                     showToast(requireContext(),response.message)
                 }
@@ -173,18 +173,18 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
     private fun validateMobileOtp() {
         val requestData = hashMapOf<String, Any?>()
         requestData["otp"] = binding.edtOtpMobile.text.toString()
-       requestData["user_id"] = token
+        requestData["user_id"] = token
 
         UtilMethods.verifyOtp(myActivity, requestData, object : MCallBackResponse {
             override fun success(from: String, message: String) {
                 val response: VerifyOtpResponse = Gson().fromJson(message, VerifyOtpResponse::class.java)
                 if (response.data.user.isNotEmpty()) {
 //                    emailToken=response.data?.toString()
-                  // mobileToken=response.data?.user.toString()
-                      mobileToken=response.data.user.toString()
+                    // mobileToken=response.data?.user.toString()
+                    mobileToken=response.data.user.toString()
                     mobileVerified="1"
 
-                  //  register()
+                    //  register()
                     cancelTimer()
                     val result = Bundle()
                     result.putString("mobileToken", mobileToken) // Make sure you're setting the right key
@@ -219,26 +219,26 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
         val requestData= hashMapOf<String,Any?>()
         requestData["emailId"]=email
         requestData["mobileNo"]=phone
-      UtilMethods.getRegistrationOtp(requireContext(),requestData,object:MCallBackResponse{
-          override fun success(from: String, message: String) {
-              val response:RegisterOtpResponse=Gson().fromJson(message,RegisterOtpResponse::class.java)
-              if(!response.error){
-                  token= response.data.user.toString()
-                  showToast(requireContext(),response.message)
-                  setTimer()
-              }else{
-                  showToast(requireContext(),response.message)
-              }
-          }
+        UtilMethods.getRegistrationOtp(requireContext(),requestData,object:MCallBackResponse{
+            override fun success(from: String, message: String) {
+                val response:RegisterOtpResponse=Gson().fromJson(message,RegisterOtpResponse::class.java)
+                if(!response.error){
+                    token= response.data.user.toString()
+                    showToast(requireContext(),response.message)
+                    setTimer()
+                }else{
+                    showToast(requireContext(),response.message)
+                }
+            }
 
-          override fun fail(from: String) {
-              showToast(requireContext(),from)
-          }
-      })
+            override fun fail(from: String) {
+                showToast(requireContext(),from)
+            }
+        })
     }
 
     private fun resendSignupOTP() {
-     //   val token = userSession.getData(Constant.USER_TOKEN).toString()
+        //   val token = userSession.getData(Constant.USER_TOKEN).toString()
         val requestData = hashMapOf<String, Any?>()
         requestData["user_id"] = token
         ApiMethods.resendSignupOTP(myActivity, token,requestData, object : MCallBackResponse {
@@ -276,58 +276,58 @@ class VerifyRegistrationOtp : BaseFragment<FragmentVerifyRegistrationOtpBinding>
         countDownTimer.start()
     }
 
-  /*  private fun register() {
-        val requestData = hashMapOf<String, Any?>()
-        requestData["email"] = email
-        requestData["mobile"] = mobileToken
-        requestData["password"] = password
-        requestData["user_type_id"] = userTypeId
-        requestData["name"] = name
-        requestData["refer_id"] = refID
-        requestData["state"] = state
-        val getHash = GetKeyHash(myActivity)
-        val finalData = getHash.getHash(requestData)
-        UtilMethods.register(myActivity, finalData, object : MCallBackResponse {
-            override fun success(from: String, message: String) {
-                val response: RegisterResponse = Gson().fromJson(message, RegisterResponse::class.java)
-                if (response.error==false){
-                    ShowDialog.bottomDialogSingleButton(myActivity,
-                        "Account Created Successfully",
-                        "You account has been created successfully.Press OK to proceed to login screen",
-                        "success",
-                        object : MyClick {
-                            override fun onClick() {
-                                findNavController().navigate(R.id.action_verifyRegistrationOtp_to_loginFragment)
-                            }
-                        })
-                }else{
-                    response.message?.let {
-                        ShowDialog.bottomDialogSingleButton(myActivity,
-                            "Account Not Created",
-                            it,
-                            "error",
-                            object : MyClick {
-                                override fun onClick() {
-                                    findNavController().popBackStack()
-                                }
-                            })
-                    }
-                }
+    /*  private fun register() {
+          val requestData = hashMapOf<String, Any?>()
+          requestData["email"] = email
+          requestData["mobile"] = mobileToken
+          requestData["password"] = password
+          requestData["user_type_id"] = userTypeId
+          requestData["name"] = name
+          requestData["refer_id"] = refID
+          requestData["state"] = state
+          val getHash = GetKeyHash(myActivity)
+          val finalData = getHash.getHash(requestData)
+          UtilMethods.register(myActivity, finalData, object : MCallBackResponse {
+              override fun success(from: String, message: String) {
+                  val response: RegisterResponse = Gson().fromJson(message, RegisterResponse::class.java)
+                  if (response.error==false){
+                      ShowDialog.bottomDialogSingleButton(myActivity,
+                          "Account Created Successfully",
+                          "You account has been created successfully.Press OK to proceed to login screen",
+                          "success",
+                          object : MyClick {
+                              override fun onClick() {
+                                  findNavController().navigate(R.id.action_verifyRegistrationOtp_to_loginFragment)
+                              }
+                          })
+                  }else{
+                      response.message?.let {
+                          ShowDialog.bottomDialogSingleButton(myActivity,
+                              "Account Not Created",
+                              it,
+                              "error",
+                              object : MyClick {
+                                  override fun onClick() {
+                                      findNavController().popBackStack()
+                                  }
+                              })
+                      }
+                  }
 
-            }
+              }
 
-            override fun fail(from: String) {
-                ShowDialog.bottomDialogSingleButton(myActivity,
-                    "Account Not Created",
-                    from,
-                    "error",
-                    object : MyClick {
-                        override fun onClick() {
-                            findNavController().popBackStack()
-                        }
-                    })
-            }
-        })
-    }*/
+              override fun fail(from: String) {
+                  ShowDialog.bottomDialogSingleButton(myActivity,
+                      "Account Not Created",
+                      from,
+                      "error",
+                      object : MyClick {
+                          override fun onClick() {
+                              findNavController().popBackStack()
+                          }
+                      })
+              }
+          })
+      }*/
 
 }

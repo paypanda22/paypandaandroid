@@ -324,11 +324,11 @@
                     android:id="@+id/btnPay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/submitt_btn"
+                    android:background="@drawable/gradient_rect_bg_rounded"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="Proceed to Pay"
                     style="@style/mostserrat_bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp"/>
 
 

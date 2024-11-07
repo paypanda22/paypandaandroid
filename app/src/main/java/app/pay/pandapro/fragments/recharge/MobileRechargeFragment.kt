@@ -11,6 +11,8 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.view.View.GONE
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -31,12 +33,14 @@ import app.pay.pandapro.helperclasses.ActivityExtensions
 import app.pay.pandapro.helperclasses.TelecomCircle
 import app.pay.pandapro.helperclasses.UserSession
 import app.pay.pandapro.helperclasses.Utils.Companion.showToast
+import app.pay.pandapro.interfaces.CommonPlanData
 import app.pay.pandapro.interfaces.MCallBackResponse
 import app.pay.pandapro.interfaces.RechargeOperatorClick
 import app.pay.pandapro.interfaces.TelecomCircleClick
 import app.pay.pandapro.responsemodels.getNumberDetails.NumberDetailsResponse
 import app.pay.pandapro.responsemodels.rechargeOperator.Operator
 import app.pay.pandapro.responsemodels.rechargeOperator.RechargeOperatorResponse
+import app.pay.pandapro.responsemodels.rechargePlans.RechargePlansResponse
 import app.pay.pandapro.retrofit.Constant
 import app.pay.pandapro.retrofit.UtilMethods
 import com.google.gson.Gson
@@ -50,9 +54,9 @@ class MobileRechargeFragment : BaseFragment<FragmentMobileRechargeBinding>(Fragm
     private lateinit var alertDialog: AlertDialog
     private var circleID=""
     private var fetchNumberDetails=true
-    private var operatorID="66617b5f3c35f52923782cbe"
+    private var operatorID=""
     private lateinit var rHelper:RechargeHelper
-
+    private lateinit var dataPlans:MutableList<CommonPlanData>
     private val pickContactLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -222,7 +226,8 @@ class MobileRechargeFragment : BaseFragment<FragmentMobileRechargeBinding>(Fragm
                         }
                         operatorList.addAll(response.data.operators)
                         openOperatorListDialog()
-                        val cleanedOperatorNames = response.data.operators.map { cleanOperatorName(it.name) }
+
+                       val cleanedOperatorNames = response.data.operators.map { cleanOperatorName(it.name) }
 
 
                     }else{
@@ -286,115 +291,233 @@ class MobileRechargeFragment : BaseFragment<FragmentMobileRechargeBinding>(Fragm
         })
     }
 
-    private fun cleanOperatorName(operatorName: String): String {
-        return when {
-            operatorName.contains("Reliance Jio", ignoreCase = true) -> "Reliance Jio"
-            operatorName.contains("Airtel", ignoreCase = true) -> "Airtel"
-            operatorName.contains("BSNL", ignoreCase = true) -> "BSNL"
-            operatorName.contains("Vodafone", ignoreCase = true) -> "Vodafone"
-            else -> operatorName // Return as is if no cleaning is required
+    private fun getMobilePlans() {
+
+        val token = userSession.getData(Constant.USER_TOKEN).toString()
+        UtilMethods.getRechargePlans(
+            requireContext(),
+            binding.edtMobile.text.toString(),
+            token,
+            object : MCallBackResponse {
+                override fun success(from: String, message: String) {
+                    val response: RechargePlansResponse =
+                        Gson().fromJson(message, RechargePlansResponse::class.java)
+                    if (!response.error) {
+                        dataPlans = mutableListOf()
+                        dataPlans.addAll(response.data.offerPlan.DATA)
+                        if (response.data.plans.isNullOrEmpty()) {
+
+                        } else {
+
+                        }
+
+                    } else {
+
+                    }
+                }
+
+                override fun fail(from: String) {
+
+                }
+            })
+    }
+
+            private fun cleanOperatorName(operatorName: String): String {
+                return when {
+                    operatorName.contains("Reliance Jio", ignoreCase = true) -> "Reliance Jio"
+                    operatorName.contains("Airtel", ignoreCase = true) -> "Airtel"
+                    operatorName.contains("BSNL", ignoreCase = true) -> "BSNL"
+                    operatorName.contains("Vodafone", ignoreCase = true) -> "Vodafone"
+                    else -> operatorName // Return as is if no cleaning is required
+                }
+            }
+
+            @SuppressLint("SetTextI18n")
+            private fun getCircleList() {
+                circleList = TelecomCircle.getTelecomCircles()
+                val dBinding = DialogDisputeMasterBinding.inflate(myActivity.layoutInflater)
+                val dialogBuilder = AlertDialog.Builder(context).apply {
+                    setView(dBinding.root)
+                }
+                dBinding.tvTitle.text = "Select Telecom Circle"
+
+                val circleAdapter =
+                    TelecomCircleAdapter(myActivity, circleList, this@MobileRechargeFragment)
+
+                dBinding.rvDisputeMaster.adapter = circleAdapter
+                dBinding.rvDisputeMaster.layoutManager = LinearLayoutManager(myActivity)
+
+
+                alertDialog = dialogBuilder.create()
+                alertDialog.setCanceledOnTouchOutside(true)
+                if (alertDialog.window != null) {
+                    alertDialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+                }
+                alertDialog.show()
+
+            }
+
+            private fun requestContactPermission() {
+                when {
+                    ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.READ_CONTACTS
+                    )
+                            == PackageManager.PERMISSION_GRANTED -> {
+                        pickContact()
+                    }
+
+                    shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS) -> {
+                        // Explain why the permission is needed and then request it
+                        Toast.makeText(
+                            requireContext(),
+                            "Contacts permission is needed to pick a contact",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
+                    }
+
+                    else -> {
+                        // Directly request for permission
+                        requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
+                    }
+                }
+            }
+
+            private fun pickContact() {
+                val contactPickerIntent =
+                    Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+                pickContactLauncher.launch(contactPickerIntent)
+            }
+
+            override fun setData() {
+
+            }
+
+            override fun onItemClicked(
+                holder: RecyclerView.ViewHolder,
+                model: List<TelecomCircle>,
+                pos: Int
+            ) {
+                binding.edtCircleName.setText(model[pos].name)
+                circleID = model[pos].circle_code.toString()
+                alertDialog.dismiss()
+
+            }
+
+            override fun onSelectOperator(
+                holder: RecyclerView.ViewHolder,
+                model: List<Operator>,
+                pos: Int
+            ) {
+                binding.edtOperatorName.setText(model[pos].name)
+                operatorID = model[pos]._id
+                setOperatorLogo()
+                alertDialog.dismiss()
+            }
+
+            private fun setOperatorLogo() {
+                when (operatorID) {
+                    "6683b0150546958c65bf4bb4" -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.bsnl
+                            )
+                        )
+                    }
+
+                    "6683b0150546958c65bf4bb6" -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.vi
+                            )
+                        )
+                    }
+
+                    "6683b0150546958c65bf4bb4" -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.bsnl
+                            )
+                        )
+                    }
+
+                    "6683b0150546958c65bf4bb3" -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.airtel
+                            )
+                        )
+                    }
+
+                    "6683b0150546958c65bf4bb5" -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.jio
+                            )
+                        )
+                    }
+
+                    "6683b2970546958c65bf4bb8" -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.airtel_tv
+                            )
+                        )
+                    }
+
+                    "6683b2970546958c65bf4bb9" -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.dish_tv
+                            )
+                        )
+                    }
+
+                    "6683b2970546958c65bf4bba" -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.sun_direct
+                            )
+                        )
+                    }
+
+                    "6683b2970546958c65bf4bbb" -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.tata_sky
+                            )
+                        )
+                    }
+
+                    "6683b2970546958c65bf4bbc" -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.v_d2h
+                            )
+                        )
+                    }
+
+                    else -> {
+                        binding.ivOperatorImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                myActivity,
+                                R.drawable.bsnl
+                            )
+                        )
+                    }
+                }
+            }
+
+
         }
-    }
-    @SuppressLint("SetTextI18n")
-    private fun getCircleList() {
-        circleList=TelecomCircle.getTelecomCircles()
-        val dBinding = DialogDisputeMasterBinding.inflate(myActivity.layoutInflater)
-        val dialogBuilder = AlertDialog.Builder(context).apply {
-            setView(dBinding.root)
-        }
-        dBinding.tvTitle.text="Select Telecom Circle"
-
-        val circleAdapter=TelecomCircleAdapter(myActivity,circleList,this@MobileRechargeFragment)
-
-        dBinding.rvDisputeMaster.adapter = circleAdapter
-        dBinding.rvDisputeMaster.layoutManager = LinearLayoutManager(myActivity)
-
-
-        alertDialog = dialogBuilder.create()
-        alertDialog.setCanceledOnTouchOutside(true)
-        if (alertDialog.window != null) {
-            alertDialog.window!!.setBackgroundDrawable(ColorDrawable(0))
-        }
-        alertDialog.show()
-
-    }
-
-    private fun requestContactPermission() {
-        when {
-            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CONTACTS)
-                    == PackageManager.PERMISSION_GRANTED -> {
-                pickContact()
-            }
-            shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS) -> {
-                // Explain why the permission is needed and then request it
-                Toast.makeText(requireContext(), "Contacts permission is needed to pick a contact", Toast.LENGTH_LONG).show()
-                requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
-            }
-            else -> {
-                // Directly request for permission
-                requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
-            }
-        }
-    }
-
-    private fun pickContact() {
-        val contactPickerIntent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-        pickContactLauncher.launch(contactPickerIntent)
-    }
-
-    override fun setData() {
-
-    }
-
-    override fun onItemClicked(holder: RecyclerView.ViewHolder, model: List<TelecomCircle>, pos: Int) {
-       binding.edtCircleName.setText(model[pos].name)
-        circleID=model[pos].circle_code.toString()
-        alertDialog.dismiss()
-    }
-
-    override fun onSelectOperator(holder: RecyclerView.ViewHolder, model: List<Operator>, pos: Int) {
-       binding.edtOperatorName.setText(model[pos].name)
-        operatorID=model[pos]._id
-      //  setOperatorLogo()
-        alertDialog.dismiss()
-    }
-
-    private fun setOperatorLogo() {
-        when(operatorID){
-            "6683b0150546958c65bf4bb4"->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.bsnl))
-            }
-            "6683b0150546958c65bf4bb6"->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.vi))
-            }
-            "6683b0150546958c65bf4bb4"->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.bsnl))
-            }
-            "6683b0150546958c65bf4bb3"->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.airtel))
-            }
-            "6683b0150546958c65bf4bb5"->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.jio))
-            }
-            "6683b2970546958c65bf4bb8"->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.airtel_tv))
-            }
-            "6683b2970546958c65bf4bb9"->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.dish_tv))
-            }
-            "6683b2970546958c65bf4bba"->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.sun_direct))
-            }
-            "6683b2970546958c65bf4bbb"->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.tata_sky))
-            }
-            "6683b2970546958c65bf4bbc"->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.v_d2h))
-            }
-            else->{
-                binding.ivOperatorImage.setImageDrawable(ContextCompat.getDrawable(myActivity,R.drawable.bsnl))
-            }
-        }
-    }
-
-}

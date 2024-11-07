@@ -15,6 +15,8 @@ import app.pay.pandapro.helperclasses.CommonClass
 import app.pay.pandapro.helperclasses.MyGlide
 import app.pay.pandapro.helperclasses.UserSession
 import app.pay.pandapro.retrofit.Constant
+import app.pay.pandapro.sqlitehelper.CategoryDatabaseHelper
+import app.pay.pandapro.sqlitehelper.CategoryDatabaseHelper.Companion.TABLE_NAME
 
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
@@ -84,8 +86,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                     null
                 }
                 .setPositiveButton("Logout") { _, _ ->
+                    val dbHelper = CategoryDatabaseHelper(requireContext())
+                    dbHelper.deleteAllCategories()
                     activity?.let { it1 -> userSession.logoutUser(it1) }
+
                 }.show()
+
         }
 
         binding.card1.setOnClickListener {
