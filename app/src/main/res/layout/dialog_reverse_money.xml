@@ -9,15 +9,15 @@
 
     <TextView
         android:id="@+id/tvTitle"
+        style="@style/mostserrat_extra_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="center"
-        android:textStyle="bold"
-        style="@style/mostserrat_extra_bold"
-        android:textSize="20sp"
+        android:gravity="center"
         android:textColor="@color/blue_900"
-        tools:text="Reverse Transfer" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Reverse Transfer" />
 
     <TextView
         android:id="@+id/tvBalance"
@@ -26,6 +26,7 @@
         android:text="Balance: 4036.2799999999997"
         android:layout_marginTop="8dp"
         android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_gravity="center"
         tools:text="Balance: 4036.2799999999997" />
     <TextView
@@ -56,33 +57,35 @@
             android:drawablePadding="@dimen/_10sdp"
             android:maxLength="15"
             android:gravity="center"
+            android:backgroundTint="@color/white"
             android:layout_gravity="center"
             android:textColor="@color/black"
             style="@style/mostserrat_bold"
+            android:textSize="@dimen/_13sdp"
             android:textColorHint="@color/bggrey"
-            android:background="@color/white"
+            android:background="@drawable/edit_bold_background"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
         android:id="@+id/edtTPin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:visibility="gone"
-        android:background="@color/white"
-        android:hint="Enter Tpin"
-        android:textSize="@dimen/dimen_10dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:inputType="numberPassword"
+        android:layout_width="140dp"
+        android:layout_height="47dp"
         android:layout_gravity="center"
+        android:layout_margin="16dp"
+       android:background="@drawable/edit_bold_background"
+        android:gravity="center"
+        android:visibility="gone"
+        android:hint="Enter Tpin"
+        android:inputType="numberPassword"
+        android:padding="8dp"
         android:shadowColor="@android:color/darker_gray"
         android:shadowDx="2"
         android:shadowDy="2"
-        android:shadowRadius="3"/>
+        android:shadowRadius="3"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold" />
 
 
 
@@ -95,9 +98,9 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/primary_text_dark" />
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"
@@ -105,42 +108,73 @@
         android:orientation="horizontal">
 
 
-    <EditText
-        android:id="@+id/otp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:background="@color/white"
-        android:hint="Enter OTP"
-        android:maxLength="6"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:inputType="number"
-        android:layout_gravity="center"
-        android:shadowColor="@android:color/darker_gray"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="3"/>
+        <EditText
+            android:id="@+id/otp"
+            android:layout_width="161dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:background="@drawable/edit_bold_background"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:hint="Enter OTP"
+            android:inputType="numberPassword"
+            android:maxLength="6"
+            android:padding="8dp"
+            android:shadowColor="@android:color/darker_gray"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/verifyOTP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:background="@drawable/edit_bold_background"
+          android:backgroundTint="@color/colorPrimaryDark"
             android:padding="8dp"
-            android:layout_gravity="center"
-            android:text="Verify OTP"
-            android:textSize="12sp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:background="@color/blue_900"
             android:shadowColor="@android:color/darker_gray"
             android:shadowDx="2"
             android:shadowDy="2"
+
             android:shadowRadius="3"
-            />
+            android:text="Verify OTP"
+          android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/relativeResend"
+        android:layout_marginTop="@dimen/_5sdp">
+        <TextView
+            android:id="@+id/tvResendOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resend_otp"
+            style="@style/mostserrat_bold"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12ssp"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_toEndOf="@+id/tvResendOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:textStyle="bold"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/red"
+            android:text="@string/_00_56"
+            android:textSize="@dimen/_12ssp"
+            android:gravity="center"/>
+    </RelativeLayout>
 </LinearLayout>

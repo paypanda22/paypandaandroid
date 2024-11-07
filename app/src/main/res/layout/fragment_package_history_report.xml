@@ -10,7 +10,7 @@
             android:id="@+id/topPanel"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/colorPrimaryDark_light">
 
             <ImageView
                 android:id="@+id/ivBack"
@@ -80,6 +80,7 @@
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/imageView"
             android:layout_width="@dimen/_75sdp"
+            android:visibility="gone"
             android:layout_height="@dimen/_75sdp"
             android:layout_centerInParent="true"
             android:layout_gravity="center"

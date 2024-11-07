@@ -11,8 +11,8 @@
         app:cnb_textColor="@color/black" />
     <item
         android:id="@+id/cashback"
-        android:icon="@drawable/wallet"
-        android:title="Main Wallet"
+        android:icon="@drawable/ic_report"
+        android:title="Reports"
         app:cnb_backgroundColor="@color/colorPrimary"
         app:cnb_iconColor="@color/black"
         app:cnb_iconTintMode="src_in"

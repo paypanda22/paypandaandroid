@@ -4,9 +4,10 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardUseCompatPadding="true"
-    app:cardCornerRadius="@dimen/_10sdp">
+    app:cardCornerRadius="@dimen/_15sdp">
     <RelativeLayout
         android:layout_width="match_parent"
+        android:padding="@dimen/_5sdp"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/ivNotification"
@@ -16,6 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="vertical"
             android:layout_toEndOf="@+id/ivNotification"
             android:layout_centerVertical="true"
@@ -24,7 +26,7 @@
                 android:id="@+id/tvSubject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/forget_transaction_pin"
+               android:text="@string/forget_transaction_pin"
                 android:textSize="@dimen/_13ssp"
                 style="@style/mostserrat_bold"
                 android:textColor="@color/black"/>
@@ -33,18 +35,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
+                android:padding="@dimen/_10sdp"
                 android:layout_gravity="start"
                 android:textSize="@dimen/_11ssp"
                 android:justificationMode="inter_word"
                 android:textColor="@color/bggrey_dark"/>
             <TextView
                 android:id="@+id/tvDate"
+                android:padding="@dimen/_5sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/mostserrat_bold"
                 android:text=""
                 android:textSize="@dimen/_10ssp"
                 android:gravity="end"
-                android:textColor="@color/bggrey_dark"/>
+                android:textColor="@color/blue_900"/>
 
         </LinearLayout>
     </RelativeLayout>

@@ -108,6 +108,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_marginTop="@dimen/_5sdp">
             <TextView
                 android:layout_width="wrap_content"
@@ -121,7 +122,7 @@
                 android:id="@+id/total_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/_0_00"
+                android:text="0.00"
                 style="@style/mostserrat_bold"
                 android:textColor="@color/green_700"
                 android:layout_alignParentEnd="true"

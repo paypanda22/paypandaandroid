@@ -4,9 +4,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/_10sdp"
     tools:context=".fragments.supportTicket.SupportTicketListing">
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimaryDark_light">
 
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:contentDescription="@string/splash_logo"
+            android:src="@drawable/left"
+            app:tint="@color/white" />
+
+        <TextView
+            style="@style/mostserrat_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="Ticket List"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+
+        <ImageView
+            android:id="@+id/filter"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_20sdp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/back"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@drawable/filter_funnel"
+            app:tint="@color/white" />
+
+    </RelativeLayout>
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imageView"
@@ -37,6 +74,8 @@
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:padding="@dimen/_10sdp"
+        android:layout_below="@+id/topBar"
         android:layout_height="wrap_content"
         android:id="@+id/rvDisputeList"/>
 

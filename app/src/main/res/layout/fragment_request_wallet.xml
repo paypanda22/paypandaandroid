@@ -11,7 +11,7 @@
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimaryDark_light">
 
         <ImageView
             android:id="@+id/ivBack"
@@ -133,7 +133,7 @@
                         android:background="@null"
                         android:hint="@string/enter_request_amount"
                         android:inputType="number"
-                        android:maxLength="4"
+                        android:maxLength="12"
                         android:textSize="@dimen/_15ssp" />
 
                 </RelativeLayout>
@@ -356,6 +356,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:maxLength="125"
+                            android:inputType="text"
                             android:textSize="@dimen/_12ssp"
                             android:hint="@string/enter_bank_ref_number"/>
                     </com.google.android.material.textfield.TextInputLayout>
@@ -395,6 +398,9 @@
                         android:id="@+id/edtRemark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxLength="125"
+                        android:maxLines="1"
+                        android:inputType="text"
                         android:textSize="@dimen/_12ssp"
                         android:hint="@string/enter_remark"/>
                 </com.google.android.material.textfield.TextInputLayout>

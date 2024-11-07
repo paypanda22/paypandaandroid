@@ -233,6 +233,7 @@
                     app:strokeWidth="@dimen/_1sdp">
 
                     <RelativeLayout
+                        android:id="@+id/lytAmt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_10sdp"
@@ -249,15 +250,20 @@
                             android:id="@+id/finalAmount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:clickable="false"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/dimen_10dp"
                             android:layout_toEndOf="@+id/iv_rupee"
                             android:background="@null"
                             android:text="0"
-
+                            android:inputType="number"
+                            android:maxLength="10"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_30sdp"
+                            android:textSize="@dimen/_23sdp"
                             style="@style/mostserrat_bold" />
+
 
                         <ImageView
                             android:id="@+id/iv_edit"
@@ -292,7 +298,7 @@
                     style="@style/mostserrat_bold"
                     android:textColor="@color/colorPrimaryDark"
                     android:gravity="center"/>
-                <app.pay.panda.reusable.PinView
+                <app.pay.pandapro.reusable.PinView
                     android:id="@+id/edtOtpLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

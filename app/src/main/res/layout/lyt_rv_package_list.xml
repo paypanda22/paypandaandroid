@@ -40,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginLeft="@dimen/_7sdp"
                 android:layout_toEndOf="@+id/ivIcon"
                 android:layout_marginStart="@dimen/_4sdp">
 
@@ -69,21 +70,19 @@
                     android:maxLength="80"
                     style="@style/mostserrat_bold"
                     android:textColor="@color/green_900"
-                    android:gravity="center"
+
                     android:paddingVertical="@dimen/_2sdp"
                     android:layout_marginBottom="@dimen/_2sdp"/>
 
                 <TextView
                     android:id="@+id/date"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Exp Date:-"
+
                     android:textSize="@dimen/_9ssp"
-                    android:maxLength="80"
+                    android:maxLength="50"
                     style="@style/mostserrat_bold"
                     android:textColor="@color/blue_900"
-                    android:gravity="center"
-                    android:paddingVertical="@dimen/_2sdp"
                     android:layout_marginBottom="@dimen/_2sdp"/>
                 <TextView
                     android:id="@+id/tvMore"
@@ -107,6 +106,7 @@
                     android:textSize="@dimen/_9ssp"
                     android:gravity="end"/>
 <LinearLayout
+    android:layout_marginBottom="@dimen/_10sdp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="end"
@@ -120,15 +120,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|center_vertical"
 
-        android:background="@drawable/btn_success"
+        android:background="@drawable/new_update_btn_back"
+
+        android:padding="@dimen/_10sdp"
         android:drawablePadding="@dimen/_8sdp"
         android:paddingHorizontal="@dimen/_8sdp"
         android:paddingVertical="@dimen/_4sdp"
-        android:paddingStart="@dimen/_20sdp"
         android:text="@string/buy_now"
         android:textColor="@color/white"
         android:textSize="@dimen/_10ssp" />
     <ImageView
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_2sdp"
         android:id="@+id/commission"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_25sdp"

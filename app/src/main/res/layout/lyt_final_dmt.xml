@@ -6,7 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/_8sdp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
+        <!-- Wrap your LinearLayout inside the ScrollView -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
     <RelativeLayout
         android:id="@+id/bill_fetch_heading"
         android:layout_width="wrap_content"
@@ -167,28 +176,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/bank_name"
-                style="@style/mostserrat_bold"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold" />
+
+            <TextView android:id="@+id/tvBankLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/bank_name"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvBankName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text=""
-                android:maxLength="25"
-                style="@style/mostserrat_bold"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold"
-                tools:ignore="RelativeOverlap" />
+                android:layout_toEndOf="@id/tvBankLabel"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text=""
+            android:maxLength="25"
+            style="@style/mostserrat_bold"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
         </RelativeLayout>
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -293,21 +305,22 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtAmount"
+                style="@style/mostserrat_bold"
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:drawableStart="@drawable/ic_rupee"
                 android:drawablePadding="@dimen/_10sdp"
                 android:drawableTint="@color/colorPrimaryDark"
                 android:inputType="number"
                 android:maxLength="5"
-                style="@style/mostserrat_bold"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_10sdp"
                 android:padding="@dimen/_5sdp"
                 android:textColorHint="@color/bggrey"
-                android:textSize="@dimen/_20ssp"
-                android:textStyle="bold"
-                android:layout_centerVertical="true" />
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
@@ -400,7 +413,7 @@
                android:textSize="@dimen/_12sdp"
                android:textAllCaps="true"
                style="@style/mostserrat_bold" />
-           <app.pay.panda.reusable.PinView
+           <app.pay.pandapro.reusable.PinView
                android:id="@+id/edtTPin"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -432,6 +445,7 @@
         style="@style/mostserrat_bold"
         android:visibility="visible"
         android:textSize="@dimen/_12ssp" />
-
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

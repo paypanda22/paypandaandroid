@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_2sdp"
+    android:paddingLeft="@dimen/_5sdp"
+    android:paddingRight="@dimen/_5sdp"
+    android:background="@color/white">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_4sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_border"
+            android:padding="@dimen/_8sdp">
+
+            <TextView
+                android:id="@+id/NAme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_9sdp"
+                android:shadowDx="2"
+                style="@style/mostserrat_bold"
+                android:shadowDy="2"
+
+                android:shadowRadius="3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/report"
+                style="@style/mostserrat_bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="332dp"
+                android:layout_marginTop="60dp"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:src="@drawable/view"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/transfer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:backgroundTint="@color/grey_10"
+                android:background="@drawable/hover"
+                style="@style/mostserrat_extra_bold"
+                android:text="Transfer"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_8sdp"
+                app:layout_constraintEnd_toStartOf="@+id/Reversetransfer"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/Reversetransfer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/hover"
+                android:text="Reverse"
+                android:backgroundTint="@color/grey_10"
+                style="@style/mostserrat_extra_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/refer_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R006605"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/blue_900"
+                android:textSize="@dimen/_8sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/NAme"
+                app:layout_constraintBottom_toTopOf="@id/retailer" />
+
+            <TextView
+                android:id="@+id/retailer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ASM"
+                android:gravity="center"
+                android:shadowDx="2"
+                style="@style/mostserrat_bold"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:drawableEnd="@drawable/arrow_below"
+                android:textColor="@color/blue_900"
+                android:textSize="@dimen/_8sdp"
+                app:layout_constraintBottom_toTopOf="@+id/main_wallet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/refer_id" />
+
+            <TextView
+                android:id="@+id/main_wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹ 230.75"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="bold"
+                style="@style/mostserrat_extra_bold"
+                app:layout_constraintEnd_toStartOf="@+id/is_approved"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/retailer"
+                app:layout_constraintHorizontal_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/is_approved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Approved"
+                style="@style/mostserrat_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/main_wallet" />
+
+            <!-- <TextView
+                 android:id="@+id/retailer"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="16dp"
+                 android:text="Approved"
+                 android:textColor="@color/black"
+                 android:textSize="@dimen/_10sdp"
+                 android:textStyle="bold"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintStart_toEndOf="@+id/main_wallet" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/retailerLyt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--   <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginBottom="@dimen/_8sdp"
+               app:cardBackgroundColor="@color/colorPrimaryDark"
+               app:cardCornerRadius="@dimen/_8sdp"
+               app:cardElevation="@dimen/_4sdp">
+
+               <LinearLayout
+                   android:id="@+id/linear_common"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:padding="@dimen/_8sdp">
+
+                   <androidx.appcompat.widget.AppCompatTextView
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:text="S.No"
+                       android:gravity="center"
+                       android:textColor="@color/white"
+                       android:textSize="@dimen/_12sdp"
+                       android:textStyle="bold" />
+
+                   <androidx.appcompat.widget.AppCompatTextView
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="2"
+                       android:text="Refer ID"
+                       android:gravity="center"
+                       android:textColor="@color/white"
+                       android:textSize="@dimen/_12sdp"
+                       android:textStyle="bold" />
+
+                   <androidx.appcompat.widget.AppCompatTextView
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="3"
+                       android:text="Name"
+                       android:gravity="center"
+                       android:textColor="@color/white"
+                       android:textSize="@dimen/_12sdp"
+                       android:textStyle="bold" />
+
+                   <androidx.appcompat.widget.AppCompatTextView
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="2"
+                       android:text="Approved"
+                       android:gravity="center"
+                       android:textColor="@color/white"
+                       android:textSize="@dimen/_11sdp"
+                       android:textStyle="bold" />
+
+                   <androidx.appcompat.widget.AppCompatTextView
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="2"
+                       android:text="Transfer"
+                       android:gravity="center"
+                       android:textColor="@color/white"
+                       android:textSize="@dimen/_12sdp"
+                       android:textStyle="bold" />
+               </LinearLayout>
+           </androidx.cardview.widget.CardView>-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerRetailer"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:nestedScrollingEnabled="false" />
+    </LinearLayout>
+</LinearLayout>

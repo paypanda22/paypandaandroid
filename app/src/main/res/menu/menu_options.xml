@@ -5,7 +5,7 @@
         android:icon="@drawable/campus_1_" />
     <item
         android:id="@+id/Super_Distributer"
-        android:title="Fund Request To Super Distributer"
+        android:title="Fund Request To Super Distributor"
         android:icon="@drawable/support" />
     <item
         android:id="@+id/Distributer"

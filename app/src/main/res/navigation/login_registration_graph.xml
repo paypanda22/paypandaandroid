@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="app.pay.panda.fragments.login.RegisterFragment"
+        android:name="app.pay.pandapro.fragments.login.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/verifyOtpFragment"
-        android:name="app.pay.panda.fragments.login.VerifyOtpFragment"
+        android:name="app.pay.pandapro.fragments.login.VerifyOtpFragment"
         android:label="fragment_verify_otp"
         tools:layout="@layout/fragment_verify_otp" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
-        android:name="app.pay.panda.fragments.login.ForgetPasswordFragment"
+        android:name="app.pay.pandapro.fragments.login.ForgetPasswordFragment"
         android:label="fragment_forget_password"
         tools:layout="@layout/fragment_forget_password" >
         <action
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="app.pay.panda.fragments.login.LoginFragment"
+        android:name="app.pay.pandapro.fragments.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/verifyRegistrationOtp"
-        android:name="app.pay.panda.fragments.login.VerifyRegistrationOtp"
+        android:name="app.pay.pandapro.fragments.login.VerifyRegistrationOtp"
         android:label="fragment_verify_registration_otp"
         tools:layout="@layout/fragment_verify_registration_otp" >
         <action

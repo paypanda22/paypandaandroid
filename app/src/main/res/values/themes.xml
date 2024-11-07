@@ -76,7 +76,25 @@
         <item name="hintTextColor">@color/colorPrimaryDark</item>
         <item name="hintAnimationEnabled">true</item>
     </style>
-
+    <style name="EditTextInputPass" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="boxStrokeColor">@color/colorPrimaryDark</item>
+        <item name="boxStrokeWidth">0.5dp</item>
+        <item name="boxStrokeWidthFocused">0.75dp</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="boxBackgroundColor">@color/grey_10</item>
+        <item name="hintEnabled">true</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_10sdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_10sdp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_10sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_10sdp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="errorEnabled">true</item>
+        <item name="hintTextColor">@color/colorPrimaryDark</item>
+        <item name="hintAnimationEnabled">true</item>
+    </style>
     <style name="EditTextInput3" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

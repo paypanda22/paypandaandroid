@@ -1,0 +1,21 @@
+<!-- res/drawable/two_color_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- White Background (bottom part) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF"/>
+        </shape>
+    </item>
+
+    <!-- Top Half Color with Curved Bottom -->
+    <item android:bottom="760dp"> <!-- Adjust this value for more or less margin -->
+        <shape android:shape="rectangle">
+            <solid android:color="@color/categoryLoaderBGColor"/>
+            <corners android:bottomLeftRadius="80dp" android:bottomRightRadius="80dp"/>
+        </shape>
+    </item>
+
+
+
+</layer-list>

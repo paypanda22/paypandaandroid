@@ -17,7 +17,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcvMain"
-        android:visibility="gone"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp"
@@ -89,7 +89,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:gravity="center"
-                            android:text="Ref id :2255885455566558565"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12ssp"
                             android:textStyle="bold" />
@@ -534,7 +534,7 @@
                         app:drawableEndCompat="@drawable/share"
                         app:drawableTint="@color/white" />
 
-                    <TextView
+                  <!--  <TextView
                         android:id="@+id/tvDownload"
                         style="@style/mostserrat_bold"
                         android:layout_width="wrap_content"
@@ -549,7 +549,7 @@
                         android:text="@string/download"
                         android:textColor="@color/white"
                         app:drawableEndCompat="@drawable/download"
-                        app:drawableTint="@color/white" />
+                        app:drawableTint="@color/white" />-->
                 </LinearLayout>
 
             </LinearLayout>

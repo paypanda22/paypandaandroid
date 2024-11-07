@@ -60,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/beneficiary_name"
                     android:inputType="textPersonName"
+                    android:maxLength="100"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Ifsc Code"
                     android:inputType="text"
+                    android:maxLength="25"
                     android:maxLines="1"
                     android:textAllCaps="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -116,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Account Number"
                     android:inputType="number"
+                    android:maxLength="30"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 

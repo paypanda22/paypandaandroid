@@ -184,7 +184,7 @@
                 android:text=""
                 android:textSize="@dimen/_10ssp"
                 android:gravity="center"/>
-            <app.pay.panda.reusable.PinView
+            <app.pay.pandapro.reusable.PinView
                 android:id="@+id/edtOtpLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

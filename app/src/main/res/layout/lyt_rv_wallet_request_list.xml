@@ -5,7 +5,9 @@
     android:id="@+id/mcvRequestItem"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardUseCompatPadding="true"
-    app:cardCornerRadius="@dimen/_5sdp">
+    app:strokeColor="@color/bggrey2"
+    app:strokeWidth="@dimen/_1sdp"
+    app:cardCornerRadius="@dimen/_16sdp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +43,7 @@
                     android:textSize="@dimen/_10ssp"
                     android:textColor="@color/black"/>
             </RelativeLayout>
-            <RelativeLayout
+          <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -137,20 +139,55 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10ssp" />
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="remarkByComany"
+                    android:id="@+id/remarkByComanytest"
+                    style="@style/mostserrat_bold"
+                    android:layout_alignParentStart="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
 
+                <TextView
+                    android:layout_toEndOf="@id/remarkByComanytest"
+                    android:id="@+id/remarkByComany"
+                    style="@style/mostserrat_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+            </RelativeLayout>
         </LinearLayout>
 
         <TextView
             android:id="@+id/tvAmount"
             style="@style/mostserrat_bold"
-            android:layout_width="215dp"
-            android:layout_height="21dp"
+            android:gravity="center"
+            android:layout_width="@dimen/_158sdp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="2"
-            android:gravity="center|center_vertical"
             android:text="0000"
+            android:layout_weight="2"
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp" />
+
+       <!-- <TextView
+            android:id="@+id/tvStatus"
+            style="@style/mostserrat_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Pending"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp" />-->
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

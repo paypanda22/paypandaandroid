@@ -128,7 +128,7 @@
             android:id="@+id/rlMerchantAuth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             android:background="@drawable/dotted_background"
             android:padding="@dimen/_5sdp">
             <TextView

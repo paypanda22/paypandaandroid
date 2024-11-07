@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@drawable/background_rounded_bottom_corner">
+    style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+    android:padding="@dimen/_15sdp"
+    android:background="@drawable/rectangle_solid_radius_white">
 
     <!-- Title -->
     <TextView
@@ -91,6 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter remark"
+            android:maxLines="1"
             android:textSize="@dimen/_11sdp"
             android:textColor="@color/grey_80"
             android:background="@drawable/edit_text_round_bg_outline" />
@@ -114,6 +116,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter TPin"
+            android:maxLines="1"
+            android:maxLength="6"
             android:inputType="numberPassword"
             android:textSize="@dimen/_13sdp"
             android:textColor="@color/grey_80"
@@ -150,7 +154,28 @@
             android:textColor="@color/grey_80"
             android:background="@drawable/spinner_background"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Authority remark :" />
+
+        <EditText
+            android:id="@+id/authority_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter remark"
+            android:maxLines="1"
+            android:textSize="@dimen/_11sdp"
+            android:textColor="@color/grey_80"
+            android:background="@drawable/edit_text_round_bg_outline" />
+    </LinearLayout>
     <!-- Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -158,23 +183,21 @@
         android:orientation="horizontal"
         android:gravity="end">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Close"
-            android:background="@drawable/edit_text_round_bg_outline_bold"
-            android:backgroundTint="@color/blue_900"
+            android:background="@drawable/gradient_rect_bg_rounded"
             android:textColor="@android:color/white"
             android:layout_marginEnd="8dp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Update"
-            android:background="@drawable/edit_text_round_bg_outline_bold"
-            android:backgroundTint="@color/green_900"
+            android:background="@drawable/gradient_rect_bg_rounded"
             android:textColor="@android:color/white"
            />
     </LinearLayout>

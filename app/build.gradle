@@ -7,15 +7,15 @@ plugins {
 }
 
 android {
-    namespace 'app.pay.panda'
+    namespace 'app.pay.pandapro'
     compileSdk 34
 
     defaultConfig {
-        applicationId "app.pay.panda"
+        applicationId "app.pay.pandapro"
         minSdk 26
         targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        versionCode 7
+        versionName "1.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -137,18 +137,22 @@ dependencies {
     implementation "io.insert-koin:koin-android:3.3.0"
     implementation "io.insert-koin:koin-androidx-navigation:3.3.0"
     implementation "io.insert-koin:koin-androidx-compose:3.3.0"
-    implementation ("com.airbnb.android:lottie:6.4.1")
+    implementation 'androidx.core:core-ktx:1.10.1'
     //PaySprint
-    implementation files('libs/onboardinglib.aar')
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.6.2"
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation "com.karumi:dexter:5.0.0"
-    implementation 'com.github.yalantis:ucrop:2.2.6'
-    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+    implementation(files("libs/onboardinglib.aar"))
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.3.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.google.code.gson:gson:2.8.2")
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
     // CameraX core library
     implementation "androidx.camera:camera-camera2:1.4.0-alpha03"
     implementation "androidx.camera:camera-lifecycle:1.4.0-alpha03"
     implementation "androidx.camera:camera-view:1.4.0-alpha03"
+    implementation ("com.airbnb.android:lottie:5.2.0")
+    implementation ("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
+    implementation ("com.android.support:cardview-v7:28.0.0")
+    implementation ("androidx.cardview:cardview:1.0.0")
 }

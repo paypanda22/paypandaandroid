@@ -1,0 +1,117 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    android:padding="8dp"
+    android:background="@android:color/white"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp"
+    android:id="@+id/card_top">
+
+    <RelativeLayout
+        android:padding="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/userImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/user_1_" />
+
+        <TextView
+            android:id="@+id/SrNo"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/userImageView"
+            android:text="1"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/NAme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/SrNo"
+            android:text="NARESH TANWAR"
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/refer_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/NAme"
+            android:layout_toEndOf="@id/userImageView"
+            android:text="R006605"
+            style="@style/mostserrat_bold"
+            android:textColor="@color/blue_900"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/main_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/refer_id"
+            android:layout_toEndOf="@id/userImageView"
+            style="@style/mostserrat_bold"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:text="Balance"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/is_approved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="is_approved"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/transfer"
+            style="@style/mostserrat_extra_bold"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_below="@+id/main_wallet"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="126dp"
+            android:background="@drawable/hover"
+            android:backgroundTint="@color/grey_10"
+            android:text="Transfer"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/_6sdp" />
+
+        <Button
+            android:id="@+id/Reversetransfer"
+            style="@style/mostserrat_extra_bold"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_below="@+id/main_wallet"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="-185dp"
+            android:layout_toStartOf="@id/transfer"
+            android:background="@drawable/hover"
+            android:backgroundTint="@color/grey_10"
+            android:text="Reverse"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_6sdp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

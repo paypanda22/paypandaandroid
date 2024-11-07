@@ -134,9 +134,9 @@
                 android:visibility="gone">
                 <ImageView
                     android:id="@+id/iv"
-                    android:layout_width="@dimen/_85sdp"
-                    android:layout_height="@dimen/_85sdp"
-                    android:src="@drawable/b_assured_memo"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    android:src="@drawable/ic_no_txn"
                     android:layout_centerInParent="true"
                     />
                 <TextView

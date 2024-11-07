@@ -107,6 +107,7 @@
                     style="@style/mostserrat_bold"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_13ssp" />
+
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -224,7 +225,26 @@
                             android:textSize="@dimen/_9ssp"
                             android:textColor="@color/black"/>
                     </RelativeLayout>
-
+                    <RelativeLayout
+                        android:id="@+id/bal_amt1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="Bal Amt :"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/green_700"/>
+                        <TextView
+                            android:id="@+id/bal_amt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="0.00"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -279,6 +299,37 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bggrey_dark"
+                android:layout_marginVertical="@dimen/_3sdp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/status_update_time1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="St. Update Time"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/status_update_time"
+                    android:layout_width="132dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="104dp"
+                    android:layout_toEndOf="@+id/status_update_time1"
+                    android:text="St. Update Time"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+            </RelativeLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

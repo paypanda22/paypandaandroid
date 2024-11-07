@@ -208,8 +208,9 @@
     <string name="_91_0000000000">+91_000000000</string>
     <string name="_91">+91</string>
     <string name="register">Register</string>
-    <string name="to_use_our_services">To use our services, please enter your basic details.Enter your aadhaar linked mobile number</string>
-    <string name="to_recover_your_lost_password">To recover your lost password enter your registered mobile/email with us. We will verify your mobile/email by sending OTP.</string>
+    <string name="to_use_our_services"> Please enter Your personal Detail along with your Aadhaar and PAN Linked Mobile Number.
+</string>
+    <string name="to_recover_your_lost_password">Reset Your Password with Pancard and mobile number. by sending OTP.</string>
     <string name="enter_registered_mobile">Enter Registered Mobile</string>
     <string name="enter_new_password">Enter New Password</string>
     <string name="re_enter_new_password">Re-Enter New Password</string>
@@ -385,7 +386,7 @@
     <string name="fragment_aeps_action">Fragment Aeps Action</string>
     <string name="aeps_onboarding">Aeps OnBoarding</string>
     <string name="review_onboarding_details">Review OnBoarding Details</string>
-    <string name="message">"For now, we need an L0 device for AEPS for a few days because we will provide you with options for all devices after a few days. Thank you."</string>
+    <string name="message">"For now, we need an L1 device for AEPS for a few days because we will provide you with options for all devices after a few days. Thank you."</string>
     <string name="warning">Before Proceeding for AEPS Onboarding Process Please Note That You should have Original Copies of Your Aadhaar Card and PAN Card with you.</string>
     <string name="name_">Name :</string>
     <string name="email">Email :</string>
@@ -464,7 +465,7 @@
     <string name="upload_bank_proof">Upload Bank Proof</string>
     <string name="upload_pan_card">Upload Pan Card</string>
     <string name="shop_s_front_photo">Shop\'s Front Photo</string>
-    <string name="transfer_to_bank">Transfer to Bank</string>
+    <string name="transfer_to_bank">Transfer to \n Bank</string>
     <string name="transfer_to_wallet">Transfer To \nWallet</string>
     <string name="view_all_transactions">All\nTransaction</string>
     <string name="available_balance">Available Balance :</string>

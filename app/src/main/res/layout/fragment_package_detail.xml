@@ -9,7 +9,7 @@
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimaryDark_light">
 
         <ImageView
             android:id="@+id/ivBack"
@@ -33,14 +33,17 @@
     <!-- CardView containing BBPS Services and Service Operator List -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="8dp"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardCornerRadius="15dp"
         app:cardElevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="vertical">
 
             <!-- BBPS Services Expandable Section Header -->
@@ -50,13 +53,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="12dp"
-                android:background="?attr/selectableItemBackground"
+                android:background="@drawable/gradient_rect_bg_rounded"
                 android:clickable="true"
                 android:focusable="true">
 
                 <ImageView
                     android:id="@+id/ivBBPSArrow"
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/arrow_right_1" />
@@ -65,8 +69,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/service"
                     android:text="BBPS Services"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
+                    style="@style/mostserrat_bold"
+                    android:fontFamily="serif-monospace"
                     android:textSize="16sp"
                     android:layout_gravity="center_vertical" />
 
@@ -79,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/tvServiceOperatorList"
@@ -93,8 +100,10 @@
                     <Spinner
                         android:id="@+id/spinnerServiceOperator"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_35sdp"
                         android:layout_marginTop="8dp"
+                        android:outlineSpotShadowColor="@color/green_900"
+                        android:outlineAmbientShadowColor="@color/green_900"
                         android:background="@drawable/spinner_background"
                        />
                 <LinearLayout
@@ -104,7 +113,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/_10sdp"
+                        android:layout_marginVertical="@dimen/_5sdp"
                         android:visibility="gone"
                         android:id="@+id/rvPackageserviceList"/>
                     <LinearLayout
@@ -144,19 +153,25 @@
 
     <!-- Commissions Expandable Section -->
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardCommision"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardCornerRadius="15dp"
         app:cardElevation="4dp">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gradient_rect_bg_rounded"
+    android:orientation="vertical">
         <LinearLayout
+            android:layout_margin="@dimen/_10sdp"
             android:id="@+id/llCommissionsHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="12dp"
-            android:background="?attr/selectableItemBackground"
+
             android:clickable="true"
             android:focusable="true">
 
@@ -173,14 +188,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Commissions"
-                android:textColor="@android:color/black"
+                android:fontFamily="serif-monospace"
+                style="@style/mostserrat_bold"
+                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:layout_gravity="center_vertical" />
 
 
         </LinearLayout>
 
-
+</LinearLayout>
     </androidx.cardview.widget.CardView>
     <!-- Commissions Expandable Content -->
     <LinearLayout
@@ -193,6 +210,7 @@
 
         <TextView
             android:id="@+id/comDetail"
+            style="@style/mostserrat_bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Commissions Details"

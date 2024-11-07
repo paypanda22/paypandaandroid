@@ -4,8 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.login.RegisterFragment">
 
+    tools:context=".fragments.login.RegisterFragment">
+    <ImageView android:layout_width="match_parent"
+    android:layout_height="@dimen/_90sdp"
+    android:src="@drawable/top_background"
+    android:scaleType="centerCrop" />
+
+    <!-- <View
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/_90sdp"
+         android:background="@drawable/top_background" />-->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="serif"
                 android:gravity="start"
                 android:justificationMode="inter_word"
                 android:text="@string/to_use_our_services"
@@ -194,6 +204,23 @@
                     android:maxLength="10" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTextInputPass"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/password"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="Enter Your Password"
+                    android:inputType="number"
+                    android:maxLength="10" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <RelativeLayout
                 android:id="@+id/referal"
@@ -205,6 +232,7 @@
                     android:id="@+id/chkNoreferal"
                     android:layout_marginLeft="@dimen/_2sdp"
                     android:layout_width="@dimen/_20sdp"
+                    android:buttonTint="@color/green"
                     android:layout_height="@dimen/_20sdp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -214,17 +242,17 @@
                     android:text="@string/i_do_not_have_any_referal_code"
                     android:textSize="@dimen/_12ssp"
                     style="@style/mostserrat_bold"
-                    android:textColor="@color/colorAccent"/>
+                    android:textColor="@color/blue_900"/>
 
             </RelativeLayout>
-            <TextView
-                android:id="@+id/tvSponsorName"
+          <!--  <TextView
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/mostserrat_bold"
                 android:gravity="end"
-                android:visibility="gone"
-                android:textColor="@color/green" />
+                 android:text="Password:-"
+                android:textColor="@color/green" />-->
             <RelativeLayout
                 android:id="@+id/rlBottom"
                 android:layout_width="match_parent"
@@ -241,7 +269,7 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
-
+                        android:buttonTint="@color/green"
                         style="@style/mostserrat_bold"
                         android:text="@string/terms_and_conditions"
                         android:textSize="@dimen/_8ssp" />
@@ -322,18 +350,18 @@
                     android:layout_height="?actionBarSize"
                     android:layout_below="@+id/policy"
                     android:layout_marginVertical="@dimen/_10sdp"
-                    android:background="@drawable/submitt_btn">
+                    android:background="@drawable/new_update_btn_back">
 
                     <TextView
                         style="@style/mostserrat_bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/submitt_btn"
+                        android:background="@drawable/new_update_btn_back"
                         android:gravity="center"
                         android:text="@string/register"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold" />
                 </RelativeLayout>

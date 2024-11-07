@@ -39,7 +39,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
-                            android:text="Satart Amount :"
+                            android:text="Start Amount :"
                             android:textSize="@dimen/_9ssp"
                             android:textColor="@color/blue_900"/>
                         <TextView
@@ -103,6 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            style="@style/mostserrat_bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
