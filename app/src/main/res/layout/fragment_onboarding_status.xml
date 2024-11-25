@@ -586,7 +586,7 @@
                     android:layout_marginVertical="@dimen/_10sdp"
                     android:background="@drawable/gradient_rect_bg_rounded"
                     android:text="@string/submit"
-                    android:textColor="@color/black"
+                    android:textColor="@color/articleToolbarBGColor"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
             </LinearLayout>

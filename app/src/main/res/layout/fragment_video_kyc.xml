@@ -72,9 +72,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="@dimen/_25sdp"
-        android:background="@drawable/submitt_btn"
+        android:background="@drawable/gradient_rect_bg_rounded"
         android:text="@string/proceed_to_record_video"
-        android:textColor="@color/black"
+        android:textColor="@color/articleToolbarBGColor"
         style="@style/mostserrat_bold"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold" />

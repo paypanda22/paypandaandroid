@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="12dp"
+                android:textColor="@color/articleToolbarBGColor"
                 android:background="@drawable/gradient_rect_bg_rounded"
                 android:clickable="true"
                 android:focusable="true">

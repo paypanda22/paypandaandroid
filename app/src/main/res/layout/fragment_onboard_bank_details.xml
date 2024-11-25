@@ -243,13 +243,13 @@
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/submitt_btn"
+                android:textColor="@color/articleToolbarBGColor"
+                android:background="@drawable/gradient_rect_bg_rounded"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:text="@string/add_bank"
                 android:textStyle="bold"
                 style="@style/mostserrat_bold"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="@color/black"/>
+                android:textSize="@dimen/_12ssp" />
 
 
         </LinearLayout>

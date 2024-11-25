@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/DMTFragment2"
-        android:name="app.pay.pandapro.fragments.dmt.DMTFragment"
+        android:name="app.pay.retailers.fragments.dmt.DMTFragment"
         android:label="fragment_d_m_t"
         tools:layout="@layout/fragment_d_m_t" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/createCustomerFragment2"
-        android:name="app.pay.pandapro.fragments.dmt.CreateCustomerFragment"
+        android:name="app.pay.retailers.fragments.dmt.CreateCustomerFragment"
         android:label="fragment_create_customer"
         tools:layout="@layout/fragment_create_customer" >
         <action
@@ -40,7 +40,28 @@
     </fragment>
     <fragment
         android:id="@+id/dmtTransactionFragment2"
-        android:name="app.pay.pandapro.fragments.dmt.DmtTransactionFragment"
+        android:name="app.pay.retailers.fragments.dmt.DmtTransactionFragment"
         android:label="fragment_dmt_transaction"
         tools:layout="@layout/fragment_dmt_transaction" />
+
+
+    <fragment
+        android:id="@+id/FrgamentAadhaarAuth"
+        android:name="app.pay.retailers.fragments.dmt.FrgamentAadhaarAuth"
+        android:label="fragment_frgament_aadhaar_auth"
+        tools:layout="@layout/fragment_frgament_aadhaar_auth" />
+
+    <fragment
+        android:id="@+id/FragmentAadhaarAuthBank2"
+        android:name="app.pay.retailers.fragments.dmt.FragmentAadhaarAuthBank2"
+        android:label="fragment_aadhaar_auth_bank2"
+        tools:layout="@layout/fragment_aadhaar_auth_bank2" />
+    <action
+        android:id="@+id/action_DMTFragment_to_FrgamentAadhaarAuth"
+        app:destination="@id/FrgamentAadhaarAuth"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/fade_out_m"
+        app:popEnterAnim="@anim/fade_in_m"
+        app:popExitAnim="@anim/slide_out_right"/>
+
 </navigation>

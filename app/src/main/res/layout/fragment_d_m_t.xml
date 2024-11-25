@@ -347,7 +347,7 @@
                         android:id="@+id/update"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="18dp"
+                        android:layout_marginEnd="@dimen/_18sdp"
                         android:layout_toStartOf="@+id/tvAddNewBeneficiary"
                         android:src="@drawable/update" />
 

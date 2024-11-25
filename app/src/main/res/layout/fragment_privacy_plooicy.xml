@@ -21,8 +21,9 @@
         <ImageView
             android:id="@+id/ivCancel"
             android:layout_marginTop="@dimen/_15sdp"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="@dimen/_3sdp"
             android:src="@drawable/cancel"
             android:layout_alignParentEnd="true"
             android:layout_marginHorizontal="@dimen/_10sdp"/>
@@ -37,6 +38,7 @@
             android:id="@+id/btnOk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/articleToolbarBGColor"
             android:layout_below="@+id/webView"
             android:background="@drawable/gradient_rect_bg_rounded"
             android:layout_margin="@dimen/_10sdp"

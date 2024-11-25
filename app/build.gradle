@@ -7,15 +7,15 @@ plugins {
 }
 
 android {
-    namespace 'app.pay.pandapro'
+    namespace 'app.pay.retailers'
     compileSdk 34
 
     defaultConfig {
-        applicationId "app.pay.pandapro"
+        applicationId "app.pay.retailers"
         minSdk 26
         targetSdk 34
-        versionCode 10
-        versionName "1.0.0"
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -132,12 +132,14 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
     //I-ServeU M-ATM
-    implementation 'com.gitlab.isu_service:commondependecy:matm_sdk_stag_0.0.6'
-    //implementation 'com.gitlab.aeps_sdk:aeps-sdk:theme_0.0.3'
+
+    implementation 'com.gitlab.isu_service:commondependecy:matm_sdk_stag_0.0.6'//Our sdk dependency
+    implementation 'com.google.code.gson:gson:2.8.7'
     implementation "io.insert-koin:koin-android:3.3.0"
     implementation "io.insert-koin:koin-androidx-navigation:3.3.0"
     implementation "io.insert-koin:koin-androidx-compose:3.3.0"
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'com.gitlab.isu_service:commondependecy:mATM_SDK_PROD_0.0.10'
+
     //PaySprint
     implementation(files("libs/onboardinglib.aar"))
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
@@ -156,4 +158,7 @@ dependencies {
     implementation ("com.android.support:cardview-v7:28.0.0")
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation ("org.json:json:20210307")
+    // ViewModel and LiveData
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 }

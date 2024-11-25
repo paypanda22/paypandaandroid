@@ -298,7 +298,7 @@
                     style="@style/mostserrat_bold"
                     android:textColor="@color/colorPrimaryDark"
                     android:gravity="center"/>
-                <app.pay.pandapro.reusable.PinView
+                <app.pay.retailers.reusable.PinView
                     android:id="@+id/edtOtpLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -324,11 +324,11 @@
                     android:id="@+id/btnPay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/articleToolbarBGColor"
                     android:background="@drawable/gradient_rect_bg_rounded"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="Proceed to Pay"
                     style="@style/mostserrat_bold"
-                    android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp"/>
 
 

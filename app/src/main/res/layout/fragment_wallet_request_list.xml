@@ -130,13 +130,18 @@
         android:layout_height="wrap_content"
 
         android:id="@+id/rvTransferTo"/>-->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/rbLoginMethod"
+        android:layout_height="wrap_content">
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rvWalletRequestList"
-        android:layout_below="@+id/rbLoginMethod"
         android:visibility="gone"/>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <LinearLayout
         android:id="@+id/llNoData"
         android:layout_width="match_parent"

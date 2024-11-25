@@ -52,10 +52,10 @@
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
                 <ImageView
-                    android:layout_width="@dimen/_45sdp"
+                    android:layout_width="@dimen/_65sdp"
                     android:layout_height="@dimen/_45sdp"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/app_icon" />
+                    android:src="@drawable/horizontal_logo" />
             </RelativeLayout>
             <TextView
                 android:id="@+id/txn_id"
@@ -262,14 +262,18 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/bggrey" />
+                android:background="@color/white" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/grey_10" />
 
-            <RelativeLayout
+          <!--  <RelativeLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -300,7 +304,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/bggrey" />
+                android:background="@color/bggrey" />-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
