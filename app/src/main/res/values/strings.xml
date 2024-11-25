@@ -377,6 +377,7 @@
     <string name="select_payment_method">Select Payment Method</string>
     <string name="upi_payment">UPI</string>
     <string name="cash_deposit"> CASH</string>
+    <string name="overdraft"> overdraft</string>
     <string name="request_wallet">Request Wallet</string>
     <string name="enter_bank_ref_number">Enter Bank Ref Number</string>
     <string name="wallet_request_list">Wallet Request List</string>

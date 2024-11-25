@@ -239,13 +239,55 @@ class RequestWalletFragment : BaseFragment<FragmentRequestWalletBinding>(Fragmen
         binding.edtPaymentDate.setOnClickListener {
             CommonClass.showDatePickerDialog(myActivity, binding.edtPaymentDate)
         }
+        val userType = userSession.getData(Constant.USER_TYPE_NAME)
 
+
+        if (userType == "zsm" || userType == "asm") {
+            binding.overdraft.visibility = View.VISIBLE
+
+
+        } else {
+            binding.overdraft.visibility = View.GONE
+        }
         binding.rgMethod.setOnCheckedChangeListener { group, checkedId ->
             method = when (checkedId) {
-                R.id.rbImps -> "IMPS"
-                R.id.rbNeft -> "NEFT"
-                R.id.rbCash -> "CASH"
-                R.id.rbUpi -> "UPI"
+                R.id.rbImps -> {
+                    binding.lytBankName.visibility = View.VISIBLE
+                    binding.lytBankAc.visibility = View.VISIBLE
+                    binding.date.visibility = View.VISIBLE
+                    binding.ltyBankRef.visibility = View.VISIBLE
+                    binding.rlImageUpload.visibility = View.VISIBLE
+                    "IMPS"}
+                R.id.rbNeft -> {
+                    binding.lytBankName.visibility = View.VISIBLE
+                    binding.lytBankAc.visibility = View.VISIBLE
+                    binding.date.visibility = View.VISIBLE
+                    binding.ltyBankRef.visibility = View.VISIBLE
+                    binding.rlImageUpload.visibility = View.VISIBLE
+                    "NEFT"}
+                R.id.rbCash ->{
+                    binding.lytBankName.visibility = View.VISIBLE
+                    binding.lytBankAc.visibility = View.VISIBLE
+                    binding.date.visibility = View.VISIBLE
+                    binding.ltyBankRef.visibility = View.VISIBLE
+                    binding.rlImageUpload.visibility = View.VISIBLE
+                    "CASH"}
+                R.id.rbUpi -> {
+                    binding.lytBankName.visibility = View.VISIBLE
+                    binding.lytBankAc.visibility = View.VISIBLE
+                    binding.date.visibility = View.VISIBLE
+                    binding.ltyBankRef.visibility = View.VISIBLE
+                    binding.rlImageUpload.visibility = View.VISIBLE
+                    "UPI"}
+                R.id.overdraft ->{
+                    binding.lytBankName.visibility = View.GONE
+                    binding.lytBankAc.visibility = View.GONE
+                    binding.date.visibility = View.GONE
+                    binding.ltyBankRef.visibility = View.GONE
+                    binding.rlImageUpload.visibility = View.GONE
+                    "overdraft"
+
+                }
                 else -> ""
             }
         }
