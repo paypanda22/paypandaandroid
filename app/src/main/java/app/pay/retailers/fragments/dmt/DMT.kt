@@ -217,9 +217,7 @@ class DMT(
                             // Skip OTP validation
                             if (dBinding.edtTPin.text.toString().length < 4) {
                                 showToast(activity, "Enter Your Transaction Pin")
-                            } else if(bank3Value.isNullOrBlank()) {
-                                showToast(activity, "Something went wrong please sand otp")
-                            } else {
+                            }  else {
                                 makeTransaction(recipient, dBinding, customerName, customerMobile, dmtDialog)
                             }
                         } else {
