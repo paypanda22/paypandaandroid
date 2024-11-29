@@ -836,24 +836,6 @@ class DMT(
 
     }
 
-    private fun settingCharges() {
-        val token = userSession.getData(Constant.USER_TOKEN).toString()
 
-        UtilMethods.settingCharges(activity, token, object : MCallBackResponse {
-            @SuppressLint("SetTextI18n")
-            override fun success(from: String, message: String) {
-                val response: CMSInvoiceResponse = Gson().fromJson(message, CMSInvoiceResponse::class.java)
-                if (!response.error) {
-
-                } else {
-                    Toast.makeText(activity, "Unable to fetch Txn Details", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun fail(from: String) {
-                Toast.makeText(activity, "Unable to fetch Txn", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
 
 }
