@@ -2,6 +2,7 @@
 
 
     import RecipientListDeserializer
+    import android.annotation.SuppressLint
     import android.app.Dialog
     import android.content.Intent
     import android.graphics.Color
@@ -41,11 +42,13 @@
     import app.pay.retailers.interfaces.MyClick
     import app.pay.retailers.interfaces.MyClick2
     import app.pay.retailers.interfaces.RecipientListClickListner
+    import app.pay.retailers.responsemodels.cmsinvoice.CMSInvoiceResponse
     import app.pay.retailers.responsemodels.deleteBene.DeleteBeneResponse
     import app.pay.retailers.responsemodels.dmtBeneficiaryList.Data
     import app.pay.retailers.responsemodels.dmtBeneficiaryList.RecipientListResponse
     import app.pay.retailers.responsemodels.dmtSettings.DmtApiType
     import app.pay.retailers.responsemodels.dmtSettings.DmtSettingsResponse
+    import app.pay.retailers.responsemodels.dmtcharges.DMTChargesResponse
     import app.pay.retailers.responsemodels.dmtcustomer.GetCustomerInfoResponse
     import app.pay.retailers.responsemodels.dmtotp.DMTOtpResponse
     import app.pay.retailers.responsemodels.verifycustomer.VerifyCustomerResponse
@@ -71,7 +74,7 @@
             nullActivityCheck()
             userSession = UserSession(requireContext())
             getDmtSettings()
-
+            settingCharges()
         }
 
         private fun getDmtSettings() {
@@ -696,6 +699,27 @@
             filterDialog.show()
         }
 
+
+
+        private fun settingCharges() {
+            val token = userSession.getData(Constant.USER_TOKEN).toString()
+
+            UtilMethods.settingCharges(myActivity, token, object : MCallBackResponse {
+                @SuppressLint("SetTextI18n")
+                override fun success(from: String, message: String) {
+                    val response: DMTChargesResponse = Gson().fromJson(message, DMTChargesResponse::class.java)
+                    if (!response.error) {
+                        userSession.setIntData(Constant.VERIFICATION_CHARGE,response.data.bankVerificationCharge)
+                    } else {
+                        Toast.makeText(myActivity, "", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun fail(from: String) {
+                    Toast.makeText(myActivity, "Unable to fetch Txn", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
 
 
     }
