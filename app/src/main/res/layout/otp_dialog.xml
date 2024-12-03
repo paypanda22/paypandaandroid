@@ -56,7 +56,7 @@
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold" />
 
-        <app.pay.pandapro.reusable.PinView
+        <app.pay.retailers.reusable.PinView
             android:id="@+id/edtOtpLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,8 +113,8 @@
             style="@style/mostserrat_bold"
             android:textSize="@dimen/_13ssp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:textColor="@color/black"
-            android:background="@drawable/submitt_btn"/>
+            android:textColor="@color/articleToolbarBGColor"
+            android:background="@drawable/gradient_rect_bg_rounded"/>
 
        <!-- <TextView
             android:id="@+id/tvResendOtp"

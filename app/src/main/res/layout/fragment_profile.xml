@@ -468,11 +468,11 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
                                     <RelativeLayout
+                                        android:background="@color/green_50"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent">
 
@@ -480,8 +480,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
-                                            app:srcCompat="@drawable/ic_account"
-                                            app:tint="@color/white" />
+                                            app:srcCompat="@drawable/ic_account" />
 
                                     </RelativeLayout>
 
@@ -1180,11 +1179,11 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
                                     <RelativeLayout
+                                        android:background="@color/green_50"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent">
 
@@ -1192,8 +1191,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
-                                            app:srcCompat="@drawable/ic_bank_1_"
-                                            app:tint="@color/white" />
+                                            app:srcCompat="@drawable/ic_bank_1_" />
 
                                     </RelativeLayout>
 
@@ -1320,11 +1318,11 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
                                     <RelativeLayout
+                                        android:background="@color/green_50"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent">
 
@@ -1332,8 +1330,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
-                                            app:srcCompat="@drawable/wallet_trf_"
-                                            app:tint="@color/white" />
+                                            app:srcCompat="@drawable/wallet_trf_" />
 
                                     </RelativeLayout>
 
@@ -1390,11 +1387,11 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
                                     <RelativeLayout
+                                        android:background="@color/green_50"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent">
 
@@ -1402,8 +1399,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
-                                            app:srcCompat="@drawable/support"
-                                            app:tint="@color/white" />
+                                            app:srcCompat="@drawable/support" />
 
                                     </RelativeLayout>
 
@@ -1460,11 +1456,11 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
                                     <RelativeLayout
+                                        android:background="@color/green_50"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent">
 
@@ -1472,8 +1468,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
-                                            app:srcCompat="@drawable/ic_electricity_new"
-                                            app:tint="@color/white" />
+                                            app:srcCompat="@drawable/wallet_plus" />
 
                                     </RelativeLayout>
 
@@ -1742,11 +1737,11 @@
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
-                                    app:cardBackgroundColor="@color/colorPrimaryDark_light"
                                     app:cardCornerRadius="4dp"
                                     app:cardElevation="0dp">
 
                                     <RelativeLayout
+                                        android:background="@color/green_50"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent">
 
@@ -1754,8 +1749,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_centerInParent="true"
-                                            app:srcCompat="@drawable/transaction_history"
-                                            app:tint="@color/white" />
+                                            app:srcCompat="@drawable/transaction_history" />
 
                                     </RelativeLayout>
 
@@ -1804,7 +1798,7 @@
                             android:elevation="@dimen/_5sdp"
                             android:text="LOGOUT"
                             android:textAllCaps="false"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/articleToolbarBGColor" />
 
 
 

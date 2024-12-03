@@ -50,7 +50,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone"
             android:layout_height="200dp"
             android:src="@drawable/otpimage"/>
         <TextView
@@ -60,7 +59,7 @@
             android:text=""
             android:textSize="@dimen/_12ssp"
             android:gravity="center"/>
-        <app.pay.pandapro.reusable.PinView
+        <app.pay.retailers.reusable.PinView
             android:id="@+id/edtOtpMobile"
             android:inputType="numberPassword"
             android:layout_width="wrap_content"
@@ -91,7 +90,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_12ssp"
             android:gravity="center"/>
-        <app.pay.pandapro.reusable.PinView
+        <app.pay.retailers.reusable.PinView
             android:id="@+id/edtOtpEmail"
             android:visibility="gone"
             android:layout_width="wrap_content"
@@ -123,6 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/resend_otp"
+                android:textColor="@color/articleToolbarTextColor"
                 style="@style/mostserrat_bold"
                 android:textStyle="bold"
                 android:textSize="@dimen/_15ssp"
@@ -149,14 +149,14 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_20sdp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/new_update_btn_back"
+        android:background="@drawable/gradient_rect_bg_rounded"
         android:drawableTint="@color/white"
         android:paddingHorizontal="@dimen/_20sdp"
         android:text="Submit"
         style="@style/mostserrat_bold"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="@dimen/_13ssp"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintButtonSize"/>
 
 </RelativeLayout>

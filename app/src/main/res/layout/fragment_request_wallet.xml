@@ -290,6 +290,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"/>
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/date"
                         style="@style/EditTextInput4">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edtPaymentDate"
@@ -347,9 +348,19 @@
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:textSize="@dimen/_12ssp"/>
 
+                        <RadioButton
+                            android:id="@+id/overdraft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/overdraft"
+                            style="@style/mostserrat_bold"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:textSize="@dimen/_12ssp"/>
+
 
                     </RadioGroup>
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ltyBankRef"
                         style="@style/EditTextInput4">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edtBankRef"
@@ -417,7 +428,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:layout_below="@+id/llToWhome"
-                android:background="@drawable/submitt_btn_dialog"
+                android:background="@drawable/gradient_rect_bg_rounded"
                 android:elevation="@dimen/_10sdp"
                 android:textSize="@dimen/_12ssp"
                 android:text="@string/request_wallet" />

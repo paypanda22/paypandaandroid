@@ -55,7 +55,7 @@
                 android:gravity="start"
                 android:justificationMode="inter_word"
                 android:text="@string/to_use_our_services"
-                android:textColor="@color/bggrey_dark"
+                android:textColor="@color/articleToolbarSubTextColor"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold" />
 
@@ -201,7 +201,7 @@
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="Partner code/Refer Id"
                     android:inputType="text"
-                    android:maxLength="10" />
+                    android:maxLength="20" />
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -350,14 +350,13 @@
                     android:layout_height="?actionBarSize"
                     android:layout_below="@+id/policy"
                     android:layout_marginVertical="@dimen/_10sdp"
-                    android:background="@drawable/new_update_btn_back">
+                    android:background="@drawable/gradient_rect_bg_rounded">
 
                     <TextView
                         style="@style/mostserrat_bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/new_update_btn_back"
                         android:gravity="center"
                         android:text="@string/register"
                         android:textAllCaps="true"

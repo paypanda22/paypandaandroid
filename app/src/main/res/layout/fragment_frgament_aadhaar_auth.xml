@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.dmt.FrgamentAadhaarAuth">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f5f5f5"
+        android:padding="16dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:text="Aadhaar Authentication"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="Please enter your Aadhaar number to authenticate"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/tvimg"
+            android:layout_width="@dimen/_125sdp"
+            android:layout_height="@dimen/_125sdp"
+            android:layout_below="@id/tvDescription"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/fingerprint"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <!-- Aadhaar Number Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/aadhaarInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvimg"
+            android:layout_marginTop="24dp"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAadhaarNumber"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:hint="Aadhaar Number"
+                android:background="@drawable/white_bg"
+                android:inputType="number"
+                android:maxLength="12"
+             />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Terms and Conditions Checkbox -->
+
+
+        <RelativeLayout
+            android:id="@+id/selectdevice"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/aadhaarInputLayout"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lytScanner"
+                style="@style/EditTextInput4"
+                app:endIconMode="dropdown_menu">
+                <AutoCompleteTextView
+                    android:id="@+id/atvScanner"
+                    android:hint="@string/select_finger_print_device"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:textSize="@dimen/_12ssp"
+                    android:clickable="true"
+                    android:padding="@dimen/_12sdp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </RelativeLayout>
+        <!--<CheckBox
+            android:id="@+id/cbTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/aadhaarInputLayout"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:text="I agree to the terms and conditions"
+            android:textColor="#666666"
+            android:textSize="14sp" />-->
+
+        <!-- Submit Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/selectdevice"
+            android:textColor="@color/articleToolbarBGColor"
+            android:background="@drawable/gradient_rect_bg_rounded"
+            android:layout_marginTop="24dp"
+            android:text="Submit"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</FrameLayout>

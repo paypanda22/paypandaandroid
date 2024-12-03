@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/icon_image"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
         android:src="@drawable/open"
         android:background="@drawable/shape_service_icon"
         android:padding="@dimen/_12sdp"

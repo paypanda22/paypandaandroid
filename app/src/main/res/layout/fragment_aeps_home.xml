@@ -474,18 +474,22 @@
 
             <ImageView
                 android:id="@+id/ivNoData"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_no_data_found" />
+                android:layout_width="match_parent"
+                android:layout_height="202dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_80sdp"
+
+                android:layout_marginEnd="0dp"
+                android:src="@drawable/moneytrans" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ivNoData"
                 android:gravity="center"
-                android:text="No Aeps Transaction Found" />
+                android:text="Aeps Transaction" />
         </RelativeLayout>
 
     </RelativeLayout>

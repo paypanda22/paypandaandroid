@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">PayPanda Retail</string>
+    <string name="app_name">PayPanda Retailers</string>
     <string name="requested_permission">Requested Permission</string>
     <string name="camera_permission">Camera Permission</string>
     <string name="location_permission">Location Permission</string>
@@ -14,7 +14,7 @@
     <string name="we_will_send_otp">We will send OTP on this number</string>
     <string name="_continue">Continue</string>
     <!-- Spannable Text-->
-    <string name="terms_and_conditions">By continuing, you agree to</string>
+    <string name="terms_and_conditions">By continuing , you agree to</string>
     <string name="terms_conditions">Terms &amp; Conditions</string>
     <string name="privacy_policy">Privacy Policy.</string>
     <string name="and">and</string>
@@ -316,6 +316,7 @@
     <string name="enter_otp_received_on_customer_s_mobile">Enter Otp Received on Customer\'s Mobile</string>
     <string name="transaction_amount">Transaction Amount :</string>
     <string name="customer_mobile">Customer Mobile :</string>
+    <string name="customer_aadhaar">Customer Aadhaar :</string>
     <string name="transaction_id">Transaction Id :</string>
     <string name="enter_otp">Enter Otp</string>
     <string name="proceed">Proceed</string>
@@ -376,6 +377,7 @@
     <string name="select_payment_method">Select Payment Method</string>
     <string name="upi_payment">UPI</string>
     <string name="cash_deposit"> CASH</string>
+    <string name="overdraft"> overdraft</string>
     <string name="request_wallet">Request Wallet</string>
     <string name="enter_bank_ref_number">Enter Bank Ref Number</string>
     <string name="wallet_request_list">Wallet Request List</string>

@@ -1,0 +1,6 @@
+<!-- res/drawable/radiogroup_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/grey_10" />
+    <corners android:radius="@dimen/_12sdp" />
+    <stroke android:width="@dimen/_1sdp" android:color="@color/colorPrimary" />
+</shape>

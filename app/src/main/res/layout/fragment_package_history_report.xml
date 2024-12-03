@@ -42,15 +42,18 @@
                 android:src="@drawable/filter_filled"
                 app:tint="@color/white" />
         </RelativeLayout>
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/topPanel"
+        android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDmtTransactions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:layout_below="@+id/topPanel"
             android:padding="@dimen/_5sdp" />
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <LinearLayout
             android:id="@+id/llNoData"
             android:layout_width="match_parent"

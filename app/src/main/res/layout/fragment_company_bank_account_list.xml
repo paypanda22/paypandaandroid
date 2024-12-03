@@ -64,13 +64,17 @@
             android:text="@string/bank_accounts"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/_12ssp" />-->
-
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/tvCompanyName"
+            android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBankList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvCompanyName"
             android:layout_marginVertical="@dimen/_10sdp" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/llNoData"

@@ -269,10 +269,10 @@
                 android:id="@+id/btnSubmit"
                 style="@style/mostserrat_bold"
                 android:layout_width="match_parent"
+                android:textColor="@color/articleToolbarBGColor"
                 android:layout_height="wrap_content"
                 android:background="@drawable/gradient_rect_bg_rounded"
                 android:text="@string/submit"
-                android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp" />
         </LinearLayout>
 

@@ -32,13 +32,18 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
     </RelativeLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/topPanel"
+        android:layout_height="wrap_content">
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/topPanel"
         android:layout_marginVertical="@dimen/_10sdp"
         android:visibility="gone"
         android:id="@+id/rvPackageList"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <LinearLayout
         android:id="@+id/llNoData"
         android:layout_width="match_parent"

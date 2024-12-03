@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/enter_your_aadhaar_number_we_will"
-                android:textColor="@color/bggrey_dark"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_10ssp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -122,7 +122,7 @@
                     android:text="@string/sent_to_the_mobile_numbe"
                     android:textSize="@dimen/_12ssp"
                     android:gravity="center"/>
-                <app.pay.pandapro.reusable.PinView
+                <app.pay.retailers.reusable.PinView
                     android:id="@+id/edtOtpLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -191,9 +191,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/submitt_btn"
+            android:textColor="@color/articleToolbarBGColor"
+            android:background="@drawable/gradient_rect_bg_rounded"
             android:text="@string/verify"
-            android:textColor="@color/black"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold" />
     </RelativeLayout>
